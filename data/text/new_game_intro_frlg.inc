@@ -161,7 +161,7 @@ gOakSpeech_Text_AskPlayerGender::
 @ Region-merge intro rewrite (QoL #3, David's copy 2026-07-12). The draft's em dashes
 @ render as " - " (the charmap has no em dash).
 gPikachuIntro_Text_Page1::
-	.string "Welcome to POKéMON WORLD!\n"
+	.string "Welcome to POKéMON MOSAIC!\n"
 	.string "Created with love by David Ayers.\n"
 	.string "\n"
 	.string "Three regions - KANTO, JOHTO, and\n"
@@ -179,7 +179,7 @@ gPikachuIntro_Text_Page2::
 
 gPikachuIntro_Text_Page3::
 	.string "Welcome to Pokémon\n"
-	.string "Grand Anthology!\n"
+	.string "MOSAIC!\n"
 	.string "\n"
 	.string "Envisioned by Pranav Sarma\n"
 	.string "(DevElectrum), built upon\n"

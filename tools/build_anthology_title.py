@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Convert Grand Anthology's 240x160 indexed PNG to GBA background resources."""
+"""Convert the inherited 240x160 indexed PNG to GBA background resources."""
 from collections import defaultdict, deque
 from pathlib import Path
 import struct
@@ -138,7 +138,7 @@ def main():
     (DIRECTORY / "anthology_title_tiles.bin.lz").write_bytes(compress_lz10(raw_tiles))
     (DIRECTORY / "anthology_title_map.bin").write_bytes(tilemap)
     (DIRECTORY / "anthology_title_palette.bin").write_bytes(gba_palette)
-    print(f"Grand Anthology title: {len(tiles)} native BG tiles, {len(raw_tiles)} bytes, 240x160, palette indexed")
+    print(f"Mosaic inherited title resources: {len(tiles)} native BG tiles, {len(raw_tiles)} bytes, 240x160, palette indexed")
 
 
 if __name__ == "__main__":

@@ -1,23 +1,23 @@
 <p align="center">
-  <img src=".github/assets/grand-anthology-readme-banner.jpg" alt="Pokémon Grand Anthology: an illustrated atlas spanning a coastal city, traditional countryside and tropical islands" width="100%">
+  <img src=".github/assets/grand-anthology-readme-banner.jpg" alt="Pokémon Mosaic: an illustrated atlas spanning a coastal city, traditional countryside and tropical islands" width="100%">
 </p>
 
-# Pokémon Grand Anthology
+# Pokémon Mosaic
 
 **Three classic regions. Nine generations. One evolving adventure.**
 
 An **unofficial, non-commercial, experimental hobby modification** built upon
 [Pokémon World](https://github.com/evilchinesefood/PKMN-World) by David A. and its contributors.
 
-[**Live Website**](https://grand-anthology.pages.dev/) · [**Origins**](#our-origins-built-upon-pokémon-world) · [**Field Guide**](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md) · [**Features**](#what-grand-anthology-adds) · [**Status**](#development-status-and-verification) · [**Build**](#building-locally) · [**Credits**](#credits-and-acknowledgments) · [**Roadmap**](#development-roadmap)
+[**Origins**](#our-origins-built-upon-pokémon-world) · [**Field Guide**](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md) · [**Features**](#what-mosaic-adds) · [**Status**](#development-status-and-verification) · [**Build**](#building-locally) · [**Credits**](#credits-and-acknowledgments) · [**Roadmap**](#development-roadmap)
 
-**Companion website:** [grand-anthology.pages.dev](https://grand-anthology.pages.dev/) includes the National Pokédex, indexed locations, Mega Stones and the seeded Randomizer Atlas. Cloudflare Pages' first production deployment succeeded on 27 October 2026. The website is a reference and development preview, **not a playable game or ROM download**.
+**Mosaic website:** The independent site source is included in `website/` but has not yet been deployed. The existing `grand-anthology.pages.dev` site belongs to the separate nine-region Grand Anthology project. No ROM downloads are provided.
 
-> **Development preview, not a completed release.** The illustration above is original AI-generated project concept artwork, **not an in-game screenshot**. Grand Anthology is independent of and not endorsed by Pokémon World or the Pokémon rights holders.
+> **Development preview, not a completed release.** The illustration above is original AI-generated project concept artwork, **not an in-game screenshot**. Mosaic is independent of and not endorsed by Pokémon World or the Pokémon rights holders.
 
-## What is Pokémon Grand Anthology?
+## What is Pokémon Mosaic?
 
-**Pokémon Grand Anthology** is a personal experiment in extending a classic, two-dimensional Pokémon adventure. Its goal is to preserve the recognizable **Kanto, Johto and Hoenn** campaigns while making Pokémon from **Generations 1–9** available across those three regions, alongside more convenient evolutions, collection systems and player options.
+**Pokémon Mosaic** is a personal experiment in extending a classic, two-dimensional Pokémon adventure. Its goal is to preserve the recognizable **Kanto, Johto and Hoenn** campaigns while making Pokémon from **Generations 1–9** available across those three regions, alongside more convenient evolutions, collection systems and player options.
 
 It is **not** an attempt to recreate nine full regions. The current world consists of Kanto, Johto, Hoenn and the connected travel hub inherited from Pokémon World. It is also not a polished, finished ROM hack: several mechanics are still being implemented, reconciled and tested.
 
@@ -25,15 +25,15 @@ It is **not** an attempt to recreate nine full regions. The current world consis
 
 **The foundation belongs to the original creators.** [Pokémon World](https://github.com/evilchinesefood/PKMN-World), developed by **David A. ([@evilchinesefood](https://github.com/evilchinesefood))** and its contributors, is the project that brings the three regional adventures into one GBA game. Its world, story integration, shared systems and substantial content are what make this extension possible.
 
-Grand Anthology is a **separate, unofficial modification**, not an official successor, replacement, or competing claim to that work. We do not seek to undermine the creators, diminish their contributions, or suggest their endorsement. If the original three-region experience interests you, please visit the original project.
+Mosaic is a **separate, unofficial modification**, not an official successor, replacement, or competing claim to that work. We do not seek to undermine the creators, diminish their contributions, or suggest their endorsement. If the original three-region experience interests you, please visit the original project.
 
 Pokémon World itself builds on [RHH's pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion), [pret's pokeemerald](https://github.com/pret/pokeemerald), and work from other community projects, including [Pokémon Heart & Soul](https://github.com/PokemonHnS-Development/pokemonHnS). Their contributions are documented in the preserved [credits](CREDITS.md). For a component-level index of the notices included with the source, see [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## A hobby project built with ChatGPT
 
-This is a **personal, non-commercial hobby project** guided by a Pokémon enthusiast. Its direction, feature priorities and design decisions are set by a human maintainer. Much of Grand Anthology's additional code, integration work, documentation and testing assistance is produced iteratively with **OpenAI's ChatGPT**.
+This is a **personal, non-commercial hobby project** guided by a Pokémon enthusiast. Its direction, feature priorities and design decisions are set by a human maintainer. Much of Mosaic's additional code, integration work, documentation and testing assistance is produced iteratively with **OpenAI's ChatGPT**.
 
-That enthusiast is also, **by his own admission, a coward when it comes to punishing game difficulty**. Grand Anthology is therefore being designed first and foremost as a **casual, approachable adventure**: a place to explore three familiar regions, collect favorite Pokémon and enjoy the journey without making hardcore challenge the price of admission.
+That enthusiast is also, **by his own admission, a coward when it comes to punishing game difficulty**. Mosaic is therefore being designed first and foremost as a **casual, approachable adventure**: a place to explore three familiar regions, collect favorite Pokémon and enjoy the journey without making hardcore challenge the price of admission.
 
 **A note for the record:** said enthusiast has also undertaken **multiple Rune Level 1 (RL1) runs in *Elden Ring*** and **will not accept slander** concerning his ability to endure difficult games. He simply prefers his Pokémon adventures without that particular flavor of suffering.
 
@@ -45,7 +45,7 @@ The project exists for enjoyment, experimentation and learning, **not** to compe
 
 ## Three regions, one adventure
 
-The following foundation is inherited from Pokémon World; Grand Anthology aims to preserve and extend it rather than rebuild it:
+The following foundation is inherited from Pokémon World; Mosaic aims to preserve and extend it rather than rebuild it:
 
 | Region | Foundation |
 | --- | --- |
@@ -54,9 +54,9 @@ The following foundation is inherited from Pokémon World; Grand Anthology aims 
 | **Hoenn** | The Emerald adventure, its League and the Battle Frontier. |
 | **World Transit** | A hub linking the regions, with shared trainer systems and region-specific progression. |
 
-Grand Anthology's intended continuous adventure uses **one trainer, party, bag, Pokédex, PC and save**, preserving the active team when moving between regions while keeping regional badges and story progression distinct. Our preferred journey is **Kanto → Johto → Hoenn**; extensive cross-region and save/reload acceptance remains part of the development work. For a searchable Pokémon-and-item lookup across the three campaigns, use the **[Grand Anthology Field Guide](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md)**.
+Mosaic's intended continuous adventure uses **one trainer, party, bag, Pokédex, PC and save**, preserving the active team when moving between regions while keeping regional badges and story progression distinct. Our preferred journey is **Kanto → Johto → Hoenn**; extensive cross-region and save/reload acceptance remains part of the development work. For a searchable Pokémon-and-item lookup across the three campaigns, use the **[Mosaic Field Guide](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md)**.
 
-## What Grand Anthology adds
+## What Mosaic adds
 
 The public `main` branch has substantial source-level acquisition and encounter implementation. **Implemented in source** and **verified in gameplay** are different claims.
 
@@ -72,7 +72,7 @@ The public `main` branch has substantial source-level acquisition and encounter 
 
 ### Player progression and locations
 
-**[Open the Grand Anthology Field Guide](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md)** for searchable National Pokédex entries, all numbered items, all 92 Mega Stone sources, a map-by-map index, major boss encounter requirements and the intended Kanto → Johto → Hoenn journey.
+**[Open the Mosaic Field Guide](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md)** for searchable National Pokédex entries, all numbered items, all 92 Mega Stone sources, a map-by-map index, major boss encounter requirements and the intended Kanto → Johto → Hoenn journey.
 
 The encounter engineering milestone **does not imply postgame placement**. The Royal Duo is explicitly **pre-Johto-Champion**. In contrast, permanent Complete Zygarde and permanent Stellar Terapagos unlock **after Hoenn Champion**. **Eternatus is now authored as a level-55 static** in a chamber off Johto Victory Road 1F; the League-side meteorite only permits entry after the Royal Duo victory. Gameplay acceptance is pending.
 
@@ -80,9 +80,9 @@ For future engineering agents, the [machine-readable acquisition catalog](data/c
 
 ## Development status and verification
 
-**Status (25 October 2026): public experimental source on `main`, not a finished ROM release or fully verified three-region game.**
+**Status (31 October 2026): Pokémon Mosaic is the independent three-region, standard-GBA continuation of the original source at `ee129df0`. This is experimental source, not a finished ROM release.**
 
-Source publication began on October 23, 2026. The [public GitHub Actions workflows](https://github.com/DevElectrum/grand-anthology/actions) run source validators, optimized GBA compilation and representative emulator smoke tests. The [October 25 optimized P0 build and source-validation run #40234899967](https://github.com/DevElectrum/grand-anthology/actions/runs/40234899967) **passed**. The earlier [mGBA smoke #40231997639](https://github.com/DevElectrum/grand-anthology/actions/runs/40231997639) **passed** on its own earlier commit; it did **not** execute end-to-end Royal Duo/92-stone/1,025-Pokémon acceptance.
+Source publication began on October 23, 2026. The [Mosaic GitHub Actions](https://github.com/DevElectrum/pokemon-mosaic/actions) run source validators, optimized GBA compilation and representative emulator smoke tests. Before the repository split, the [October 25 optimized P0 build and source-validation run #40234899967](https://github.com/DevElectrum/grand-anthology/actions/runs/40234899967) **passed**. The earlier [mGBA smoke #40231997639](https://github.com/DevElectrum/grand-anthology/actions/runs/40231997639) **passed** on its own earlier commit; it did **not** execute end-to-end Royal Duo/92-stone/1,025-Pokémon acceptance.
 
 The maintainer has separately reported a successful **Mew Nine Masks** sequence and final catch/revisit, recorded in [its implementation and manual QA note](docs/MEW_NINE_MASKS_IMPLEMENTATION_2026-10-25.md). This does not automatically validate other battles.
 
@@ -90,19 +90,19 @@ The maintainer has separately reported a successful **Mew Nine Masks** sequence 
 
 ## Screenshots
 
-**Grand Anthology gameplay screenshots are pending consolidated emulator verification.** We will publish captures from this modification when they accurately represent the tested build.
+**Mosaic gameplay screenshots are pending consolidated emulator verification.** We will publish captures from this modification when they accurately represent the tested build.
 
-For a preview of the **underlying** game's three-region presentation, see [Pokémon World's screenshots](https://github.com/evilchinesefood/PKMN-World/tree/master/graphics/branding/screenshots/showcase). Those are **upstream images**, not evidence that Grand Anthology's added features are functioning.
+For a preview of the **underlying** game's three-region presentation, see [Pokémon World's screenshots](https://github.com/evilchinesefood/PKMN-World/tree/master/graphics/branding/screenshots/showcase). Those are **upstream images**, not evidence that Mosaic's added features are functioning.
 
 ## Building locally
 
-This repository contains GBA source, data and build tools; **it does not provide downloadable ROM files**. The current inherited Makefile still names its output `pokemonworld.gba`; that filename is a technical legacy detail, not an assertion that this project is the official Pokémon World release.
+This repository contains GBA source, data and build tools; **it does not provide downloadable ROM files**. The inherited `pokemonworld-release.gba` output filename is intentionally retained for compatibility with existing save and CI tooling. The player-facing identity and GBA cartridge title now say Pokémon Mosaic. A later filename transition will include instructions for copying an existing `.sav` safely.
 
 You need Git, Python 3, GNU Make, host build tools, `libpng` development headers, and a modern `arm-none-eabi` compiler/binutils/newlib toolchain. The project uses **modern compilation, not agbcc**. See [INSTALL.md](INSTALL.md) for platform-specific setup.
 
 ```sh
-git clone https://github.com/DevElectrum/grand-anthology.git
-cd grand-anthology
+git clone https://github.com/DevElectrum/pokemon-mosaic.git
+cd pokemon-mosaic
 make release -j4
 ```
 
@@ -114,7 +114,7 @@ For source-level checks and test tooling, consult [INSTALL.md](INSTALL.md) and t
 
 The current baseline PC storage remains **14 boxes × 30 slots = 420 Pokémon**. A larger external archive has been explored separately, but it is **not an integrated in-game feature**, and a 1,025-species *living* Pokédex is not currently supported by those 420 slots. National Pokédex caught registration is designed to remain recorded even if an individual Pokémon is released.
 
-Do not assume compatibility with existing Pokémon World or earlier Grand Anthology saves. **Back up original `.sav` files before experimenting**, especially when switching commits, ROMs, or emulators. Save migration, forms, battle state, encounters and multi-region continuity still require broader validation.
+Do not assume compatibility with existing Pokémon World or earlier Mosaic saves. **Back up original `.sav` files before experimenting**, especially when switching commits, ROMs, or emulators. Save migration, forms, battle state, encounters and multi-region continuity still require broader validation.
 
 Android and other emulator support are goals to check in practice, not guarantees. Details and deferred storage ideas appear in the [public development status](docs/PUBLIC_STATUS.md).
 
@@ -126,26 +126,26 @@ Please avoid submitting copyrighted ROM binaries, ripped game assets without app
 
 ## Project principles, copyright and distribution
 
-Grand Anthology is an **unofficial, free, non-commercial fan hobby project**. It is not affiliated with, authorized by, sponsored by, or endorsed by **Nintendo, Game Freak, The Pokémon Company, the Pokémon World team, or the other upstream project teams**. Pokémon names, characters and associated intellectual property remain the property of their respective owners.
+Mosaic is an **unofficial, free, non-commercial fan hobby project**. It is not affiliated with, authorized by, sponsored by, or endorsed by **Nintendo, Game Freak, The Pokémon Company, the Pokémon World team, or the other upstream project teams**. Pokémon names, characters and associated intellectual property remain the property of their respective owners.
 
 We intend to respect the original [Pokémon World](https://github.com/evilchinesefood/PKMN-World) project's published practices and the rights and applicable terms of every upstream contributor. In particular:
 
 - **No ROM distribution:** do not publish compiled `.gba` files through this repository, GitHub Releases, GitHub Actions artifacts, or affiliated downloads. Builds are for local use.
 - **No commercial use:** the project is not for sale and does not offer paid builds, monetized access, or paid ROM downloads.
-- **Attribution preserved:** retain the original project's extensive [CREDITS.md](CREDITS.md), source notices and file-specific third-party license requirements; identify Grand Anthology additions separately.
+- **Attribution preserved:** retain the original project's extensive [CREDITS.md](CREDITS.md), source notices and file-specific third-party license requirements; identify Mosaic additions separately.
 - **No implied permission:** public source availability, these acknowledgments and this README **do not create a license** to assets or code that the rights holders have not licensed. We will investigate requests and concerns about material and make corrections where appropriate.
 
 The original project has not been verified to publish a blanket license authorizing unrestricted derivative-source redistribution. We do **not** claim such a permission here; anyone considering reuse must examine each source and its terms independently. **Respectful intent is not a substitute for permission.**
 
 ## Credits and acknowledgments
 
-Grand Anthology would not exist without the original contributors and the community work they assembled:
+Mosaic would not exist without the original contributors and the community work they assembled:
 
 - **[Pokémon World](https://github.com/evilchinesefood/PKMN-World):** David A. and contributors, for the interconnected Kanto, Johto, Hoenn adventure and the integrated game foundation.
 - **[RHH / pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion):** the underlying modernized Emerald engine, battle systems and extensive community contributions.
 - **[pret / pokeemerald](https://github.com/pret/pokeemerald):** the foundational Emerald decompilation project.
 - **[Pokémon Heart & Soul](https://github.com/PokemonHnS-Development/pokemonHnS)** and other credited creators: source material, Johto assets, community features and art as documented by Pokémon World.
-- **Grand Anthology project direction:** an independent hobby maintainer, with extensive ChatGPT-assisted implementation, iteration and documentation.
+- **Mosaic project direction:** an independent hobby maintainer, with extensive ChatGPT-assisted implementation, iteration and documentation.
 
 **The complete inherited credits and contributor acknowledgments remain in [CREDITS.md](CREDITS.md).** Listing groups here is not meant to replace the individual credits there or imply that any upstream contributor endorses this modification.
 
@@ -192,6 +192,6 @@ This is a **plan, not a promised schedule**. The [current project scope](docs/PU
 <summary><strong>P5: final-stage battle-mechanic experiments</strong></summary>
 
 - Consider Dynamax, Gigantamax and Terastallization only after earlier work is satisfactory.
-- Their presence in upstream engine code is not evidence that they work in Grand Anthology now.
+- Their presence in upstream engine code is not evidence that they work in Mosaic now.
 
 </details>

@@ -1,4 +1,4 @@
-# Grand Anthology Field Guide
+# Pokémon Mosaic Field Guide
 **For human players** · 25 October 2026 · [Back to README](../README.md) · [Machine-readable source atlas](../data/catalog/world_acquisition.jsonl)
 > **Unfinished game, source-indexed guide.** A documented location is a candidate in source code, not proof the map is reachable or the encounter works. Randomization, postgame gates, catchability and save behavior need separate testing. Older design ledgers can be obsolete.
 This reference includes all **1,025 National Pokédex species**, all **874 explicitly numbered item constants**, and **92 Mega Stones**. Use your browser's Find function to search any name. The tables give representative locations; Astra's catalog retains the full indexed source list.

@@ -265,8 +265,8 @@ static const u8 gText_SaveFileErased[] = _("The save file has been erased\ndue t
 // Version-refused saves (see LoadGameSave's layout gates). Without these the menu showed a
 // bare NEW GAME — indistinguishable from a blank cartridge — and invited overwriting a save
 // that is still intact and playable on its own version.
-static const u8 gText_SaveFileTooOld[] = _("This save file was made by an older\nversion of POKéMON WORLD\pand can't be loaded here.\pTo keep playing it, use that older\nversion. Starting a NEW GAME\nwill erase this save file.");
-static const u8 gText_SaveFileTooNew[] = _("This save file was made by a newer\nversion of POKéMON WORLD\pand can't be loaded here.\pTo keep playing it, use the newer\nversion. Starting a NEW GAME\nwill erase this save file.");
+static const u8 gText_SaveFileTooOld[] = _("This save file was made by an older\nversion of POKéMON MOSAIC\pand can't be loaded here.\pTo keep playing it, use that older\nversion. Starting a NEW GAME\nwill erase this save file.");
+static const u8 gText_SaveFileTooNew[] = _("This save file was made by a newer\nversion of POKéMON MOSAIC\pand can't be loaded here.\pTo keep playing it, use the newer\nversion. Starting a NEW GAME\nwill erase this save file.");
 static const u8 gText_RegionSaveDamaged[] = _("Part of this save file's region\nprogress data may be damaged.\pStory progress in another region\ncould be missing or altered.");
 static const u8 gJPText_No1MSubCircuit[] = _("1Mサブきばんが ささっていません！");
 static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.");
@@ -1044,7 +1044,7 @@ static void Task_DisplayMainMenu(u8 taskId)
         WorldMenu_LoadTextPalette(13);
         palette = RGB(26, 6, 10);
         LoadPalette(&palette, BG_PLTT_ID(13) + TEXT_COLOR_DARK_GRAY, PLTT_SIZEOF(1));
-        WorldMenu_DrawHeader(MENU_WIN_HEADER, COMPOUND_STRING("Pokémon World"));
+        WorldMenu_DrawHeader(MENU_WIN_HEADER, COMPOUND_STRING("Pokémon Mosaic"));
         gTasks[taskId].func = Task_HighlightSelectedMainMenuItem;
     }
 }

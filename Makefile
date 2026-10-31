@@ -1,5 +1,5 @@
 GAME_VERSION ?= EMERALD
-TITLE        ?= GRDANTHOLOGY
+TITLE        ?= PKMN MOSAIC
 GAME_CODE    ?= BPEE
 BUILD_NAME   ?= emerald
 MAP_VERSION  ?= emerald
@@ -37,7 +37,7 @@ REVISION    := 0
 KEEP_TEMPS  ?= 0
 
 # `File name`.gba
-FILE_NAME := pokemonworld
+FILE_NAME ?= pokemonworld
 BUILD_DIR := build
 
 # Executes the Test Runner System that checks that all mechanics work as expected
