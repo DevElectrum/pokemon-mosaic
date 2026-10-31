@@ -49,11 +49,11 @@ The JSONL is a **candidate-path inventory**. It is not proof that each encounter
 
 > **Current handoff override, 24 October 2026 (newer than the design-pause note below):** The maintainer explicitly authorized **a documentation-only repository update** to publish the [full design ledger](docs/LEGENDARY_MYTHICAL_DESIGN_LEDGER_2026-10-24.md), [pre-implementation design audit](docs/PREIMPLEMENTATION_DESIGN_AUDIT_2026-10-24.md), and [new handoff](docs/NEXT_ASTRA_HANDOFF_2026-10-24_DESIGN_READY.md). **The next Astra may read all public repo source to reconcile the design, but must WAIT for explicit approval before writing gameplay code, altering encounters/maps, running tests/builds/CI, or committing further engineering changes.** Earlier "do not edit docs / GitHub" instructions below refer to the superseded pre-publication discussion pause. See [prompt](docs/NEXT_ASTRA_PROMPT.md). Do not touch the private historical repo.
 
-# Grand Anthology public development instructions
+# Pokémon Mosaic public development instructions
 
-**Canonical repository:** `DevElectrum/grand-anthology`, branch `main`.
+**Canonical repository:** `DevElectrum/pokemon-mosaic`, branch `main`. The independent future nine-region project remains `DevElectrum/grand-anthology`.
 **Read [the current next-Astra handoff](docs/NEXT_ASTRA_HANDOFF.md) first.**
-This is the NEW public, clean-history, source-only development repository.
+This is the separate, publicly developed three-region, source-only Pokémon Mosaic repository copied with full history from the earlier Grand Anthology source.
 Do not import or reveal private predecessor history or modify any unrelated
 private repository and its original `master`.
 
@@ -68,7 +68,7 @@ covers nine regions. All 1,025 National Pokédex species should be obtainable **
 For future gameplay changes explicitly approved by the maintainer, prioritize substantial P0 implementation in sensible grouped batches,
 then consolidated gameplay verification. Commit meaningful changes and
 review existing tests; don't stall on individual encounter test cases.
-Original 420-slot storage remains for now. Optional later gimmicks and
+Existing normal-GBA PC storage remains for now; do not import XGBA's experimental E6 save layout. Optional later gimmicks and
 native port work are deferred. Preserve casual default gameplay and
 the current project's original humor, credits and upstream acknowledgments.
 
@@ -81,7 +81,7 @@ Maintain original [credits](CREDITS.md) and
 [third-party notices](THIRD_PARTY_NOTICES.md). Those notices do not
 supply a blanket license for Pokémon IP, code and art.
 
-Use public `main` and the two read-only workflows under
+Use Mosaic's public `main` and the existing read-only workflows under
 `.github/workflows/` for game-source/build and real mGBA regression.
 Generated ROMs are ephemeral on runners and must never be uploaded.
 Source validators, compilation and emulator gameplay have different proof
