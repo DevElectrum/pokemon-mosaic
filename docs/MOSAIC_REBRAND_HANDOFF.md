@@ -34,3 +34,25 @@ At first check, Mosaic website workflow run https://github.com/DevElectrum/pokem
 2. Decide and create approved Mosaic title art as a separately reviewable visual change; generate exact GBA BG tilemap/palette from its 240x160 indexed image, adjust exact-tile-count validation as needed, and update test labels and website art together.
 3. Only after title/other assets are correctly renamed, optionally transition final ROM filename with explicit old .sav copy instructions. No automatic save migration or overwrite.
 4. Keep a single normal-emulator gameplay acceptance pass; do not repeat Kanto/Johto campaigns.
+
+## Handoff decision, 31 October 2026: leave remaining rebrand to another Astra
+
+The maintainer explicitly instructed the present Astra **not to spend additional work on Mosaic's rebrand**. A different Astra should complete the remaining source/asset/website identity and verification from this checkpoint. Do not ask the maintainer to re-explain the two-project distinction. Mosaic is **3 regions, standard GBA emulator compatible**. Grand Anthology, housed at `DevElectrum/grand-anthology`, is **9 regions and beyond, modern battle rules, large bag and PC systems, custom XGBA emulator**.
+
+### Accepted work already committed
+- `b263d092`: README, agents/handoff intro, cartridge title `PKMN MOSAIC`, main menu and new-game intro branding, Makefile overrideable filename and source CI labeling
+- `9a022819`: website layout, home/status/about/randomizer copy, repository links, favicon, website package and workflow labels
+- Later documentation-only source records are in GitHub `main`, while `archive/pre-mosaic-rebrand-20261031` preserves the exact original imported code
+- [Mosaic website build 41253940157](https://github.com/DevElectrum/pokemon-mosaic/actions/runs/41253940157) **PASS**
+- [Mosaic optimized game build 41253890293](https://github.com/DevElectrum/pokemon-mosaic/actions/runs/41253890293) **PASS** for source validators and full ROM compilation
+- [Mosaic mGBA smoke 41253890323](https://github.com/DevElectrum/pokemon-mosaic/actions/runs/41253890323) was **still in progress** (optimized ROM compilation underway) at this handoff; inspect final run before claiming emulator verification
+
+### Remaining cohesive rebranding work
+1. Replace the image `graphics/title_screen/world/grand_anthology_title.png` with properly designed **Pokémon Mosaic** native title art, keeping the 240x160 indexed GBA requirements and adjusting its generator, exact-tile-count compile guards and title Lua regression as needed. Old sunset/title art should not be silently claimed as Mosaic. For existing title pipeline see `tools/build_anthology_title.py`, `src/title_screen_world.c`, `Makefile`, `test/overworld/lua/WorldTitle.lua`. Preserve working input transitions.
+2. Handle inherited `.github/assets/grand-anthology-readme-banner.jpg` and generated website title illustration; update `website/scripts/generate.mjs` references **only once new assets exist**. Retain properly credited provenance for upstream screenshots and artwork. Rebrand site labels, readme/public status and source-facing links carefully; do **not** deploy to the separate Grand Anthology's `grand-anthology.pages.dev` project.
+3. Audit remaining player-visible strings (intro, credits and menu titles, screenshots/README) and changes to CI labels. Preserve original Pokémon World provenance in descriptive credits, original history/commit URLs and stable in-game save flags/constants, even if their names contain "Anthology" or "World".
+4. If choosing a new final ROM basename, audit all `pokemonworld-release.gba` build/CI/test references first. Explain that emulators associate saves with ROM filenames, and **copy** (never rename/delete/overwrite the only) original `.sav` under the new basename. Keep game code `BPEE` and save ABI stable; standard mGBA/Pizza Boy compatibility is a hard requirement.
+5. Run a single consolidated optimized build, website test, and focused mGBA title/New Game/Continue smoke, rather than repeated user-driven micro-tests. Record exact CI SHA and game verification accurately.
+
+Historical documents and regression test symbol names are allowed to retain original naming where semantically necessary. **No title image or logo redesign is approved or completed at this checkpoint.**
+
