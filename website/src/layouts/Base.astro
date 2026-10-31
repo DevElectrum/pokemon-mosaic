@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-const { title = 'Pokémon Grand Anthology', description = 'An unofficial, experimental, collection-first Pokémon fan project across Kanto, Johto and Hoenn.' } = Astro.props;
+const { title = 'Pokémon Mosaic', description = 'An unofficial, experimental, collection-first Pokémon fan project across Kanto, Johto and Hoenn.' } = Astro.props;
 const navigation = [
   ['/', 'Home'],
   ['/pokedex/', 'Pokédex'],
@@ -20,30 +20,30 @@ const path = Astro.url.pathname;
     <meta name="description" content={description} />
     <meta name="theme-color" content="#122a42" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Pokémon Grand Anthology" />
-    <meta property="og:title" content={title + ' | Pokémon Grand Anthology'} />
+    <meta property="og:site_name" content="Pokémon Mosaic" />
+    <meta property="og:title" content={title + ' | Pokémon Mosaic'} />
     <meta property="og:description" content={description} />
     <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="color-scheme" content="light dark" />
     <script is:inline>
       (() => {
-        const key = 'grand-anthology-theme';
+        const key = 'pokemon-mosaic-theme';
         let stored = null;
         try { stored = localStorage.getItem(key); } catch { /* storage unavailable */ }
         const automatic = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         document.documentElement.dataset.theme = stored === 'light' || stored === 'dark' ? stored : automatic;
       })();
     </script>
-    <title>{title} | Pokémon Grand Anthology</title>
+    <title>{title} | Pokémon Mosaic</title>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="header-inner">
-        <a class="brand" href="/" aria-label="Pokémon Grand Anthology homepage">
+        <a class="brand" href="/" aria-label="Pokémon Mosaic homepage">
           <span class="brand-mark" aria-hidden="true">✦</span>
-          <span>Pokémon <strong>Grand Anthology</strong></span>
+          <span>Pokémon <strong>Mosaic</strong></span>
         </a>
         <nav class="main-nav" aria-label="Primary navigation">
           {navigation.map(([href, label]) =>
@@ -61,13 +61,13 @@ const path = Astro.url.pathname;
     </div>
     <footer class="footer">
       <div class="footer-inner">
-        <p><strong>Pokémon Grand Anthology</strong> is an unofficial, free, noncommercial fan project in development. Not affiliated with or endorsed by Nintendo, Game Freak, The Pokémon Company, or the Pokémon World team.</p>
-        <p>Built upon <a href="https://github.com/evilchinesefood/PKMN-World">Pokémon World</a> by David A. and contributors. <a href="/about/">Full acknowledgments</a> · <a href="https://github.com/DevElectrum/grand-anthology">Source repository</a></p>
+        <p><strong>Pokémon Mosaic</strong> is an unofficial, free, noncommercial fan project in development. Not affiliated with or endorsed by Nintendo, Game Freak, The Pokémon Company, or the Pokémon World team.</p>
+        <p>Built upon <a href="https://github.com/evilchinesefood/PKMN-World">Pokémon World</a> by David A. and contributors. <a href="/about/">Full acknowledgments</a> · <a href="https://github.com/DevElectrum/pokemon-mosaic">Source repository</a></p>
       </div>
     </footer>
     <script is:inline>
       (() => {
-        const key = 'grand-anthology-theme';
+        const key = 'pokemon-mosaic-theme';
         const root = document.documentElement;
         const button = document.getElementById('theme-toggle');
         const media = window.matchMedia('(prefers-color-scheme: dark)');

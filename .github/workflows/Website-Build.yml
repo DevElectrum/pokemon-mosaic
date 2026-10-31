@@ -1,4 +1,4 @@
-name: Website build
+name: Pokémon Mosaic website build
 
 on:
   push:
