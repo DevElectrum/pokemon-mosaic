@@ -2208,12 +2208,12 @@ Every explicitly numbered item constant appears below. **Source not indexed** me
 | 389 | **ALORAICHIUM Z** | *Source not indexed* |
 | 390 | **PIKASHUNIUM Z** | *Source not indexed* |
 | 391 | **ULTRANECROZIUM Z** | *Source not indexed* |
-| 392 | **LIGHT BALL** | *Source not indexed* |
-| 393 | **LEEK** | *Source not indexed* |
-| 394 | **THICK CLUB** | *Source not indexed* |
+| 392 | **LIGHT BALL** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 393 | **LEEK** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 394 | **THICK CLUB** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 395 | **LUCKY PUNCH** | *Source not indexed* |
-| 396 | **METAL POWDER** | *Source not indexed* |
-| 397 | **QUICK POWDER** | *Source not indexed* |
+| 396 | **METAL POWDER** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 397 | **QUICK POWDER** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 398 | **DEEP SEA SCALE** | *Source not indexed* |
 | 399 | **DEEP SEA TOOTH** | *Source not indexed* |
 | 400 | **SOUL DEW** | *Source not indexed* |
@@ -2261,17 +2261,17 @@ Every explicitly numbered item constant appears below. **Source not indexed** me
 | 442 | **CHOICE BAND** | *Source not indexed* |
 | 443 | **CHOICE SPECS** | *Source not indexed* |
 | 444 | **CHOICE SCARF** | *Source not indexed* |
-| 445 | **FLAME ORB** | *Source not indexed* |
-| 446 | **TOXIC ORB** | *Source not indexed* |
-| 447 | **DAMP ROCK** | *Source not indexed* |
-| 448 | **HEAT ROCK** | *Source not indexed* |
-| 449 | **SMOOTH ROCK** | *Source not indexed* |
-| 450 | **ICY ROCK** | *Source not indexed* |
+| 445 | **FLAME ORB** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 446 | **TOXIC ORB** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 447 | **DAMP ROCK** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 448 | **HEAT ROCK** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 449 | **SMOOTH ROCK** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 450 | **ICY ROCK** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 451 | **ELECTRIC SEED** | *Source not indexed* |
 | 452 | **PSYCHIC SEED** | *Source not indexed* |
 | 453 | **MISTY SEED** | *Source not indexed* |
 | 454 | **GRASSY SEED** | *Source not indexed* |
-| 455 | **ABSORB BULB** | *Source not indexed* |
+| 455 | **ABSORB BULB** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 456 | **CELL BATTERY** | *Source not indexed* |
 | 457 | **LUMINOUS MOSS** | *Source not indexed* |
 | 458 | **SNOWBALL** | *Source not indexed* |
@@ -2286,7 +2286,7 @@ Every explicitly numbered item constant appears below. **Source not indexed** me
 | 467 | **CLEANSE TAG** | Script reward candidate at Mt Pyre 1F |
 | 468 | **SMOKE BALL** | *Source not indexed* |
 | 469 | **FOCUS BAND** | Script reward candidate at Shoal Cave Low Tide Lower Room |
-| 470 | **LUCKY EGG** | *Source not indexed* |
+| 470 | **LUCKY EGG** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 471 | **SCOPE LENS** | *Source not indexed* |
 | 472 | **LEFTOVERS** | *Source not indexed* |
 | 473 | **SHELL BELL** | *Source not indexed* |
@@ -2298,13 +2298,13 @@ Every explicitly numbered item constant appears below. **Source not indexed** me
 | 479 | **LIFE ORB** | *Source not indexed* |
 | 480 | **POWER HERB** | *Source not indexed* |
 | 481 | **FOCUS SASH** | *Source not indexed* |
-| 482 | **ZOOM LENS** | *Source not indexed* |
+| 482 | **ZOOM LENS** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 483 | **METRONOME** | *Source not indexed* |
 | 484 | **IRON BALL** | *Source not indexed* |
 | 485 | **LAGGING TAIL** | *Source not indexed* |
-| 486 | **DESTINY KNOT** | *Source not indexed* |
+| 486 | **DESTINY KNOT** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 487 | **BLACK SLUDGE** | *Source not indexed* |
-| 488 | **GRIP CLAW** | *Source not indexed* |
+| 488 | **GRIP CLAW** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 489 | **STICKY BARB** | *Source not indexed* |
 | 490 | **SHED SHELL** | *Source not indexed* |
 | 491 | **BIG ROOT** | *Source not indexed* |
@@ -2314,22 +2314,22 @@ Every explicitly numbered item constant appears below. **Source not indexed** me
 | 495 | **FLOAT STONE** | *Source not indexed* |
 | 496 | **ROCKY HELMET** | *Source not indexed* |
 | 497 | **AIR BALLOON** | *Source not indexed* |
-| 498 | **RED CARD** | *Source not indexed* |
-| 499 | **RING TARGET** | *Source not indexed* |
-| 500 | **BINDING BAND** | *Source not indexed* |
-| 501 | **EJECT BUTTON** | *Source not indexed* |
+| 498 | **RED CARD** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 499 | **RING TARGET** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 500 | **BINDING BAND** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 501 | **EJECT BUTTON** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 502 | **WEAKNESS POLICY** | *Source not indexed* |
 | 503 | **ASSAULT VEST** | *Source not indexed* |
 | 504 | **SAFETY GOGGLES** | *Source not indexed* |
-| 505 | **ADRENALINE ORB** | *Source not indexed* |
-| 506 | **TERRAIN EXTENDER** | *Source not indexed* |
-| 507 | **PROTECTIVE PADS** | *Source not indexed* |
-| 508 | **THROAT SPRAY** | *Source not indexed* |
-| 509 | **EJECT PACK** | *Source not indexed* |
-| 510 | **HEAVY DUTY BOOTS** | *Source not indexed* |
-| 511 | **BLUNDER POLICY** | *Source not indexed* |
-| 512 | **ROOM SERVICE** | *Source not indexed* |
-| 513 | **UTILITY UMBRELLA** | *Source not indexed* |
+| 505 | **ADRENALINE ORB** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 506 | **TERRAIN EXTENDER** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 507 | **PROTECTIVE PADS** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 508 | **THROAT SPRAY** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 509 | **EJECT PACK** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 510 | **HEAVY DUTY BOOTS** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 511 | **BLUNDER POLICY** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 512 | **ROOM SERVICE** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 513 | **UTILITY UMBRELLA** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 515 | **CHESTO BERRY** | *Source not indexed* |
 | 516 | **PECHA BERRY** | Pickup candidate at Violet City |
 | 517 | **RAWST BERRY** | *Source not indexed* |
@@ -2573,10 +2573,10 @@ Every explicitly numbered item constant appears below. **Source not indexed** me
 | 755 | **TEA** | *Source not indexed* |
 | 756 | **RUBY** | Script reward candidate at Mt Ember Ruby Path B 3F Frlg |
 | 757 | **SAPPHIRE** | *Source not indexed* |
-| 758 | **ABILITY SHIELD** | *Source not indexed* |
-| 759 | **CLEAR AMULET** | *Source not indexed* |
-| 760 | **PUNCHING GLOVE** | *Source not indexed* |
-| 761 | **COVERT CLOAK** | *Source not indexed* |
+| 758 | **ABILITY SHIELD** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 759 | **CLEAR AMULET** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 760 | **PUNCHING GLOVE** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
+| 761 | **COVERT CLOAK** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 762 | **LOADED DICE** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (₽20,000) |
 | 763 | **AUSPICIOUS ARMOR** | *Source not indexed* |
 | 764 | **BOOSTER ENERGY** | *Source not indexed* |
@@ -2584,7 +2584,7 @@ Every explicitly numbered item constant appears below. **Source not indexed** me
 | 766 | **GIMMIGHOUL COIN** | *Source not indexed* |
 | 767 | **LEADERS CREST** | *Source not indexed* |
 | 768 | **MALICIOUS ARMOR** | *Source not indexed* |
-| 769 | **MIRROR HERB** | *Source not indexed* |
+| 769 | **MIRROR HERB** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 770 | **SCROLL OF DARKNESS** | Script reward candidate at Mt Mortar B 1F |
 | 771 | **SCROLL OF WATERS** | Script reward candidate at Cianwood Gym |
 | 772 | **TERA ORB** | *Source not indexed* |
@@ -2613,7 +2613,7 @@ Every explicitly numbered item constant appears below. **Source not indexed** me
 | 795 | **BLACK AUGURITE** | *Source not indexed* |
 | 796 | **LINKING CORD** | *Source not indexed* |
 | 797 | **PEAT BLOCK** | *Source not indexed* |
-| 798 | **BERSERK GENE** | *Source not indexed* |
+| 798 | **BERSERK GENE** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (configured item price) |
 | 799 | **FAIRY FEATHER** | *Source not indexed* |
 | 800 | **SYRUPY APPLE** | *Source not indexed* |
 | 801 | **UNREMARKABLE TEACUP** | *Source not indexed* |

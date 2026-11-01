@@ -83,6 +83,7 @@ jobs:
           python3 test/overworld/ValidateAnthologyEvolutionAccess.py
           python3 test/overworld/ValidateWorldDiscoveryEncounters.py
           python3 test/overworld/ValidatePcBulkRelease.py
+          python3 test/overworld/ValidateHeldItemShopAvailability.py
           python3 test/overworld/ValidateZoneStructure.py
           python3 test/overworld/SavePatch.py --check
           python3 test/overworld/ValidateGrandVault.py
