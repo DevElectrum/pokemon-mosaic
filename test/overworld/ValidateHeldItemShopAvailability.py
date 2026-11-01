@@ -60,7 +60,7 @@ for region, shop in shops.items():
     start = source.index(label + ":")
     end = source.index(terminator, start)
     stock = source[start:end]
-    entries = re.findall(r"\\.2byte\\s+(ITEM_[A-Z0-9_]+)", stock)
+    entries = re.findall(r"\.2byte\s+(ITEM_[A-Z0-9_]+)", stock)
     for item in items:
         symbol = "ITEM_" + item
         assert entries.count(symbol) == 1, "Shop stock missing or duplicated: " + region + "/" + symbol
