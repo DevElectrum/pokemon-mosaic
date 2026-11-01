@@ -90,6 +90,7 @@ CeladonCity_DepartmentStore_4F_Items::
 	.2byte ITEM_AIR_BALLOON
 	.2byte ITEM_SAFETY_GOGGLES
 	.2byte ITEM_WIDE_LENS
+	.2byte ITEM_LOADED_DICE
 	.2byte ITEM_MUSCLE_BAND
 	.2byte ITEM_WISE_GLASSES
 	.2byte ITEM_BIG_ROOT

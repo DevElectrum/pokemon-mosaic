@@ -2577,7 +2577,7 @@ Every explicitly numbered item constant appears below. **Source not indexed** me
 | 759 | **CLEAR AMULET** | *Source not indexed* |
 | 760 | **PUNCHING GLOVE** | *Source not indexed* |
 | 761 | **COVERT CLOAK** | *Source not indexed* |
-| 762 | **LOADED DICE** | *Source not indexed* |
+| 762 | **LOADED DICE** | Sold at Celadon Department Store 4F, Goldenrod Department Store 4F, Lilycove Department Store 2F, and World Transit Hub Battle Depot (₽20,000) |
 | 763 | **AUSPICIOUS ARMOR** | *Source not indexed* |
 | 764 | **BOOSTER ENERGY** | *Source not indexed* |
 | 765 | **BIG BAMBOO SHOOT** | *Source not indexed* |

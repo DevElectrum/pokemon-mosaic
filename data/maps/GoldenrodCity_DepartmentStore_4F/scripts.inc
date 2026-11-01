@@ -24,6 +24,7 @@ GoldenrodDeptStore4_Pokemart_FeathersAndMints::
 	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_ABILITY_PATCH
 	.2byte ITEM_LEADERS_CREST
+	.2byte ITEM_LOADED_DICE
 	.2byte ITEM_DUSK_STONE
 	@ Complete pre-Champion evolutionary supplies for Johto's new roster.
 	.2byte ITEM_FIRE_STONE
