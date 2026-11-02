@@ -23,7 +23,7 @@
 
 // The 240x160 title contains no prompt; reuse the original World blinking sprite.
 #define MOSAIC_SCREEN_BLOCK 30
-#define MOSAIC_TITLE_TILES_RAW_BYTES (577 * 64)
+#define MOSAIC_TITLE_TILES_RAW_BYTES (232 * 64)
 #define MOSAIC_PRESS_START_TAG 1001
 #define MOSAIC_PRESS_START_PIECES 5
 #define CLEAR_SAVE_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
