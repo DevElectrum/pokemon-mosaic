@@ -65,5 +65,5 @@ jobs:
             tail -n 80 "$RUNNER_TEMP/gba-build.log"
             exit 1
           }
-          test -s pokemonworld-release.gba
+          test -s pokemon-mosaic-release.gba
           echo "PASS: compiled optimized GBA game with extended multipliers"

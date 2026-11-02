@@ -43,8 +43,8 @@ on:
       - "data/maps/ShoalCave_LowTideIceRoom/scripts.inc"
       - "data/maps/RustboroCity_DevonCorp_2F/scripts.inc"
       - "data/scripts/field_move_scripts.inc"
-      - "src/data/anthology_rare_habitats.h"
-      - "test/overworld/ValidateAnthologyHabitatRare.py"
+      - "src/data/mosaic_rare_habitats.h"
+      - "test/overworld/ValidateMosaicHabitatRare.py"
       - "src/battle_main.c"
       - "src/debug.c"
       - "src/world_pc_search.c"
@@ -75,7 +75,7 @@ on:
       - "data/maps/Route34_DayCare/scripts.inc"
       - "data/scripts/day_care_frlg.inc"
       - "src/daycare.c"
-      - "test/overworld/ValidateAnthologyEvolutionAccess.py"
+      - "test/overworld/ValidateMosaicEvolutionAccess.py"
   workflow_dispatch:
 
 permissions:
@@ -121,8 +121,8 @@ jobs:
             tail -n 50 "${RUNNER_TEMP}/game.log"
             exit 1
           }
-          test -s pokemonworld-release.gba
-          size=$(wc -c < pokemonworld-release.gba)
+          test -s pokemon-mosaic-release.gba
+          size=$(wc -c < pokemon-mosaic-release.gba)
           echo "ROM bytes: $size / 33554432"
           test "$size" -le 33554432
           # Do not upload or publish ROM images, saves, or screenshots.
@@ -153,12 +153,12 @@ jobs:
           export PW_OUT="${RUNNER_TEMP}/p0-mgba-tests"
           export PW_TIMEOUT=360
           echo "Retained optimized-release title/menu symbols:"
-          arm-none-eabi-nm --defined-only pokemonworld-release.elf | grep -E 'WorldTitleScreen|CB2_MainMenu|CB2_InitClearSave|CB2_Overworld' || true
-          python3 test/overworld/GenLuaSymbols.py pokemonworld-release.elf arm-none-eabi-nm --title > "$PW_TITLE_SYMBOLS"
+          arm-none-eabi-nm --defined-only pokemon-mosaic-release.elf | grep -E 'WorldTitleScreen|CB2_MainMenu|CB2_InitClearSave|CB2_Overworld' || true
+          python3 test/overworld/GenLuaSymbols.py pokemon-mosaic-release.elf arm-none-eabi-nm --title > "$PW_TITLE_SYMBOLS"
           test -s "$PW_TITLE_SYMBOLS"
           # Test runner only emulates a disposable temporary copy and never
           # accesses a user's real save. WorldTitle verifies actual VRAM bytes.
-          test/overworld/mgba-run.sh test/overworld/lua/WorldTitle.lua pokemonworld-release.gba
+          test/overworld/mgba-run.sh test/overworld/lua/WorldTitle.lua pokemon-mosaic-release.gba
           grep -q 'VERDICT WorldTitle: .* PASS' "$PW_OUT/WorldTitle.log" || {
             echo 'mGBA title suite did not produce a clean PASS verdict'
             ls -la "$PW_OUT" || true
@@ -167,14 +167,14 @@ jobs:
           echo 'PASS: authentic GBA title/graphics/input tested in mGBA'
           # The production graphical Start wheel must expose the safe Cheats UI
           # even when developer debug is disabled in RELEASE=1 builds.
-          test/overworld/mgba-run.sh test/overworld/lua/WorldPlayerCheats.lua pokemonworld-release.gba
+          test/overworld/mgba-run.sh test/overworld/lua/WorldPlayerCheats.lua pokemon-mosaic-release.gba
           grep -q 'VERDICT WorldPlayerCheats: 8/8 PASS' "$PW_OUT/WorldPlayerCheats.log"
           test -f "$PW_OUT/WorldPlayerCheats.PASS"
           echo 'PASS: release graphical Start opens Cheats and Quick Pokémon creates a real party member'
           # Cross-campaign party continuity must also handle a seventh gift
           # when the party is full: real ScriptGiveMon -> global PC, then flash
           # Save/core reset/Continue restores the box AND original six mons.
-          test/overworld/mgba-run.sh test/overworld/lua/WorldFullPartyGift.lua pokemonworld-release.gba
+          test/overworld/mgba-run.sh test/overworld/lua/WorldFullPartyGift.lua pokemon-mosaic-release.gba
           grep -q 'VERDICT WorldFullPartyGift: 15/15 PASS' "$PW_OUT/WorldFullPartyGift.log" || {
             tail -n 110 "$PW_OUT/WorldFullPartyGift.log" || true
             exit 1
@@ -187,7 +187,7 @@ jobs:
           # Require every strict scene verdict and PASS sentinel; aggregate
           # failures so CI remains red if even one real story scene is broken.
           starter_failed=0
-          if ! test/overworld/mgba-run.sh test/overworld/lua/WorldJohtoStarterBall.lua pokemonworld-release.gba; then
+          if ! test/overworld/mgba-run.sh test/overworld/lua/WorldJohtoStarterBall.lua pokemon-mosaic-release.gba; then
             starter_failed=1
           fi
           if grep -q 'VERDICT WorldJohtoStarterBall: 34/34 PASS' "$PW_OUT/WorldJohtoStarterBall.log" &&
@@ -198,7 +198,7 @@ jobs:
             tail -n 105 "$PW_OUT/WorldJohtoStarterBall.log" || true
             starter_failed=1
           fi
-          if ! test/overworld/mgba-run.sh test/overworld/lua/WorldKantoStarterBall.lua pokemonworld-release.gba; then
+          if ! test/overworld/mgba-run.sh test/overworld/lua/WorldKantoStarterBall.lua pokemon-mosaic-release.gba; then
             starter_failed=1
           fi
           if grep -q 'VERDICT WorldKantoStarterBall: 34/34 PASS' "$PW_OUT/WorldKantoStarterBall.log" &&
@@ -211,7 +211,7 @@ jobs:
           fi
           # Run Birch independently, including when Oak or Elm fails, to avoid
           # hiding a separate Hoenn rescue/PC-full quest regression.
-          if ! test/overworld/mgba-run.sh test/overworld/lua/WorldBirchFullPCRefusal.lua pokemonworld-release.gba; then
+          if ! test/overworld/mgba-run.sh test/overworld/lua/WorldBirchFullPCRefusal.lua pokemon-mosaic-release.gba; then
             starter_failed=1
           fi
           if grep -q 'VERDICT WorldBirchFullPCRefusal: 26/26 PASS' "$PW_OUT/WorldBirchFullPCRefusal.log" &&
@@ -231,7 +231,7 @@ jobs:
             # Independent positive branch: native Birch bag, real Treecko
             # choice, original Zigzagoon rescue battle, shared-PC overflow,
             # and unchanged save-version/data across battery flash Continue.
-            if ! test/overworld/mgba-run.sh test/overworld/lua/WorldBirchStarterRescue.lua pokemonworld-release.gba; then
+            if ! test/overworld/mgba-run.sh test/overworld/lua/WorldBirchStarterRescue.lua pokemon-mosaic-release.gba; then
               starter_failed=1
             fi
             if grep -q 'VERDICT WorldBirchStarterRescue: 46/46 PASS' "$PW_OUT/WorldBirchStarterRescue.log" &&
@@ -250,13 +250,13 @@ jobs:
             exit 1
           fi
           # Real user selection: legacy odds -> Always, Save, reset, Continue.
-          test/overworld/mgba-run.sh test/overworld/lua/WorldShinyOdds.lua pokemonworld-release.gba
+          test/overworld/mgba-run.sh test/overworld/lua/WorldShinyOdds.lua pokemon-mosaic-release.gba
           grep -q 'VERDICT WorldShinyOdds: 26/26 PASS' "$PW_OUT/WorldShinyOdds.log"
           test -f "$PW_OUT/WorldShinyOdds.PASS"
           echo 'PASS: all eleven Shiny Odds options retained; Always, 1/2, 1/4, 1/8 survive real battery Save/Continue'
           # A separate disposable new-game invocation, still no save fixture.
           # This reaches actual GBA overworld logic, not merely its title UI.
-          test/overworld/mgba-run.sh test/overworld/lua/WorldFirstBoot.lua pokemonworld-release.gba
+          test/overworld/mgba-run.sh test/overworld/lua/WorldFirstBoot.lua pokemon-mosaic-release.gba
           grep -q 'VERDICT WorldFirstBoot: 4/4 PASS' "$PW_OUT/WorldFirstBoot.log" || {
             echo 'fresh-game overworld smoke did not report all four passes'
             test -f "$PW_OUT/WorldFirstBoot.log" && tail -n 100 "$PW_OUT/WorldFirstBoot.log" || true
@@ -271,7 +271,7 @@ jobs:
           # behind its synthetic button timing. Test it manually on Nyx next.
           # Full-party travel: real region attendant scripts and actual Hub Pass,
           # with a six-Pokémon scratch fixture isolated to emulator RAM.
-          test/overworld/mgba-run.sh test/overworld/lua/WorldRegionPartyTravel.lua pokemonworld-release.gba
+          test/overworld/mgba-run.sh test/overworld/lua/WorldRegionPartyTravel.lua pokemon-mosaic-release.gba
           grep -q 'VERDICT WorldRegionPartyTravel: .* PASS' "$PW_OUT/WorldRegionPartyTravel.log" || {
             echo 'full-party cross-region integration smoke did not pass'
             test -f "$PW_OUT/WorldRegionPartyTravel.log" && tail -n 120 "$PW_OUT/WorldRegionPartyTravel.log" || true

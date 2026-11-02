@@ -71,17 +71,17 @@ jobs:
           python3 test/overworld/ValidateFullPartyStarters.py
           python3 test/overworld/ValidateScripts.py
           python3 test/overworld/ValidateGen13.py
-          python3 test/overworld/ValidateAnthologyDexAndRewards.py
+          python3 test/overworld/ValidateMosaicDexAndRewards.py
           python3 tools/audit_p0_acquisition.py
-          python3 test/overworld/ValidateAnthologyRoyalDuo.py
+          python3 test/overworld/ValidateMosaicRoyalDuo.py
           python3 test/overworld/ValidateJohtoEternatusChamber.py
-          python3 test/overworld/ValidateAnthologyHabitatRare.py
+          python3 test/overworld/ValidateMosaicHabitatRare.py
           python3 test/overworld/ValidatePermanentStellarTerapagos.py
-          python3 test/overworld/ValidateAnthologyStaticLifecycle.py
-          python3 test/overworld/ValidateAnthologyMegaStoneAcquisition.py
-          python3 test/overworld/ValidateAnthologyTaoTrio.py
-          python3 test/overworld/ValidateAnthologyNativeSlots.py
-          python3 test/overworld/ValidateAnthologyEvolutionAccess.py
+          python3 test/overworld/ValidateMosaicStaticLifecycle.py
+          python3 test/overworld/ValidateMosaicMegaStoneAcquisition.py
+          python3 test/overworld/ValidateMosaicTaoTrio.py
+          python3 test/overworld/ValidateMosaicNativeSlots.py
+          python3 test/overworld/ValidateMosaicEvolutionAccess.py
           python3 test/overworld/ValidateWorldDiscoveryEncounters.py
           python3 test/overworld/ValidatePcBulkRelease.py
           python3 test/overworld/ValidateHeldItemShopAvailability.py
@@ -127,6 +127,6 @@ jobs:
           }
           echo "PASS: optimized real GBA ROM builds on public main (not published)"
           grep -A 4 -E '^Memory region|^ *ROM:' "${RUNNER_TEMP}/gba-build.log" | tail -n 18 || true
-          test -s pokemonworld-release.gba
-          du -h pokemonworld-release.gba
+          test -s pokemon-mosaic-release.gba
+          du -h pokemon-mosaic-release.gba
           # Deliberately no actions/upload-artifact step and no ROM release.
