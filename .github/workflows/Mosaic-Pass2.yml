@@ -38,6 +38,7 @@ jobs:
           python3 -m py_compile tools/mosaic_rebrand_pass2.py
           python3 tools/mosaic_rebrand_pass2.py
           python3 tools/mosaic_rebrand_pass2.py --check
+          sed -i 's/[[:blank:]]*$//' data/maps/Route39/scripts.inc
           git diff --check
           git status --short | head -n 100
       - name: Build and validate actual 32 MiB ROM
