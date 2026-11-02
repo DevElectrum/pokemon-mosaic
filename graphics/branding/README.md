@@ -1,4 +1,6 @@
-# Pokémon World branding
+# Historical Pokémon World branding resources
+
+> **Mosaic rebrand status (2 November 2026):** This directory documents legacy Pokémon World artwork and its historical exporter. It is not the active Mosaic title pipeline. The currently active (still Grand Anthology-branded) GBA title uses `src/title_screen_world.c` and `tools/build_anthology_title.py`; its native image will be replaced **last**, after text, internal naming, ROM basename, and other visuals. Do not run the old World exporter as part of current Mosaic branding.
 
 `logos/pokemon-world.png` is the shared stacked logo used by the main README and
 the title exporter. World is intentionally shifted right relative to Pokémon:

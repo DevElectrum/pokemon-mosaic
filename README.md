@@ -80,11 +80,11 @@ For future engineering agents, the [machine-readable acquisition catalog](data/c
 
 ## Development status and verification
 
-**Status (31 October 2026): Pokémon Mosaic is the independent three-region, standard-GBA continuation of the original source at `ee129df0`. This is experimental source, not a finished ROM release.**
+**Status (2 November 2026): Pokémon Mosaic is the independent three-region, standard-GBA continuation of the source split at `ee129df0`. The maintainer has finished one Kanto → Johto → Hoenn playthrough. This is experimental source, not a finished ROM release.**
 
 Source publication began on October 23, 2026. The [Mosaic GitHub Actions](https://github.com/DevElectrum/pokemon-mosaic/actions) run source validators, optimized GBA compilation and representative emulator smoke tests. Before the repository split, the [October 25 optimized P0 build and source-validation run #40234899967](https://github.com/DevElectrum/grand-anthology/actions/runs/40234899967) **passed**. The earlier [mGBA smoke #40231997639](https://github.com/DevElectrum/grand-anthology/actions/runs/40231997639) **passed** on its own earlier commit; it did **not** execute end-to-end Royal Duo/92-stone/1,025-Pokémon acceptance.
 
-The maintainer has separately reported a successful **Mew Nine Masks** sequence and final catch/revisit, recorded in [its implementation and manual QA note](docs/MEW_NINE_MASKS_IMPLEMENTATION_2026-10-25.md). This does not automatically validate other battles.
+The maintainer has separately reported a successful **Mew Nine Masks** sequence and final catch/revisit, recorded in [its implementation and manual QA note](docs/MEW_NINE_MASKS_IMPLEMENTATION_2026-10-25.md). The full first playthrough also exposed a Johto→Hoenn Gym-trainer flag collision, since fixed in [source commit `ee620d9`](https://github.com/DevElectrum/pokemon-mosaic/commit/ee620d966c012f89e9006f3790bbc79067309be4). This does not automatically validate every battle, feature, or previously affected save.
 
 **Outstanding acceptance:** walkability and overworld object interactions; actual Royal Duo win/reward persistence, storage overflow and form changes; collectible Mega Stone pickups; story flags and encounters after region changes; breeding and evolution edges; catching/revisiting; full-game Pokedex source realization and save/reload reliability. The field guide and structured catalog are navigational/source aids, **not playtesting certificates**.
 
@@ -96,7 +96,7 @@ For a preview of the **underlying** game's three-region presentation, see [Poké
 
 ## Building locally
 
-This repository contains GBA source, data and build tools; **it does not provide downloadable ROM files**. The inherited `pokemonworld-release.gba` output filename is intentionally retained for compatibility with existing save and CI tooling. The player-facing identity and GBA cartridge title now say Pokémon Mosaic. A later filename transition will include instructions for copying an existing `.sav` safely.
+This repository contains GBA source, data and build tools; **it does not provide downloadable ROM files**. The inherited `pokemonworld-release.gba` output filename remains **temporarily** in Pass 1 for save and CI compatibility, although the GBA cartridge header and main menu already say Pokémon Mosaic. Pass 2 will rename the default output to `pokemon-mosaic-release.gba` alongside every CI/test consumer, with explicit, copy-only `.sav` migration instructions. **Do not rename, overwrite, or delete your only save file.**
 
 You need Git, Python 3, GNU Make, host build tools, `libpng` development headers, and a modern `arm-none-eabi` compiler/binutils/newlib toolchain. The project uses **modern compilation, not agbcc**. See [INSTALL.md](INSTALL.md) for platform-specific setup.
 
@@ -106,7 +106,7 @@ cd pokemon-mosaic
 make release -j4
 ```
 
-**Important:** The full-generation roster has previously required the optimized release-style build shown above to fit the GBA ROM size limit. This is **not a guarantee** that every in-progress commit compiles or runs correctly. The optimized GBA build and source-validation workflow passed on October 25, 2026, at [run #40234899967](https://github.com/DevElectrum/grand-anthology/actions/runs/40234899967); full gameplay validation remains unfinished. `make modern` is an inherited non-release invocation and should not be assumed to fit this development branch. Check the exact commit's CI and emulator evidence before treating a build as verified. Keep ROM outputs local; never upload them to GitHub Releases, Actions artifacts, or the repository.
+**Important:** The full-generation roster has previously required the optimized release-style build shown above to fit the GBA ROM size limit. This is **not a guarantee** that every in-progress commit compiles or runs correctly. The Mosaic optimized GBA build and source-validation workflow passed on 2 November 2026 in [run #41427319507](https://github.com/DevElectrum/pokemon-mosaic/actions/runs/41427319507); full gameplay validation remains unfinished. `make modern` is an inherited non-release invocation and should not be assumed to fit this development branch. Check the exact commit's CI and emulator evidence before treating a build as verified. Keep ROM outputs local; never upload them to GitHub Releases, Actions artifacts, or the repository.
 
 For source-level checks and test tooling, consult [INSTALL.md](INSTALL.md) and the project documentation. Never interpret a green static validator alone as full gameplay acceptance.
 

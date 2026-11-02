@@ -1,3 +1,5 @@
+> **2 November 2026 | Mosaic rebranding Pass 1:** Current-facing prose, build instructions, intro attribution, website copy, credits and acquisition-catalog documentation have been updated to Pokémon Mosaic. `Makefile` still creates `pokemonworld-release.gba` in this pass; actual basename/CI/test changes, internal `ANTHOLOGY_*` symbol migrations and assets belong to later passes. The legacy 240×160 Grand Anthology picture remains intentionally last. Original Pokémon World credits and historical records are preserved. The first human Kanto→Johto→Hoenn run completed; individual gameplay paths remain incompletely verified.
+
 > **28 OCT 2026: RESEARCH RETIRED IN SOURCE.** Post-League Research no longer injects unrelated species into grass, walking overworld encounters, Surf or fishing. The classic Start-menu entry and its target editor are removed; the graphical Start menu never had Research. Seeded Wild Randomizer and curated habitats remain unchanged. Game-stat index 53 stays allocated (unused) for save compatibility. The optimistic 1,025-species acquisition catalog does not list Research-only sources, but this is not a gameplay reachability certification. Confirm the actual commit's CI result and perform real-ROM encounter testing before calling the change runtime-verified.
 
 > **25 OCT 2026: RETIRED TWO SYNTHETIC M-GBA DOORWAY GATES.** Kanto Route 5 daycare and Granite Cave Diancie were verified manually through normal graphical mGBA gameplay on Nyx, including daycare Egg/Phione and Diancie catch/revisit/save persistence. Their old synthetic Save/Continue navigation fixtures did not reliably reach the rooms and are **no longer required CI checks**. The archived Lua scripts remain for diagnostics. Other mGBA suites, gameplay ROM compilation and source checks remain required. See [Nyx manual QA](NYX_MANUAL_QA_2026-10-24.md). This policy supersedes older statements below calling the same two fixture failures active release blockers.
@@ -18,7 +20,7 @@
 
 > **Design correction and development pause, 24 October 2026:** The current requirement is eventual access to all 1,025 species across the *complete three-region adventure, including postgame*, **not before the first Champion**. Original story gates may remain intact. Legendary and Mythical Pokémon should be static encounters; Ultra Beasts and Paradox Pokémon are intentionally natural rare encounters. The source-location [audit](LEGENDARY_MYTHICAL_LOCATION_AUDIT_2026-10-24.md) identifies exceptions pending discussion. **No new gameplay work is authorized until user discussion.** Any older pre-Champion requirement or "resume immediately" below is historical and superseded.
 
-# Pokémon Grand Anthology: scope and verification status
+# Pokémon Mosaic: scope and verification status (historical engineering entries below)
 
 ## Last exact optimized and mGBA results (24 October UTC)
 

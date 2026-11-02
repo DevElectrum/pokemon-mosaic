@@ -1,3 +1,5 @@
+> **Current instruction, 2 November 2026:** The maintainer has completed Hoenn and resumed Mosaic rebranding in phases. **Pass 1** covers active prose, intro attribution, website copy, and documentation; Pass 2 covers internal symbol/ROM filename/test migration; Pass 3 covers other visuals; the **native GBA title-screen image is explicitly last**. Older 'do not start rebrand' or 'title image second' notes below are historical and superseded. Preserve ordinary GBA compatibility, original Pokémon World credit, and the completed-game save.
+
 # Pokémon Mosaic: repository split and rebrand handoff
 
 ## What the user wants

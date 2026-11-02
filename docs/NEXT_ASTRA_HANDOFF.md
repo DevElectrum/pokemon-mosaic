@@ -1,3 +1,7 @@
+## Mosaic branding Pass 1 (2 November 2026)
+
+User explicitly resumed the remaining Mosaic rebrand after completing Hoenn. Pass 1 updates active project documents, public website copy, the human/machine acquisition guide documentation, and the five-page new-game opening's creator attribution (Mosaic built upon David Ayers' Pokémon World). No technical symbol, save ID, GBA game code, Makefile basename, website asset, or title artwork was changed. Next is **Pass 2: internal `Anthology` naming, command-line/CI/test rename, and `.sav` copy-only migration**, followed by other assets, with **native GBA title artwork LAST**. Older 31 October notes delegating rebranding to another collaborator are superseded by this explicit new user authorization. Source-only changes must not be misrepresented as emulator runtime testing.
+
 ## Mosaic Johto Gym victories corrupt Hoenn trainer-defeated flags (2026-11-02)
 
 Source root cause found in #3, fixed by bringing over the relevant Pokémon World upstream `95ba7588bd` 8 Johto call sites and its Johto-specific 28-trainer dispatcher. All eight Johto handlers map exactly to Mosaic's current `trainerbattle_*` records, distinct from Hoenn. Regression `test/overworld/ValidateJohtoGymTrainerIsolation.py` added to gameplay CI. No save format changes or retroactive flag clearing: the user's 24-badge completed save stays untouched. Need exact-commit build/acceptance and emulator confirmation on disposable test save.

@@ -9,7 +9,7 @@ This reference includes all **1,025 National Pokédex species**, all **874 expli
 | **Johto** | Continue with the same trainer and collection, then eight gyms and the League | Zacian and Zamazenta stand together on Route 27 after all eight badges, **before** Johto Champion |
 | **Hoenn** | Continue the shared adventure and defeat Hoenn Champion | Regular Terapagos on Route 114; permanent Complete Zygarde and permanent Stellar Terapagos available **after** Hoenn Champion |
 
-The story is meant to run **Kanto → Johto → Hoenn**, without forced level resets or fresh teams. The source is still experimental; regional continuity has representative tests, not a full accepted playthrough.
+The story is meant to run **Kanto → Johto → Hoenn**, without forced level resets or fresh teams. The maintainer completed the first Kanto → Johto → Hoenn run; broader feature and save-state acceptance remains incomplete. The old Johto→Hoenn Gym trainer-flag contamination was fixed in source on 2 November 2026, but existing saves retain already-written flags.
 ## Major special encounters
 | Encounter | Where | How / notes |
 | --- | --- | --- |
