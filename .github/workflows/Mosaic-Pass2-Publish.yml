@@ -79,6 +79,10 @@ jobs:
         run: |
           set -euo pipefail
           git add -A
+          # GITHUB_TOKEN cannot push modifications to workflow files.
+          # Publish source separately; use the maintainer GitHub connection
+          # for workflow updates before merging the review branch.
+          git restore --staged -- .github/workflows
           while IFS= read -r -d '' file; do
             case "$file" in
               *.gba|*.sav|*.srm|*.elf|*.png|*.jpg|*.jpeg|*.bin|*.lz|*.map|*.o|*.a|*.pyc)
