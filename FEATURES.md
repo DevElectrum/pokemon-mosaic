@@ -2,16 +2,16 @@
 
 # Features
 
-**Pokémon Grand Anthology** is an experimental extension of
+**Pokémon Mosaic** is an experimental, three-region extension of
 [Pokémon World](https://github.com/evilchinesefood/PKMN-World) by David A. and contributors,
 itself based on [RHH's pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion)
-and [pret/pokeemerald](https://github.com/pret/pokeemerald).
+and [pret/pokeemerald](https://github.com/pret/pokeemerald). The separate nine-region project is Pokémon Grand Anthology.
 
-This document contains **inherited Pokémon World features** below. Those story and engine features
-do not originate with Grand Anthology, and their source-level presence does not establish that
-the modified all-generation game has passed a complete three-region playthrough.
+This document also describes **inherited Pokémon World features**. Original story and engine work
+is credited to its authors, not Mosaic. The maintainer reports completing a full Kanto → Johto → Hoenn
+playthrough, but that does not certify every individual feature, save path, or encounter.
 
-### Grand Anthology additions: current evidence
+### Mosaic additions: current evidence
 
 | Addition | Verified scope and remaining work |
 | --- | --- |
@@ -102,10 +102,10 @@ Elite Four, Champion and Hall of Fame, and you choose the order.
 - **Hoenn** — the native Emerald campaign, plus the **Battle Frontier** as the shared post-game
   facility. It's reachable from the hub once you've cleared at least one region's league.
 
-### Grand Anthology roster overrides the original Gen 1–3 restriction
+### Mosaic roster overrides the original Gen 1–3 restriction
 
 Pokémon World originally limited natural inhabitants and trainer pools to Generations 1–3
-(with later evolutions where supported). Grand Anthology has superseded that restriction:
+(with later evolutions where supported). Mosaic extends that restriction:
 all nine generations' species families are enabled and **1,025 National IDs** have optimistic
 source-level acquisition paths. The inherited validator filename
 `test/overworld/ValidateGen13.py` now enforces all-generation enablement rather than
@@ -349,10 +349,13 @@ on:
   defaults to the active campaign. Started optional errands have separate pages;
   existing regional script state supplies the reminders without new save fields.
   Coverage and controls: [`docs/story-progress/README.md`](docs/story-progress/README.md).
-- **Pokémon World title screen** — native logo, island panorama and centered
-  PRESS START. SELECT no longer skips to a new game (`ENABLE_QUICKSTART` is
-  `FALSE` in `include/config/quickstart.h`). Branding source and exporter live
-  under `graphics/branding/` and `tools/export-world-title.mjs`.
+- **Mosaic title presentation (artwork pending)** — the cartridge header and main menu say
+  Pokémon Mosaic, while the inherited native GBA title-screen image still visibly says
+  Grand Anthology until the final rebranding pass. The existing centered PRESS START
+  and title-screen transitions are retained. SELECT no longer skips to a new game
+  (`ENABLE_QUICKSTART` is `FALSE` in `include/config/quickstart.h`). The active
+  title resource is managed by `tools/build_anthology_title.py`, not the older
+  Pokémon World exporter.
 - **World Panels** — Main Menu, Options and Relearn Moves share light moving
   diagonal backgrounds, white panels and red headers. Main Menu save details
   use dark readable text; text-rendered action labels use title case. Battle

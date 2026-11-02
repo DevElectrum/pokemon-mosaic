@@ -1,11 +1,10 @@
-# Building Pokémon Grand Anthology
+# Building Pokémon Mosaic
 
-This builds **Pokémon Grand Anthology**, an experimental modification of [Pokémon World](https://github.com/evilchinesefood/PKMN-World) using [pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion). The original platform/toolchain notes below are inherited; the first build command and release status have been updated for our larger roster.
+This builds **Pokémon Mosaic**, an experimental three-region modification built upon [Pokémon World](https://github.com/evilchinesefood/PKMN-World) and [pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion). The original platform and toolchain notes are inherited. This is the **standard GBA emulator** game, not the separate nine-region Grand Anthology/XGBA project.
 
-Build from an authorized source checkout on its published or maintainer-designated branch. A fresh-history public snapshot will not contain the private development branches, so no private branch switch is required. The inherited Makefile retains `pokemonworld` output naming: the optimized build produces `pokemonworld-release.gba` locally. No compiled ROM is published.
+Build from `DevElectrum/pokemon-mosaic` on its published or maintainer-designated branch. The inherited Makefile **still** uses the temporary `pokemonworld` build basename: `make release -j4` currently produces `pokemonworld-release.gba` locally. Renaming that default, its CI consumers, and matching emulator save basenames belongs to rebranding Pass 2; **do not rename or overwrite your only `.sav`**. No compiled ROM is published.
 
-- **Output ROM:** `pokemonworld.gba` — 32 MB, ROM header title `POKEMON WRLD`, game code `BPEE`
-  (`Makefile:2-3`)
+- **Current default ROMs:** `pokemonworld.gba` (normal/debug) and `pokemonworld-release.gba` (`make release`), both still under the legacy filename until Pass 2. The GBA header already says **`PKMN MOSAIC`**, with the original game code **`BPEE`**. The ROM limit is **32 MiB**.
 - **Toolchain:** modern only — `arm-none-eabi-gcc` + newlib. **agbcc is not used**; the Makefile
   hardcodes `-DMODERN=1` and `make agbcc` deliberately exits with an error (`Makefile:345-348`).
 
@@ -198,7 +197,7 @@ arm-none-eabi-gcc (devkitARM) 16.1.0
 
 ---
 
-## 5. Building Grand Anthology
+## 5. Building Pokémon Mosaic
 
 From the root of your authorized source checkout, after installing the toolchain:
 
@@ -226,7 +225,7 @@ GitHub Releases, or Actions artifacts.
 | --- | --- |
 | `make` / `make modern` | build `pokemonworld.gba` (+ `.elf`, `.map`, and a refreshed `test/overworld/lua/symbols.lua`) |
 | `make check` | invoke the inherited battle-engine test target; it may require separately provided mGBA runner binaries, which are not bundled in the public source snapshot |
-| `make validate` | run the fifteen host-side content checks (no build) |
+| `make validate` | run the currently configured host-side content checks (no ROM build) |
 | `make tools` | build only the host tools in `tools/` — the target to use when diagnosing a tools failure |
 | `make symbols` | regenerate `test/overworld/lua/symbols.lua` from the ELF (the normal ROM build already does this) |
 | `make obstacles` | regenerate the committed cleared-obstacle table after a map edit |
@@ -238,7 +237,7 @@ GitHub Releases, or Actions artifacts.
 > **`make debug` overwrites `pokemonworld.gba`.** Only `release` renames its output
 > (`Makefile:102-104`); `debug` changes the object directory but not the ROM filename.
 
-> **Anthology status:** This inherited Pokémon World shipping policy is superseded for the experimental Anthology branch. Optimized `make release` currently fits the all-generation build, but **neither its successful compilation nor selected smoke suites is a release-ready acceptance test**. No Grand Anthology release or ROM distribution is authorized.
+> **Mosaic status:** This three-region project is an experimental, source-only fan modification. An optimized build can fit the standard 32 MiB ROM budget, but **neither successful compilation nor selected emulator smoke tests alone certify the game for release**. No Mosaic ROM distribution is authorized.
 
 ### Expected output
 
@@ -251,7 +250,7 @@ Memory region         Used Size  Region Size  %age Used
            IWRAM:        ...           32 KB      ...
              ROM:        ...           32 MB      ...
 cd build/emerald && arm-none-eabi-ld -Map ../../pokemonworld.map --print-memory-usage --gc-sections -T ../../ld_script_modern.ld -o ../../pokemonworld.elf <objs> <libs> | cat
-tools/gbafix/gbafix pokemonworld.elf -t"POKEMON WRLD" -cBPEE -m01 -r0 --silent
+tools/gbafix/gbafix pokemonworld.elf -t"PKMN MOSAIC" -cBPEE -m01 -r0 --silent
 arm-none-eabi-objcopy -O binary pokemonworld.elf pokemonworld.gba
 tools/gbafix/gbafix pokemonworld.gba -p --silent
 ```
@@ -262,7 +261,7 @@ harmless.
 The region sizes come from `ld_script_modern.ld:9-11`. The `ROM:` line is the one worth watching
 — the region is capped at 32 MB, and that percentage is the project's headroom budget.
 
-With **`make release`**, the expected local ROM filename is **`pokemonworld-release.gba`**. With `make modern`, the inherited output filename is `pokemonworld.gba`. Both names refer to our experimental build when generated from the development branch; do not publish either ROM.
+With **`make release`**, the current local ROM filename is **`pokemonworld-release.gba`**. With `make modern`, it is `pokemonworld.gba`. These temporary basenames **do not** determine the in-game brand: the header says `PKMN MOSAIC`. Pass 2 will migrate the default to `pokemon-mosaic-release.gba` and update scripts/CI together; retain backup copies of the old ROM/save pair and copy the matching `.sav` rather than moving or deleting it. Do not publish either ROM.
 
 ---
 
@@ -332,7 +331,7 @@ PATH=/path/to/toolchain/bin:$PATH make modern -j8
 
 ## 8. Reviewing upstream expansion updates (advanced)
 
-Grand Anthology is a separate modification with its own development history.
+Pokémon Mosaic is a separate modification with its own development history. Pokémon Grand Anthology is maintained in a different repository.
 Do **not** blindly merge the upstream `master` branch into this project's
 default branch. Upstream engine changes should be reviewed and ported
 selectively, with their authorship and license notices preserved. The

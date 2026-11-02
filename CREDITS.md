@@ -1,4 +1,4 @@
-# Pokémon Grand Anthology: credits and upstream acknowledgments
+# Pokémon Mosaic: credits and upstream acknowledgments
 
 **This project is a modification, not the origin of the three-region game.**
 The entire original Pokémon World credit record is retained **without removing contributors**
@@ -10,7 +10,7 @@ Johto, Hoenn and World Transit adventure. Additional original work belongs to
 [Pokémon Heart & Soul](https://github.com/PokemonHnS-Development/pokemonHnS),
 and all the other people and communities recorded below.
 
-**Grand Anthology additions:** an independent hobby enthusiast sets direction,
+**Mosaic additions:** the independent project maintainer sets direction,
 requirements and product choices. Much of its additional code, source integration,
 tests, documentation and iteration has been produced with OpenAI's **ChatGPT**.
 This acknowledgment is not a claim that ChatGPT or the maintainer created

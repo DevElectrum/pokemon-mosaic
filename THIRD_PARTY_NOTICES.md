@@ -1,6 +1,6 @@
 # Third-party credits and component license notices
 
-Pokémon Grand Anthology is an **unofficial, non-commercial, experimental
+Pokémon Mosaic is an **unofficial, non-commercial, experimental
 modification** of [Pokémon World](https://github.com/evilchinesefood/PKMN-World).
 The engine, map/story integration, graphics, audio and other inherited material
 were created by their respective authors and rights holders.

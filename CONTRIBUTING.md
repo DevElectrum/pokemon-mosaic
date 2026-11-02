@@ -1,4 +1,4 @@
-# Contributing to Pokémon Grand Anthology
+# Contributing to Pokémon Mosaic
 
 Thank you for considering a contribution. This is a **small, unofficial,
 non-commercial, experimental fan project** based on

@@ -162,7 +162,8 @@ gOakSpeech_Text_AskPlayerGender::
 @ render as " - " (the charmap has no em dash).
 gPikachuIntro_Text_Page1::
 	.string "Welcome to POKéMON MOSAIC!\n"
-	.string "Created with love by David Ayers.\n"
+	.string "Built upon POKéMON WORLD,\n"
+	.string "created by David Ayers.\n"
 	.string "\n"
 	.string "Three regions - KANTO, JOHTO, and\n"
 	.string "HOENN - each a complete adventure\n"

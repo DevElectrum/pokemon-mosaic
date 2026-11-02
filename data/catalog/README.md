@@ -1,11 +1,11 @@
-# World Acquisition Catalog: Astra's Search Index
+# Pokémon Mosaic Acquisition Catalog: Source Index
 
-**Canonical repository:** `DevElectrum/grand-anthology`, public `main`. The catalog is a **source-level acquisition index**, not a verified strategy guide, a proof of full-game obtainability, or a substitute for current map scripts.
+**Canonical repository:** `DevElectrum/pokemon-mosaic`, public `main`. The catalog is a **source-level acquisition index**, not a verified strategy guide, a proof of full-game obtainability, or a substitute for current map scripts.
 
 ## The two reader views
 
 - **Astra / machine:** [`world_acquisition.jsonl`](world_acquisition.jsonl). One JSON object per line: a metadata header, exactly **1,025** `kind=pokemon` records in National Dex order, and **874** `kind=item` records for explicitly numbered item constants. The item list includes all **92** defined Mega Stones, and **41** world Mega Stone entries carry exact source-map tile coordinates.
-- **Human:** [Grand Anthology Field Guide](../../docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md), which has Kanto → Johto → Hoenn progression, a complete Pokédex lookup, 546 source-location groups, the 92-stone acquisition list and an item lookup.
+- **Human:** [Mosaic Field Guide](../../docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md), which has Kanto → Johto → Hoenn progression, a complete Pokédex lookup, 546 source-location groups, the 92-stone acquisition list and an item lookup.
 - **Public introduction:** [README](../../README.md). Keep its progression and development status synchronized.
 
 ## Search examples
@@ -39,7 +39,7 @@ jq -r 'select(.kind=="pokemon" and (.sources | length)==0) | .name' data/catalog
 
 ## Source inputs and maintenance
 
-This index was assembled from current `include/constants/pokedex.h`, `include/constants/items.h`, the Gen 1–9 species-info evolution links, `src/data/wild_encounters.json`, three `src/data/anthology_*_habitats.h` catalogs, map script code-search matches, world Mega Stone item-ball references, `src/battle_net.c`, and bespoke Royal Duo / Mew / Terapagos / Zygarde source paths. **The search extraction is conservative and incomplete for arbitrary script branches.** The 25 October snapshot currently records at least one explicit source for 197 of 874 item definitions; the remainder require deeper inherited shop/quest/drop auditing. All 1,025 National species have a direct source candidate or evolution-parent relation in the index, but that does not prove they are obtainable in normal gameplay.
+This index was assembled from current `include/constants/pokedex.h`, `include/constants/items.h`, the Gen 1–9 species-info evolution links, `src/data/wild_encounters.json`, three `src/data/anthology_*_habitats.h` catalogs, map script code-search matches, world Mega Stone item-ball references, `src/battle_net.c`, and bespoke Royal Duo / Mew / Terapagos / Zygarde source paths. **The search extraction is conservative and incomplete for arbitrary script branches.** The index has been incrementally updated since its 25 October snapshot, including Loaded Dice and 35 additional held-item shop paths. Remaining item definitions still require inherited shop/quest/drop auditing. All 1,025 National species have a direct source candidate or evolution-parent relation in the index, but that does not prove they are obtainable in normal gameplay.
 
 When source changes:
 
@@ -47,8 +47,8 @@ When source changes:
 2. Update the affected JSONL line's source list and evidence labels. If a record is a candidate, leave it a candidate until gameplay acceptance is recorded.
 3. Update the corresponding player's Field Guide entry and map/item indexes, plus README progression when relevant. The JSONL is the canonical machine inventory; do not let the guides drift.
 4. Validate **1,025 unique dex entries**, **92 Mega Stones**, valid item IDs and no invented source locations. The independent `test/overworld/ValidateAnthologyMegaStoneAcquisition.py` confirms 92/92 *source-level* Mega paths (30 rematch, 21 vendor, 41 world), not walkability.
-5. Consult `docs/ROYAL_DUO_ROUTE27_IMPLEMENTATION_2026-10-25.md` and `docs/PERMANENT_STELLAR_TERAPAGOS_2026-10-25.md` for special cases. **Eternatus remains on Route 44 in present source**, though a Victory Road relocation was discussed.
+5. Consult `docs/ROYAL_DUO_ROUTE27_IMPLEMENTATION_2026-10-25.md` and `docs/PERMANENT_STELLAR_TERAPAGOS_2026-10-25.md` for special cases. **Eternatus is now in Johto Victory Road's gated chamber**; older Route 44 placement notes are superseded.
 
 The human guide is currently a documented rendering of this machine inventory with editorial progression notes. There is **no automatic keep-in-sync build step yet**; future developers must update both views together or add a deterministic generator before relying on automation.
 
-**Do not modify `DevElectrum/pokemon-grand-anthology`**, the private historical archive. Do not upload ROMs or saves.
+**Do not modify the separate `DevElectrum/grand-anthology` project** while maintaining Mosaic. Do not upload ROMs or saves.
