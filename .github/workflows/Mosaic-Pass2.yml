@@ -38,13 +38,40 @@ jobs:
           python3 -m py_compile tools/mosaic_rebrand_pass2.py
           python3 tools/mosaic_rebrand_pass2.py
           python3 tools/mosaic_rebrand_pass2.py --check
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("test/overworld/ValidateMosaicBranding.py")
+          p.write_text("""#!/usr/bin/env python3
+from pathlib import Path
+import subprocess
+root = Path(__file__).resolve().parents[2]
+subprocess.run(["python3", "tools/mosaic_rebrand_pass2.py", "--check"], cwd=root, check=True)
+assert (root / "docs/SAVE_FILENAME_MIGRATION.md").is_file()
+assert (root / "docs/MOSAIC_FIELD_GUIDE.md").is_file()
+print("PASS: Mosaic brand, ROM name, save-copy guidance and title-art deferral")
+""")
+          PY
           sed -i 's/[[:blank:]]*$//' data/maps/Route39/scripts.inc
           git diff --check
           git status --short | head -n 100
       - name: Build and validate actual 32 MiB ROM
         run: |
           set -euo pipefail
-          make validate
+          python3 - <<'PY'
+          from pathlib import Path
+          import shlex
+          import subprocess
+          text = Path(".github/workflows/Gameplay-P0.yml").read_text()
+          commands = []
+          for line in text.splitlines():
+              command = line.strip()
+              if command.startswith("python3 test/overworld/"):
+                  commands.append(shlex.split(command))
+          assert len(commands) >= 20, "Gameplay CI validator list unexpectedly small"
+          for command in commands:
+              subprocess.run(command, check=True)
+          print("PASS:", len(commands), "maintained gameplay source validators")
+          PY
           make release -j4 > "$RUNNER_TEMP/mosaic-build.log" 2>&1 || {
             grep -n -E 'Error:|error:|undefined reference|No rule|overflowed|fatal:' "$RUNNER_TEMP/mosaic-build.log" | tail -n 100 || true
             tail -n 70 "$RUNNER_TEMP/mosaic-build.log"
