@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import { existsSync } from 'node:fs';
+const hasMosaicHero = existsSync(new URL('../../public/visuals/mosaic-hero.png', import.meta.url));
 import { catalog } from '../lib/data';
 const regions = [
   { name: 'Kanto', subtitle: 'Where the journey begins', img: '/visuals/kanto.png', description: 'Familiar routes, hidden encounters, and a world much larger than you remember.' },
@@ -7,18 +9,19 @@ const regions = [
   { name: 'Hoenn', subtitle: 'Explore beyond the horizon', img: '/visuals/hoenn.png', description: 'From coastal waters to volcanic peaks, a region built for discovery.' }
 ];
 ---
-<Base title="Three regions. Nine generations. One adventure." description="Explore Pokémon Mosaic: an experimental, collection-first Pokémon fan adventure built upon Pokémon World.">
-  <section class="hero">
+<Base title="A brighter adventure. A little mystery." description="Explore Pokémon Mosaic: a colorful collection-first fan adventure with hidden wonders, built upon Pokémon World.">
+  <section class={hasMosaicHero ? 'hero hero-with-mosaic-art' : 'hero'}>
+    {hasMosaicHero && <img class="hero-mosaic-art" src="/visuals/mosaic-hero.png" width="1916" height="821" fetchpriority="high" alt="A trainer and Pokémon overlooking a brilliant realm of floating islands and waterfalls, a stained-glass Pokémon Mosaic gateway, and a mysterious violet night sky with a winged creature" />}
     <div class="hero-content">
-      <p class="eyebrow light">A world worth exploring</p>
-      <h1>Nine generations.<br />Three regions.<br /><em>One connected adventure.</em></h1>
-      <p class="hero-copy">Discover Pokémon across Kanto, Johto and Hoenn in a collection-first fan adventure built upon Pokémon World.</p>
+      <p class="eyebrow light">Every journey begins with wonder</p>
+      <h1>Find a little joy.<br /><em>Follow a little mystery.</em></h1>
+      <p class="hero-copy">Meet old friends, uncover hidden surprises, and collect your favorites in a colorful Pokémon adventure built upon Pokémon World.</p>
       <div class="hero-actions">
         <a href="/pokedex/" class="button button-gold">Explore the Pokédex <span aria-hidden="true">↗</span></a>
         <a href="/randomizer/" class="button button-ghost">Randomizer Atlas <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-    <span class="hero-caption">Illustrated concept artwork, not an in-game screenshot</span>
+    <span class="hero-caption">Original concept illustration, not an in-game screenshot</span>
   </section>
   <section class="intro-strip" aria-label="Project snapshot">
     <div><strong>1,025</strong><span>National species indexed</span></div>

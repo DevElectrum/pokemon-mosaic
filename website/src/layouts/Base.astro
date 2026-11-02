@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import { existsSync } from 'node:fs';
+const hasMosaicLogo = existsSync(new URL('../../public/visuals/mosaic-logo.png', import.meta.url));
+const hasMosaicHero = existsSync(new URL('../../public/visuals/mosaic-hero.png', import.meta.url));
 const { title = 'Pokémon Mosaic', description = 'An unofficial, experimental, collection-first Pokémon fan project across Kanto, Johto and Hoenn.' } = Astro.props;
 const navigation = [
   ['/', 'Home'],
@@ -23,6 +26,8 @@ const path = Astro.url.pathname;
     <meta property="og:site_name" content="Pokémon Mosaic" />
     <meta property="og:title" content={title + ' | Pokémon Mosaic'} />
     <meta property="og:description" content={description} />
+    {hasMosaicHero && <meta property="og:image" content={new URL('/visuals/mosaic-hero.png', Astro.site ?? Astro.url).href} />}
+    {hasMosaicHero && <meta property="og:image:alt" content="Pokémon Mosaic stained-glass gateway: a bright adventure and a mysterious twilight realm" />}
     <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="color-scheme" content="light dark" />
@@ -42,7 +47,9 @@ const path = Astro.url.pathname;
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="Pokémon Mosaic homepage">
-          <span class="brand-mark" aria-hidden="true">✦</span>
+          {hasMosaicLogo
+            ? <img class="brand-logo" src="/visuals/mosaic-logo.png" width="48" height="48" alt="" aria-hidden="true" />
+            : <span class="brand-mark" aria-hidden="true">✦</span>}
           <span>Pokémon <strong>Mosaic</strong></span>
         </a>
         <nav class="main-nav" aria-label="Primary navigation">

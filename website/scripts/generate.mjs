@@ -1,4 +1,4 @@
-import { readFile, mkdir, writeFile, copyFile } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, copyFile, access } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { normalizeSourceEntries } from './normalize-sources.mjs';
@@ -97,6 +97,23 @@ const images = [
   ['graphics/branding/screenshots/showcase/02-world-transit.png', 'hub.png']
 ];
 for (const [from, to] of images) await copyFile(resolve(repository, from), resolve(visuals, to));
+
+// The approved Mosaic masters are intentionally not committed via this source
+// change: binary art is delivered separately with its original checksums.
+// Prefer the new pictures once installed; keep the existing website build
+// working until both images are present. Never touch the GBA title resources.
+const mosaicArt = [
+  ['graphics/branding/logos/pokemon-mosaic-master.png', 'mosaic-logo.png'],
+  ['graphics/branding/artwork/pokemon-mosaic-hero-master.png', 'mosaic-hero.png']
+];
+for (const [from, to] of mosaicArt) {
+  try {
+    await access(resolve(repository, from));
+    await copyFile(resolve(repository, from), resolve(visuals, to));
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+}
 console.log(`Supplemental/rare habitat level ranges: ${supplementalLevels.resolved}/${supplementalLevels.candidates} resolved from native encounter slots; ${supplementalLevels.unresolved} without usable level tables.`);
 console.log(`Generated site data: ${pokemon.length} Pokémon, ${items.length} items, ${megaStones.length} Mega Stones, ${locations.length} indexed map identifiers.`);
 console.log(`Website presentation merged ${rawRecords.reduce((count, entry) => count + (entry.sources?.length ?? 0), 0) - records.reduce((count, entry) => count + (entry.sources?.length ?? 0), 0)} redundant script-source references; distinct acquisition methods remain separate.`);
