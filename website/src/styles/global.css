@@ -487,8 +487,8 @@ a.atlas-starter-card:hover strong, a.atlas-starter-card:focus-visible strong {
 .hero::before {
   content: ''; display: block;
   width: 100%; height: clamp(240px, 43vw, 690px);
-  background-image: url('/visuals/mosaic-hero.webp'), url('/visuals/atlas.jpg');
-  background-size: cover, cover; background-position: center, center;
+  background-image: url('/visuals/atlas.jpg');
+  background-size: cover; background-position: center;
   background-repeat: no-repeat;
 }
 .hero .hero-content { padding: 33px 38px 32px; }
