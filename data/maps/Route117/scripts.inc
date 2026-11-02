@@ -6,7 +6,7 @@ Route117_MapScripts::
 	.byte 0
 
 Route117_OnTransition:
-	call Route117_AnthologyHuntTransition
+	call Route117_MosaicHuntTransition
 	call Route117_EventScript_TryMoveDayCareMan
 	@ set flags for OW daycare mons
 	setflag FLAG_TEMP_1
@@ -242,16 +242,16 @@ Route117_Text_DayCareSign:
 	.string "POKéMON DAY CARE\n"
 	.string "“Let us raise your POKéMON.”$"
 
-Route117_AnthologyHuntTransition::
-	callnative AnthologyStaticRandomizerIsOn
+Route117_MosaicHuntTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route117_RandomHuntTransition
 	getcaughtmon SPECIES_OGERPON_TEAL
 	goto_if_eq VAR_RESULT, TRUE, Route117_HideOgerpon
-	clearflag FLAG_HIDE_ANTHOLOGY_OGERPON
+	clearflag FLAG_HIDE_MOSAIC_OGERPON
 	goto Route117_CheckPecharunt
 
 Route117_HideOgerpon::
-	setflag FLAG_HIDE_ANTHOLOGY_OGERPON
+	setflag FLAG_HIDE_MOSAIC_OGERPON
 	goto Route117_CheckPecharunt
 
 Route117_CheckPecharunt::
@@ -265,26 +265,26 @@ Route117_CheckPecharunt::
 	goto_if_ne VAR_RESULT, TRUE, Route117_HidePecharunt
 	getcaughtmon SPECIES_MUNKIDORI
 	goto_if_ne VAR_RESULT, TRUE, Route117_HidePecharunt
-	clearflag FLAG_HIDE_ANTHOLOGY_PECHARUNT
+	clearflag FLAG_HIDE_MOSAIC_PECHARUNT
 	return
 
 Route117_RandomHuntTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE117_OGERPON, Route117_RandomHideOgerpon
-	clearflag FLAG_HIDE_ANTHOLOGY_OGERPON
+	clearflag FLAG_HIDE_MOSAIC_OGERPON
 	goto Route117_RandomCheckPecharunt
 Route117_RandomHideOgerpon::
-	setflag FLAG_HIDE_ANTHOLOGY_OGERPON
+	setflag FLAG_HIDE_MOSAIC_OGERPON
 Route117_RandomCheckPecharunt::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE117_PECHARUNT, Route117_HidePecharunt
 	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE117_OGERPON, Route117_HidePecharunt
 	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE112_OKIDOGI, Route117_HidePecharunt
 	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE113_FEZANDIPITI, Route117_HidePecharunt
 	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE114_MUNKIDORI, Route117_HidePecharunt
-	clearflag FLAG_HIDE_ANTHOLOGY_PECHARUNT
+	clearflag FLAG_HIDE_MOSAIC_PECHARUNT
 	return
 
 Route117_HidePecharunt::
-	setflag FLAG_HIDE_ANTHOLOGY_PECHARUNT
+	setflag FLAG_HIDE_MOSAIC_PECHARUNT
 	return
 
 Route117_EventScript_Ogerpon::
@@ -296,26 +296,26 @@ Route117_EventScript_Ogerpon::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route117_AnthologyOgerponRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route117_AnthologyOgerponRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route117_AnthologyOgerponCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route117_AnthologyOgerponResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route117_MosaicOgerponRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route117_MosaicOgerponRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route117_MosaicOgerponCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route117_MosaicOgerponResolved
 	release
 	end
 
-Route117_AnthologyOgerponCaught::
+Route117_MosaicOgerponCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE117_OGERPON
-	goto Route117_AnthologyOgerponResolved
+	goto Route117_MosaicOgerponResolved
 
-Route117_AnthologyOgerponResolved::
+Route117_MosaicOgerponResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_OGERPON
-	setflag FLAG_HIDE_ANTHOLOGY_OGERPON
+	removeobject LOCALID_MOSAIC_OGERPON
+	setflag FLAG_HIDE_MOSAIC_OGERPON
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route117_AnthologyOgerponRetreated::
+Route117_MosaicOgerponRetreated::
 	release
 	end
 
@@ -328,25 +328,25 @@ Route117_EventScript_Pecharunt::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route117_AnthologyPecharuntRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route117_AnthologyPecharuntRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route117_AnthologyPecharuntCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route117_AnthologyPecharuntResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route117_MosaicPecharuntRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route117_MosaicPecharuntRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route117_MosaicPecharuntCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route117_MosaicPecharuntResolved
 	release
 	end
 
-Route117_AnthologyPecharuntCaught::
+Route117_MosaicPecharuntCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE117_PECHARUNT
-	goto Route117_AnthologyPecharuntResolved
+	goto Route117_MosaicPecharuntResolved
 
-Route117_AnthologyPecharuntResolved::
+Route117_MosaicPecharuntResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_PECHARUNT
-	setflag FLAG_HIDE_ANTHOLOGY_PECHARUNT
+	removeobject LOCALID_MOSAIC_PECHARUNT
+	setflag FLAG_HIDE_MOSAIC_PECHARUNT
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route117_AnthologyPecharuntRetreated::
+Route117_MosaicPecharuntRetreated::
 	release
 	end

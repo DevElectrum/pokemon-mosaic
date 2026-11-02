@@ -54,7 +54,7 @@
       "flag": "FLAG_ITEM_SPROUT_TOWER_X_DEFEND"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_KUBFU_WEST",
+      "local_id": "LOCALID_MOSAIC_KUBFU_WEST",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(KUBFU)",
       "x": 14,
       "y": 11,
@@ -65,7 +65,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SproutTower_2F_EventScript_KubfuWest",
-      "flag": "FLAG_HIDE_ANTHOLOGY_KUBFU_WEST"
+      "flag": "FLAG_HIDE_MOSAIC_KUBFU_WEST"
     }
   ],
   "warp_events": [

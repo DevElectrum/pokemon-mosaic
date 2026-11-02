@@ -568,7 +568,7 @@ static u8 PickWildMonNature(enum Species species)
     return GetSynchronizedNature(WILDMON_ORIGIN, species);
 }
 
-// P0 Anthology: natural wild encounters have a repeatable *species mapping*
+// P0 Mosaic: natural wild encounters have a repeatable *species mapping*
 // per seed, map, area and encounter table slot. No gameplay RNG is advanced,
 // so reloads/revisits give the same mapping regardless of frame timing.
 // Scripted legendary/static encounters, roamer/outbreak encounters, FEebas,
@@ -630,7 +630,7 @@ static enum Species WorldRandomizeWildSpecies(enum Species original, u32 slot, e
 // Natural, pre-Champion rare habitat encounters. No original wild table is
 // overwritten. Only use an extra slot when the DexNav land UI has a free icon;
 // that ensures its list and the real encounter generator agree.
-enum Species AnthologyGetRareHabitatSpecies(enum WildPokemonArea area, const struct WildPokemonInfo *info)
+enum Species MosaicGetRareHabitatSpecies(enum WildPokemonArea area, const struct WildPokemonInfo *info)
 {
 #if ALL_REGIONS
     u32 i, j, distinct = 0;
@@ -646,7 +646,7 @@ enum Species AnthologyGetRareHabitatSpecies(enum WildPokemonArea area, const str
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(map) \
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(map)) rare = SPECIES_##mon;
     // Shared catalog also powers the native Pokédex area screen.
-#include "data/anthology_rare_habitats.h"
+#include "data/mosaic_rare_habitats.h"
 #undef RARE_ON_MAP
 
     if (!WorldIsNaturalDiscoverySpecies(rare))
@@ -759,43 +759,43 @@ bool8 WorldIsNaturalDiscoverySpecies(enum Species species)
 // These are separate from unique static encounters, fossil restoration and
 // fish-only habitats. The source catalog is a small, compile-time map index.
 #if ALL_REGIONS
-struct AnthologyExtraHabitat
+struct MosaicExtraHabitat
 {
     u8 mapGroup;
     u8 mapNum;
     enum Species species;
 };
 #define ECOLOGY_ON_MAP(map, mon) {MAP_GROUP(map), MAP_NUM(map), SPECIES_##mon},
-static const struct AnthologyExtraHabitat sAnthologyExtraHabitats[] =
+static const struct MosaicExtraHabitat sMosaicExtraHabitats[] =
 {
-#include "data/anthology_extra_habitats.h"
+#include "data/mosaic_extra_habitats.h"
 };
 #undef ECOLOGY_ON_MAP
 #endif
 
-enum Species AnthologyGetExtraHabitatSpecies(enum WildPokemonArea area,
+enum Species MosaicGetExtraHabitatSpecies(enum WildPokemonArea area,
                                           const struct WildPokemonInfo *info, u8 slot)
 {
 #if ALL_REGIONS
     u32 i, j;
     // Reuse all of the original habitat's story/facility/randomizer guards.
-    if (AnthologyGetRareHabitatSpecies(area, info) == SPECIES_NONE || slot >= ANTHOLOGY_EXTRA_HABITAT_SLOTS)
+    if (MosaicGetRareHabitatSpecies(area, info) == SPECIES_NONE || slot >= MOSAIC_EXTRA_HABITAT_SLOTS)
         return SPECIES_NONE;
-    for (i = 0; i < ARRAY_COUNT(sAnthologyExtraHabitats); i++)
+    for (i = 0; i < ARRAY_COUNT(sMosaicExtraHabitats); i++)
     {
-        if (sAnthologyExtraHabitats[i].mapGroup != gSaveBlock1Ptr->location.mapGroup
-         || sAnthologyExtraHabitats[i].mapNum != gSaveBlock1Ptr->location.mapNum)
+        if (sMosaicExtraHabitats[i].mapGroup != gSaveBlock1Ptr->location.mapGroup
+         || sMosaicExtraHabitats[i].mapNum != gSaveBlock1Ptr->location.mapNum)
             continue;
         if (slot-- != 0)
             continue;
-        if (!WorldIsNaturalDiscoverySpecies(sAnthologyExtraHabitats[i].species))
+        if (!WorldIsNaturalDiscoverySpecies(sMosaicExtraHabitats[i].species))
             return SPECIES_NONE;
         // If any native time-of-day table acquires this species, prefer the
         // native encounter and avoid showing it twice in DexNav.
         for (j = 0; j < NUM_LAND_MONS_ENCOUNTER_SLOTS; j++)
-            if (info->wildPokemon[j].species == sAnthologyExtraHabitats[i].species)
+            if (info->wildPokemon[j].species == sMosaicExtraHabitats[i].species)
                 return SPECIES_NONE;
-        return sAnthologyExtraHabitats[i].species;
+        return sMosaicExtraHabitats[i].species;
     }
 #endif
     return SPECIES_NONE;
@@ -804,7 +804,7 @@ enum Species AnthologyGetExtraHabitatSpecies(enum WildPokemonArea area,
 // Area-screen-safe membership: never change the live player's map to query
 // a different habitat. Look up the exact header location and current land table.
 // This supplements, never replaces, native Pokédex location discovery.
-bool8 AnthologyMapHasHabitatSpecies(u8 mapGroup, u8 mapNum,
+bool8 MosaicMapHasHabitatSpecies(u8 mapGroup, u8 mapNum,
                                    enum Species species, const struct WildPokemonInfo *info)
 {
 #if ALL_REGIONS
@@ -825,14 +825,14 @@ bool8 AnthologyMapHasHabitatSpecies(u8 mapGroup, u8 mapNum,
         return FALSE;
 #define RARE_ON_MAP(map, mon) \
     if (mapGroup == MAP_GROUP(map) && mapNum == MAP_NUM(map) && species == SPECIES_##mon) return TRUE;
-#include "data/anthology_rare_habitats.h"
+#include "data/mosaic_rare_habitats.h"
 #undef RARE_ON_MAP
     // Extras exist only where a primary rare habitat is registered; their
     // generated source and CI audit enforce the same DexNav capacity invariant.
-    for (i = 0; i < ARRAY_COUNT(sAnthologyExtraHabitats); i++)
-        if (mapGroup == sAnthologyExtraHabitats[i].mapGroup
-         && mapNum == sAnthologyExtraHabitats[i].mapNum
-         && species == sAnthologyExtraHabitats[i].species)
+    for (i = 0; i < ARRAY_COUNT(sMosaicExtraHabitats); i++)
+        if (mapGroup == sMosaicExtraHabitats[i].mapGroup
+         && mapNum == sMosaicExtraHabitats[i].mapNum
+         && species == sMosaicExtraHabitats[i].species)
             return TRUE;
 #endif
     return FALSE;
@@ -840,7 +840,7 @@ bool8 AnthologyMapHasHabitatSpecies(u8 mapGroup, u8 mapNum,
 
 
 #if ALL_REGIONS
-struct AnthologyAquaticHabitat
+struct MosaicAquaticHabitat
 {
     u8 mapGroup;
     u8 mapNum;
@@ -848,9 +848,9 @@ struct AnthologyAquaticHabitat
     enum Species species;
 };
 #define AQUATIC_ON_MAP(map, kind, mon) {MAP_GROUP(map), MAP_NUM(map), WILD_AREA_##kind, SPECIES_##mon},
-static const struct AnthologyAquaticHabitat sAnthologyAquaticHabitats[] =
+static const struct MosaicAquaticHabitat sMosaicAquaticHabitats[] =
 {
-#include "data/anthology_aquatic_habitats.h"
+#include "data/mosaic_aquatic_habitats.h"
 };
 #undef AQUATIC_ON_MAP
 #endif
@@ -858,7 +858,7 @@ static const struct AnthologyAquaticHabitat sAnthologyAquaticHabitats[] =
 // Shared selection policy for Surf, fishing, DexNav and Pokédex area maps.
 // Caller supplies a real table for the destination map, never a forged player
 // location. Surf bonus must leave a free icon among the five native water slots.
-static enum Species AnthologyFindAquaticHabitat(u8 mapGroup, u8 mapNum,
+static enum Species MosaicFindAquaticHabitat(u8 mapGroup, u8 mapNum,
                                                 enum WildPokemonArea area,
                                                 const struct WildPokemonInfo *info)
 {
@@ -870,13 +870,13 @@ static enum Species AnthologyFindAquaticHabitat(u8 mapGroup, u8 mapNum,
     if (info == NULL || info->wildPokemon == NULL || info->encounterRate == 0
      || (area != WILD_AREA_WATER && area != WILD_AREA_FISHING))
         return SPECIES_NONE;
-    for (i = 0; i < ARRAY_COUNT(sAnthologyAquaticHabitats); i++)
+    for (i = 0; i < ARRAY_COUNT(sMosaicAquaticHabitats); i++)
     {
-        if (sAnthologyAquaticHabitats[i].mapGroup == mapGroup
-         && sAnthologyAquaticHabitats[i].mapNum == mapNum
-         && sAnthologyAquaticHabitats[i].area == area)
+        if (sMosaicAquaticHabitats[i].mapGroup == mapGroup
+         && sMosaicAquaticHabitats[i].mapNum == mapNum
+         && sMosaicAquaticHabitats[i].area == area)
         {
-            species = sAnthologyAquaticHabitats[i].species;
+            species = sMosaicAquaticHabitats[i].species;
             break;
         }
     }
@@ -905,7 +905,7 @@ static enum Species AnthologyFindAquaticHabitat(u8 mapGroup, u8 mapNum,
 #endif
 }
 
-enum Species AnthologyGetAquaticHabitatSpecies(enum WildPokemonArea area,
+enum Species MosaicGetAquaticHabitatSpecies(enum WildPokemonArea area,
                                               const struct WildPokemonInfo *info)
 {
 #if ALL_REGIONS
@@ -914,18 +914,18 @@ enum Species AnthologyGetAquaticHabitatSpecies(enum WildPokemonArea area,
      || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE
      || gMapHeader.battleType == MAP_BATTLE_SCENE_FRONTIER)
         return SPECIES_NONE;
-    return AnthologyFindAquaticHabitat(gSaveBlock1Ptr->location.mapGroup,
+    return MosaicFindAquaticHabitat(gSaveBlock1Ptr->location.mapGroup,
                                       gSaveBlock1Ptr->location.mapNum, area, info);
 #else
     return SPECIES_NONE;
 #endif
 }
 
-bool8 AnthologyMapHasAquaticHabitatSpecies(u8 mapGroup, u8 mapNum, enum WildPokemonArea area,
+bool8 MosaicMapHasAquaticHabitatSpecies(u8 mapGroup, u8 mapNum, enum WildPokemonArea area,
                                           enum Species species, const struct WildPokemonInfo *info)
 {
     return species != SPECIES_NONE
-        && AnthologyFindAquaticHabitat(mapGroup, mapNum, area, info) == species;
+        && MosaicFindAquaticHabitat(mapGroup, mapNum, area, info) == species;
 }
 
 void CreateWildMon(enum Species species, u8 level)
@@ -1007,15 +1007,15 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     // Roll the habitat before calculating level and repel protection.
     // The rare's advertised DexNav level comes from this map's first native
     // encounter slot; a random native slot would give a misleading level range.
-    enum Species rare = AnthologyGetRareHabitatSpecies(area, wildMonInfo);
+    enum Species rare = MosaicGetRareHabitatSpecies(area, wildMonInfo);
     bool8 useRare = rare != SPECIES_NONE && Random() % 100 < 2;
     enum Species extra = SPECIES_NONE;
     if (!useRare)
     {
         u32 habitatSlot;
-        for (habitatSlot = 0; habitatSlot < ANTHOLOGY_EXTRA_HABITAT_SLOTS; habitatSlot++)
+        for (habitatSlot = 0; habitatSlot < MOSAIC_EXTRA_HABITAT_SLOTS; habitatSlot++)
         {
-            enum Species candidate = AnthologyGetExtraHabitatSpecies(area, wildMonInfo, habitatSlot);
+            enum Species candidate = MosaicGetExtraHabitatSpecies(area, wildMonInfo, habitatSlot);
             // Each supplement keeps its 2% roll; original species remain dominant.
             if (candidate != SPECIES_NONE && Random() % 100 < 2)
             {
@@ -1024,7 +1024,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
             }
         }
     }
-    enum Species aquatic = AnthologyGetAquaticHabitatSpecies(area, wildMonInfo);
+    enum Species aquatic = MosaicGetAquaticHabitatSpecies(area, wildMonInfo);
     bool8 useAquatic = aquatic != SPECIES_NONE && Random() % 100 < 3;
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, (useRare || extra != SPECIES_NONE || useAquatic) ? 0 : wildMonIndex, area);
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
@@ -1048,7 +1048,7 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(rod);
     enum Species wildMonSpecies = WorldRandomizeWildSpecies(wildMonInfo->wildPokemon[wildMonIndex].species, wildMonIndex, WILD_AREA_FISHING);
     u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
-    enum Species aquatic = AnthologyGetAquaticHabitatSpecies(WILD_AREA_FISHING, wildMonInfo);
+    enum Species aquatic = MosaicGetAquaticHabitatSpecies(WILD_AREA_FISHING, wildMonInfo);
 
     // Keep the selected rod's native level range, existing Feebas spot logic,
     // shiny-chain accounting and original bite mechanics unchanged.
@@ -1309,7 +1309,7 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
 // not story flags: multiple fragments can be gathered and revived independently.
 // Keep the original Rock Smash encounter and Rusturf Tunnel puzzle paths intact.
 #if ALL_REGIONS
-static const enum Item sAnthologyExcavationFossils[] =
+static const enum Item sMosaicExcavationFossils[] =
 {
     ITEM_ARMOR_FOSSIL,
     ITEM_SKULL_FOSSIL,
@@ -1376,7 +1376,7 @@ void RockSmashWildEncounter(void)
      && gMapHeader.battleType != MAP_BATTLE_SCENE_FRONTIER
      && Random() % 100 < 12)
     {
-        enum Item fossil = sAnthologyExcavationFossils[Random() % ARRAY_COUNT(sAnthologyExcavationFossils)];
+        enum Item fossil = sMosaicExcavationFossils[Random() % ARRAY_COUNT(sMosaicExcavationFossils)];
         if (AddBagItem(fossil, 1))
             gSpecialVar_0x8004 = fossil;
     }

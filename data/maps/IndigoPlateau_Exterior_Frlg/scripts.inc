@@ -4,7 +4,7 @@ IndigoPlateau_Exterior_Frlg_MapScripts::
 	.byte 0
 
 IndigoPlateau_Exterior_OnTransition::
-	call IndigoPlateau_Exterior_AnthologyOnTransition
+	call IndigoPlateau_Exterior_MosaicOnTransition
 	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
 	call_if_eq VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1, IndigoPlateau_Exterior_EventScript_PlayCreditsMusic
 	end
@@ -187,35 +187,35 @@ IndigoPlateau_Exterior_Movement_OakExitBuilding::
 	step_end
 
 // The post-Champion creation-trio hunt must be completed before Arceus.
-IndigoPlateau_Exterior_AnthologyOnTransition::
-	goto_if_unset FLAG_KANTO_CHAMPION, IndigoPlateau_Exterior_AnthologyHideArceus
-	callnative AnthologyStaticRandomizerIsOn
+IndigoPlateau_Exterior_MosaicOnTransition::
+	goto_if_unset FLAG_KANTO_CHAMPION, IndigoPlateau_Exterior_MosaicHideArceus
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, IndigoPlateau_Exterior_SeededArceusGate
 	getcaughtmon SPECIES_DIALGA
-	goto_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_AnthologyHideArceus
+	goto_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_MosaicHideArceus
 	getcaughtmon SPECIES_PALKIA
-	goto_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_AnthologyHideArceus
+	goto_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_MosaicHideArceus
 	getcaughtmon SPECIES_GIRATINA
-	goto_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_AnthologyHideArceus
+	goto_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_MosaicHideArceus
 	getcaughtmon SPECIES_ARCEUS
-	call_if_eq VAR_RESULT, TRUE, IndigoPlateau_Exterior_AnthologyHideArceus
-	call_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_AnthologyShowArceus
+	call_if_eq VAR_RESULT, TRUE, IndigoPlateau_Exterior_MosaicHideArceus
+	call_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_MosaicShowArceus
 	return
 
 IndigoPlateau_Exterior_SeededArceusGate::
-	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_DIALGA, IndigoPlateau_Exterior_AnthologyHideArceus
-	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_PALKIA, IndigoPlateau_Exterior_AnthologyHideArceus
-	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_GIRATINA, IndigoPlateau_Exterior_AnthologyHideArceus
-	call_if_set FLAG_CAUGHT_RANDOM_INDIGO_ARCEUS, IndigoPlateau_Exterior_AnthologyHideArceus
-	call_if_unset FLAG_CAUGHT_RANDOM_INDIGO_ARCEUS, IndigoPlateau_Exterior_AnthologyShowArceus
+	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_DIALGA, IndigoPlateau_Exterior_MosaicHideArceus
+	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_PALKIA, IndigoPlateau_Exterior_MosaicHideArceus
+	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_GIRATINA, IndigoPlateau_Exterior_MosaicHideArceus
+	call_if_set FLAG_CAUGHT_RANDOM_INDIGO_ARCEUS, IndigoPlateau_Exterior_MosaicHideArceus
+	call_if_unset FLAG_CAUGHT_RANDOM_INDIGO_ARCEUS, IndigoPlateau_Exterior_MosaicShowArceus
 	return
 
-IndigoPlateau_Exterior_AnthologyHideArceus::
-	setflag FLAG_HIDE_ANTHOLOGY_ARCEUS
+IndigoPlateau_Exterior_MosaicHideArceus::
+	setflag FLAG_HIDE_MOSAIC_ARCEUS
 	return
 
-IndigoPlateau_Exterior_AnthologyShowArceus::
-	clearflag FLAG_HIDE_ANTHOLOGY_ARCEUS
+IndigoPlateau_Exterior_MosaicShowArceus::
+	clearflag FLAG_HIDE_MOSAIC_ARCEUS
 	return
 
 IndigoPlateau_Exterior_EventScript_Arceus::
@@ -227,30 +227,30 @@ IndigoPlateau_Exterior_EventScript_Arceus::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, IndigoPlateau_Exterior_AnthologyArceusRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, IndigoPlateau_Exterior_AnthologyArceusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, IndigoPlateau_Exterior_MosaicArceusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, IndigoPlateau_Exterior_MosaicArceusRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, IndigoPlateau_Exterior_SeededArceusCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IndigoPlateau_Exterior_AnthologyArceusResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IndigoPlateau_Exterior_MosaicArceusResolved
 	release
 	end
 
 IndigoPlateau_Exterior_SeededArceusCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, IndigoPlateau_Exterior_MarkSeededArceus
-	goto IndigoPlateau_Exterior_AnthologyArceusResolved
+	goto IndigoPlateau_Exterior_MosaicArceusResolved
 
 IndigoPlateau_Exterior_MarkSeededArceus::
 	setflag FLAG_CAUGHT_RANDOM_INDIGO_ARCEUS
 	return
 
-IndigoPlateau_Exterior_AnthologyArceusResolved::
+IndigoPlateau_Exterior_MosaicArceusResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ARCEUS
-	setflag FLAG_HIDE_ANTHOLOGY_ARCEUS
+	removeobject LOCALID_MOSAIC_ARCEUS
+	setflag FLAG_HIDE_MOSAIC_ARCEUS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-IndigoPlateau_Exterior_AnthologyArceusRetreated::
+IndigoPlateau_Exterior_MosaicArceusRetreated::
 	release
 	end

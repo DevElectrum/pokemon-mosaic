@@ -402,7 +402,7 @@ MauvilleCity_GameCorner_EventScript_Girl::
 	msgbox MauvilleCity_GameCorner_Text_GotTwoOfSameDollWantOne, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_EventScript_DeclineStarterDoll
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_GiveTreeckoDoll
 	case 1, MauvilleCity_GameCorner_EventScript_GiveTorchicDoll

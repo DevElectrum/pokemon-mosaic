@@ -107,15 +107,15 @@ SealedChamber_OuterRoom_EventScript_BrailleDigHere::
 
 
 SealedChamber_OuterRoom_ChiYuTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, SealedChamber_OuterRoom_SeededCHIYUVisible
 	getcaughtmon SPECIES_CHI_YU
 	goto_if_eq VAR_RESULT, TRUE, SealedChamber_OuterRoom_HideChiYu
-	clearflag FLAG_HIDE_ANTHOLOGY_CHI_YU
+	clearflag FLAG_HIDE_MOSAIC_CHI_YU
 	return
 
 SealedChamber_OuterRoom_HideChiYu::
-	setflag FLAG_HIDE_ANTHOLOGY_CHI_YU
+	setflag FLAG_HIDE_MOSAIC_CHI_YU
 	return
 
 SealedChamber_OuterRoom_EventScript_ChiYu::
@@ -136,8 +136,8 @@ SealedChamber_OuterRoom_EventScript_ChiYu::
 
 SealedChamber_OuterRoom_ChiYuResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_CHI_YU
-	setflag FLAG_HIDE_ANTHOLOGY_CHI_YU
+	removeobject LOCALID_MOSAIC_CHI_YU
+	setflag FLAG_HIDE_MOSAIC_CHI_YU
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -149,11 +149,11 @@ SealedChamber_OuterRoom_ChiYuRetreated::
 // Seeded location ownership is separate from the original species Pokédex.
 SealedChamber_OuterRoom_SeededCHIYUVisible::
 	goto_if_set FLAG_CAUGHT_RANDOM_SEALEDCHAMBER_OUTERROOM_CHI_YU, SealedChamber_OuterRoom_HideChiYu
-	clearflag FLAG_HIDE_ANTHOLOGY_CHI_YU
+	clearflag FLAG_HIDE_MOSAIC_CHI_YU
 	return
 
 SealedChamber_OuterRoom_SeededCHIYUCatch::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, SealedChamber_OuterRoom_SeededCHIYUCatchMark
 	goto SealedChamber_OuterRoom_ChiYuResolved
 

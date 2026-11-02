@@ -4,7 +4,7 @@ Route43_MapScripts::
 	.byte 0
 
 Route43_MapScript_OnTransition::
-	call Route43_AnthologyOnTransition
+	call Route43_MosaicOnTransition
 	call_if_set FLAG_HIDE_ROUTE42_SUICUNE, Route42_MapScript_HideTrigger
 	end
 
@@ -144,21 +144,21 @@ Route43_TrainerTips:
     .string "weak against your POKéMON's type.$"
 
 
-Route43_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, Route43_AnthologyRandomOnTransition
+Route43_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, Route43_MosaicRandomOnTransition
 	getcaughtmon SPECIES_LANDORUS
-	goto_if_eq VAR_RESULT, TRUE, Route43_AnthologyHideLandorus
-	clearflag FLAG_HIDE_ANTHOLOGY_LANDORUS
+	goto_if_eq VAR_RESULT, TRUE, Route43_MosaicHideLandorus
+	clearflag FLAG_HIDE_MOSAIC_LANDORUS
 	return
 
-Route43_AnthologyRandomOnTransition::
-	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE43_LANDORUS, Route43_AnthologyHideLandorus
-	clearflag FLAG_HIDE_ANTHOLOGY_LANDORUS
+Route43_MosaicRandomOnTransition::
+	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE43_LANDORUS, Route43_MosaicHideLandorus
+	clearflag FLAG_HIDE_MOSAIC_LANDORUS
 	return
 
-Route43_AnthologyHideLandorus::
-	setflag FLAG_HIDE_ANTHOLOGY_LANDORUS
+Route43_MosaicHideLandorus::
+	setflag FLAG_HIDE_MOSAIC_LANDORUS
 	return
 
 Route43_EventScript_Landorus::
@@ -170,25 +170,25 @@ Route43_EventScript_Landorus::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route43_AnthologyLandorusRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route43_AnthologyLandorusRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route43_AnthologyLandorusResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route43_AnthologyLandorusResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route43_MosaicLandorusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route43_MosaicLandorusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route43_MosaicLandorusResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route43_MosaicLandorusResolved
 	release
 	end
 
-Route43_AnthologyLandorusResolvedRandomCaught::
+Route43_MosaicLandorusResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE43_LANDORUS
-	goto Route43_AnthologyLandorusResolved
+	goto Route43_MosaicLandorusResolved
 
-Route43_AnthologyLandorusResolved::
+Route43_MosaicLandorusResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_LANDORUS
-	setflag FLAG_HIDE_ANTHOLOGY_LANDORUS
+	removeobject LOCALID_MOSAIC_LANDORUS
+	setflag FLAG_HIDE_MOSAIC_LANDORUS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route43_AnthologyLandorusRetreated::
+Route43_MosaicLandorusRetreated::
 	release
 	end

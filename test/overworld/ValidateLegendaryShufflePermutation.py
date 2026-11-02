@@ -92,7 +92,7 @@ def expected(seed, version, pool):
         shuffled[i], shuffled[j] = shuffled[j], shuffled[i]
     return shuffled
 
-with tempfile.TemporaryDirectory(prefix="anthology-static-shuffle-") as temporary:
+with tempfile.TemporaryDirectory(prefix="mosaic-static-shuffle-") as temporary:
     root = Path(temporary)
     c = root / "shuffle.c"
     exe = root / "shuffle"

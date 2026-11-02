@@ -388,17 +388,17 @@ static u16 GetKantoStarterBranch(u16 index)
     return index == 9 ? 0 : index % STARTER_MON_COUNT;
 }
 
-void Anthology_GetKantoStarterStoryBranch(struct ScriptContext *ctx)
+void Mosaic_GetKantoStarterStoryBranch(struct ScriptContext *ctx)
 {
     gSpecialVar_Result = GetKantoStarterBranch(VarGet(VAR_STARTER_MON));
 }
 
-void Anthology_GetKantoPendingStarterBranch(struct ScriptContext *ctx)
+void Mosaic_GetKantoPendingStarterBranch(struct ScriptContext *ctx)
 {
     gSpecialVar_Result = GetKantoStarterBranch(VarGet(VAR_TEMP_1));
 }
 
-void Anthology_GetKantoChosenStarterSpecies(struct ScriptContext *ctx)
+void Mosaic_GetKantoChosenStarterSpecies(struct ScriptContext *ctx)
 {
     gSpecialVar_Result = GetStarterPokemon(VarGet(VAR_TEMP_1));
 }
@@ -406,18 +406,18 @@ void Anthology_GetKantoChosenStarterSpecies(struct ScriptContext *ctx)
 // Hoenn story scripts were authored for three starter *types*, not nine species.
 // VAR_STARTER_MON still stores the full selected species index, making credits
 // and IsStarterInParty accurate; only script rival/doll dispatch uses its type.
-void Anthology_GetHoennStarterStoryBranch(struct ScriptContext *ctx)
+void Mosaic_GetHoennStarterStoryBranch(struct ScriptContext *ctx)
 {
     gSpecialVar_Result = VarGet(VAR_STARTER_MON) % STARTER_MON_COUNT;
 }
 
 // Silver's canonical teams still follow the original elemental branch.
-void Anthology_GetJohtoStarterStoryBranch(struct ScriptContext *ctx)
+void Mosaic_GetJohtoStarterStoryBranch(struct ScriptContext *ctx)
 {
     gSpecialVar_Result = VarGet(VAR_STARTER_MON) % STARTER_MON_COUNT;
 }
 
-void Anthology_GetJohtoChosenStarterSpecies(struct ScriptContext *ctx)
+void Mosaic_GetJohtoChosenStarterSpecies(struct ScriptContext *ctx)
 {
     gSpecialVar_Result = GetStarterPokemon(VarGet(VAR_STARTER_MON));
 }

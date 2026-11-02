@@ -37,7 +37,7 @@ REVISION    := 0
 KEEP_TEMPS  ?= 0
 
 # `File name`.gba
-FILE_NAME ?= pokemonworld
+FILE_NAME ?= pokemon-mosaic
 BUILD_DIR := build
 
 # Executes the Test Runner System that checks that all mechanics work as expected
@@ -564,13 +564,13 @@ endif
 	rm -rf $(OBJ_DIR_NAME_RELEASE)
 
 # Other rules
-# Grand Anthology 240x160 title art: compile source PNG before C object dependency scans.
-ANTHOLOGY_TITLE_STAMP := $(BUILD_DIR)/.anthology-title.stamp
-$(ANTHOLOGY_TITLE_STAMP): graphics/title_screen/world/grand_anthology_title.png tools/build_anthology_title.py
+# Grand Mosaic 240x160 title art: compile source PNG before C object dependency scans.
+MOSAIC_TITLE_STAMP := $(BUILD_DIR)/.mosaic-title.stamp
+$(MOSAIC_TITLE_STAMP): graphics/title_screen/world/grand_anthology_title.png tools/build_anthology_title.py
 	@mkdir -p $(BUILD_DIR)
 	python3 tools/build_anthology_title.py
 	@touch $@
-$(C_BUILDDIR)/title_screen_world.d $(C_BUILDDIR)/title_screen_world.o: $(ANTHOLOGY_TITLE_STAMP)
+$(C_BUILDDIR)/title_screen_world.d $(C_BUILDDIR)/title_screen_world.o: $(MOSAIC_TITLE_STAMP)
 
 include graphics_file_rules.mk
 include map_data_rules.mk

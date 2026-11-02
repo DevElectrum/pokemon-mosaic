@@ -20,7 +20,7 @@ JaggedPass_EventScript_SetReadyToOpenHideout::
 
 JaggedPass_OnTransition:
 	call_if_eq VAR_JAGGED_PASS_ASH_WEATHER, 1, JaggedPass_EventScript_SetWeatherAsh
-	call JaggedPass_AnthologyOnTransition
+	call JaggedPass_MosaicOnTransition
 	end
 
 JaggedPass_EventScript_SetWeatherAsh::
@@ -267,20 +267,20 @@ JaggedPass_Text_AutumnPostBattle:
 
 // Cluster-first optional statics. The original cave boulders, passage,
 // weather, and Team Magma stories remain controlled by their native scripts.
-JaggedPass_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+JaggedPass_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, JaggedPass_SeededGOUGINGFIREVisible
 	getcaughtmon SPECIES_GOUGING_FIRE
-	call_if_eq VAR_RESULT, TRUE, JaggedPass_AnthologyHideGougingFire
-	call_if_ne VAR_RESULT, TRUE, JaggedPass_AnthologyShowGougingFire
+	call_if_eq VAR_RESULT, TRUE, JaggedPass_MosaicHideGougingFire
+	call_if_ne VAR_RESULT, TRUE, JaggedPass_MosaicShowGougingFire
 	return
 
-JaggedPass_AnthologyHideGougingFire::
-	setflag FLAG_HIDE_ANTHOLOGY_GOUGING_FIRE
+JaggedPass_MosaicHideGougingFire::
+	setflag FLAG_HIDE_MOSAIC_GOUGING_FIRE
 	return
 
-JaggedPass_AnthologyShowGougingFire::
-	clearflag FLAG_HIDE_ANTHOLOGY_GOUGING_FIRE
+JaggedPass_MosaicShowGougingFire::
+	clearflag FLAG_HIDE_MOSAIC_GOUGING_FIRE
 	return
 
 JaggedPass_EventScript_GougingFire::
@@ -292,35 +292,35 @@ JaggedPass_EventScript_GougingFire::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, JaggedPass_AnthologyGougingFireRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, JaggedPass_AnthologyGougingFireRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, JaggedPass_MosaicGougingFireRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, JaggedPass_MosaicGougingFireRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, JaggedPass_SeededGOUGINGFIRECatch
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, JaggedPass_AnthologyGougingFireResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, JaggedPass_MosaicGougingFireResolved
 	release
 	end
 
-JaggedPass_AnthologyGougingFireResolved::
+JaggedPass_MosaicGougingFireResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_GOUGING_FIRE
-	setflag FLAG_HIDE_ANTHOLOGY_GOUGING_FIRE
+	removeobject LOCALID_MOSAIC_GOUGING_FIRE
+	setflag FLAG_HIDE_MOSAIC_GOUGING_FIRE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-JaggedPass_AnthologyGougingFireRetreated::
+JaggedPass_MosaicGougingFireRetreated::
 	release
 	end
 
 // Seeded location ownership is separate from the original species Pokédex.
 JaggedPass_SeededGOUGINGFIREVisible::
-	call_if_set FLAG_CAUGHT_RANDOM_JAGGEDPASS_GOUGING_FIRE, JaggedPass_AnthologyHideGougingFire
-	call_if_unset FLAG_CAUGHT_RANDOM_JAGGEDPASS_GOUGING_FIRE, JaggedPass_AnthologyShowGougingFire
+	call_if_set FLAG_CAUGHT_RANDOM_JAGGEDPASS_GOUGING_FIRE, JaggedPass_MosaicHideGougingFire
+	call_if_unset FLAG_CAUGHT_RANDOM_JAGGEDPASS_GOUGING_FIRE, JaggedPass_MosaicShowGougingFire
 	return
 
 JaggedPass_SeededGOUGINGFIRECatch::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, JaggedPass_SeededGOUGINGFIRECatchMark
-	goto JaggedPass_AnthologyGougingFireResolved
+	goto JaggedPass_MosaicGougingFireResolved
 
 JaggedPass_SeededGOUGINGFIRECatchMark::
 	setflag FLAG_CAUGHT_RANDOM_JAGGEDPASS_GOUGING_FIRE

@@ -35,7 +35,7 @@ make release TOOLCHAIN=/opt/devkitpro/devkitARM -j8
 make validate
 python3 test/overworld/warm-windows/check_data.py --repo . --out /tmp/window-audit
 python3 test/overworld/visual-features/build_fixture.py --repo . \
-  --rom pokemonworld.gba --elf pokemonworld.elf \
+  --rom pokemon-mosaic.gba --elf pokemon-mosaic.elf \
   --source test/overworld/warm-windows/fixture.c --out /tmp/window-fixture
 PW_WINDOWS_AFTER=1 python3 test/overworld/visual-features/run_fixture.py --repo . \
   --fixture /tmp/window-fixture --suite test/overworld/warm-windows/capture.lua \
@@ -46,7 +46,7 @@ PW_WINDOWS_AFTER=1 python3 test/overworld/visual-features/run_fixture.py --repo 
 PW_OUT=/tmp/window-tracked test/overworld/run-all.sh
 mkdir -p /tmp/window-runs/delivery
 PW_OUT=/tmp/window-runs/delivery test/overworld/mgba-run.sh \
-  test/overworld/warm-windows/verify_delivery.lua pokemonworld.gba \
+  test/overworld/warm-windows/verify_delivery.lua pokemon-mosaic.gba \
   /tmp/window-runs/after-lifecycle/VisualReview.sav \
   > /tmp/window-runs/delivery/runner.log 2>&1
 ```

@@ -962,10 +962,10 @@ static bool32 DexNavSpeciesInCurrentMapEncounters(enum Species species, u32 head
         for (i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
             if (WorldRandomizeWildSpeciesAtMap(info->wildPokemon[i].species, i, WILD_AREA_LAND, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum) == species)
                 return TRUE;
-        if (AnthologyGetRareHabitatSpecies(WILD_AREA_LAND, info) == species)
+        if (MosaicGetRareHabitatSpecies(WILD_AREA_LAND, info) == species)
             return TRUE;
-        for (i = 0; i < ANTHOLOGY_EXTRA_HABITAT_SLOTS; i++)
-            if (AnthologyGetExtraHabitatSpecies(WILD_AREA_LAND, info, i) == species)
+        for (i = 0; i < MOSAIC_EXTRA_HABITAT_SLOTS; i++)
+            if (MosaicGetExtraHabitatSpecies(WILD_AREA_LAND, info, i) == species)
                 return TRUE;
     }
 
@@ -976,7 +976,7 @@ static bool32 DexNavSpeciesInCurrentMapEncounters(enum Species species, u32 head
         for (i = 0; i < NUM_WATER_MONS_ENCOUNTER_SLOTS; i++)
             if (WorldRandomizeWildSpeciesAtMap(info->wildPokemon[i].species, i, WILD_AREA_WATER, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum) == species)
                 return TRUE;
-        if (AnthologyGetAquaticHabitatSpecies(WILD_AREA_WATER, info) == species)
+        if (MosaicGetAquaticHabitatSpecies(WILD_AREA_WATER, info) == species)
             return TRUE;
     }
 
@@ -1550,9 +1550,9 @@ static u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType 
         // Rare habitats use the area's native first-slot level range.
         if (max == 0)
         {
-            bool8 isHabitatSpecies = AnthologyGetRareHabitatSpecies(WILD_AREA_LAND, landMonsInfo) == species;
-            for (i = 0; i < ANTHOLOGY_EXTRA_HABITAT_SLOTS && !isHabitatSpecies; i++)
-                isHabitatSpecies = AnthologyGetExtraHabitatSpecies(WILD_AREA_LAND, landMonsInfo, i) == species;
+            bool8 isHabitatSpecies = MosaicGetRareHabitatSpecies(WILD_AREA_LAND, landMonsInfo) == species;
+            for (i = 0; i < MOSAIC_EXTRA_HABITAT_SLOTS && !isHabitatSpecies; i++)
+                isHabitatSpecies = MosaicGetExtraHabitatSpecies(WILD_AREA_LAND, landMonsInfo, i) == species;
             if (isHabitatSpecies)
             {
                 min = landMonsInfo->wildPokemon[0].minLevel;
@@ -1575,7 +1575,7 @@ static u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType 
                 max = (max > waterMonsInfo->wildPokemon[i].maxLevel) ? max : waterMonsInfo->wildPokemon[i].maxLevel;
             }
         }
-        if (max == 0 && AnthologyGetAquaticHabitatSpecies(WILD_AREA_WATER, waterMonsInfo) == species)
+        if (max == 0 && MosaicGetAquaticHabitatSpecies(WILD_AREA_WATER, waterMonsInfo) == species)
         {
             min = waterMonsInfo->wildPokemon[0].minLevel;
             max = waterMonsInfo->wildPokemon[0].maxLevel;
@@ -1782,13 +1782,13 @@ static bool8 CapturedAllLandMons(u32 headerId)
         if (i >= NUM_LAND_MONS_ENCOUNTER_SLOTS && count > 0)
         {
             // Include the bonus entries in grass completion, not just natives.
-            species = AnthologyGetRareHabitatSpecies(WILD_AREA_LAND, landMonsInfo);
+            species = MosaicGetRareHabitatSpecies(WILD_AREA_LAND, landMonsInfo);
             if (species != SPECIES_NONE
              && !GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
                 return FALSE;
-            for (i = 0; i < ANTHOLOGY_EXTRA_HABITAT_SLOTS; i++)
+            for (i = 0; i < MOSAIC_EXTRA_HABITAT_SLOTS; i++)
             {
-                species = AnthologyGetExtraHabitatSpecies(WILD_AREA_LAND, landMonsInfo, i);
+                species = MosaicGetExtraHabitatSpecies(WILD_AREA_LAND, landMonsInfo, i);
                 if (species != SPECIES_NONE
                  && !GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
                     return FALSE;
@@ -1829,7 +1829,7 @@ static bool8 CapturedAllWaterMons(u32 headerId)
 
         if (i >= NUM_WATER_MONS_ENCOUNTER_SLOTS && count > 0)
         {
-            species = AnthologyGetAquaticHabitatSpecies(WILD_AREA_WATER, waterMonsInfo);
+            species = MosaicGetAquaticHabitatSpecies(WILD_AREA_WATER, waterMonsInfo);
             return species == SPECIES_NONE
                 || GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
         }
@@ -2021,14 +2021,14 @@ static void DexNavLoadEncounterData(void)
                 sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
         }
         // Extra icon without removing any of the original species.
-        species = AnthologyGetRareHabitatSpecies(WILD_AREA_LAND, landMonsInfo);
+        species = MosaicGetRareHabitatSpecies(WILD_AREA_LAND, landMonsInfo);
         if (species != SPECIES_NONE && grassIndex < NUM_LAND_MONS_ENCOUNTER_SLOTS
          && !SpeciesInArray(species, 0))
             sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
         // Supplementary ordinary Gen 4-9 species occupy only spare icons.
-        for (i = 0; i < ANTHOLOGY_EXTRA_HABITAT_SLOTS && grassIndex < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
+        for (i = 0; i < MOSAIC_EXTRA_HABITAT_SLOTS && grassIndex < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
         {
-            species = AnthologyGetExtraHabitatSpecies(WILD_AREA_LAND, landMonsInfo, i);
+            species = MosaicGetExtraHabitatSpecies(WILD_AREA_LAND, landMonsInfo, i);
             if (species != SPECIES_NONE && !SpeciesInArray(species, 0))
                 sDexNavUiDataPtr->landSpecies[grassIndex++] = species;
         }
@@ -2049,7 +2049,7 @@ static void DexNavLoadEncounterData(void)
     // Add one Surf habitat to a truly spare water slot, never displacing natives.
     if (waterMonsInfo != NULL && waterMonsInfo->encounterRate != 0)
     {
-        species = AnthologyGetAquaticHabitatSpecies(WILD_AREA_WATER, waterMonsInfo);
+        species = MosaicGetAquaticHabitatSpecies(WILD_AREA_WATER, waterMonsInfo);
         if (species != SPECIES_NONE && waterIndex < NUM_WATER_MONS_ENCOUNTER_SLOTS
          && !SpeciesInArray(species, 1))
             sDexNavUiDataPtr->waterSpecies[waterIndex++] = species;

@@ -132,7 +132,7 @@ JohtoVictoryRoad_1F_EventScript_ItemPPUp::
 JohtoVictoryRoad_1F_EventScript_EternatusSeal::
     lock
     faceplayer
-    goto_if_unset FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED, JohtoVictoryRoad_1F_EternatusStillSealed
+    goto_if_unset FLAG_MOSAIC_ROYAL_DUO_CLAIMED, JohtoVictoryRoad_1F_EternatusStillSealed
     msgbox JohtoVictoryRoad_1F_Text_EternatusOpen, MSGBOX_DEFAULT
     closemessage
     warp MAP_JOHTO_ETERNATUS_CHAMBER, 7, 6

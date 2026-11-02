@@ -286,7 +286,7 @@
       "flag": "FLAG_ITEM_ROUTE27_REVIVE"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_ZACIAN",
+      "local_id": "LOCALID_MOSAIC_ZACIAN",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(ZACIAN)",
       "x": 61,
       "y": 22,
@@ -297,10 +297,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route27_EventScript_RoyalDuoZacian",
-      "flag": "FLAG_HIDE_ANTHOLOGY_ZACIAN"
+      "flag": "FLAG_HIDE_MOSAIC_ZACIAN"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_ZAMAZENTA",
+      "local_id": "LOCALID_MOSAIC_ZAMAZENTA",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(ZAMAZENTA)",
       "x": 62,
       "y": 22,
@@ -311,7 +311,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route27_EventScript_RoyalDuoZamazenta",
-      "flag": "FLAG_HIDE_ANTHOLOGY_ZAMAZENTA"
+      "flag": "FLAG_HIDE_MOSAIC_ZAMAZENTA"
     }
   ],
   "warp_events": [

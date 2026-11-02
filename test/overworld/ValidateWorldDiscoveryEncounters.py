@@ -61,14 +61,14 @@ fish = wild.split("static u16 GenerateFishingWildMon(", 1)[1].split(
 require("CreateWildMon(wildSpecies, level);" in grass, "Grass/overworld creation must be direct")
 require("WorldRandomizeWildSpecies(wildMonInfo->wildPokemon[wildMonIndex].species, wildMonIndex, area)" in grass,
         "Preserve the optional seeded wild Randomizer")
-for term in ("AnthologyGetRareHabitatSpecies(area, wildMonInfo)",
-             "AnthologyGetExtraHabitatSpecies(area, wildMonInfo, habitatSlot)",
-             "AnthologyGetAquaticHabitatSpecies(area, wildMonInfo)",
+for term in ("MosaicGetRareHabitatSpecies(area, wildMonInfo)",
+             "MosaicGetExtraHabitatSpecies(area, wildMonInfo, habitatSlot)",
+             "MosaicGetAquaticHabitatSpecies(area, wildMonInfo)",
              "if (useRare)", "else if (extra != SPECIES_NONE)", "else if (useAquatic)"):
     require(term in grass, f"Natural habitat lost: {term}")
 require("enum Species wildMonSpecies = WorldRandomizeWildSpecies(" in fish,
         "Preserve native/randomized fishing species selection")
-require("AnthologyGetAquaticHabitatSpecies(WILD_AREA_FISHING, wildMonInfo)" in fish,
+require("MosaicGetAquaticHabitatSpecies(WILD_AREA_FISHING, wildMonInfo)" in fish,
         "Authored fishing habitat lost")
 require("wildMonSpecies = aquatic;" in fish and "CreateWildMon(wildMonSpecies, level);" in fish,
         "Fishing must use native or authored aquatic species")
@@ -77,7 +77,7 @@ require("GAME_STAT_WILD_BATTLES" not in wild,
 require("WorldIsFieldStableDiscoverySpecies(result)" in wild,
         "Keep field-stable form restrictions on seeded randomizer")
 for token in ("WorldIsNaturalDiscoverySpecies(rare)",
-              "WorldIsNaturalDiscoverySpecies(sAnthologyExtraHabitats[i].species)",
+              "WorldIsNaturalDiscoverySpecies(sMosaicExtraHabitats[i].species)",
               "WorldIsNaturalDiscoverySpecies(species)"):
     require(token in wild, f"Natural habitat eligibility lost: {token}")
 require("CreateWildMon(gSaveBlock1Ptr->outbreakPokemonSpecies, gSaveBlock1Ptr->outbreakPokemonLevel);" in wild,

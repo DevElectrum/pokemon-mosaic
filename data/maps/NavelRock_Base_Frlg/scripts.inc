@@ -4,7 +4,7 @@ NavelRock_Base_Frlg_MapScripts::
 	.byte 0
 
 NavelRock_Base_Frlg_OnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, NavelRock_Base_Frlg_SeededOnTransition
 	call_if_set FLAG_FOUGHT_LUGIA, NavelRock_Base_Frlg_EventScript_HideLugia
 	call_if_unset FLAG_FOUGHT_LUGIA, NavelRock_Base_Frlg_EventScript_TryShowLugia
@@ -65,7 +65,7 @@ NavelRock_Base_Frlg_EventScript_Lugia::
 	goto NavelRock_Base_Frlg_SeededCaught
 
 NavelRock_Base_Frlg_SeededCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, NavelRock_Base_Frlg_SeededMark
 	setflag FLAG_FOUGHT_LUGIA
 	release

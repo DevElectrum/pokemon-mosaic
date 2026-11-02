@@ -342,7 +342,7 @@
       "flag": "FLAG_HIDE_JESSIE_JAMES_ROUTE118"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_IRON_BOULDER",
+      "local_id": "LOCALID_MOSAIC_IRON_BOULDER",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(IRON_BOULDER)",
       "x": 50,
       "y": 11,
@@ -353,7 +353,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route118_EventScript_IronBoulder",
-      "flag": "FLAG_HIDE_ANTHOLOGY_IRON_BOULDER"
+      "flag": "FLAG_HIDE_MOSAIC_IRON_BOULDER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -366,7 +366,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_TATSUGIRINITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_24"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_24"
     }
   ],
   "warp_events": [

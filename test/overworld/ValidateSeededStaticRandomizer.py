@@ -115,7 +115,7 @@ for location, original, site_flag in (
     need(map_script, "seteventmon SPECIES_"+original)
     need(map_script, "getcaughtmon SPECIES_"+original)
     need(map_script, "setflag "+site_flag)
-    need(map_script, "callnative AnthologyStaticRandomizerIsOn")
+    need(map_script, "callnative MosaicStaticRandomizerIsOn")
     need(src("include/constants/flags.h"), "#define "+site_flag+" ")
 
 for location, species, captured in (
@@ -129,7 +129,7 @@ for location, species, captured in (
     need(site, "getcaughtmon SPECIES_"+species)
     need(site, "seteventmon SPECIES_"+species)
     need(site, "setflag "+captured)
-    need(site, "callnative AnthologyStaticRandomizerIsOn")
+    need(site, "callnative MosaicStaticRandomizerIsOn")
     need(src("include/constants/flags.h"), "#define "+captured+" ")
 for prerequisite in ("FLAG_CAUGHT_RANDOM_ROUTE44_TORNADUS", "FLAG_CAUGHT_RANDOM_ROUTE41_THUNDURUS", "FLAG_CAUGHT_RANDOM_ROUTE43_LANDORUS"):
     need(src("data/maps/Route39/scripts.inc"), "goto_if_unset "+prerequisite)
@@ -157,7 +157,7 @@ for location, original, site_flag in (
     script = src("data/maps/"+location+"/scripts.inc")
     need(script, "getcaughtmon SPECIES_"+original)
     need(script, "setflag "+site_flag)
-    need(script, "callnative AnthologyStaticRandomizerIsOn")
+    need(script, "callnative MosaicStaticRandomizerIsOn")
     need(src("include/constants/flags.h"), "#define "+site_flag+" ")
 for prereq in ("FLAG_CAUGHT_RANDOM_DESERTRUINS_REGIROCK",
                "FLAG_CAUGHT_RANDOM_ISLANDCAVE_REGICE",

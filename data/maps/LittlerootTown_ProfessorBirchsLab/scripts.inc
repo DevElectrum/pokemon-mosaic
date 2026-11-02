@@ -463,7 +463,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter::
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
-	callnative Anthology_ScrClaimBirchMedal
+	callnative Mosaic_ScrClaimBirchMedal
 	goto_if_eq VAR_RESULT, 1, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchMedalAward
 	goto_if_eq VAR_RESULT, 2, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchMedalBagFull
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon

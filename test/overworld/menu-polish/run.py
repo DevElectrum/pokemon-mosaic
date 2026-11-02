@@ -15,10 +15,10 @@ def run(*command, env=None):
     subprocess.run([str(arg) for arg in command], check=True, env=env)
 
 run('python3', repo / 'test/overworld/visual-features/build_fixture.py',
-    '--repo', repo, '--rom', repo / 'pokemonworld.gba', '--elf', repo / 'pokemonworld.elf',
+    '--repo', repo, '--rom', repo / 'pokemon-mosaic.gba', '--elf', repo / 'pokemon-mosaic.elf',
     '--out', fixture, '--source', repo / 'test/overworld/world-menu-theme/fixture.c')
 symbols = subprocess.check_output([
-    '/opt/devkitpro/devkitARM/bin/arm-none-eabi-nm', str(repo / 'pokemonworld.elf')], text=True)
+    '/opt/devkitpro/devkitARM/bin/arm-none-eabi-nm', str(repo / 'pokemon-mosaic.elf')], text=True)
 names = ['gPlttBufferFaded', 'CB2_ContinueSavedGame', 'CB2_NewGameScene', 'CB2_InitOptionMenu']
 resolved = {name: next(line.split()[0] for line in symbols.splitlines() if line.endswith(' ' + name))
             for name in names}

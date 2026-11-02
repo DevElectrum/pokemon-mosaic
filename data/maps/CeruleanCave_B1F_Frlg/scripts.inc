@@ -14,7 +14,7 @@ CeruleanCave_B1F_EventScript_TryRemoveMewtwo::
 	return
 
 CeruleanCave_B1F_OnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, CeruleanCave_B1F_OnSeededTransition
 	getcaughtmon SPECIES_MEW
 	goto_if_ne VAR_RESULT, TRUE, CeruleanCave_B1F_NativeMEWTWOBlocked
@@ -69,7 +69,7 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 	end
 
 CeruleanCave_B1F_EventScript_CaughtMewtwo::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, CeruleanCave_B1F_MarkSeededMewtwo
 	setflag FLAG_FOUGHT_MEWTWO
 	release

@@ -25,7 +25,7 @@ SkyPillar_Top_EventScript_SetCleanLayout::
 	return
 
 SkyPillar_Top_EventScript_TryShowRayquaza::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, SkyPillar_Top_SeededRayquazaTransition
 	getcaughtmon SPECIES_RAYQUAZA
 	call_if_eq VAR_RESULT, TRUE, SkyPillar_Top_NativeRAYQUAZACaught
@@ -69,7 +69,7 @@ SkyPillar_Top_EventScript_Rayquaza::
 	end
 
 SkyPillar_Top_SeededRayquazaCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, SkyPillar_Top_MarkSeededRayquaza
 	setflag FLAG_DEFEATED_RAYQUAZA
 	releaseall

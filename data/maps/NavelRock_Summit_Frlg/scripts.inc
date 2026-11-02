@@ -4,7 +4,7 @@ NavelRock_Summit_Frlg_MapScripts::
 	.byte 0
 
 NavelRock_Summit_OnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, NavelRock_Summit_SeededOnTransition
 	call_if_set FLAG_FOUGHT_HO_OH, NavelRock_Summit_EventScript_HideHoOh
 	call_if_unset FLAG_FOUGHT_HO_OH, NavelRock_Summit_EventScript_TryShowHoOh
@@ -70,7 +70,7 @@ NavelRock_Summit_EventScript_HoOh::
 	goto NavelRock_Summit_SeededCaught
 
 NavelRock_Summit_SeededCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, NavelRock_Summit_SeededMark
 	setflag FLAG_FOUGHT_HO_OH
 	releaseall

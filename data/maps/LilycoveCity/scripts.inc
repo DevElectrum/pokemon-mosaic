@@ -239,7 +239,7 @@ LilycoveCity_EventScript_May::
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineMayBattle
 	msgbox LilycoveCity_Text_MayWontBeBeaten, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, LilycoveCity_EventScript_BattleMayTreecko
 	case 1, LilycoveCity_EventScript_BattleMayTorchic
@@ -269,7 +269,7 @@ LilycoveCity_EventScript_Brendan::
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineBrendanBattle
 	msgbox LilycoveCity_Text_BrendanWontBeBeaten, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, LilycoveCity_EventScript_BattleBrendanTreecko
 	case 1, LilycoveCity_EventScript_BattleBrendanTorchic

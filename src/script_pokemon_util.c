@@ -1066,7 +1066,7 @@ void Script_GiveRandomBerry(struct ScriptContext *ctx)
 
 // Map scripts use this to select source-location completion flags under
 // the optional randomizer while retaining classic caught-Dex gates otherwise.
-void AnthologyStaticRandomizerIsOn(void)
+void MosaicStaticRandomizerIsOn(void)
 {
 #if ALL_REGIONS
     gSpecialVar_Result = (gSaveBlock2Ptr != NULL && gSaveBlock2Ptr->randomizerStatics);

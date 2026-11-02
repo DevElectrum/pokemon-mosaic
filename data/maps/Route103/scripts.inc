@@ -36,7 +36,7 @@ Route103_EventScript_RivalMay::
 	waitmovement 0
 	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, Route103_EventScript_StartMayBattleTreecko
 	case 1, Route103_EventScript_StartMayBattleTorchic
@@ -55,7 +55,7 @@ Route103_EventScript_RivalBrendan::
 	waitmovement 0
 	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, Route103_EventScript_StartBrendanBattleTreecko
 	case 1, Route103_EventScript_StartBrendanBattleTorchic

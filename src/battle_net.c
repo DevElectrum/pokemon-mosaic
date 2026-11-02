@@ -390,7 +390,7 @@ void DeductBattleNetShards(void)
 // unsigned subtraction can never wrap.
 void TryBuyBattleNetShard(void)
 {
-    if (FlagGet(FLAG_ANTHOLOGY_INFINITE_BP))
+    if (FlagGet(FLAG_MOSAIC_INFINITE_BP))
     {
         gSpecialVar_Result = 1;
         return;

@@ -4,24 +4,24 @@ TinTower_2F_MapScripts::
 
 TinTower_2F_OnTransition::
 	setescapewarp MAP_BELLCHIME_TRAIL, 35, 42
-	call TinTower_2F_AnthologyOnTransition
+	call TinTower_2F_MosaicOnTransition
 	end
 
-TinTower_2F_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, TinTower_2F_AnthologyRandomOnTransition
+TinTower_2F_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, TinTower_2F_MosaicRandomOnTransition
 	getcaughtmon SPECIES_RESHIRAM
-	goto_if_eq VAR_RESULT, TRUE, TinTower_2F_AnthologyHideReshiram
-	clearflag FLAG_HIDE_ANTHOLOGY_RESHIRAM
+	goto_if_eq VAR_RESULT, TRUE, TinTower_2F_MosaicHideReshiram
+	clearflag FLAG_HIDE_MOSAIC_RESHIRAM
 	return
 
-TinTower_2F_AnthologyRandomOnTransition::
-	goto_if_set FLAG_CAUGHT_RANDOM_TINTOWER_RESHIRAM, TinTower_2F_AnthologyHideReshiram
-	clearflag FLAG_HIDE_ANTHOLOGY_RESHIRAM
+TinTower_2F_MosaicRandomOnTransition::
+	goto_if_set FLAG_CAUGHT_RANDOM_TINTOWER_RESHIRAM, TinTower_2F_MosaicHideReshiram
+	clearflag FLAG_HIDE_MOSAIC_RESHIRAM
 	return
 
-TinTower_2F_AnthologyHideReshiram::
-	setflag FLAG_HIDE_ANTHOLOGY_RESHIRAM
+TinTower_2F_MosaicHideReshiram::
+	setflag FLAG_HIDE_MOSAIC_RESHIRAM
 	return
 
 TinTower_2F_EventScript_Reshiram::
@@ -33,25 +33,25 @@ TinTower_2F_EventScript_Reshiram::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, TinTower_2F_AnthologyReshiramRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, TinTower_2F_AnthologyReshiramRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, TinTower_2F_AnthologyReshiramResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, TinTower_2F_AnthologyReshiramResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, TinTower_2F_MosaicReshiramRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, TinTower_2F_MosaicReshiramRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, TinTower_2F_MosaicReshiramResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, TinTower_2F_MosaicReshiramResolved
 	release
 	end
 
-TinTower_2F_AnthologyReshiramResolvedRandomCaught::
+TinTower_2F_MosaicReshiramResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_TINTOWER_RESHIRAM
-	goto TinTower_2F_AnthologyReshiramResolved
+	goto TinTower_2F_MosaicReshiramResolved
 
-TinTower_2F_AnthologyReshiramResolved::
+TinTower_2F_MosaicReshiramResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_RESHIRAM
-	setflag FLAG_HIDE_ANTHOLOGY_RESHIRAM
+	removeobject LOCALID_MOSAIC_RESHIRAM
+	setflag FLAG_HIDE_MOSAIC_RESHIRAM
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-TinTower_2F_AnthologyReshiramRetreated::
+TinTower_2F_MosaicReshiramRetreated::
 	release
 	end

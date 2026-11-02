@@ -10,7 +10,7 @@ WhirlIslands_LugiaChamber_MapScripts::
 	.byte 0
 
 WhirlIslands_LugiaChamber_OnTransition:
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, WhirlIslands_LugiaChamber_SeededTransition
 	goto_if_eq VAR_COMPLETED_LUGIA, 2, WhirlIslands_LugiaChamber_MapScript_LugiaStory
 	goto_if_eq VAR_COMPLETED_LUGIA, 3, WhirlIslands_LugiaChamber_MapScript_LugiaPostStoryGone
@@ -252,7 +252,7 @@ WhirlIslands_LugiaChamber_EventScript_LugiaFlewAway::
 	return
 
 WhirlIslands_LugiaChamber_EventScript_CaughtLugia::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, WhirlIslands_LugiaChamber_MarkSeededLugia
 	setflag FLAG_CAUGHT_LUGIA
 	fadescreenswapbuffers FADE_TO_BLACK

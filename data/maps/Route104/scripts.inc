@@ -142,7 +142,7 @@ Route104_EventScript_MayAskToBattle::
 Route104_EventScript_BattleMay::
 	msgbox Route104_Text_MayIntro, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, Route104_EventScript_BattleMayTreecko
 	case 1, Route104_EventScript_BattleMayTorchic
@@ -216,7 +216,7 @@ Route104_EventScript_BrendanAskToBattle::
 Route104_EventScript_BattleBrendan::
 	msgbox Route104_Text_BrendanIntro, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, Route104_EventScript_BattleBrendanTreecko
 	case 1, Route104_EventScript_BattleBrendanTorchic

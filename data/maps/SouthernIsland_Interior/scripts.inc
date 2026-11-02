@@ -51,7 +51,7 @@ SouthernIsland_Interior_EventScript_TryLatiEncounter::
 
 SouthernIsland_Interior_EventScript_Lati::
 	goto_if_set FLAG_TEMP_2, SouthernIsland_Interior_EventScript_Sign
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, SouthernIsland_Interior_SeededLatiGate
 	goto_if_set FLAG_DEFEATED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
 	goto_if_set FLAG_CAUGHT_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_Sign
@@ -95,7 +95,7 @@ SouthernIsland_Interior_LatiShipGate::
 	end
 
 SouthernIsland_Interior_SeededLatiCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, SouthernIsland_Interior_MarkSeededLati
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
 	releaseall

@@ -38,7 +38,7 @@ python3 test/overworld/visual-features/run_fixture.py \
   --suite test/overworld/hub-sprites/save.lua --out /tmp/hub-runs/save
 mkdir -p /tmp/hub-runs/delivery
 PW_OUT=/tmp/hub-runs/delivery test/overworld/mgba-run.sh \
-  test/overworld/hub-sprites/verify_delivery.lua pokemonworld.gba \
+  test/overworld/hub-sprites/verify_delivery.lua pokemon-mosaic.gba \
   /tmp/hub-runs/save/VisualReview.sav > /tmp/hub-runs/delivery/runner.log 2>&1
 ```
 

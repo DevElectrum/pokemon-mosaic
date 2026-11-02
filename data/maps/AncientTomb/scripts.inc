@@ -16,7 +16,7 @@ AncientTomb_EventScript_TryRemoveRegisteel::
 
 AncientTomb_OnTransition:
 	setflag FLAG_LANDMARK_ANCIENT_TOMB
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, AncientTomb_RandomStaticOnTransition
 	getcaughtmon SPECIES_REGISTEEL
 	call_if_eq VAR_RESULT, TRUE, AncientTomb_NativeREGISTEELCaught

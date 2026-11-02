@@ -216,7 +216,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_OKIDOGI",
+      "local_id": "LOCALID_MOSAIC_OKIDOGI",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(OKIDOGI)",
       "x": 16,
       "y": 45,
@@ -227,7 +227,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route112_EventScript_Okidogi",
-      "flag": "FLAG_HIDE_ANTHOLOGY_OKIDOGI"
+      "flag": "FLAG_HIDE_MOSAIC_OKIDOGI"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -240,7 +240,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_SCOVILLAINITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_20"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_20"
     }
   ],
   "warp_events": [

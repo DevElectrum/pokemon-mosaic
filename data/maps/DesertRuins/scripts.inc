@@ -29,7 +29,7 @@ DesertRuins_EventScript_HideRegiEntrance::
 
 DesertRuins_OnTransition:
 	setflag FLAG_LANDMARK_DESERT_RUINS
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, DesertRuins_RandomStaticOnTransition
 	getcaughtmon SPECIES_REGIROCK
 	call_if_eq VAR_RESULT, TRUE, DesertRuins_NativeREGIROCKCaught

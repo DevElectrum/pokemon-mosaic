@@ -4,7 +4,7 @@ MtPyre_Exterior_MapScripts::
 
 MtPyre_Exterior_OnTransition:
 	call MtPyre_Exterior_EventScript_CheckEnterFromSummit
-	call MtPyre_Exterior_AnthologyOnTransition
+	call MtPyre_Exterior_MosaicOnTransition
 	end
 
 MtPyre_Exterior_EventScript_CheckEnterFromSummit::
@@ -28,25 +28,25 @@ MtPyre_Exterior_EventScript_SunTrigger::
 
 // All four statics are on one stable exterior layout. Fog/sun boundaries and
 // canonical summit script continue to run without changing their logic.
-MtPyre_Exterior_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, MtPyre_Exterior_AnthologyRandomOnTransition
+MtPyre_Exterior_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, MtPyre_Exterior_MosaicRandomOnTransition
 	getcaughtmon SPECIES_YVELTAL
-	call_if_eq VAR_RESULT, TRUE, MtPyre_Exterior_AnthologyHideYveltal
-	call_if_ne VAR_RESULT, TRUE, MtPyre_Exterior_AnthologyShowYveltal
+	call_if_eq VAR_RESULT, TRUE, MtPyre_Exterior_MosaicHideYveltal
+	call_if_ne VAR_RESULT, TRUE, MtPyre_Exterior_MosaicShowYveltal
 	return
 
-MtPyre_Exterior_AnthologyRandomOnTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_MTPYRE_EXTERIOR_YVELTAL, MtPyre_Exterior_AnthologyHideYveltal
-	call_if_unset FLAG_CAUGHT_RANDOM_MTPYRE_EXTERIOR_YVELTAL, MtPyre_Exterior_AnthologyShowYveltal
+MtPyre_Exterior_MosaicRandomOnTransition::
+	call_if_set FLAG_CAUGHT_RANDOM_MTPYRE_EXTERIOR_YVELTAL, MtPyre_Exterior_MosaicHideYveltal
+	call_if_unset FLAG_CAUGHT_RANDOM_MTPYRE_EXTERIOR_YVELTAL, MtPyre_Exterior_MosaicShowYveltal
 	return
 
-MtPyre_Exterior_AnthologyHideYveltal::
-	setflag FLAG_HIDE_ANTHOLOGY_YVELTAL
+MtPyre_Exterior_MosaicHideYveltal::
+	setflag FLAG_HIDE_MOSAIC_YVELTAL
 	return
 
-MtPyre_Exterior_AnthologyShowYveltal::
-	clearflag FLAG_HIDE_ANTHOLOGY_YVELTAL
+MtPyre_Exterior_MosaicShowYveltal::
+	clearflag FLAG_HIDE_MOSAIC_YVELTAL
 	return
 
 MtPyre_Exterior_EventScript_Yveltal::
@@ -58,26 +58,26 @@ MtPyre_Exterior_EventScript_Yveltal::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MtPyre_Exterior_AnthologyYveltalRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MtPyre_Exterior_AnthologyYveltalRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtPyre_Exterior_AnthologyYveltalResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtPyre_Exterior_AnthologyYveltalResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MtPyre_Exterior_MosaicYveltalRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MtPyre_Exterior_MosaicYveltalRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtPyre_Exterior_MosaicYveltalResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtPyre_Exterior_MosaicYveltalResolved
 	release
 	end
 
-MtPyre_Exterior_AnthologyYveltalResolvedRandomCaught::
+MtPyre_Exterior_MosaicYveltalResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_MTPYRE_EXTERIOR_YVELTAL
-	goto MtPyre_Exterior_AnthologyYveltalResolved
+	goto MtPyre_Exterior_MosaicYveltalResolved
 
-MtPyre_Exterior_AnthologyYveltalResolved::
+MtPyre_Exterior_MosaicYveltalResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_YVELTAL
-	setflag FLAG_HIDE_ANTHOLOGY_YVELTAL
+	removeobject LOCALID_MOSAIC_YVELTAL
+	setflag FLAG_HIDE_MOSAIC_YVELTAL
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-MtPyre_Exterior_AnthologyYveltalRetreated::
+MtPyre_Exterior_MosaicYveltalRetreated::
 	release
 	end
 

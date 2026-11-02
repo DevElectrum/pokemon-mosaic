@@ -4287,11 +4287,11 @@ static void DebugAction_Give_MaxBattlePoints(u8 taskId)
 
 static void DebugAction_ToggleInfiniteBattlePoints(u8 taskId)
 {
-    if (FlagGet(FLAG_ANTHOLOGY_INFINITE_BP))
-        FlagClear(FLAG_ANTHOLOGY_INFINITE_BP);
+    if (FlagGet(FLAG_MOSAIC_INFINITE_BP))
+        FlagClear(FLAG_MOSAIC_INFINITE_BP);
     else
     {
-        FlagSet(FLAG_ANTHOLOGY_INFINITE_BP);
+        FlagSet(FLAG_MOSAIC_INFINITE_BP);
         gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
     }
     Debug_DestroyMenu_Full(taskId);

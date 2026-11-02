@@ -27,7 +27,7 @@ to 62. The four support files below must never be launched directly.
 | File | Role |
 |---|---|
 | `lib.lua` | Shared helpers — boot loop, coordinate-verified stepping, the two debug spinners, cursor-verified multichoice, screenshots, object dumps, bag scans, crash-screen decoding, assertions and the verdict. Every suite starts `local F = require("lib").new(require("symbols"), "SuiteName")`. |
-| `symbols.lua` | Generated per build from `pokemonworld.elf` by `test/overworld/GenLuaSymbols.py`. Runtime addresses that move every rebuild, a curated ABI-fixed struct-offset table, and the ROM's md5/sha1. **Build artifact — gitignored, never committed.** |
+| `symbols.lua` | Generated per build from `pokemon-mosaic.elf` by `test/overworld/GenLuaSymbols.py`. Runtime addresses that move every rebuild, a curated ABI-fixed struct-offset table, and the ROM's md5/sha1. **Build artifact — gitignored, never committed.** |
 | `mgba_shim.lua` | The `--script` entry point. Provides the EmuHawk Lua API the suites are written against and loads the suite named by `$PW_SUITE`. Not a suite. |
 | `SaveHarvest.lua` | In-emulator save harvester driven by `../MakeMigrationFixtures.sh` to produce the `fixtures/*.srm`. A utility, not a suite. |
 
@@ -43,7 +43,7 @@ to 62. The four support files below must never be launched directly.
 ```bash
 make modern -j$(sysctl -n hw.ncpu)
 test/overworld/mgba-run.sh test/overworld/lua/SmokeBoot.lua
-test/overworld/mgba-run.sh test/overworld/lua/VerifyV7Migrate.lua pokemonworld.gba test/overworld/lua/fixtures/v7dirty.srm
+test/overworld/mgba-run.sh test/overworld/lua/VerifyV7Migrate.lua pokemon-mosaic.gba test/overworld/lua/fixtures/v7dirty.srm
 ```
 
 Arguments are `<suite.lua> [rom.gba] [save.srm]`; the ROM defaults to the repo build. Exit code is
@@ -71,7 +71,7 @@ FAILURE, not a pass** — a suite that aborted before its first check must not r
 ## Running the whole battery
 
 ```bash
-test/overworld/run-all.sh [rom.gba]        # defaults to ./pokemonworld.gba
+test/overworld/run-all.sh [rom.gba]        # defaults to ./pokemon-mosaic.gba
 ```
 
 It is not just a loop: it exists because "21/21 green" was once reported from 20 fresh runs plus
@@ -100,13 +100,13 @@ Exit code is **0** only for that. **1** means the sweep failed and the message s
 On the owner's machine: **52/52, `SWEEP OK`, exit 0.**
 
 On a fresh clone: **51 green, 1 optional, exit 0.** The one difference is `VerifyOwnerSave`, which
-reads `pokemonworld.sav` — the owner's live battery save at the repo root. `*.sav` is gitignored,
+reads `pokemon-mosaic.sav` — the owner's live battery save at the repo root. `*.sav` is gitignored,
 and `MakeMigrationFixtures.sh` forbids committing a save harvested from a real playthrough, so no
 clone can ever have one. It is therefore listed in `run-all.sh`'s `OPTIONAL_SAVE` rather than
 `WITH_SAVE`: absent, it prints
 
 ```
-VerifyOwnerSave          OPTIONAL - no pokemonworld.sav on this machine, not counted
+VerifyOwnerSave          OPTIONAL - no pokemon-mosaic.sav on this machine, not counted
 ```
 
 and is left out of `EXPECTED` so the sentinel audit does not demand a `.PASS` for it.
@@ -162,7 +162,7 @@ is clean; keep it that way.
 | Suite | Needs | What it covers |
 |---|---|---|
 | [`SmokeBoot.lua`](#smokebootlua) | fresh new game | Harness self-test: symbols + lib load, boot to the hub, party / step / object dump all read correctly. |
-| `WorldTitle.lua` | fresh boot, ALL_REGIONS | Native title tiles/maps/palette and layer registers; World wordmark's four-pixel offset; centered PRESS START; scrolling fog and wrap; Start/A, service-chord guard, clear-save cancel, music-end intro loop; SELECT quickstart and its badge disabled. Screenshots at each transition. Release/LTO symbols: `GenLuaSymbols.py pokemonworld-release.elf [nm] --title`, then set `PW_TITLE_SYMBOLS` to that generated file. |
+| `WorldTitle.lua` | fresh boot, ALL_REGIONS | Native title tiles/maps/palette and layer registers; World wordmark's four-pixel offset; centered PRESS START; scrolling fog and wrap; Start/A, service-chord guard, clear-save cancel, music-end intro loop; SELECT quickstart and its badge disabled. Screenshots at each transition. Release/LTO symbols: `GenLuaSymbols.py pokemon-mosaic-release.elf [nm] --title`, then set `PW_TITLE_SYMBOLS` to that generated file. |
 | [`HubIntroTour.lua`](#hubintrotourlua) | fresh new game | The World Transit intro tour — all five reachable paths on one fresh game. |
 | [`HubIntroTourFollower.lua`](#hubintrotourfollowerlua) | fresh new game | The same escort with a follower out, at the exact sprite budget. |
 | [`HubStairsGate.lua`](#hubstairsgatelua) | fresh new game | The champion-gated hub escalator: refusal, admission, and the ride back down. |
@@ -208,7 +208,7 @@ is clean; keep it that way.
 | [`HubPassReCross.lua`](#hubpassrecrosslua) | fresh new game | The Hoenn hub gate seeds Littleroot ONCE on **both** gender branches; re-crossing does not rewind; `hoennIntroDone` only latches arrival narration, while the Stone Badge alone unlocks Slateport. |
 | [`VerifyV7Migrate.lua`](#verifyv7migratelua) | `fixtures/v7dirty.srm` | The v7→v8 ladder step runs, and the stale `mapView` does not repaint the old room. |
 | [`MigrateFixtures.lua`](#migratefixtureslua) | `fixtures/v3.srm` | A pre-v7 save is *refused* at load, not half-loaded. |
-| [`VerifyOwnerSave.lua`](#verifyownersavelua) | `pokemonworld.sav` (untracked, **optional**) | A real mid-playthrough save survives the v9 break. |
+| [`VerifyOwnerSave.lua`](#verifyownersavelua) | `pokemon-mosaic.sav` (untracked, **optional**) | A real mid-playthrough save survives the v9 break. |
 | [`VerifyMapRenumber.lua`](#verifymaprenumberlua) | `fixtures/v7renumber.srm` (generated) | The v9 map-renumber migration repoints persisted warps. |
 
 Every entry below is **`evidence`**: it asserts a real, load-bearing contract, and where a
@@ -677,7 +677,7 @@ That a pre-v7 save is **refused**, not half-loaded. Save format v7 reshaped Save
 
 ### `VerifyOwnerSave.lua`
 
-Salvage check for a **real mid-playthrough save** across the v9 break, run against the owner's battery save rather than a fixture. v9 does three things a save can notice and that save hits two: it appends `johtoTrainerFlags[]` to SaveBlock3 (un-checksummed tail, so it must be zeroed); it deletes two mid-group maps and renumbers 17 `gMapGroup_IndoorGoldenrod` and 3 `gMapGroup_MtSilver` mapNums, which are persisted in five `WarpData`s and in `objectEvents[]`; and it moves the Violet City and Route 32 heal coordinates, where `lastHealLocation` stores the COORDINATE and `GetHealLocationIndexByWarpData` matches on exact x/y, so a save holding the old pair silently stops matching the table and keeps whiting out to the old tile. Issue #51 explicitly accepted a save RESET for the renumber; this suite is the evidence that a migration was written instead and that a real save survives it. **The map-renumber half is VACUOUS here and the suite says so** — none of that save's warps are in either affected group, which is exactly why `VerifyMapRenumber.lua` exists. Where the save is STANDING and where it HEALS are separate facts; the standing map is overridable with `PW_EXPECT_GRP` / `PW_EXPECT_MAP` (defaults 75/6, Violet City) because a real save moves. **This suite cannot run on a fresh clone**: `pokemonworld.sav` is gitignored and untracked, and `MakeMigrationFixtures.sh` forbids committing a save harvested from a real playthrough. It is therefore in `run-all.sh`'s `OPTIONAL_SAVE` list — absent, it is reported `OPTIONAL` and not counted, and does **not** fail the sweep.
+Salvage check for a **real mid-playthrough save** across the v9 break, run against the owner's battery save rather than a fixture. v9 does three things a save can notice and that save hits two: it appends `johtoTrainerFlags[]` to SaveBlock3 (un-checksummed tail, so it must be zeroed); it deletes two mid-group maps and renumbers 17 `gMapGroup_IndoorGoldenrod` and 3 `gMapGroup_MtSilver` mapNums, which are persisted in five `WarpData`s and in `objectEvents[]`; and it moves the Violet City and Route 32 heal coordinates, where `lastHealLocation` stores the COORDINATE and `GetHealLocationIndexByWarpData` matches on exact x/y, so a save holding the old pair silently stops matching the table and keeps whiting out to the old tile. Issue #51 explicitly accepted a save RESET for the renumber; this suite is the evidence that a migration was written instead and that a real save survives it. **The map-renumber half is VACUOUS here and the suite says so** — none of that save's warps are in either affected group, which is exactly why `VerifyMapRenumber.lua` exists. Where the save is STANDING and where it HEALS are separate facts; the standing map is overridable with `PW_EXPECT_GRP` / `PW_EXPECT_MAP` (defaults 75/6, Violet City) because a real save moves. **This suite cannot run on a fresh clone**: `pokemon-mosaic.sav` is gitignored and untracked, and `MakeMigrationFixtures.sh` forbids committing a save harvested from a real playthrough. It is therefore in `run-all.sh`'s `OPTIONAL_SAVE` list — absent, it is reported `OPTIONAL` and not counted, and does **not** fail the sweep.
 
 ### `VerifyMapRenumber.lua`
 
@@ -713,7 +713,7 @@ with the new ladder step.
 
 **Two saves the suites need are NOT in the tree:**
 
-- `pokemonworld.sav` — the owner's live save, read by `VerifyOwnerSave.lua`. Gitignored.
+- `pokemon-mosaic.sav` — the owner's live save, read by `VerifyOwnerSave.lua`. Gitignored.
 - ~~the crafted pre-deletion-warp save for `VerifyMapRenumber.lua`~~ — now committed as
   `fixtures/v7renumber.srm`, generated from `v7.srm` by `test/overworld/MakeRenumberFixture.py`. Also
   rebuildable with

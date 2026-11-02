@@ -31,7 +31,7 @@
 --        the vacuous-green failure MANIFEST.md warns about and is exactly how New Bark used to look.
 --
 -- Run against a THROWAWAY COPY (lib.new refuses anything not Verify*/MigChk*/FixGen*):
---   cp <repo>\pokemonworld.gba  BizHawk\VerifyBedroomPC.gba
+--   cp <repo>\pokemon-mosaic.gba  BizHawk\VerifyBedroomPC.gba
 --   EmuHawk.exe BizHawk\VerifyBedroomPC.gba --lua=<repo>\test\overworld\lua\VerifyBedroomPC.lua
 local here = (debug.getinfo(1, "S").source:sub(2)):match("^(.*[/\\])") or ""
 package.path = here .. "?.lua;" .. package.path

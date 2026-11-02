@@ -10,11 +10,11 @@ p.add_argument('--out', type=Path, required=True)
 a = p.parse_args()
 source = Path(__file__).resolve().parent / 'fixture.c'
 subprocess.run(['python3', str(a.repo / 'test/overworld/visual-features/build_fixture.py'),
-                '--repo', str(a.repo), '--rom', str(a.repo / 'pokemonworld.gba'),
-                '--elf', str(a.repo / 'pokemonworld.elf'), '--source', str(source),
+                '--repo', str(a.repo), '--rom', str(a.repo / 'pokemon-mosaic.gba'),
+                '--elf', str(a.repo / 'pokemon-mosaic.elf'), '--source', str(source),
                 '--out', str(a.out)], check=True)
 rows = subprocess.check_output(['/opt/devkitpro/devkitARM/bin/arm-none-eabi-nm',
-                                str(a.repo / 'pokemonworld.elf')], text=True)
+                                str(a.repo / 'pokemon-mosaic.elf')], text=True)
 names = {f'gSpecialVar_0x800{n:X}' for n in range(3, 12)}
 values = {r[2]: int(r[0], 16) for line in rows.splitlines()
           if len(r := line.split()) == 3 and r[2] in names}

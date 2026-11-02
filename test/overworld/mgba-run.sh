@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run a test/overworld/lua suite headlessly under mGBA (macOS/arm64 stand-in for BizHawk).
 #
-#   test/overworld/mgba-run.sh test/overworld/lua/SmokeBoot.lua [pokemonworld.gba]
+#   test/overworld/mgba-run.sh test/overworld/lua/SmokeBoot.lua [pokemon-mosaic.gba]
 #
 # BizHawk has no macOS build, so the suites run under `mgba-headless --script` with
 # test/overworld/lua/mgba_shim.lua providing the EmuHawk API. See test/overworld/mgba/README.md.
@@ -15,7 +15,7 @@ set -euo pipefail
 
 SUITE="${1:?usage: mgba-run.sh <suite.lua> [rom.gba] [save.srm]}"
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-ROM="${2:-$REPO/pokemonworld.gba}"
+ROM="${2:-$REPO/pokemon-mosaic.gba}"
 # Suites that exercise a migration ladder or read an existing profile need a battery save to
 # boot into -- without one they land on NEW GAME and report BOOT FAIL. Fixtures live in
 # test/overworld/lua/fixtures/*.srm (raw 128KB flash images, which is already mGBA's .sav format).

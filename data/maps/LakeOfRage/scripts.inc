@@ -10,7 +10,7 @@ LakeOfRage_MapScripts::
 
 LakeOfRage_OnTransition::
 	setflag FLAG_VISITED_LAKE_OF_RAGE
-	call LakeOfRage_AnthologyFieldTransition
+	call LakeOfRage_MosaicFieldTransition
 	call_if_lt VAR_MAHOGANY_TOWN_STATE, 2, LakeOfRage_EventScript_HideLois
 	goto_if_lt VAR_MAHOGANY_TOWN_STATE, 14, LakeOfRage_EventScript_SetHighTide
 	special UpdateShoalTideFlag
@@ -449,14 +449,14 @@ LakeOfRage_Text_FishingGuruSign:
     .string "FISHING GURU'S HOUSE$"
 
 // Suicune returns to the Lake once Lance deactivates Rocket's radio signal.
-LakeOfRage_AnthologyFieldTransition::
+LakeOfRage_MosaicFieldTransition::
 	call LakeOfRage_FieldSyncSuicuneReserve
 	return
 
 LakeOfRage_FieldSyncSuicuneReserve::
 	goto_if_unset FLAG_RELEASED_BEASTS, LakeOfRage_FieldHideSuicuneReserve
 	goto_if_lt VAR_MAHOGANY_TOWN_STATE, 14, LakeOfRage_FieldHideSuicuneReserve
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, LakeOfRage_FieldSyncSeededSuicuneReserve
 	getcaughtmon SPECIES_SUICUNE
 	goto_if_eq VAR_RESULT, TRUE, LakeOfRage_FieldHideSuicuneReserve
@@ -467,11 +467,11 @@ LakeOfRage_FieldSyncSeededSuicuneReserve::
 	goto LakeOfRage_FieldShowSuicuneReserve
 
 LakeOfRage_FieldHideSuicuneReserve::
-	setflag FLAG_HIDE_ANTHOLOGY_BEAST_SUICUNE
+	setflag FLAG_HIDE_MOSAIC_BEAST_SUICUNE
 	return
 
 LakeOfRage_FieldShowSuicuneReserve::
-	clearflag FLAG_HIDE_ANTHOLOGY_BEAST_SUICUNE
+	clearflag FLAG_HIDE_MOSAIC_BEAST_SUICUNE
 	return
 
 LakeOfRage_EventScript_SuicuneReserve::
@@ -491,7 +491,7 @@ LakeOfRage_EventScript_SuicuneReserve::
 	end
 
 LakeOfRage_FieldSuicuneReserveCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, LakeOfRage_MarkSeededSuicune
 	goto LakeOfRage_FieldSuicuneReserveResolved
 
@@ -501,8 +501,8 @@ LakeOfRage_MarkSeededSuicune::
 
 LakeOfRage_FieldSuicuneReserveResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_BEAST_SUICUNE
-	setflag FLAG_HIDE_ANTHOLOGY_BEAST_SUICUNE
+	removeobject LOCALID_MOSAIC_BEAST_SUICUNE
+	setflag FLAG_HIDE_MOSAIC_BEAST_SUICUNE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

@@ -24,39 +24,39 @@ for region, gens in groups.items():
 assert len(assigned) == 1025 and sorted(assigned) == list(range(1, 1026))
 
 require("include/pokedex.h", (
-    "AnthologyRegionalToNationalOrder", "AnthologyNationalToRegionalOrder",
-    "GetAnthologyRegionalPokedexCount", "HasAllAnthologyRegionalMons"))
+    "MosaicRegionalToNationalOrder", "MosaicNationalToRegionalOrder",
+    "GetMosaicRegionalPokedexCount", "HasAllMosaicRegionalMons"))
 require("src/pokedex.c", (
     "case REGION_KANTO: return 346", "case REGION_JOHTO: return 352",
     "case REGION_HOENN: return 327",
     "GetSetPokedexFlag(number, FLAG_GET_CAUGHT)",
-    "GetAnthologyRegionalPokedexCount(GetActiveRegion(), caseID)",
-    "AnthologyNationalToRegionalOrder"))
+    "GetMosaicRegionalPokedexCount(GetActiveRegion(), caseID)",
+    "MosaicNationalToRegionalOrder"))
 require("src/pokedex_plus_hgss.c", (
-    "temp_dexNum = AnthologyRegionalToNationalOrder(region, i + 1);",
-    "IsInAnthologyRegionalDex(region, temp_dexNum)",
-    "AnthologyNationalToRegionalOrder(AnthologyGetDisplayRegion(), dexNum);"))
+    "temp_dexNum = MosaicRegionalToNationalOrder(region, i + 1);",
+    "IsInMosaicRegionalDex(region, temp_dexNum)",
+    "MosaicNationalToRegionalOrder(MosaicGetDisplayRegion(), dexNum);"))
 require("include/constants/flags.h", (
-    "FLAG_ANTHOLOGY_OAK_MEDAL", "FLAG_ANTHOLOGY_ELM_MEDAL",
-    "FLAG_ANTHOLOGY_BIRCH_MEDAL", "FLAG_ANTHOLOGY_GRAND_RESEARCHER"))
+    "FLAG_MOSAIC_OAK_MEDAL", "FLAG_MOSAIC_ELM_MEDAL",
+    "FLAG_MOSAIC_BIRCH_MEDAL", "FLAG_MOSAIC_GRAND_RESEARCHER"))
 require("src/region_switch.c", (
-    "HasAllAnthologyRegionalMons(REGION_KANTO), 3, ITEM_RARE_CANDY, 10",
-    "HasAllAnthologyRegionalMons(REGION_JOHTO), 3, ITEM_ABILITY_PATCH, 5, ITEM_PP_MAX, 10",
-    "HasAllAnthologyRegionalMons(REGION_HOENN), 3, ITEM_RARE_CANDY, 25, ITEM_PP_MAX, 10",
+    "HasAllMosaicRegionalMons(REGION_KANTO), 3, ITEM_RARE_CANDY, 10",
+    "HasAllMosaicRegionalMons(REGION_JOHTO), 3, ITEM_ABILITY_PATCH, 5, ITEM_PP_MAX, 10",
+    "HasAllMosaicRegionalMons(REGION_HOENN), 3, ITEM_RARE_CANDY, 25, ITEM_PP_MAX, 10",
     "HasAllMons(), 10, ITEM_NONE, 0, ITEM_NONE, 0",
     "RemoveBagItem(item1, count1)", "FlagSet(flag);"))
 for region, path, symbol in (
-    ("OAK", "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc", "Anthology_ScrClaimOakMedal"),
-    ("ELM", "data/maps/NewBarkTown_Lab/scripts.inc", "Anthology_ScrClaimElmMedal"),
-    ("BIRCH", "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "Anthology_ScrClaimBirchMedal"),
+    ("OAK", "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc", "Mosaic_ScrClaimOakMedal"),
+    ("ELM", "data/maps/NewBarkTown_Lab/scripts.inc", "Mosaic_ScrClaimElmMedal"),
+    ("BIRCH", "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "Mosaic_ScrClaimBirchMedal"),
 ):
     require(path, (f"callnative {symbol}", "ResearchMedalBagFull", "ResearchMedalAward"))
 require("data/maps/RegionHub/scripts.inc", (
     "callnative RegionHub_ScrClaimGrandResearcher",
-    "FLAG_ANTHOLOGY_GRAND_RESEARCHER", "RegionHub_Items_Premium",
+    "FLAG_MOSAIC_GRAND_RESEARCHER", "RegionHub_Items_Premium",
     "ITEM_MASTER_BALL", "ITEM_RARE_CANDY", "ITEM_PP_MAX",
     "FLAG_DEX_REWARD_1", "FLAG_DEX_REWARD_2",
     "RegionHub_Text_GrandResearcherCeremony"))
 require("src/data/items.h", ('.name = ITEM_NAME("Master Ball"),\n        .price = 50000',))
-require("src/trainer_card.c", ("FlagGet(FLAG_ANTHOLOGY_GRAND_RESEARCHER)", "return 4;"))
-print("P0 anthology regional-dex 346/352/327 partition + medals + national reward guards PASS")
+require("src/trainer_card.c", ("FlagGet(FLAG_MOSAIC_GRAND_RESEARCHER)", "return 4;"))
+print("P0 mosaic regional-dex 346/352/327 partition + medals + national reward guards PASS")

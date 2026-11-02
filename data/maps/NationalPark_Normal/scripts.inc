@@ -4,7 +4,7 @@ NationalPark_Normal_MapScripts::
 	.byte 0
 
 NationalPark_Normal_OnTransition: 
-	call NationalPark_Normal_AnthologyOnTransition
+	call NationalPark_Normal_MosaicOnTransition
 	call NationalPark_Normal_VictiniOnTransition
 	end
 
@@ -200,25 +200,25 @@ NationalPark_Normal_Text_TrainerTips:
 	.string "pressing START.$"
 
 // Independent early/mid-Johto Sword of Justice static. No sibling capture gate.
-NationalPark_Normal_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, NationalPark_Normal_AnthologyRandomOnTransition
+NationalPark_Normal_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, NationalPark_Normal_MosaicRandomOnTransition
 	getcaughtmon SPECIES_VIRIZION
-	call_if_eq VAR_RESULT, TRUE, NationalPark_Normal_AnthologyHideVirizion
-	call_if_ne VAR_RESULT, TRUE, NationalPark_Normal_AnthologyShowVirizion
+	call_if_eq VAR_RESULT, TRUE, NationalPark_Normal_MosaicHideVirizion
+	call_if_ne VAR_RESULT, TRUE, NationalPark_Normal_MosaicShowVirizion
 	return
 
-NationalPark_Normal_AnthologyRandomOnTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_NATIONALPARK_NORMAL_VIRIZION, NationalPark_Normal_AnthologyHideVirizion
-	call_if_unset FLAG_CAUGHT_RANDOM_NATIONALPARK_NORMAL_VIRIZION, NationalPark_Normal_AnthologyShowVirizion
+NationalPark_Normal_MosaicRandomOnTransition::
+	call_if_set FLAG_CAUGHT_RANDOM_NATIONALPARK_NORMAL_VIRIZION, NationalPark_Normal_MosaicHideVirizion
+	call_if_unset FLAG_CAUGHT_RANDOM_NATIONALPARK_NORMAL_VIRIZION, NationalPark_Normal_MosaicShowVirizion
 	return
 
-NationalPark_Normal_AnthologyHideVirizion::
-	setflag FLAG_HIDE_ANTHOLOGY_VIRIZION
+NationalPark_Normal_MosaicHideVirizion::
+	setflag FLAG_HIDE_MOSAIC_VIRIZION
 	return
 
-NationalPark_Normal_AnthologyShowVirizion::
-	clearflag FLAG_HIDE_ANTHOLOGY_VIRIZION
+NationalPark_Normal_MosaicShowVirizion::
+	clearflag FLAG_HIDE_MOSAIC_VIRIZION
 	return
 
 NationalPark_Normal_EventScript_Virizion::
@@ -230,46 +230,46 @@ NationalPark_Normal_EventScript_Virizion::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NationalPark_Normal_AnthologyVirizionRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NationalPark_Normal_AnthologyVirizionRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NationalPark_Normal_AnthologyVirizionResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NationalPark_Normal_AnthologyVirizionResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NationalPark_Normal_MosaicVirizionRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NationalPark_Normal_MosaicVirizionRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NationalPark_Normal_MosaicVirizionResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NationalPark_Normal_MosaicVirizionResolved
 	release
 	end
 
-NationalPark_Normal_AnthologyVirizionResolvedRandomCaught::
+NationalPark_Normal_MosaicVirizionResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_NATIONALPARK_NORMAL_VIRIZION
-	goto NationalPark_Normal_AnthologyVirizionResolved
+	goto NationalPark_Normal_MosaicVirizionResolved
 
-NationalPark_Normal_AnthologyVirizionResolved::
+NationalPark_Normal_MosaicVirizionResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_VIRIZION
-	setflag FLAG_HIDE_ANTHOLOGY_VIRIZION
+	removeobject LOCALID_MOSAIC_VIRIZION
+	setflag FLAG_HIDE_MOSAIC_VIRIZION
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-NationalPark_Normal_AnthologyVirizionRetreated::
+NationalPark_Normal_MosaicVirizionRetreated::
 	release
 	end
 
 
 NationalPark_Normal_VictiniOnTransition::
 	goto_if_unset FLAG_SYS_GAME_CLEAR, NationalPark_Normal_HideVictini
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, NationalPark_Normal_VictiniRandomOnTransition
 	getcaughtmon SPECIES_VICTINI
 	goto_if_eq VAR_RESULT, TRUE, NationalPark_Normal_HideVictini
-	clearflag FLAG_HIDE_ANTHOLOGY_VICTINI
+	clearflag FLAG_HIDE_MOSAIC_VICTINI
 	return
 
 NationalPark_Normal_VictiniRandomOnTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_NATIONALPARK_NORMAL_VICTINI, NationalPark_Normal_HideVictini
-	clearflag FLAG_HIDE_ANTHOLOGY_VICTINI
+	clearflag FLAG_HIDE_MOSAIC_VICTINI
 	return
 
 NationalPark_Normal_HideVictini::
-	setflag FLAG_HIDE_ANTHOLOGY_VICTINI
+	setflag FLAG_HIDE_MOSAIC_VICTINI
 	return
 
 NationalPark_Normal_EventScript_Victini::
@@ -294,8 +294,8 @@ NationalPark_Normal_VictiniResolvedRandomCaught::
 
 NationalPark_Normal_VictiniResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_VICTINI
-	setflag FLAG_HIDE_ANTHOLOGY_VICTINI
+	removeobject LOCALID_MOSAIC_VICTINI
+	setflag FLAG_HIDE_MOSAIC_VICTINI
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

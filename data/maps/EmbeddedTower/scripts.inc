@@ -14,7 +14,7 @@ EmbeddedTower_MapScripts::
 @ made elsewhere) whenever the map loads. Hall of Fame only clears a tower flag
 @ when that species is still uncaught.
 EmbeddedTower_OnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, EmbeddedTower_SeededTransition
 	getcaughtmon SPECIES_RAYQUAZA
 	call_if_eq VAR_RESULT, TRUE, EmbeddedTower_HideRayquaza
@@ -62,7 +62,7 @@ waitstate
 	end
 
 EmbeddedTower_GroudonSeededCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, EmbeddedTower_MarkGroudonSeededCaught
 	goto EmbeddedTower_EventScript_GroudonResolved
 
@@ -99,7 +99,7 @@ waitstate
 	end
 
 EmbeddedTower_KyogreSeededCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, EmbeddedTower_MarkKyogreSeededCaught
 	goto EmbeddedTower_EventScript_KyogreResolved
 
@@ -137,7 +137,7 @@ waitstate
 	end
 
 EmbeddedTower_RayquazaSeededCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, EmbeddedTower_MarkRayquazaSeededCaught
 	goto EmbeddedTower_EventScript_RayquazaResolved
 

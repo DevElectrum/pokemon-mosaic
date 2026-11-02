@@ -7,11 +7,11 @@ PokemonLeague_ChampionsRoom_Frlg_MapScripts::
 PokemonLeague_ChampionsRoom_OnResume::
 	setvar VAR_0x8004, 4
 	call PokemonLeague_EventScript_DoLightingEffect
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander
 	end
 
@@ -103,20 +103,20 @@ PokemonLeague_ChampionsRoom_EventScript_QuestLogEnd::
 	end
 
 PokemonLeague_ChampionsRoom_EventScript_Battle::
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, PokemonLeague_ChampionsRoom_EventScript_BattleCharmander
 	return
 
 PokemonLeague_ChampionsRoom_EventScript_Rematch::
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, PokemonLeague_ChampionsRoom_EventScript_RematchCharmander
 	return
 

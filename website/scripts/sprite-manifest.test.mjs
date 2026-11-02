@@ -27,7 +27,7 @@ test('materialize real game fronts and icons with form-specific fallbacks', asyn
     execFileSync('python3', [fileURLToPath(new URL('./export_species.py', import.meta.url))], { cwd: repository });
     return readFile(new URL('../src/generated/pokemon-details.json', import.meta.url), 'utf8');
   }));
-  const temp = await mkdtemp(join(tmpdir(), 'anthology-sprites-'));
+  const temp = await mkdtemp(join(tmpdir(), 'mosaic-sprites-'));
   try {
     const { coverage, manifest, missing } = await buildSpriteManifest({ repository, website: temp, pokemon, details, quiet: true });
     assert.equal(coverage.national, 1025);

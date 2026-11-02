@@ -4,7 +4,7 @@ SproutTower_2F_MapScripts::
 	.byte 0
 
 SproutTower_2F_OnTransition:
-	call SproutTower_2F_AnthologyOnTransition
+	call SproutTower_2F_MosaicOnTransition
 	end
 
 SproutTower_2F_EventScript_SageNico::
@@ -53,17 +53,17 @@ SproutTower_Text_2F_Statue:
 	.string "A POKéMON statue…\p"
 	.string "It looks very distinguished.$"
 
-SproutTower_2F_AnthologyOnTransition::
-	call_if_set FLAG_CAUGHT_ANTHOLOGY_KUBFU_WEST, SproutTower_2F_HideKubfuWest
-	call_if_unset FLAG_CAUGHT_ANTHOLOGY_KUBFU_WEST, SproutTower_2F_ShowKubfuWest
+SproutTower_2F_MosaicOnTransition::
+	call_if_set FLAG_CAUGHT_MOSAIC_KUBFU_WEST, SproutTower_2F_HideKubfuWest
+	call_if_unset FLAG_CAUGHT_MOSAIC_KUBFU_WEST, SproutTower_2F_ShowKubfuWest
 	return
 
 SproutTower_2F_HideKubfuWest::
-	setflag FLAG_HIDE_ANTHOLOGY_KUBFU_WEST
+	setflag FLAG_HIDE_MOSAIC_KUBFU_WEST
 	return
 
 SproutTower_2F_ShowKubfuWest::
-	clearflag FLAG_HIDE_ANTHOLOGY_KUBFU_WEST
+	clearflag FLAG_HIDE_MOSAIC_KUBFU_WEST
 	return
 
 SproutTower_2F_EventScript_KubfuWest::
@@ -83,13 +83,13 @@ SproutTower_2F_EventScript_KubfuWest::
 	end
 
 SproutTower_2F_KubfuWestCaught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_KUBFU_WEST
+	setflag FLAG_CAUGHT_MOSAIC_KUBFU_WEST
 	goto SproutTower_2F_KubfuWestResolved
 
 SproutTower_2F_KubfuWestResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_KUBFU_WEST
-	setflag FLAG_HIDE_ANTHOLOGY_KUBFU_WEST
+	removeobject LOCALID_MOSAIC_KUBFU_WEST
+	setflag FLAG_HIDE_MOSAIC_KUBFU_WEST
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

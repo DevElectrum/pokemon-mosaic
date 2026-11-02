@@ -857,7 +857,7 @@ RustboroCity_EventScript_MayAskToBattle::
 RustboroCity_EventScript_BattleMay::
 	msgbox RustboroCity_Text_MayImNotGoingToLose, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, RustboroCity_EventScript_BattleMayTreecko
 	case 1, RustboroCity_EventScript_BattleMayTorchic
@@ -925,7 +925,7 @@ RustboroCity_EventScript_BrendanAskToBattle::
 RustboroCity_EventScript_BattleBrendan::
 	msgbox RustboroCity_Text_BrendanIWontGoEasy, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, RustboroCity_EventScript_BattleBrendanTreecko
 	case 1, RustboroCity_EventScript_BattleBrendanTorchic

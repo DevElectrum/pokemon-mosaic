@@ -1,5 +1,5 @@
 MeteorFalls_1F_1R_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, MeteorFalls_1F_1R_AnthologyOnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, MeteorFalls_1F_1R_MosaicOnTransition
 	map_script MAP_SCRIPT_ON_LOAD, MeteorFalls_1F_1R_OnLoad
 	.byte 0
 
@@ -309,18 +309,18 @@ MeteorFalls_1F_1R_Text_WhatsTeamMagmaDoingAtMtChimney:
 	.string "What are they going to do with that\n"
 	.string "METEORITE at MT. CHIMNEY?$"
 
-MeteorFalls_1F_1R_AnthologyOnTransition::
-	call_if_set FLAG_CAUGHT_ANTHOLOGY_ZYGARDE, MeteorFalls_1F_1R_AnthologyHideZygarde50
-	goto_if_unset FLAG_BADGE06_GET, MeteorFalls_1F_1R_AnthologyHideZygarde50
-	call_if_unset FLAG_CAUGHT_ANTHOLOGY_ZYGARDE, MeteorFalls_1F_1R_AnthologyShowZygarde50
+MeteorFalls_1F_1R_MosaicOnTransition::
+	call_if_set FLAG_CAUGHT_MOSAIC_ZYGARDE, MeteorFalls_1F_1R_MosaicHideZygarde50
+	goto_if_unset FLAG_BADGE06_GET, MeteorFalls_1F_1R_MosaicHideZygarde50
+	call_if_unset FLAG_CAUGHT_MOSAIC_ZYGARDE, MeteorFalls_1F_1R_MosaicShowZygarde50
 	end
 
-MeteorFalls_1F_1R_AnthologyHideZygarde50::
-	setflag FLAG_HIDE_ANTHOLOGY_ZYGARDE
+MeteorFalls_1F_1R_MosaicHideZygarde50::
+	setflag FLAG_HIDE_MOSAIC_ZYGARDE
 	return
 
-MeteorFalls_1F_1R_AnthologyShowZygarde50::
-	clearflag FLAG_HIDE_ANTHOLOGY_ZYGARDE
+MeteorFalls_1F_1R_MosaicShowZygarde50::
+	clearflag FLAG_HIDE_MOSAIC_ZYGARDE
 	return
 
 MeteorFalls_1F_1R_EventScript_Zygarde50::
@@ -332,24 +332,24 @@ MeteorFalls_1F_1R_EventScript_Zygarde50::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MeteorFalls_1F_1R_AnthologyZygarde50Retreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MeteorFalls_1F_1R_AnthologyZygarde50Retreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MeteorFalls_1F_1R_AnthologyZygarde50Caught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MeteorFalls_1F_1R_AnthologyZygarde50Resolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MeteorFalls_1F_1R_MosaicZygarde50Retreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MeteorFalls_1F_1R_MosaicZygarde50Retreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MeteorFalls_1F_1R_MosaicZygarde50Caught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MeteorFalls_1F_1R_MosaicZygarde50Resolved
 	release
 	end
 
-MeteorFalls_1F_1R_AnthologyZygarde50Caught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_ZYGARDE
-	goto MeteorFalls_1F_1R_AnthologyZygarde50Resolved
-MeteorFalls_1F_1R_AnthologyZygarde50Resolved::
+MeteorFalls_1F_1R_MosaicZygarde50Caught::
+	setflag FLAG_CAUGHT_MOSAIC_ZYGARDE
+	goto MeteorFalls_1F_1R_MosaicZygarde50Resolved
+MeteorFalls_1F_1R_MosaicZygarde50Resolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ZYGARDE
-	setflag FLAG_HIDE_ANTHOLOGY_ZYGARDE
+	removeobject LOCALID_MOSAIC_ZYGARDE
+	setflag FLAG_HIDE_MOSAIC_ZYGARDE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-MeteorFalls_1F_1R_AnthologyZygarde50Retreated::
+MeteorFalls_1F_1R_MosaicZygarde50Retreated::
 	release
 	end

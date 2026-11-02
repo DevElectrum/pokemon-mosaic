@@ -400,7 +400,7 @@ Route110_EventScript_PlayBrendanMusic::
 Route110_EventScript_MayBattle::
 	msgbox Route110_Text_MayLetsBattle, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, Route110_EventScript_MayBattleTreecko
 	case 1, Route110_EventScript_MayBattleTorchic
@@ -432,7 +432,7 @@ Route110_EventScript_MayDefeated::
 Route110_EventScript_BrendanBattle::
 	msgbox Route110_Text_BrendanLetsBattle, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, Route110_EventScript_BrendanBattleTreecko
 	case 1, Route110_EventScript_BrendanBattleTorchic

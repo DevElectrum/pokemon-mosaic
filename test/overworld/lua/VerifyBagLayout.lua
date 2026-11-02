@@ -1,7 +1,7 @@
 -- Issue #24 acceptance: the expanded bag + item PC really shipped, and survives a save/reload.
 -- Evidence suite.
 --
---   cp <repo>\pokemonworld.gba  BizHawk\Verify1.gba
+--   cp <repo>\pokemon-mosaic.gba  BizHawk\Verify1.gba
 --   EmuHawk.exe BizHawk\Verify1.gba --lua=<repo>\test\overworld\lua\VerifyBagLayout.lua
 --
 -- Why the pointer-spacing checks and not just the capacities: gBagPockets[p].capacity is written

@@ -19,7 +19,7 @@ SeafoamIslands_B4F_EventScript_TryRemoveArticuno::
 	return
 
 SeafoamIslands_B4F_OnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, SeafoamIslands_B4F_SeededArticunoVisibility
 	getcaughtmon SPECIES_ARTICUNO
 	call_if_eq VAR_RESULT, TRUE, SeafoamIslands_B4F_NativeARTICUNOCaught
@@ -187,7 +187,7 @@ SeafoamIslands_B4F_EventScript_Articuno::
 	end
 
 SeafoamIslands_B4F_SeededArticunoCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, SeafoamIslands_B4F_SeededArticunoMark
 	setflag FLAG_FOUGHT_ARTICUNO
 	release

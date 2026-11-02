@@ -235,7 +235,7 @@
       "flag": "FLAG_HIDE_CELADON_ROCKETS"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_TAPU_LELE",
+      "local_id": "LOCALID_MOSAIC_TAPU_LELE",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(TAPU_LELE)",
       "x": 8,
       "y": 24,
@@ -246,7 +246,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeladonCity_EventScript_TapuLele",
-      "flag": "FLAG_HIDE_ANTHOLOGY_TAPU_LELE"
+      "flag": "FLAG_HIDE_MOSAIC_TAPU_LELE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -259,7 +259,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_VICTREEBELITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_01"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_01"
     }
   ],
   "warp_events": [

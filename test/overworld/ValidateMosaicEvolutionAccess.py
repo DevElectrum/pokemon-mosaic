@@ -35,7 +35,7 @@ pokedex = source("src/pokedex.c").split("bool16 HasAllMons(void)")[1].split("sta
 assert "isMythical" not in pokedex
 assert "required[dn >> 3] |= 1 << (dn & 7)" in pokedex
 assert "GetSetPokedexFlag(dn, FLAG_GET_CAUGHT)" in pokedex
-print("P0 anthology evolution access and national completion source guards: PASS")
+print("P0 mosaic evolution access and national completion source guards: PASS")
 
 # Kubfu's two ordinary evolution items are one-time exploration rewards,
 # not mass-sold merchandise. Both independently obtainable in Johto.

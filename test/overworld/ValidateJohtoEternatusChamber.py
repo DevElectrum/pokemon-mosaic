@@ -51,7 +51,7 @@ assembly = read("data/event_scripts.s")
 
 assert groups[-1] == "JohtoEternatusChamber", "Append new map to preserve all prior map indices"
 assert "data/maps/JohtoEternatusChamber/scripts.inc" in assembly
-assert all(obj.get("local_id") != "LOCALID_ANTHOLOGY_ETERNATUS" for obj in old["object_events"])
+assert all(obj.get("local_id") != "LOCALID_MOSAIC_ETERNATUS" for obj in old["object_events"])
 assert "Route44_EventScript_Eternatus" not in old_script
 assert "Route44_TornadusOnTransition" in old_script
 assert len(parent["warp_events"]) == 5
@@ -59,12 +59,12 @@ assert parent["warp_events"][1]["dest_map"] == "MAP_JOHTO_INDIGO_PLATEAU"
 assert (parent["warp_events"][1]["x"], parent["warp_events"][1]["y"]) == (39, 5)
 
 entrances = [obj for obj in parent["object_events"]
-             if obj.get("local_id") == "LOCALID_ANTHOLOGY_ETERNATUS_SEAL"]
+             if obj.get("local_id") == "LOCALID_MOSAIC_ETERNATUS_SEAL"]
 assert len(entrances) == 1
 entrance = entrances[0]
 assert (entrance["x"], entrance["y"]) == (35, 4)
 assert entrance["script"] == "JohtoVictoryRoad_1F_EventScript_EternatusSeal"
-assert "goto_if_unset FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED, JohtoVictoryRoad_1F_EternatusStillSealed" in parent_script
+assert "goto_if_unset FLAG_MOSAIC_ROYAL_DUO_CLAIMED, JohtoVictoryRoad_1F_EternatusStillSealed" in parent_script
 assert "warp MAP_JOHTO_ETERNATUS_CHAMBER, 7, 6" in parent_script
 assert "FLAG_SYS_GAME_CLEAR" not in parent_script[parent_script.index("JohtoVictoryRoad_1F_EventScript_EternatusSeal::"):]
 
@@ -82,19 +82,19 @@ assert len(chamber["warp_events"]) == 1
 assert chamber["warp_events"][0]["dest_map"] == "MAP_JOHTO_VICTORY_ROAD_1F"
 assert chamber["warp_events"][0]["dest_warp_id"] == "1"
 mons = [obj for obj in chamber["object_events"]
-        if obj.get("local_id") == "LOCALID_ANTHOLOGY_ETERNATUS"]
+        if obj.get("local_id") == "LOCALID_MOSAIC_ETERNATUS"]
 assert len(mons) == 1
 assert (mons[0]["x"], mons[0]["y"]) == (10, 9)
 assert mons[0]["graphics_id"] == "OBJ_EVENT_GFX_SPECIES(ETERNATUS)"
-assert mons[0]["flag"] == "FLAG_HIDE_ANTHOLOGY_ETERNATUS"
+assert mons[0]["flag"] == "FLAG_HIDE_MOSAIC_ETERNATUS"
 room_tiles = layout(chamber)
 room_reachable = connected(room_tiles, (7, 6))
 assert (7, 3) in room_reachable and (10, 9) in room_reachable
-assert "goto_if_unset FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED, JohtoEternatusChamber_Hide" in chamber_script
-assert "goto_if_unset FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED, JohtoEternatusChamber_NotReady" in chamber_script
+assert "goto_if_unset FLAG_MOSAIC_ROYAL_DUO_CLAIMED, JohtoEternatusChamber_Hide" in chamber_script
+assert "goto_if_unset FLAG_MOSAIC_ROYAL_DUO_CLAIMED, JohtoEternatusChamber_NotReady" in chamber_script
 assert "seteventmon SPECIES_ETERNATUS, 55" in chamber_script
 assert "getcaughtmon SPECIES_ETERNATUS" in chamber_script
-assert "callnative AnthologyStaticRandomizerIsOn" in chamber_script
+assert "callnative MosaicStaticRandomizerIsOn" in chamber_script
 assert "FLAG_CAUGHT_RANDOM_ROUTE44_ETERNATUS" in chamber_script
 assert "setflag FLAG_CAUGHT_RANDOM_ROUTE44_ETERNATUS" in chamber_script
 assert "goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT" in chamber_script
@@ -102,6 +102,6 @@ assert "goto_if_eq VAR_RESULT, B_OUTCOME_WON" in chamber_script
 assert "goto_if_eq VAR_RESULT, B_OUTCOME_RAN" in chamber_script
 assert "goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED" in chamber_script
 assert "#define FLAG_CAUGHT_RANDOM_ROUTE44_ETERNATUS " in flags
-assert "#define FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED " in flags
+assert "#define FLAG_MOSAIC_ROYAL_DUO_CLAIMED " in flags
 print("PASS: Royal Duo-gated, walkable Eternatus side chamber; original Route 44 retired.")
 print("NOTE: source contract only; real emulator capture/return/save still pending.")

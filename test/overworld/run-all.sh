@@ -21,7 +21,7 @@ set -uo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$REPO" || exit 2
-ROM="${1:-$REPO/pokemonworld.gba}"
+ROM="${1:-$REPO/pokemon-mosaic.gba}"
 OUT="${PW_OUT:-$REPO/_pwtest}"
 
 [[ -f "$ROM" ]] || { echo "no such ROM: $ROM (run 'make modern' first)" >&2; exit 2; }
@@ -62,7 +62,7 @@ WITH_SAVE=("VerifyV7Migrate:test/overworld/lua/fixtures/v7dirty.srm"
 # a real playthrough, so no clean checkout can ever have one. Distinguishing this from a missing
 # TRACKED fixture is the whole point -- one is "nobody can run this", the other is "this tree is
 # broken". Reported as OPTIONAL and left out of EXPECTED so the sentinel audit does not want one.
-OPTIONAL_SAVE=("VerifyOwnerSave:pokemonworld.sav")
+OPTIONAL_SAVE=("VerifyOwnerSave:pokemon-mosaic.sav")
 
 # Suites in MANIFEST.md that cannot run from a clean checkout, and why. Listed so the sweep
 # reports them by name instead of leaving a stale sentinel to be counted. Empty today:

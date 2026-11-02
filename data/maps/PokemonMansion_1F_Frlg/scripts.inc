@@ -8,7 +8,7 @@ PokemonMansion_1F_OnLoad::
 	end
 
 PokemonMansion_1F_OnTransition::
-	call PokemonMansion_1F_AnthologyOnTransition
+	call PokemonMansion_1F_MosaicOnTransition
 	setworldmapflag FLAG_WORLD_MAP_POKEMON_MANSION_1F
 	end
 
@@ -57,27 +57,27 @@ PokemonMansion_1F_Text_JohnsonPostBattle::
 	.string "I ought to go soon.$"
 
 // Independent pre-League encounters; preserve original local puzzle/story.
-PokemonMansion_1F_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, PokemonMansion_1F_AnthologySeededTransition
+PokemonMansion_1F_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, PokemonMansion_1F_MosaicSeededTransition
 	getcaughtmon SPECIES_TYPE_NULL
-	call_if_eq VAR_RESULT, TRUE, PokemonMansion_1F_AnthologyHideTypeNull
-	call_if_ne VAR_RESULT, TRUE, PokemonMansion_1F_AnthologyShowTypeNull
+	call_if_eq VAR_RESULT, TRUE, PokemonMansion_1F_MosaicHideTypeNull
+	call_if_ne VAR_RESULT, TRUE, PokemonMansion_1F_MosaicShowTypeNull
 	return
 
-PokemonMansion_1F_AnthologySeededTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_MANSION_MEW, PokemonMansion_1F_AnthologyHideMew
-	call_if_unset FLAG_CAUGHT_RANDOM_MANSION_MEW, PokemonMansion_1F_AnthologyShowMew
-	call_if_set FLAG_CAUGHT_RANDOM_MANSION_TYPE_NULL, PokemonMansion_1F_AnthologyHideTypeNull
-	call_if_unset FLAG_CAUGHT_RANDOM_MANSION_TYPE_NULL, PokemonMansion_1F_AnthologyShowTypeNull
+PokemonMansion_1F_MosaicSeededTransition::
+	call_if_set FLAG_CAUGHT_RANDOM_MANSION_MEW, PokemonMansion_1F_MosaicHideMew
+	call_if_unset FLAG_CAUGHT_RANDOM_MANSION_MEW, PokemonMansion_1F_MosaicShowMew
+	call_if_set FLAG_CAUGHT_RANDOM_MANSION_TYPE_NULL, PokemonMansion_1F_MosaicHideTypeNull
+	call_if_unset FLAG_CAUGHT_RANDOM_MANSION_TYPE_NULL, PokemonMansion_1F_MosaicShowTypeNull
 	return
 
-PokemonMansion_1F_AnthologyHideMew::
-	setflag FLAG_HIDE_ANTHOLOGY_MEW
+PokemonMansion_1F_MosaicHideMew::
+	setflag FLAG_HIDE_MOSAIC_MEW
 	return
 
-PokemonMansion_1F_AnthologyShowMew::
-	clearflag FLAG_HIDE_ANTHOLOGY_MEW
+PokemonMansion_1F_MosaicShowMew::
+	clearflag FLAG_HIDE_MOSAIC_MEW
 	return
 
 PokemonMansion_1F_EventScript_Mew::
@@ -97,7 +97,7 @@ PokemonMansion_1F_EventScript_Mew::
 	special BattleSetup_StartMewGauntletBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_AnthologyMewRetreated
+	goto_if_ne VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_MosaicMewRetreated
 
 	setvar VAR_0x8004, 1
 	special MewGauntletPrepareBattle
@@ -107,7 +107,7 @@ PokemonMansion_1F_EventScript_Mew::
 	special BattleSetup_StartMewGauntletBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_AnthologyMewRetreated
+	goto_if_ne VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_MosaicMewRetreated
 
 	setvar VAR_0x8004, 2
 	special MewGauntletPrepareBattle
@@ -117,7 +117,7 @@ PokemonMansion_1F_EventScript_Mew::
 	special BattleSetup_StartMewGauntletBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_AnthologyMewRetreated
+	goto_if_ne VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_MosaicMewRetreated
 
 	setvar VAR_0x8004, 3
 	special MewGauntletPrepareBattle
@@ -127,8 +127,8 @@ PokemonMansion_1F_EventScript_Mew::
 	special BattleSetup_StartMewGauntletBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_AnthologyMewResolved
-	goto PokemonMansion_1F_AnthologyMewRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_MosaicMewResolved
+	goto PokemonMansion_1F_MosaicMewRetreated
 
 PokemonMansion_1F_RandomizedMewStatic::
     @ No illusion battle unless the resident species really is Mew.
@@ -136,9 +136,9 @@ PokemonMansion_1F_RandomizedMewStatic::
     special BattleSetup_StartLegendaryBattle
     waitstate
     specialvar VAR_RESULT, GetBattleOutcome
-    goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_AnthologyMewResolved
+    goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_MosaicMewResolved
     @ Fainting/fleeing does not consume the static location.
-    goto PokemonMansion_1F_AnthologyMewRetreated
+    goto PokemonMansion_1F_MosaicMewRetreated
 
 PokemonMansion_1F_Text_MewChallenge::
 	.string "MEW looks at you curiously...\p"
@@ -157,30 +157,30 @@ PokemonMansion_1F_Text_MewRevealed::
 	.string "All three illusions are gone!\p"
 	.string "The real MEW appeared!$"
 
-PokemonMansion_1F_AnthologyMewResolved::
-	callnative AnthologyStaticRandomizerIsOn
-	call_if_eq VAR_RESULT, TRUE, PokemonMansion_1F_AnthologyMarkSeededMew
+PokemonMansion_1F_MosaicMewResolved::
+	callnative MosaicStaticRandomizerIsOn
+	call_if_eq VAR_RESULT, TRUE, PokemonMansion_1F_MosaicMarkSeededMew
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_MEW
-	setflag FLAG_HIDE_ANTHOLOGY_MEW
+	removeobject LOCALID_MOSAIC_MEW
+	setflag FLAG_HIDE_MOSAIC_MEW
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-PokemonMansion_1F_AnthologyMarkSeededMew::
+PokemonMansion_1F_MosaicMarkSeededMew::
 	setflag FLAG_CAUGHT_RANDOM_MANSION_MEW
 	return
 
-PokemonMansion_1F_AnthologyMewRetreated::
+PokemonMansion_1F_MosaicMewRetreated::
 	release
 	end
 
-PokemonMansion_1F_AnthologyHideTypeNull::
-	setflag FLAG_HIDE_ANTHOLOGY_TYPE_NULL
+PokemonMansion_1F_MosaicHideTypeNull::
+	setflag FLAG_HIDE_MOSAIC_TYPE_NULL
 	return
 
-PokemonMansion_1F_AnthologyShowTypeNull::
-	clearflag FLAG_HIDE_ANTHOLOGY_TYPE_NULL
+PokemonMansion_1F_MosaicShowTypeNull::
+	clearflag FLAG_HIDE_MOSAIC_TYPE_NULL
 	return
 
 PokemonMansion_1F_EventScript_TypeNull::
@@ -192,31 +192,31 @@ PokemonMansion_1F_EventScript_TypeNull::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PokemonMansion_1F_AnthologyTypeNullRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PokemonMansion_1F_AnthologyTypeNullRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_AnthologyTypeNullCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_AnthologyTypeNullResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PokemonMansion_1F_MosaicTypeNullRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PokemonMansion_1F_MosaicTypeNullRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_MosaicTypeNullCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_MosaicTypeNullResolved
 	release
 	end
 
-PokemonMansion_1F_AnthologyTypeNullCaught::
-	callnative AnthologyStaticRandomizerIsOn
-	call_if_eq VAR_RESULT, TRUE, PokemonMansion_1F_AnthologyMarkSeededTypeNull
-	goto PokemonMansion_1F_AnthologyTypeNullResolved
+PokemonMansion_1F_MosaicTypeNullCaught::
+	callnative MosaicStaticRandomizerIsOn
+	call_if_eq VAR_RESULT, TRUE, PokemonMansion_1F_MosaicMarkSeededTypeNull
+	goto PokemonMansion_1F_MosaicTypeNullResolved
 
-PokemonMansion_1F_AnthologyMarkSeededTypeNull::
+PokemonMansion_1F_MosaicMarkSeededTypeNull::
 	setflag FLAG_CAUGHT_RANDOM_MANSION_TYPE_NULL
 	return
 
-PokemonMansion_1F_AnthologyTypeNullResolved::
+PokemonMansion_1F_MosaicTypeNullResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_TYPE_NULL
-	setflag FLAG_HIDE_ANTHOLOGY_TYPE_NULL
+	removeobject LOCALID_MOSAIC_TYPE_NULL
+	setflag FLAG_HIDE_MOSAIC_TYPE_NULL
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-PokemonMansion_1F_AnthologyTypeNullRetreated::
+PokemonMansion_1F_MosaicTypeNullRetreated::
 	release
 	end
 

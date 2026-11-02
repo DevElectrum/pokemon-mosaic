@@ -317,7 +317,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_KELDEO",
+      "local_id": "LOCALID_MOSAIC_KELDEO",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(KELDEO)",
       "x": 18,
       "y": 35,
@@ -328,7 +328,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route32_EventScript_Keldeo",
-      "flag": "FLAG_HIDE_ANTHOLOGY_KELDEO"
+      "flag": "FLAG_HIDE_MOSAIC_KELDEO"
     }
   ],
   "warp_events": [

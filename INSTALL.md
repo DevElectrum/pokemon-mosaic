@@ -2,9 +2,9 @@
 
 This builds **Pokémon Mosaic**, an experimental three-region modification built upon [Pokémon World](https://github.com/evilchinesefood/PKMN-World) and [pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion). The original platform and toolchain notes are inherited. This is the **standard GBA emulator** game, not the separate nine-region Grand Anthology/XGBA project.
 
-Build from `DevElectrum/pokemon-mosaic` on its published or maintainer-designated branch. The inherited Makefile **still** uses the temporary `pokemonworld` build basename: `make release -j4` currently produces `pokemonworld-release.gba` locally. Renaming that default, its CI consumers, and matching emulator save basenames belongs to rebranding Pass 2; **do not rename or overwrite your only `.sav`**. No compiled ROM is published.
+Build from `DevElectrum/pokemon-mosaic` on its published or maintainer-designated branch. The inherited Makefile **now** uses the `pokemonworld` build basename: `make release -j4` currently produces `pokemon-mosaic-release.gba` locally. ROM and CI filenames are updated together in rebranding Pass 2; **do not rename or overwrite your only `.sav`**. No compiled ROM is published.
 
-- **Current default ROMs:** `pokemonworld.gba` (normal/debug) and `pokemonworld-release.gba` (`make release`), both still under the legacy filename until Pass 2. The GBA header already says **`PKMN MOSAIC`**, with the original game code **`BPEE`**. The ROM limit is **32 MiB**.
+- **Current default ROMs:** `pokemon-mosaic.gba` (normal/debug) and `pokemon-mosaic-release.gba` (`make release`), both using the new Mosaic filename. The GBA header already says **`PKMN MOSAIC`**, with the original game code **`BPEE`**. The ROM limit is **32 MiB**.
 - **Toolchain:** modern only — `arm-none-eabi-gcc` + newlib. **agbcc is not used**; the Makefile
   hardcodes `-DMODERN=1` and `make agbcc` deliberately exits with an error (`Makefile:345-348`).
 
@@ -223,18 +223,18 @@ GitHub Releases, or Actions artifacts.
 
 | Target | What it does |
 | --- | --- |
-| `make` / `make modern` | build `pokemonworld.gba` (+ `.elf`, `.map`, and a refreshed `test/overworld/lua/symbols.lua`) |
+| `make` / `make modern` | build `pokemon-mosaic.gba` (+ `.elf`, `.map`, and a refreshed `test/overworld/lua/symbols.lua`) |
 | `make check` | invoke the inherited battle-engine test target; it may require separately provided mGBA runner binaries, which are not bundled in the public source snapshot |
 | `make validate` | run the currently configured host-side content checks (no ROM build) |
 | `make tools` | build only the host tools in `tools/` — the target to use when diagnosing a tools failure |
 | `make symbols` | regenerate `test/overworld/lua/symbols.lua` from the ELF (the normal ROM build already does this) |
 | `make obstacles` | regenerate the committed cleared-obstacle table after a map edit |
 | `make debug` | same ROM filename, built with `-Og -g` into `build/emerald-debug` |
-| `make release` | `pokemonworld-release.gba` — optimized, `NDEBUG`, LTO on by default (`config.mk`) |
+| `make release` | `pokemon-mosaic-release.gba` — optimized, `NDEBUG`, LTO on by default (`config.mk`) |
 | `make clean` | remove build artifacts, generated assets and host tools |
 | `make tidy` | remove build artifacts only, keeping the tools and generated assets |
 
-> **`make debug` overwrites `pokemonworld.gba`.** Only `release` renames its output
+> **`make debug` overwrites `pokemon-mosaic.gba`.** Only `release` renames its output
 > (`Makefile:102-104`); `debug` changes the object directory but not the ROM filename.
 
 > **Mosaic status:** This three-region project is an experimental, source-only fan modification. An optimized build can fit the standard 32 MiB ROM budget, but **neither successful compilation nor selected emulator smoke tests alone certify the game for release**. No Mosaic ROM distribution is authorized.
@@ -249,19 +249,19 @@ Memory region         Used Size  Region Size  %age Used
            EWRAM:        ...          256 KB      ...
            IWRAM:        ...           32 KB      ...
              ROM:        ...           32 MB      ...
-cd build/emerald && arm-none-eabi-ld -Map ../../pokemonworld.map --print-memory-usage --gc-sections -T ../../ld_script_modern.ld -o ../../pokemonworld.elf <objs> <libs> | cat
-tools/gbafix/gbafix pokemonworld.elf -t"PKMN MOSAIC" -cBPEE -m01 -r0 --silent
-arm-none-eabi-objcopy -O binary pokemonworld.elf pokemonworld.gba
-tools/gbafix/gbafix pokemonworld.gba -p --silent
+cd build/emerald && arm-none-eabi-ld -Map ../../pokemon-mosaic.map --print-memory-usage --gc-sections -T ../../ld_script_modern.ld -o ../../pokemon-mosaic.elf <objs> <libs> | cat
+tools/gbafix/gbafix pokemon-mosaic.elf -t"PKMN MOSAIC" -cBPEE -m01 -r0 --silent
+arm-none-eabi-objcopy -O binary pokemon-mosaic.elf pokemon-mosaic.gba
+tools/gbafix/gbafix pokemon-mosaic.gba -p --silent
 ```
 
-A `warning: pokemonworld.elf has a LOAD segment with RWX permissions` from `ld` is expected and
+A `warning: pokemon-mosaic.elf has a LOAD segment with RWX permissions` from `ld` is expected and
 harmless.
 
 The region sizes come from `ld_script_modern.ld:9-11`. The `ROM:` line is the one worth watching
 — the region is capped at 32 MB, and that percentage is the project's headroom budget.
 
-With **`make release`**, the current local ROM filename is **`pokemonworld-release.gba`**. With `make modern`, it is `pokemonworld.gba`. These temporary basenames **do not** determine the in-game brand: the header says `PKMN MOSAIC`. Pass 2 will migrate the default to `pokemon-mosaic-release.gba` and update scripts/CI together; retain backup copies of the old ROM/save pair and copy the matching `.sav` rather than moving or deleting it. Do not publish either ROM.
+With **`make release`**, the current local ROM filename is **`pokemon-mosaic-release.gba`**. With `make modern`, it is `pokemon-mosaic.gba`. The ROM filename and GBA header now both use Mosaic branding: the header says `PKMN MOSAIC`. Pass 2 migrated the default to `pokemon-mosaic-release.gba` and update scripts/CI together; retain backup copies of the old ROM/save pair and copy the matching `.sav` rather than moving or deleting it. Do not publish either ROM.
 
 ---
 
@@ -349,3 +349,8 @@ Optional editors that pair well with a pokeemerald-based project:
   ([VS Code extension](https://marketplace.visualstudio.com/items?itemName=karathan.poryscript))
 - [Tilemap Studio](https://github.com/Rangi42/tilemap-studio) — viewing and editing tilemaps
 - [porytiles](https://github.com/grunt-lucas/porytiles) — adding new metatiles for maps
+
+
+## Preserve saves after the filename change
+
+Read [the copy-only save guide](docs/SAVE_FILENAME_MIGRATION.md) before starting the new ROM. The actual save format and game code BPEE remain unchanged.

@@ -204,7 +204,7 @@
                                                // In Gen4, it's 30%. In Gen5+ it has 11% to sleep, 9% chance to poison and 10% chance to paralyze.
 #define B_PICKUP_WILD               GEN_LATEST // In Gen9+, Pickup allows its user to pickup its own used item at the end of the turn in wild battles.
 #define B_MAGIC_GUARD               GEN_LATEST // In Gen4 only, Magic Guard ignores immobilization caused by paralysis
-#define B_BATTLE_BOND               GEN_8 // Grand Anthology: classic Ash-Greninja transformation rather than Gen 9 stat boost.
+#define B_BATTLE_BOND               GEN_8 // Grand Mosaic: classic Ash-Greninja transformation rather than Gen 9 stat boost.
 #define B_ATE_MULTIPLIER            GEN_LATEST // In Gen7+, -ate abilities (Aerilate, Galvanize, Normalize, Pixilate, Refrigerate) multiply damage by 1.2. Otherwise, it's 1.3, except Normalize which has no multiplier.
 #define B_DEFIANT_STICKY_WEB        GEN_LATEST // In Gen9+, Defiant activates on Sticky Web regardless of who set it up. In Gen8, Defiant does not activate on Sticky Web set up by an ally after Court Change swaps its side.
 // NOT pinned, unlike the Transform pair above (issue #120). The pinning rule is "preserve

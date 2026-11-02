@@ -42,7 +42,7 @@
       "flag": "FLAG_ITEM_MT_PYRE_EXTERIOR_TM_SKILL_SWAP"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_YVELTAL",
+      "local_id": "LOCALID_MOSAIC_YVELTAL",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(YVELTAL)",
       "x": 13,
       "y": 17,
@@ -53,7 +53,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtPyre_Exterior_EventScript_Yveltal",
-      "flag": "FLAG_HIDE_ANTHOLOGY_YVELTAL"
+      "flag": "FLAG_HIDE_MOSAIC_YVELTAL"
     }
   ],
   "warp_events": [

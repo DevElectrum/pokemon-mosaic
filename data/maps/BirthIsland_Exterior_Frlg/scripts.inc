@@ -13,7 +13,7 @@ BirthIsland_Exterior_Frlg_OnTransition::
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_DEOXYS_N
 	setvar VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0
 	setvar VAR_DEOXYS_INTERACTION_NUM, 0
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, BirthIsland_Exterior_Frlg_SeededTransition
 	call_if_set FLAG_FOUGHT_DEOXYS, BirthIsland_Exterior_Frlg_EventScript_HideDeoxysAndPuzzle
 	call_if_unset FLAG_FOUGHT_DEOXYS, BirthIsland_Exterior_Frlg_EventScript_TryShowDeoxysPuzzle
@@ -104,7 +104,7 @@ BirthIsland_Exterior_Frlg_EventScript_Deoxys::
 	end
 
 BirthIsland_Exterior_Frlg_SeededCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, BirthIsland_Exterior_Frlg_MarkSeededDeoxys
 	setflag FLAG_FOUGHT_DEOXYS
 	release

@@ -20,7 +20,7 @@ GoldenrodDeptStore4_Pokemart_FeathersAndMints::
 	@ ground item, no gift -- so both were unobtainable. Sold here because the Day Care this
 	@ serves is next door on Route 34. (The other incenses are sold at SafariZoneGate.)
 	.2byte ITEM_ROSE_INCENSE
-	@ Anthology accessible ability and evolution items.
+	@ Mosaic accessible ability and evolution items.
 	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_ABILITY_PATCH
 	.2byte ITEM_LEADERS_CREST

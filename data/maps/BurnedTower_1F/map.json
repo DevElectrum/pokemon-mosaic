@@ -197,7 +197,7 @@
       "flag": "FLAG_ITEM_BURNED_TOWER_1F_ETHER"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_MOLTRES_GALAR",
+      "local_id": "LOCALID_MOSAIC_MOLTRES_GALAR",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(MOLTRES_GALAR)",
       "x": 7,
       "y": 6,
@@ -208,7 +208,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "BurnedTower_1F_EventScript_GalarianMoltres",
-      "flag": "FLAG_HIDE_ANTHOLOGY_MOLTRES_GALAR"
+      "flag": "FLAG_HIDE_MOSAIC_MOLTRES_GALAR"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -221,7 +221,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_ABSOLITE_Z",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_14"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_14"
     }
   ],
   "warp_events": [

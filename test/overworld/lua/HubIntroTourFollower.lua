@@ -10,7 +10,7 @@
 -- the guide still gets home.
 --
 -- Run against a THROWAWAY COPY, on a genuinely fresh save:
---   cp <repo>\pokemonworld.gba  BizHawk\Verify2.gba
+--   cp <repo>\pokemon-mosaic.gba  BizHawk\Verify2.gba
 --   rm BizHawk\GBA\SaveRAM\Verify2.SaveRAM
 --   EmuHawk.exe BizHawk\Verify2.gba --lua=<repo>\test\overworld\lua\HubIntroTourFollower.lua
 local here = (debug.getinfo(1, "S").source:sub(2)):match("^(.*[/\\])") or ""

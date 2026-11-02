@@ -7,7 +7,7 @@ MtMoon_B2F_OnTransition::
 	call_if_unset FLAG_GOT_DOME_FOSSIL, MtMoon_B2F_EventScript_ShowDomeFossil
 	call_if_set FLAG_GOT_HELIX_FOSSIL, MtMoon_B2F_EventScript_HideHelixFossil
 	call_if_unset FLAG_GOT_HELIX_FOSSIL, MtMoon_B2F_EventScript_ShowHelixFossil
-	call MtMoon_B2F_AnthologyOnTransition
+	call MtMoon_B2F_MosaicOnTransition
 	end
 
 MtMoon_B2F_EventScript_ShowDomeFossil::
@@ -242,31 +242,31 @@ MtMoon_B2F_Text_JessieJamesBlastOff:
 	.string "agaaain!$"
 
 // Giratina waits in Mt. Moon's remote cave after both creation siblings are caught.
-MtMoon_B2F_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, MtMoon_B2F_AnthologyRandomOnTransition
+MtMoon_B2F_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, MtMoon_B2F_MosaicRandomOnTransition
 	getcaughtmon SPECIES_DIALGA
-	goto_if_ne VAR_RESULT, TRUE, MtMoon_B2F_AnthologyHideGiratina
+	goto_if_ne VAR_RESULT, TRUE, MtMoon_B2F_MosaicHideGiratina
 	getcaughtmon SPECIES_PALKIA
-	goto_if_ne VAR_RESULT, TRUE, MtMoon_B2F_AnthologyHideGiratina
+	goto_if_ne VAR_RESULT, TRUE, MtMoon_B2F_MosaicHideGiratina
 	getcaughtmon SPECIES_GIRATINA
-	call_if_eq VAR_RESULT, TRUE, MtMoon_B2F_AnthologyHideGiratina
-	call_if_ne VAR_RESULT, TRUE, MtMoon_B2F_AnthologyShowGiratina
+	call_if_eq VAR_RESULT, TRUE, MtMoon_B2F_MosaicHideGiratina
+	call_if_ne VAR_RESULT, TRUE, MtMoon_B2F_MosaicShowGiratina
 	return
 
-MtMoon_B2F_AnthologyRandomOnTransition::
-	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_DIALGA, MtMoon_B2F_AnthologyHideGiratina
-	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_PALKIA, MtMoon_B2F_AnthologyHideGiratina
-	call_if_set FLAG_CAUGHT_RANDOM_MTMOON_GIRATINA, MtMoon_B2F_AnthologyHideGiratina
-	call_if_unset FLAG_CAUGHT_RANDOM_MTMOON_GIRATINA, MtMoon_B2F_AnthologyShowGiratina
+MtMoon_B2F_MosaicRandomOnTransition::
+	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_DIALGA, MtMoon_B2F_MosaicHideGiratina
+	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_PALKIA, MtMoon_B2F_MosaicHideGiratina
+	call_if_set FLAG_CAUGHT_RANDOM_MTMOON_GIRATINA, MtMoon_B2F_MosaicHideGiratina
+	call_if_unset FLAG_CAUGHT_RANDOM_MTMOON_GIRATINA, MtMoon_B2F_MosaicShowGiratina
 	return
 
-MtMoon_B2F_AnthologyHideGiratina::
-	setflag FLAG_HIDE_ANTHOLOGY_GIRATINA
+MtMoon_B2F_MosaicHideGiratina::
+	setflag FLAG_HIDE_MOSAIC_GIRATINA
 	return
 
-MtMoon_B2F_AnthologyShowGiratina::
-	clearflag FLAG_HIDE_ANTHOLOGY_GIRATINA
+MtMoon_B2F_MosaicShowGiratina::
+	clearflag FLAG_HIDE_MOSAIC_GIRATINA
 	return
 
 MtMoon_B2F_EventScript_Giratina::
@@ -278,26 +278,26 @@ MtMoon_B2F_EventScript_Giratina::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MtMoon_B2F_AnthologyGiratinaRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MtMoon_B2F_AnthologyGiratinaRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtMoon_B2F_AnthologyGiratinaCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtMoon_B2F_AnthologyGiratinaResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MtMoon_B2F_MosaicGiratinaRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MtMoon_B2F_MosaicGiratinaRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtMoon_B2F_MosaicGiratinaCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtMoon_B2F_MosaicGiratinaResolved
 	release
 	end
 
-MtMoon_B2F_AnthologyGiratinaCaught::
+MtMoon_B2F_MosaicGiratinaCaught::
 	setflag FLAG_CAUGHT_RANDOM_MTMOON_GIRATINA
-	goto MtMoon_B2F_AnthologyGiratinaResolved
+	goto MtMoon_B2F_MosaicGiratinaResolved
 
-MtMoon_B2F_AnthologyGiratinaResolved::
+MtMoon_B2F_MosaicGiratinaResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_GIRATINA
-	setflag FLAG_HIDE_ANTHOLOGY_GIRATINA
+	removeobject LOCALID_MOSAIC_GIRATINA
+	setflag FLAG_HIDE_MOSAIC_GIRATINA
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-MtMoon_B2F_AnthologyGiratinaRetreated::
+MtMoon_B2F_MosaicGiratinaRetreated::
 	release
 	end
 

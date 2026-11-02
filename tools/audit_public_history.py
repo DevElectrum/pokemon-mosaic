@@ -70,7 +70,7 @@ def main():
                            "graphics","sound","include","native",".github"):
                 top="(other)"
             origin=("inherited" if oid in baseline_objects
-                    else "anthology_or_unknown")
+                    else "mosaic_or_unknown")
             summaries[key]=(top, size, origin, detail)
     proc=subprocess.Popen(["git","cat-file","--batch"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,bufsize=1048576)
     assert proc.stdin and proc.stdout

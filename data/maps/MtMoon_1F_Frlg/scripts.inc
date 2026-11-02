@@ -4,7 +4,7 @@ MtMoon_1F_Frlg_MapScripts::
 
 MtMoon_1F_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_MT_MOON_1F
-	call MtMoon_1F_AnthologyOnTransition
+	call MtMoon_1F_MosaicOnTransition
 	end
 
 MtMoon_1F_EventScript_ZubatSign::
@@ -141,17 +141,17 @@ MtMoon_1F_Text_BrockHelpsExcavateFossils::
 
 
 // Restore uncaught statics on entry; let the original map scripts run.
-MtMoon_1F_AnthologyOnTransition::
-	call_if_set FLAG_CAUGHT_ANTHOLOGY_COSMOG_MOON, MtMoon_1F_AnthologyHideCosmogMoon
-	call_if_unset FLAG_CAUGHT_ANTHOLOGY_COSMOG_MOON, MtMoon_1F_AnthologyShowCosmogMoon
+MtMoon_1F_MosaicOnTransition::
+	call_if_set FLAG_CAUGHT_MOSAIC_COSMOG_MOON, MtMoon_1F_MosaicHideCosmogMoon
+	call_if_unset FLAG_CAUGHT_MOSAIC_COSMOG_MOON, MtMoon_1F_MosaicShowCosmogMoon
 	return
 
-MtMoon_1F_AnthologyHideCosmogMoon::
-	setflag FLAG_HIDE_ANTHOLOGY_COSMOG_MOON
+MtMoon_1F_MosaicHideCosmogMoon::
+	setflag FLAG_HIDE_MOSAIC_COSMOG_MOON
 	return
 
-MtMoon_1F_AnthologyShowCosmogMoon::
-	clearflag FLAG_HIDE_ANTHOLOGY_COSMOG_MOON
+MtMoon_1F_MosaicShowCosmogMoon::
+	clearflag FLAG_HIDE_MOSAIC_COSMOG_MOON
 	return
 
 // Caught: permanently gone. Fainted: returns on re-entry. Run: stays here.
@@ -164,26 +164,26 @@ MtMoon_1F_EventScript_CosmogMoon::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MtMoon_1F_AnthologyCosmogMoonRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MtMoon_1F_AnthologyCosmogMoonRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtMoon_1F_AnthologyCosmogMoonCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtMoon_1F_AnthologyCosmogMoonResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MtMoon_1F_MosaicCosmogMoonRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MtMoon_1F_MosaicCosmogMoonRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtMoon_1F_MosaicCosmogMoonCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtMoon_1F_MosaicCosmogMoonResolved
 	release
 	end
 
-MtMoon_1F_AnthologyCosmogMoonCaught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_COSMOG_MOON
-	goto MtMoon_1F_AnthologyCosmogMoonResolved
+MtMoon_1F_MosaicCosmogMoonCaught::
+	setflag FLAG_CAUGHT_MOSAIC_COSMOG_MOON
+	goto MtMoon_1F_MosaicCosmogMoonResolved
 
-MtMoon_1F_AnthologyCosmogMoonResolved::
+MtMoon_1F_MosaicCosmogMoonResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_COSMOG_MOON
-	setflag FLAG_HIDE_ANTHOLOGY_COSMOG_MOON
+	removeobject LOCALID_MOSAIC_COSMOG_MOON
+	setflag FLAG_HIDE_MOSAIC_COSMOG_MOON
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-MtMoon_1F_AnthologyCosmogMoonRetreated::
+MtMoon_1F_MosaicCosmogMoonRetreated::
 	release
 	end
 

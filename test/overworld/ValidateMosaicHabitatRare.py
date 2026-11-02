@@ -3,7 +3,7 @@
 from pathlib import Path
 root = Path(__file__).resolve().parents[2]
 wild = (root / "src/wild_encounter.c").read_text()
-rare_catalog = (root / "src/data/anthology_rare_habitats.h").read_text()
+rare_catalog = (root / "src/data/mosaic_rare_habitats.h").read_text()
 wild += "\\n" + rare_catalog
 dex = (root / "src/dexnav.c").read_text()
 placements = {
@@ -33,8 +33,8 @@ for text in (
     "WorldIsNaturalDiscoverySpecies(rare)"):
     assert text in wild
 for text in (
-    "AnthologyGetRareHabitatSpecies(WILD_AREA_LAND, info)",
-    "AnthologyGetRareHabitatSpecies(WILD_AREA_LAND, landMonsInfo)",
+    "MosaicGetRareHabitatSpecies(WILD_AREA_LAND, info)",
+    "MosaicGetRareHabitatSpecies(WILD_AREA_LAND, landMonsInfo)",
     "grassIndex < NUM_LAND_MONS_ENCOUNTER_SLOTS"):
     assert text in dex
 print("P0 rare habitat: original 21 priority placements, shared DexNav guards PASS")
@@ -75,7 +75,7 @@ assert "max = landMonsInfo->wildPokemon[0].maxLevel;" in dex
 
 # Extra natural habitats share DexNav's genuine land capacity, native level,
 # Safari/frontier/randomizer guard and source maps without replacing originals.
-extra_text = (root / "src/data/anthology_extra_habitats.h").read_text()
+extra_text = (root / "src/data/mosaic_extra_habitats.h").read_text()
 extra = re.findall(r"^ECOLOGY_ON_MAP\((MAP_[A-Z0-9_]+), ([A-Z0-9_]+)\)$", extra_text, re.M)
 assert len(extra) == 308, (len(extra), "lost or unexpected habitat entries")
 for forbidden in (("MAP_ROUTE22", "ZAPDOS_GALAR"),
@@ -207,13 +207,13 @@ for map_name, mon in extra:
         native = {x["species"] for x in section["mons"]}
         assert f"SPECIES_{mon}" not in native, (map_name, mon, "native duplicate")
         assert len(native) + 1 + extra_counts[map_name] <= 12, (map_name, "DexNav overflow")
-for token in ("AnthologyGetExtraHabitatSpecies(WILD_AREA_LAND, info, i)",
-              "AnthologyGetExtraHabitatSpecies(WILD_AREA_LAND, landMonsInfo, i)",
-              "ANTHOLOGY_EXTRA_HABITAT_SLOTS"):
+for token in ("MosaicGetExtraHabitatSpecies(WILD_AREA_LAND, info, i)",
+              "MosaicGetExtraHabitatSpecies(WILD_AREA_LAND, landMonsInfo, i)",
+              "MOSAIC_EXTRA_HABITAT_SLOTS"):
     assert token in dex, token
 assert "else if (extra != SPECIES_NONE)" in wild
-assert "ANTHOLOGY_EXTRA_HABITAT_SLOTS 4" in (root / "include/wild_encounter.h").read_text()
-assert "for (habitatSlot = 0; habitatSlot < ANTHOLOGY_EXTRA_HABITAT_SLOTS; habitatSlot++)" in wild
+assert "MOSAIC_EXTRA_HABITAT_SLOTS 4" in (root / "include/wild_encounter.h").read_text()
+assert "for (habitatSlot = 0; habitatSlot < MOSAIC_EXTRA_HABITAT_SLOTS; habitatSlot++)" in wild
 assert "Include the bonus entries in grass completion" in dex
 for mon in ("BURMY_TRASH", "COTTONEE", "SHELMET", "FARFETCHD_GALAR",
             "SCATTERBUG_RIVER", "SQUAWKABILLY_BLUE", "FLABEBE_YELLOW"):
@@ -223,10 +223,10 @@ print(f"P0 supplemental ecology: {len(extra)} map-species entries, ten pre-Champ
 # Regional Pokédex area mapping uses the same pure map lookup as the natural
 # encounter catalog rather than mutating the save's live region/map coordinates.
 area_screen = (root / "src/pokedex_area_screen.c").read_text()
-assert "AnthologyMapHasHabitatSpecies(header->mapGroup, header->mapNum" in area_screen
+assert "MosaicMapHasHabitatSpecies(header->mapGroup, header->mapNum" in area_screen
 assert "MapHasSpecies(header, headerSectionId, species)" in area_screen
-assert '#include "data/anthology_rare_habitats.h"' in wild
-assert "gSaveBlock1Ptr->location.mapGroup =" not in wild.split("bool8 AnthologyMapHasHabitatSpecies(")[1].split("void CreateWildMon(enum Species species, u8 level)")[0]
+assert '#include "data/mosaic_rare_habitats.h"' in wild
+assert "gSaveBlock1Ptr->location.mapGroup =" not in wild.split("bool8 MosaicMapHasHabitatSpecies(")[1].split("void CreateWildMon(enum Species species, u8 level)")[0]
 print("P0 regional Pokédex area mapping: native+170 curated+extra habitats guarded")
 
 # C preprocessor macro continuations must end with one backslash, never
@@ -240,7 +240,7 @@ assert all(line.endswith(chr(92)) and not line.endswith(chr(92) * 2)
 
 # Aquatic P0: water and fishing are separate, source-audited and reachable
 # without champion flags or replacing canonical encounters.
-aquatic_catalog = (root / "src/data/anthology_aquatic_habitats.h").read_text()
+aquatic_catalog = (root / "src/data/mosaic_aquatic_habitats.h").read_text()
 aquatic = re.findall(r"^AQUATIC_ON_MAP\((MAP_[A-Z0-9_]+), (WATER|FISHING), ([A-Z0-9_]+)\)$", aquatic_catalog, re.M)
 assert len(aquatic) == 81, len(aquatic)
 assert sum(kind == "WATER" for _, kind, _ in aquatic) == 59
@@ -255,12 +255,12 @@ for loc, kind, mon in aquatic:
         assert f"SPECIES_{mon}" not in native, (loc, kind, mon, "duplicate native")
         if kind == "WATER":
             assert len(set(native)) < 5, (loc, "DexNav Surf icon capacity")
-assert "AnthologyGetAquaticHabitatSpecies(area, wildMonInfo)" in wild
-assert "AnthologyGetAquaticHabitatSpecies(WILD_AREA_FISHING, wildMonInfo)" in wild
-assert "AnthologyGetAquaticHabitatSpecies(WILD_AREA_WATER, waterMonsInfo)" in dex
-assert "AnthologyGetAquaticHabitatSpecies(WILD_AREA_WATER, info)" in dex
-assert "AnthologyMapHasAquaticHabitatSpecies(header->mapGroup, header->mapNum, WILD_AREA_WATER" in area_screen
-assert "AnthologyMapHasAquaticHabitatSpecies(header->mapGroup, header->mapNum, WILD_AREA_FISHING" in area_screen
+assert "MosaicGetAquaticHabitatSpecies(area, wildMonInfo)" in wild
+assert "MosaicGetAquaticHabitatSpecies(WILD_AREA_FISHING, wildMonInfo)" in wild
+assert "MosaicGetAquaticHabitatSpecies(WILD_AREA_WATER, waterMonsInfo)" in dex
+assert "MosaicGetAquaticHabitatSpecies(WILD_AREA_WATER, info)" in dex
+assert "MosaicMapHasAquaticHabitatSpecies(header->mapGroup, header->mapNum, WILD_AREA_WATER" in area_screen
+assert "MosaicMapHasAquaticHabitatSpecies(header->mapGroup, header->mapNum, WILD_AREA_FISHING" in area_screen
 assert "|| useAquatic) ? 0 : wildMonIndex" in wild
 assert "Random() % 100 < 3" in wild
 assert ("MAP_ROUTE20", "WATER", "LAPRAS") in aquatic
@@ -349,11 +349,11 @@ print("P0 Diancie: original map warp source and manually accepted gameplay recor
 rock_script = (root / 'data/scripts/field_move_scripts.inc').read_text()
 lab = (root / 'data/maps/RustboroCity_DevonCorp_2F/scripts.inc').read_text()
 rock_code = (root / 'src/wild_encounter.c').read_text()
-assert 'static const enum Item sAnthologyExcavationFossils[]' in rock_code
+assert 'static const enum Item sMosaicExcavationFossils[]' in rock_code
 assert 'Random() % 100 < 12' in rock_code
 assert 'if (AddBagItem(fossil, 1))' in rock_code
 assert 'gSpecialVar_0x8004 = ITEM_NONE;' in rock_code
-assert 'EventScript_AnthologyCheckExcavatedFossil::' in rock_script
+assert 'EventScript_MosaicCheckExcavatedFossil::' in rock_script
 assert 'bufferitemname STR_VAR_1, VAR_0x8004' in rock_script
 assert 'goto_if_eq VAR_RESULT, MON_CANT_GIVE, Common_EventScript_NoMoreRoomForPokemon' in lab
 assert lab.index('givemon VAR_TEMP_TRANSFERRED_SPECIES, 20') < lab.index('removeitem VAR_TEMP_1')
@@ -361,16 +361,16 @@ for item, mon in [["SKULL_FOSSIL","CRANIDOS"],["ARMOR_FOSSIL","SHIELDON"],["COVE
     assert f'ITEM_{item}' in rock_code and f'ITEM_{item}' in lab and f'SPECIES_{mon}' in lab
 for left, right, mon in [["FOSSILIZED_BIRD","FOSSILIZED_DRAKE","DRACOZOLT"],["FOSSILIZED_BIRD","FOSSILIZED_DINO","ARCTOZOLT"],["FOSSILIZED_FISH","FOSSILIZED_DRAKE","DRACOVISH"],["FOSSILIZED_FISH","FOSSILIZED_DINO","ARCTOVISH"]]:
     assert f'ITEM_{left}' in rock_code and f'ITEM_{right}' in rock_code
-    assert f'EventScript_Anthology_{mon}::' in lab and f'SPECIES_{mon}' in lab
+    assert f'EventScript_Mosaic_{mon}::' in lab and f'SPECIES_{mon}' in lab
 print('P0 Rock Smash excavations + ten ancient fossil restorations: source contracts PASS')
 
 # P0 static priority repair: replace the two grass-only rare "legendary"
 # placements with real, repeatable-until-caught field objects.
 import json
 static_sites = (
-    ("GraniteCave_StevensRoom", "DIANCIE", "CARBINK", "FLAG_HIDE_ANTHOLOGY_DIANCIE",
+    ("GraniteCave_StevensRoom", "DIANCIE", "CARBINK", "FLAG_HIDE_MOSAIC_DIANCIE",
      "FLAG_DELIVERED_STEVEN_LETTER"),
-    ("ShoalCave_LowTideIceRoom", "GLASTRIER", "SNOM", "FLAG_HIDE_ANTHOLOGY_GLASTRIER", None),
+    ("ShoalCave_LowTideIceRoom", "GLASTRIER", "SNOM", "FLAG_HIDE_MOSAIC_GLASTRIER", None),
 )
 for site, mon, ordinary, hide, gate in static_sites:
     here = json.loads((root / "data/maps" / site / "map.json").read_text())
@@ -392,7 +392,7 @@ for site, mon, ordinary, hide, gate in static_sites:
                                             if "RARE_ON_MAP(MAP_GRANITE_CAVE_STEVENS_ROOM" in line
                                             or "RARE_ON_MAP(MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM" in line)
 for mon in ("DIANCIE", "GLASTRIER"):
-    assert "FLAG_HIDE_ANTHOLOGY_" + mon in (root / "include/constants/flags.h").read_text()
+    assert "FLAG_HIDE_MOSAIC_" + mon in (root / "include/constants/flags.h").read_text()
 assert "RARE_ON_MAP(MAP_GRANITE_CAVE_STEVENS_ROOM, CARBINK)" in rare_catalog
 assert "RARE_ON_MAP(MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SNOM)" in rare_catalog
 print("P0 Diancie/Glastrier: persistent statics until caught, originals and DexNav ecology retained PASS")
@@ -411,15 +411,15 @@ for layout, width, height, x, y, expected in (
     tile, = struct.unpack_from("<H", raw, 2 * (y * width + x))
     assert tile == expected and (tile >> 12) == 3, (layout, hex(tile))
     objs = json.loads((root / "data/maps" / layout / "map.json").read_text())["object_events"]
-    local_id = ("LOCALID_ANTHOLOGY_DIANCIE" if layout == "GraniteCave_StevensRoom"
-                else "LOCALID_ANTHOLOGY_GLASTRIER")
+    local_id = ("LOCALID_MOSAIC_DIANCIE" if layout == "GraniteCave_StevensRoom"
+                else "LOCALID_MOSAIC_GLASTRIER")
     obj = next(obj for obj in objs if obj.get("local_id") == local_id)
     assert (obj["x"], obj["y"], obj["elevation"]) == (x, y, 3), layout
 print("P0 cave statics: real collision/elevation tilemap coordinates PASS")
 
 # P0 further mythical statics: source checks and real layout collision data.
 # These checks do not certify in-emulator catch/faint/re-entry or save behavior.
-import struct as _anthology_struct
+import struct as _mosaic_struct
 _p0_new_statics = (
 ("PowerPlant_Frlg","PowerPlant","TapuKoko","TAPU_KOKO",8,12,"TAPU_KOKO",False),
 ("PowerPlant_Frlg","PowerPlant","Zeraora","ZERAORA",37,11,"ZERAORA",False),
@@ -519,7 +519,7 @@ for _dir,_prefix,_n,_species,_x,_y,_suffix,_multiple in _p0_new_statics:
     def _open_tile(xx, yy):
         if not (0 <= xx < _w and 0 <= yy < _h):
             return False
-        _v = _anthology_struct.unpack_from("<H", _raw, 2 * (yy * _w + xx))[0]
+        _v = _mosaic_struct.unpack_from("<H", _raw, 2 * (yy * _w + xx))[0]
         return _v >> 12 == 3 and ((_v >> 10) & 3) == 0
     _occupied = {(ob["x"], ob["y"]) for ob in _m["object_events"] if ob.get("script") != f"{_prefix}_EventScript_{_n}"}
     _occupied.update((ob["x"], ob["y"]) for ob in _m["warp_events"])
@@ -547,7 +547,7 @@ for _dd, _anchor in (("Route119", (18,139)), ("Route120", (0,27))):
     def _on_route(xx,yy):
         if not (0<=xx<_w and 0<=yy<_h):
             return False
-        val = _anthology_struct.unpack_from("<H", _raw, 2*(yy*_w+xx))[0]
+        val = _mosaic_struct.unpack_from("<H", _raw, 2*(yy*_w+xx))[0]
         return val>>12 == 3 and ((val>>10)&3) == 0
     _reach=set()
     _pending=[_anchor]
@@ -574,18 +574,18 @@ for _dir,_p,_n,_species,_x,_y,_suffix,_multiple in _p0_new_statics:
     _found=[o for o in _m["object_events"] if o.get("script")==f"{_p}_EventScript_{_n}"]
     assert len(_found)==1, (_dir,_n)
     _obj=_found[0]
-    _hide="FLAG_HIDE_ANTHOLOGY_"+_suffix
+    _hide="FLAG_HIDE_MOSAIC_"+_suffix
     assert (_obj["x"],_obj["y"],_obj["elevation"])==(_x,_y,3)
     assert _obj["graphics_id"]==f"OBJ_EVENT_GFX_SPECIES({_species})"
-    assert _obj["local_id"]=="LOCALID_ANTHOLOGY_"+_suffix and _obj["flag"]==_hide
+    assert _obj["local_id"]=="LOCALID_MOSAIC_"+_suffix and _obj["flag"]==_hide
     assert "#define "+_hide+" " in _p0_flags
     _transition_hooks = (
-        f"{_p}_AnthologyOnTransition",
+        f"{_p}_MosaicOnTransition",
         f"{_p}_BigBatchOnTransition",
         f"{_p}_SecondBatchOnTransition",
-        f"{_p}_AnthologyFieldTransition",
+        f"{_p}_MosaicFieldTransition",
         f"{_p}_PreLeagueOnTransition",
-        f"{_p}_AnthologyHuntTransition",
+        f"{_p}_MosaicHuntTransition",
         f"{_p}_{_n}Transition",
         f"{_p}_{_n}OnTransition",  # e.g. Route44_TornadusOnTransition
     )
@@ -602,19 +602,19 @@ for _dir,_p,_n,_species,_x,_y,_suffix,_multiple in _p0_new_statics:
         assert "call Route44_TornadusOnTransition" in _route44_entry
         assert "Route44_TornadusOnTransition::" in _script
 
-    _part=_script.split(f"{_p}_EventScript_{_n}::")[1].split(f"{_p}_Anthology{_n}Retreated::")[0].split(f"{_p}_BigBatch{_n}Retreated::")[0].split(f"{_p}_SecondBatch{_n}Retreated::")[0].split(f"{_p}_Field{_n}Retreated::")[0]
+    _part=_script.split(f"{_p}_EventScript_{_n}::")[1].split(f"{_p}_Mosaic{_n}Retreated::")[0].split(f"{_p}_BigBatch{_n}Retreated::")[0].split(f"{_p}_SecondBatch{_n}Retreated::")[0].split(f"{_p}_Field{_n}Retreated::")[0]
     if _dir == "PokemonMansion_1F_Frlg" and _n == "Mew":
         # Mew is now a three-disguise endurance gauntlet followed by a
         # catch-only final battle, not the old one-battle seteventmon.
         for _token in ("MewGauntletRollDisguises", "MewGauntletPrepareBattle",
                        "BattleSetup_StartMewGauntletBattle", "GetBattleOutcome",
                        "B_OUTCOME_WON", "B_OUTCOME_CAUGHT",
-                       "goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_AnthologyMewResolved",
+                       "goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_MosaicMewResolved",
                        "removeobject "+_obj["local_id"], "setflag "+_hide):
             assert _token in _part, (_dir,_n,_token)
         assert _part.count("special BattleSetup_StartMewGauntletBattle") == 4
         assert _part.count("goto_if_ne VAR_RESULT, B_OUTCOME_WON") == 3
-        assert "goto_if_eq VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_AnthologyMewResolved" not in _part
+        assert "goto_if_eq VAR_RESULT, B_OUTCOME_WON, PokemonMansion_1F_MosaicMewResolved" not in _part
         assert "BATTLE_TYPE_MEW_DISGUISE" in (root/"src/battle_setup.c").read_text()
         assert "BATTLE_TYPE_MEW_DISGUISE" in (root/"src/item_use.c").read_text()
     else:
@@ -624,22 +624,22 @@ for _dir,_p,_n,_species,_x,_y,_suffix,_multiple in _p0_new_statics:
                        "removeobject "+_obj["local_id"],"setflag "+_hide):
             assert _token in _part, (_dir,_n,_token)
     if _multiple:
-        _claimed="FLAG_CAUGHT_ANTHOLOGY_"+_suffix
+        _claimed="FLAG_CAUGHT_MOSAIC_"+_suffix
         assert "#define "+_claimed+" " in _p0_flags
         assert f"call_if_set {_claimed}" in _script and f"call_if_unset {_claimed}" in _script
         assert "setflag "+_claimed in _part and f"getcaughtmon SPECIES_{_species}" not in _script
     elif _dir == "Route114" and _n == "Terapagos":
         # Normal and permanent Stellar Terapagos now have independent catch flags.
-        assert "FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_NORMAL" in _script
-        assert "goto_if_set FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_NORMAL" in _script
-        assert "setflag FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_NORMAL" in _part
+        assert "FLAG_CAUGHT_MOSAIC_TERAPAGOS_NORMAL" in _script
+        assert "goto_if_set FLAG_CAUGHT_MOSAIC_TERAPAGOS_NORMAL" in _script
+        assert "setflag FLAG_CAUGHT_MOSAIC_TERAPAGOS_NORMAL" in _part
     elif _dir == "PokemonMansion_1F_Frlg" and _n == "Mew":
         # Randomizing locations must not despawn the Mansion encounter just
         # because the player caught a Mew somewhere else.
         assert "getcaughtmon SPECIES_MEW" not in _script
         assert "special MewGauntletShouldRun" in _part
         assert "goto_if_eq VAR_RESULT, FALSE, PokemonMansion_1F_RandomizedMewStatic" in _part
-        assert "setflag FLAG_HIDE_ANTHOLOGY_MEW" in _script
+        assert "setflag FLAG_HIDE_MOSAIC_MEW" in _script
     else:
         assert "getcaughtmon SPECIES_"+_species in _script
     _lay=_p0_layouts[_m["layout"]]
@@ -648,7 +648,7 @@ for _dir,_p,_n,_species,_x,_y,_suffix,_multiple in _p0_new_statics:
     _buf=(root/_lay["blockdata_filepath"]).read_bytes()
     assert len(_buf)==2*_w*_h
     def _tile(xx,yy):
-        return _anthology_struct.unpack_from("<H",_buf,2*(yy*_w+xx))[0]
+        return _mosaic_struct.unpack_from("<H",_buf,2*(yy*_w+xx))[0]
     _v=_tile(_x,_y)
     assert _v>>12==3 and ((_v>>10)&3)==0, (_dir,_n,hex(_v))
     assert sum((_tile(_x+dx,_y+dy)>>12)==3 and ((_tile(_x+dx,_y+dy)>>10)&3)==0
@@ -686,7 +686,7 @@ for _dir,_p,_n,_species,_x,_y,_suffix,_multiple in _p0_new_statics:
             def _vfree(pos):
                 xx,yy=pos
                 if not(0<=xx<_w and 0<=yy<_h): return False
-                val=_anthology_struct.unpack_from("<H",_vbuf,2*(yy*_w+xx))[0]
+                val=_mosaic_struct.unpack_from("<H",_vbuf,2*(yy*_w+xx))[0]
                 return val>>12==3 and ((val>>10)&3)==0
             _seen=set()
             _todo=[(20,8)]
@@ -708,7 +708,7 @@ for _dir,_p,_n,_species,_x,_y,_suffix,_multiple in _p0_new_statics:
         def _land(p):
             xx,yy=p
             if not (0<=xx<_w and 0<=yy<_h): return False
-            raw=_anthology_struct.unpack_from("<H",_buf,2*(yy*_w+xx))[0]
+            raw=_mosaic_struct.unpack_from("<H",_buf,2*(yy*_w+xx))[0]
             return raw>>12==3 and ((raw>>10)&3)==0
         assert _land(_start), ("bad route entrance",_dir,_start)
         _visited=set()
@@ -758,7 +758,7 @@ for _jmap in ("Route38","Route39","Route40","Route42","Route48","RuinsOfAlph_Out
     assert len(_jb)==2*_jw*_jh
     def _jopen(x,y):
         if not(0<=x<_jw and 0<=y<_jh): return False
-        v=_anthology_struct.unpack_from("<H",_jb,2*(y*_jw+x))[0]
+        v=_mosaic_struct.unpack_from("<H",_jb,2*(y*_jw+x))[0]
         return v>>12==3 and ((v>>10)&3)==0
     _q=[(x,y) for y in range(_jh) for x in range(_jw)
         if (x in (0,_jw-1) or y in (0,_jh-1)) and _jopen(x,y)]
@@ -781,7 +781,7 @@ for _km in ("RockTunnel_B1F_Frlg","PokemonMansion_1F_Frlg","IndigoPlateau_Exteri
     assert len(_raw)==2*_w*_h
     def _walk(x,y):
         if not(0<=x<_w and 0<=y<_h): return False
-        v=_anthology_struct.unpack_from("<H",_raw,2*(y*_w+x))[0]
+        v=_mosaic_struct.unpack_from("<H",_raw,2*(y*_w+x))[0]
         return v>>12==3 and ((v>>10)&3)==0
     _todo=[(x,y) for y in range(_h) for x in range(_w)
            if (x==0 or y==0 or x==_w-1 or y==_h-1) and _walk(x,y)]
@@ -804,7 +804,7 @@ for _loc in ("Route44","GoldenrodCity","BurnedTower_1F","GraniteCave_B2F","Route
     assert len(_buf)==2*_w*_h
     def _open(x,y):
         if not(0<=x<_w and 0<=y<_h): return False
-        value=_anthology_struct.unpack_from("<H",_buf,2*(y*_w+x))[0]
+        value=_mosaic_struct.unpack_from("<H",_buf,2*(y*_w+x))[0]
         return value>>12==3 and ((value>>10)&3)==0
     _todo=[(x,y) for y in range(_h) for x in range(_w)
            if (x==0 or y==0 or x==_w-1 or y==_h-1) and _open(x,y)]
@@ -878,7 +878,7 @@ for _d in ("Route38","Route40","BurnedTower_1F","Route43","Route46","Route35"):
     assert len(_b)==2*_w*_h
     def _canwalk(x,y):
         if not(0<=x<_w and 0<=y<_h): return False
-        v=_anthology_struct.unpack_from("<H",_b,2*(y*_w+x))[0]
+        v=_mosaic_struct.unpack_from("<H",_b,2*(y*_w+x))[0]
         return v>>12==3 and ((v>>10)&3)==0
     _todo=[(x,y) for y in range(_h) for x in range(_w)
            if (x in (0,_w-1) or y in (0,_h-1)) and _canwalk(x,y)]
@@ -918,7 +918,7 @@ for _dir,_p,_n,_species,_x,_y,_suffix,_multiple in _p0_new_statics:
         _w,_h=_l["width"],_l["height"]
         _b=(root/_l["blockdata_filepath"]).read_bytes()
         assert len(_b)==2*_w*_h
-        _raw=_anthology_struct.unpack_from("<H",_b,2*(_y*_w+_x))[0]
+        _raw=_mosaic_struct.unpack_from("<H",_b,2*(_y*_w+_x))[0]
         assert _raw>>12==3 and ((_raw>>10)&3)==0
         assert not any(o["x"]==_x and o["y"]==_y for o in _m["coord_events"]+_m["warp_events"])
         if _species=="KYOGRE":
@@ -1077,18 +1077,18 @@ print("P0 #950 Klawf: pre-Champion Route 115 relocation plus excluded Steven's C
 # Approved optional Legendary prerequisites are checked on each map entry;
 # caught Dex bits matter, not whether the Pokémon is still in the party.
 _regi = (root / "data/maps/RockTunnel_B1F_Frlg/scripts.inc").read_text()
-_regi_gate = _regi.split("RockTunnel_B1F_AnthologyOnTransition::")[1].split("RockTunnel_B1F_AnthologyOtherStatics::")[0]
+_regi_gate = _regi.split("RockTunnel_B1F_MosaicOnTransition::")[1].split("RockTunnel_B1F_MosaicOtherStatics::")[0]
 for _name in ("REGIROCK", "REGICE", "REGISTEEL"):
     assert "getcaughtmon SPECIES_" + _name in _regi_gate
-assert "RockTunnel_B1F_AnthologyRegigigasLocked::" in _regi_gate
-assert "setflag FLAG_HIDE_ANTHOLOGY_REGIGIGAS" in _regi_gate
+assert "RockTunnel_B1F_MosaicRegigigasLocked::" in _regi_gate
+assert "setflag FLAG_HIDE_MOSAIC_REGIGIGAS" in _regi_gate
 
 _arceus = (root / "data/maps/IndigoPlateau_Exterior_Frlg/scripts.inc").read_text()
-_arceus_gate = _arceus.split("IndigoPlateau_Exterior_AnthologyOnTransition::")[1].split("IndigoPlateau_Exterior_AnthologyHideArceus::")[0]
+_arceus_gate = _arceus.split("IndigoPlateau_Exterior_MosaicOnTransition::")[1].split("IndigoPlateau_Exterior_MosaicHideArceus::")[0]
 assert "goto_if_unset FLAG_KANTO_CHAMPION" in _arceus_gate
 for _name in ("DIALGA", "PALKIA", "GIRATINA"):
     assert "getcaughtmon SPECIES_" + _name in _arceus_gate
-    assert "goto_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_AnthologyHideArceus" in _arceus_gate
+    assert "goto_if_ne VAR_RESULT, TRUE, IndigoPlateau_Exterior_MosaicHideArceus" in _arceus_gate
 
 _diancie = (root / "data/maps/GraniteCave_StevensRoom/scripts.inc").read_text()
 _diancie_transition = _diancie.split("GraniteCave_StevensRoom_OnTransition::")[1].split("GraniteCave_StevensRoom_HideDiancie::")[0]
@@ -1104,14 +1104,14 @@ print("P0 approved legendary gates: Regis, creation trio, Kanto Champion, Dianci
 # before his battle, so checking it here would show Marshadow too early.
 _dojo = (root / "data/maps/SaffronCity_Dojo_Frlg/scripts.inc").read_text()
 assert "checktrainerflag TRAINER_BLACK_BELT_KOICHI" in _dojo
-assert "goto_if EQUAL, SaffronCity_Dojo_AnthologyMarshadowAfterMaster" in _dojo
-assert "call SaffronCity_Dojo_AnthologyRevealMarshadowNow" in _dojo
+assert "goto_if EQUAL, SaffronCity_Dojo_MosaicMarshadowAfterMaster" in _dojo
+assert "call SaffronCity_Dojo_MosaicRevealMarshadowNow" in _dojo
 assert "SaffronCity_Dojo_EventScript_HitmonleeBall::" in _dojo
 assert "SaffronCity_Dojo_EventScript_HitmonchanBall::" in _dojo
 assert "seteventmon SPECIES_MARSHADOW, 38" in _dojo
 _necro = (root / "data/maps/CeruleanCave_2F_Frlg/scripts.inc").read_text()
 assert "seteventmon SPECIES_NECROZMA, 65" in _necro
-assert "CeruleanCave_2F_AnthologyOnTransition::" in _necro
+assert "CeruleanCave_2F_MosaicOnTransition::" in _necro
 print("Kanto Dojo Marshadow requires true Koichi victory; Cerulean Cave Necrozma static PASS")
 
 # Prevent generated overworld wild Pokémon from filling enclosed cave rooms
@@ -1148,7 +1148,7 @@ _mblock = (root/_mlayout["blockdata_filepath"]).read_bytes()
 _mw,_mh = _mlayout["width"], _mlayout["height"]
 def _mtwalk(x,y):
     if not (0 <= x < _mw and 0 <= y < _mh): return False
-    v = _anthology_struct.unpack_from("<H", _mblock, 2*(y*_mw+x))[0]
+    v = _mosaic_struct.unpack_from("<H", _mblock, 2*(y*_mw+x))[0]
     return v >> 12 == 3 and ((v >> 10)&3) == 0
 _q=[(16,50)] # western Route 42 entrance
 _v=set()
@@ -1166,11 +1166,11 @@ print("P0 Johto Swords: four early/mid reachable statics, western Mt Mortar acce
 # A moved static must not leave dead transition labels or undefined call targets
 # behind on a former map; source-level checks run before the costly ROM link.
 _olivine = (root/"data/maps/OlivineCity_Lighthouse/scripts.inc").read_text()
-assert "OlivineCity_Lighthouse_AnthologyOnTransition::" in _olivine
+assert "OlivineCity_Lighthouse_MosaicOnTransition::" in _olivine
 assert "getcaughtmon SPECIES_REGIELEKI" in _olivine
 assert "FLAG_AMPHAROS_HEALED" in _olivine
-assert "OlivineCity_Lighthouse_AnthologyHideCobalion" not in _olivine
-assert "OlivineCity_Lighthouse_AnthologyShowCobalion" not in _olivine
+assert "OlivineCity_Lighthouse_MosaicHideCobalion" not in _olivine
+assert "OlivineCity_Lighthouse_MosaicShowCobalion" not in _olivine
 print("P0 relocated Cobalion: no dangling old-map event references PASS")
 
 # Permanent Hoenn side chambers: routes, exit links, and post-collapse access.

@@ -44,7 +44,7 @@ Build with the repository's toolchain and Lua-enabled mGBA described in [test/ov
 ```sh
 make modern TOOLCHAIN=/opt/devkitpro/devkitARM -j8
 python3 test/overworld/swsh-refresh/build_fixture.py --repo . \
-  --rom "$PWD/pokemonworld.gba" --elf "$PWD/pokemonworld.elf" \
+  --rom "$PWD/pokemon-mosaic.gba" --elf "$PWD/pokemon-mosaic.elf" \
   --source-ref "$(git rev-parse HEAD)" --out /tmp/swsh-fixture
 python3 test/overworld/visual-features/run_fixture.py --repo . \
   --fixture /tmp/swsh-fixture --suite test/overworld/swsh-refresh/capture.lua --out /tmp/swsh-capture

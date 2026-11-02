@@ -4,7 +4,7 @@ DarkCave_NorthSide_MapScripts::
 	.byte 0
 
 DarkCave_NorthSide_OnTransition:
-	call DarkCave_NorthSide_AnthologyOnTransition
+	call DarkCave_NorthSide_MosaicOnTransition
 	end
 
 DarkCave2_EventScript_Item_BlackFlute::
@@ -47,21 +47,21 @@ DarkCave2_Text_Nerd2:
     .string "BLACK-GLASSES ups the power of\n"
     .string "DARK-type moves.$"
 
-DarkCave_NorthSide_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, DarkCave_NorthSide_AnthologyRandomOnTransition
+DarkCave_NorthSide_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, DarkCave_NorthSide_MosaicRandomOnTransition
 	getcaughtmon SPECIES_ZEKROM
-	goto_if_eq VAR_RESULT, TRUE, DarkCave_NorthSide_AnthologyHideZekrom
-	clearflag FLAG_HIDE_ANTHOLOGY_ZEKROM
+	goto_if_eq VAR_RESULT, TRUE, DarkCave_NorthSide_MosaicHideZekrom
+	clearflag FLAG_HIDE_MOSAIC_ZEKROM
 	return
 
-DarkCave_NorthSide_AnthologyRandomOnTransition::
-	goto_if_set FLAG_CAUGHT_RANDOM_DARKCAVE_ZEKROM, DarkCave_NorthSide_AnthologyHideZekrom
-	clearflag FLAG_HIDE_ANTHOLOGY_ZEKROM
+DarkCave_NorthSide_MosaicRandomOnTransition::
+	goto_if_set FLAG_CAUGHT_RANDOM_DARKCAVE_ZEKROM, DarkCave_NorthSide_MosaicHideZekrom
+	clearflag FLAG_HIDE_MOSAIC_ZEKROM
 	return
 
-DarkCave_NorthSide_AnthologyHideZekrom::
-	setflag FLAG_HIDE_ANTHOLOGY_ZEKROM
+DarkCave_NorthSide_MosaicHideZekrom::
+	setflag FLAG_HIDE_MOSAIC_ZEKROM
 	return
 
 DarkCave_NorthSide_EventScript_Zekrom::
@@ -73,25 +73,25 @@ DarkCave_NorthSide_EventScript_Zekrom::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, DarkCave_NorthSide_AnthologyZekromRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, DarkCave_NorthSide_AnthologyZekromRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, DarkCave_NorthSide_AnthologyZekromResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, DarkCave_NorthSide_AnthologyZekromResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, DarkCave_NorthSide_MosaicZekromRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, DarkCave_NorthSide_MosaicZekromRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, DarkCave_NorthSide_MosaicZekromResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, DarkCave_NorthSide_MosaicZekromResolved
 	release
 	end
 
-DarkCave_NorthSide_AnthologyZekromResolvedRandomCaught::
+DarkCave_NorthSide_MosaicZekromResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_DARKCAVE_ZEKROM
-	goto DarkCave_NorthSide_AnthologyZekromResolved
+	goto DarkCave_NorthSide_MosaicZekromResolved
 
-DarkCave_NorthSide_AnthologyZekromResolved::
+DarkCave_NorthSide_MosaicZekromResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ZEKROM
-	setflag FLAG_HIDE_ANTHOLOGY_ZEKROM
+	removeobject LOCALID_MOSAIC_ZEKROM
+	setflag FLAG_HIDE_MOSAIC_ZEKROM
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-DarkCave_NorthSide_AnthologyZekromRetreated::
+DarkCave_NorthSide_MosaicZekromRetreated::
 	release
 	end

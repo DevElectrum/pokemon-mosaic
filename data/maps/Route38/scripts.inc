@@ -4,7 +4,7 @@ Route38_MapScripts::
 	.byte 0
 
 Route38_OnTransition:
-	call Route38_AnthologyFieldTransition
+	call Route38_MosaicFieldTransition
 	end
 
 Route38_EventScript_Toby::
@@ -158,18 +158,18 @@ Route38_Text_WaterSign:
 
 // New static acquisition flags are independent of original Johto plot events.
 // Optional new form or post-release roamer safety-net encounter.
-Route38_AnthologyFieldTransition::
-	call_if_set FLAG_CAUGHT_ANTHOLOGY_ZAPDOS_GALAR, Route38_FieldHideGalarianZapdos
-	call_if_unset FLAG_CAUGHT_ANTHOLOGY_ZAPDOS_GALAR, Route38_FieldShowGalarianZapdos
+Route38_MosaicFieldTransition::
+	call_if_set FLAG_CAUGHT_MOSAIC_ZAPDOS_GALAR, Route38_FieldHideGalarianZapdos
+	call_if_unset FLAG_CAUGHT_MOSAIC_ZAPDOS_GALAR, Route38_FieldShowGalarianZapdos
 	call Route38_FieldSyncRaikouReserve
 	return
 
 Route38_FieldHideGalarianZapdos::
-	setflag FLAG_HIDE_ANTHOLOGY_ZAPDOS_GALAR
+	setflag FLAG_HIDE_MOSAIC_ZAPDOS_GALAR
 	return
 
 Route38_FieldShowGalarianZapdos::
-	clearflag FLAG_HIDE_ANTHOLOGY_ZAPDOS_GALAR
+	clearflag FLAG_HIDE_MOSAIC_ZAPDOS_GALAR
 	return
 
 Route38_EventScript_GalarianZapdos::
@@ -189,13 +189,13 @@ Route38_EventScript_GalarianZapdos::
 	end
 
 Route38_FieldGalarianZapdosCaught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_ZAPDOS_GALAR
+	setflag FLAG_CAUGHT_MOSAIC_ZAPDOS_GALAR
 	goto Route38_FieldGalarianZapdosResolved
 
 Route38_FieldGalarianZapdosResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ZAPDOS_GALAR
-	setflag FLAG_HIDE_ANTHOLOGY_ZAPDOS_GALAR
+	removeobject LOCALID_MOSAIC_ZAPDOS_GALAR
+	setflag FLAG_HIDE_MOSAIC_ZAPDOS_GALAR
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -207,7 +207,7 @@ Route38_FieldGalarianZapdosRetreated::
 // Approved fixed Raikou encounter after the Burned Tower awakening.
 Route38_FieldSyncRaikouReserve::
 	goto_if_unset FLAG_RELEASED_BEASTS, Route38_FieldHideRaikouReserve
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route38_FieldSyncSeededRaikouReserve
 	getcaughtmon SPECIES_RAIKOU
 	goto_if_eq VAR_RESULT, TRUE, Route38_FieldHideRaikouReserve
@@ -218,11 +218,11 @@ Route38_FieldSyncSeededRaikouReserve::
 	goto Route38_FieldShowRaikouReserve
 
 Route38_FieldHideRaikouReserve::
-	setflag FLAG_HIDE_ANTHOLOGY_BEAST_RAIKOU
+	setflag FLAG_HIDE_MOSAIC_BEAST_RAIKOU
 	return
 
 Route38_FieldShowRaikouReserve::
-	clearflag FLAG_HIDE_ANTHOLOGY_BEAST_RAIKOU
+	clearflag FLAG_HIDE_MOSAIC_BEAST_RAIKOU
 	return
 
 Route38_EventScript_RaikouReserve::
@@ -242,7 +242,7 @@ Route38_EventScript_RaikouReserve::
 	end
 
 Route38_FieldRaikouReserveCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route38_MarkSeededRaikou
 	goto Route38_FieldRaikouReserveResolved
 
@@ -252,8 +252,8 @@ Route38_MarkSeededRaikou::
 
 Route38_FieldRaikouReserveResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_BEAST_RAIKOU
-	setflag FLAG_HIDE_ANTHOLOGY_BEAST_RAIKOU
+	removeobject LOCALID_MOSAIC_BEAST_RAIKOU
+	setflag FLAG_HIDE_MOSAIC_BEAST_RAIKOU
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

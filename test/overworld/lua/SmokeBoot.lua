@@ -3,7 +3,7 @@
 --
 -- Run against a THROWAWAY COPY — lib.new() now refuses anything not named Verify*/MigChk*/FixGen*,
 -- because this suite blind-presses A and Start and BizHawk flushes SaveRAM on exit:
---   cp <repo>\pokemonworld.gba  BizHawk\Verify1.gba
+--   cp <repo>\pokemon-mosaic.gba  BizHawk\Verify1.gba
 --   make symbols                          # symbols.lua is bound to the ROM; make -j12 alone won't
 --   EmuHawk.exe BizHawk\Verify1.gba --lua=<repo>\test\overworld\lua\SmokeBoot.lua
 --

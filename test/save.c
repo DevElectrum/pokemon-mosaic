@@ -53,7 +53,7 @@ static void WriteValidSlot1WithOddCounter(void)
 // automated layout tripwire protected nothing, and a permanently red suite meant the ~1,500
 // inherited battle tests gave no signal either. The values are now this fork's real sizes.
 //
-// Derived from `arm-none-eabi-nm --print-size pokemonworld.elf`, NOT hand-summed. Note that
+// Derived from `arm-none-eabi-nm --print-size pokemon-mosaic.elf`, NOT hand-summed. Note that
 // gSaveblock1/2 and gPokemonStorage are declared through the *ASLR wrappers (include/load_save.h),
 // which append u8 aslr[SAVEBLOCK_MOVE_RANGE] = 128 bytes, so subtract 128 from what nm reports for
 // those three. gSaveblock3 is a bare struct, so its nm size is exact.

@@ -24,7 +24,7 @@
 -- Verified to discriminate: without MigrateDeletedTwinMaps() both read back unchanged (19 and 11).
 --
 --   python3 test/overworld/MakeRenumberFixture.py
---   test/overworld/mgba-run.sh test/overworld/lua/VerifyMapRenumber.lua pokemonworld.gba \
+--   test/overworld/mgba-run.sh test/overworld/lua/VerifyMapRenumber.lua pokemon-mosaic.gba \
 --       test/overworld/lua/fixtures/v7renumber.srm
 local here = (debug.getinfo(1, "S").source:sub(2)):match("^(.*[/\\])") or ""
 package.path = here .. "?.lua;" .. package.path

@@ -268,7 +268,7 @@
       "flag": "FLAG_HIDE_ILEX_FOREST_SECOND_CELEBI"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_ZARUDE",
+      "local_id": "LOCALID_MOSAIC_ZARUDE",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(ZARUDE)",
       "x": 48,
       "y": 19,
@@ -279,7 +279,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "IlexForest_EventScript_Zarude",
-      "flag": "FLAG_HIDE_ANTHOLOGY_ZARUDE"
+      "flag": "FLAG_HIDE_MOSAIC_ZARUDE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -292,7 +292,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_SCOLIPITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_10"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_10"
     }
   ],
   "warp_events": [

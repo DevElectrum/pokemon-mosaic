@@ -73,17 +73,17 @@ enum Species WorldRandomizeWildSpeciesAtMap(enum Species original, u32 slot, enu
 bool8 WorldIsFieldStableDiscoverySpecies(enum Species species);
 bool8 WorldIsNaturalDiscoverySpecies(enum Species species);
 // Shared pre-Champion rare habitat lookup for natural fights and DexNav.
-enum Species AnthologyGetRareHabitatSpecies(enum WildPokemonArea area, const struct WildPokemonInfo *info);
+enum Species MosaicGetRareHabitatSpecies(enum WildPokemonArea area, const struct WildPokemonInfo *info);
 // Up to four supplements using spare grass DexNav icons on the current map.
-#define ANTHOLOGY_EXTRA_HABITAT_SLOTS 4
-enum Species AnthologyGetExtraHabitatSpecies(enum WildPokemonArea area, const struct WildPokemonInfo *info, u8 slot);
+#define MOSAIC_EXTRA_HABITAT_SLOTS 4
+enum Species MosaicGetExtraHabitatSpecies(enum WildPokemonArea area, const struct WildPokemonInfo *info, u8 slot);
 // Supplemental natural aquatic encounters, separate from static/legendary species.
-enum Species AnthologyGetAquaticHabitatSpecies(enum WildPokemonArea area, const struct WildPokemonInfo *info);
+enum Species MosaicGetAquaticHabitatSpecies(enum WildPokemonArea area, const struct WildPokemonInfo *info);
 // Pokédex area map checks explicit locations without changing the player's save state.
-bool8 AnthologyMapHasAquaticHabitatSpecies(u8 mapGroup, u8 mapNum, enum WildPokemonArea area,
+bool8 MosaicMapHasAquaticHabitatSpecies(u8 mapGroup, u8 mapNum, enum WildPokemonArea area,
                                           enum Species species, const struct WildPokemonInfo *info);
 // Pure location lookup for Pokédex area glows: never mutates active map state.
-bool8 AnthologyMapHasHabitatSpecies(u8 mapGroup, u8 mapNum, enum Species species, const struct WildPokemonInfo *info);
+bool8 MosaicMapHasHabitatSpecies(u8 mapGroup, u8 mapNum, enum Species species, const struct WildPokemonInfo *info);
 bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPokemonArea area, u8 flags);
 bool8 SetUpMassOutbreakEncounter(u8 flags);
 bool8 DoMassOutbreakEncounterTest(void);

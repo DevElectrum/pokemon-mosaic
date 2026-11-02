@@ -719,15 +719,15 @@ Route111_Text_TrainerHillSign:
 // Independent rare statics: caught status persists in the National Dex.
 // Fainting permits a rematch after map re-entry. Preserve original route story.
 Route111_TingLuTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route111_SeededTINGLUVisibility
 	getcaughtmon SPECIES_TING_LU
 	goto_if_eq VAR_RESULT, TRUE, Route111_HideTingLu
-	clearflag FLAG_HIDE_ANTHOLOGY_TING_LU
+	clearflag FLAG_HIDE_MOSAIC_TING_LU
 	return
 
 Route111_HideTingLu::
-	setflag FLAG_HIDE_ANTHOLOGY_TING_LU
+	setflag FLAG_HIDE_MOSAIC_TING_LU
 	return
 
 Route111_EventScript_TingLu::
@@ -748,8 +748,8 @@ Route111_EventScript_TingLu::
 
 Route111_TingLuResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_TING_LU
-	setflag FLAG_HIDE_ANTHOLOGY_TING_LU
+	removeobject LOCALID_MOSAIC_TING_LU
+	setflag FLAG_HIDE_MOSAIC_TING_LU
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -789,11 +789,11 @@ Route111_Text_RingNotReady:
 
 Route111_SeededTINGLUVisibility::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE111_TING_LU, Route111_HideTingLu
-	clearflag FLAG_HIDE_ANTHOLOGY_TING_LU
+	clearflag FLAG_HIDE_MOSAIC_TING_LU
 	return
 
 Route111_SeededTINGLUCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route111_SeededTINGLUMark
 	goto Route111_TingLuResolved
 

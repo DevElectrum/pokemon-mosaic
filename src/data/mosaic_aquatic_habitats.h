@@ -1,4 +1,4 @@
-// P0 Anthology: additional pre-Champion Surf and rod habitats.
+// P0 Mosaic: additional pre-Champion Surf and rod habitats.
 // Keep originals intact; the runtime admits a Surf species only when DexNav
 // has a spare water icon. Fishing additions use existing rod-level brackets.
 // WATER and FISHING are distinct acquisition methods, one bonus per map/method.

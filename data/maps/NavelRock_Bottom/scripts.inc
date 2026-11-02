@@ -4,7 +4,7 @@ NavelRock_Bottom_MapScripts::
 	.byte 0
 
 NavelRock_Bottom_OnTransition:
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, NavelRock_Bottom_SeededOnTransition
 	call_if_set FLAG_CAUGHT_LUGIA, NavelRock_Bottom_EventScript_HideLugia
 	call_if_unset FLAG_CAUGHT_LUGIA, NavelRock_Bottom_EventScript_TryShowLugia
@@ -64,7 +64,7 @@ NavelRock_Bottom_EventScript_Lugia::
 	goto NavelRock_Bottom_SeededCaught
 
 NavelRock_Bottom_SeededCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, NavelRock_Bottom_SeededMark
 	setflag FLAG_CAUGHT_LUGIA
 	release

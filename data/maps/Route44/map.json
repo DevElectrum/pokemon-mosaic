@@ -364,7 +364,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_TORNADUS",
+      "local_id": "LOCALID_MOSAIC_TORNADUS",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(TORNADUS)",
       "x": 57,
       "y": 24,
@@ -375,7 +375,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route44_EventScript_Tornadus",
-      "flag": "FLAG_HIDE_ANTHOLOGY_TORNADUS"
+      "flag": "FLAG_HIDE_MOSAIC_TORNADUS"
     }
   ],
   "warp_events": [

@@ -48,7 +48,7 @@ def run(labels, entry, save, outcome=None, yes=True):
             return
         if op == "getcaughtmon":
             result = args[0] in save.caught
-        elif op == "callnative" and args[0] == "AnthologyStaticRandomizerIsOn":
+        elif op == "callnative" and args[0] == "MosaicStaticRandomizerIsOn":
             result = save.seeded
         elif op == "seteventmon":
             active_species = "SPECIES_SEEDED_REPLACEMENT" if save.seeded else args[0]
@@ -117,21 +117,21 @@ def run(labels, entry, save, outcome=None, yes=True):
 
 # (map, map-entry guard, battle, hide flag, caught species, extra captured flag)
 SITES = (
-    ("PowerPlant_Frlg", "PowerPlant_AnthologyOnTransition", "PowerPlant_EventScript_TapuKoko",
+    ("PowerPlant_Frlg", "PowerPlant_MosaicOnTransition", "PowerPlant_EventScript_TapuKoko",
      "TAPU_KOKO", None),
-    ("Route38", "Route38_AnthologyFieldTransition", "Route38_EventScript_GalarianZapdos",
-     "ZAPDOS_GALAR", "FLAG_CAUGHT_ANTHOLOGY_ZAPDOS_GALAR"),
-    ("Route40", "Route40_AnthologyFieldTransition", "Route40_EventScript_GalarianArticuno",
-     "ARTICUNO_GALAR", "FLAG_CAUGHT_ANTHOLOGY_ARTICUNO_GALAR"),
-    ("BurnedTower_1F", "BurnedTower_1F_AnthologyFieldTransition", "BurnedTower_1F_EventScript_GalarianMoltres",
-     "MOLTRES_GALAR", "FLAG_CAUGHT_ANTHOLOGY_MOLTRES_GALAR"),
-    ("Route38", "Route38_AnthologyFieldTransition", "Route38_EventScript_RaikouReserve",
+    ("Route38", "Route38_MosaicFieldTransition", "Route38_EventScript_GalarianZapdos",
+     "ZAPDOS_GALAR", "FLAG_CAUGHT_MOSAIC_ZAPDOS_GALAR"),
+    ("Route40", "Route40_MosaicFieldTransition", "Route40_EventScript_GalarianArticuno",
+     "ARTICUNO_GALAR", "FLAG_CAUGHT_MOSAIC_ARTICUNO_GALAR"),
+    ("BurnedTower_1F", "BurnedTower_1F_MosaicFieldTransition", "BurnedTower_1F_EventScript_GalarianMoltres",
+     "MOLTRES_GALAR", "FLAG_CAUGHT_MOSAIC_MOLTRES_GALAR"),
+    ("Route38", "Route38_MosaicFieldTransition", "Route38_EventScript_RaikouReserve",
      "BEAST_RAIKOU", None),
-    ("MtMortar_2F", "MtMortar_2F_AnthologyFieldTransition", "MtMortar_2F_EventScript_EnteiReserve",
+    ("MtMortar_2F", "MtMortar_2F_MosaicFieldTransition", "MtMortar_2F_EventScript_EnteiReserve",
      "BEAST_ENTEI", None),
-    ("LakeOfRage", "LakeOfRage_AnthologyFieldTransition", "LakeOfRage_EventScript_SuicuneReserve",
+    ("LakeOfRage", "LakeOfRage_MosaicFieldTransition", "LakeOfRage_EventScript_SuicuneReserve",
      "BEAST_SUICUNE", None),
-    ("IcePath_B2F", "IcePath_B2F_AnthologyOnTransition",
+    ("IcePath_B2F", "IcePath_B2F_MosaicOnTransition",
      "IcePath_B2F_EventScript_GlastrierJohto", "JOHTO_GLASTRIER", None),
     ("ShoalCave_LowTideIceRoom", "ShoalCave_LowTideIceRoom_OnTransition",
      "ShoalCave_LowTideIceRoom_EventScript_Glastrier", "GLASTRIER", None),
@@ -139,7 +139,7 @@ SITES = (
 
 for directory, transition, battle, suffix, form_capture in SITES:
     scripts = blocks(directory)
-    hide = "FLAG_HIDE_ANTHOLOGY_" + suffix
+    hide = "FLAG_HIDE_MOSAIC_" + suffix
     species = {
         "BEAST_RAIKOU": "RAIKOU", "BEAST_ENTEI": "ENTEI",
         "BEAST_SUICUNE": "SUICUNE",
@@ -187,7 +187,7 @@ for directory, transition, battle, suffix, form_capture in SITES:
 # of representative maps. Read the source-of-truth inventory as a Python
 # literal rather than duplicating the map/species coordinates in this harness.
 import ast
-inventory = ast.parse((ROOT / "test/overworld/ValidateAnthologyHabitatRare.py").read_text())
+inventory = ast.parse((ROOT / "test/overworld/ValidateMosaicHabitatRare.py").read_text())
 table = next(
     ast.literal_eval(node.value)
     for node in inventory.body
@@ -198,7 +198,7 @@ assert len(table) >= 83, f"Lost tracked individual statics (the Royal Duo moved 
 for directory, prefix, name, species, x, y, suffix, multiple in table:
     scripts = blocks(directory)
     battle = prefix + "_EventScript_" + name
-    hide = "FLAG_HIDE_ANTHOLOGY_" + suffix
+    hide = "FLAG_HIDE_MOSAIC_" + suffix
     if directory == "PokemonMansion_1F_Frlg" and name == "Mew":
         # Mew is four sequential fights, with three compulsory victories and a
         # catch-only fourth battle. One fixed outcome for all four rounds in
@@ -207,8 +207,8 @@ for directory, prefix, name, species, x, y, suffix, multiple in table:
         full = script.split("PokemonMansion_1F_EventScript_Mew::")[1].split("PokemonMansion_1F_Text_MewChallenge::")[0]
         assert full.count("special BattleSetup_StartMewGauntletBattle") == 4
         assert full.count("goto_if_ne VAR_RESULT, B_OUTCOME_WON") == 3
-        assert "goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_AnthologyMewResolved" in full
-        assert "goto PokemonMansion_1F_AnthologyMewRetreated" in full
+        assert "goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_MosaicMewResolved" in full
+        assert "goto PokemonMansion_1F_MosaicMewRetreated" in full
         continue
     for outcome in ("B_OUTCOME_WON", "B_OUTCOME_CAUGHT",
                     "B_OUTCOME_RAN", "B_OUTCOME_PLAYER_TELEPORTED"):
@@ -221,7 +221,7 @@ for directory, prefix, name, species, x, y, suffix, multiple in table:
             run(scripts, battle, locked, outcome)
             assert hide not in locked.flags, ("Eternatus battle bypassed Royal Duo seal")
             assert "SPECIES_ETERNATUS" not in locked.caught, ("Locked Eternatus was caught")
-            state.flags.add("FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED")
+            state.flags.add("FLAG_MOSAIC_ROYAL_DUO_CLAIMED")
         run(scripts, battle, state, outcome)
         resolved = outcome in ("B_OUTCOME_WON", "B_OUTCOME_CAUGHT")
         assert (hide in state.flags) == resolved, (
@@ -230,7 +230,7 @@ for directory, prefix, name, species, x, y, suffix, multiple in table:
         assert caught == (outcome == "B_OUTCOME_CAUGHT"), (
             directory, species, outcome, "wrong captured National Dex bit")
         if multiple:
-            claimed = "FLAG_CAUGHT_ANTHOLOGY_" + suffix
+            claimed = "FLAG_CAUGHT_MOSAIC_" + suffix
             assert (claimed in state.flags) == (outcome == "B_OUTCOME_CAUGHT"), (
                 directory, species, outcome, "shared-National alternate capture")
 print(f"P0 all {len(table)} current field object scripts: battle-faint/catch/flee/teleport paths source-interpreted PASS")
@@ -238,16 +238,16 @@ print(f"P0 all {len(table)} current field object scripts: battle-faint/catch/fle
 # The two Kubfu/three Galarian flags must not depend on the shared National entry.
 for directory, suffix in (("SproutTower_2F", "KUBFU_WEST"), ("Route34", "KUBFU_EAST")):
     site = (ROOT / "data/maps" / directory / "scripts.inc").read_text()
-    assert "FLAG_CAUGHT_ANTHOLOGY_" + suffix in site
+    assert "FLAG_CAUGHT_MOSAIC_" + suffix in site
 for name in ("GalarianZapdos", "GalarianArticuno", "GalarianMoltres"):
     assert any(name in battle for _, _, battle, _, _ in SITES)
 
 # Johto and Hoenn Glastrier objects must both disappear on either capture.
 johto, shoal = blocks("IcePath_B2F"), blocks("ShoalCave_LowTideIceRoom")
 shared = Save(caught={"SPECIES_GLASTRIER"})
-run(johto, "IcePath_B2F_AnthologyOnTransition", shared)
+run(johto, "IcePath_B2F_MosaicOnTransition", shared)
 run(shoal, "ShoalCave_LowTideIceRoom_OnTransition", shared)
-assert {"FLAG_HIDE_ANTHOLOGY_JOHTO_GLASTRIER", "FLAG_HIDE_ANTHOLOGY_GLASTRIER"} <= shared.flags
+assert {"FLAG_HIDE_MOSAIC_JOHTO_GLASTRIER", "FLAG_HIDE_MOSAIC_GLASTRIER"} <= shared.flags
 
 # Hoenn story reaches the alternative encounter unlock during its eighth gym,
 # before Hall of Fame; simply reaching the legendary climax (state 5) is not enough.
@@ -270,11 +270,11 @@ assert "DeactivateAllRoamers();" not in fixed
 # Suicune only reveals after the Rocket signal is shut down (Mahogany state 14).
 lake = blocks("LakeOfRage")
 before = Save(flags={"FLAG_RELEASED_BEASTS"}, variables={"VAR_MAHOGANY_TOWN_STATE": 13})
-run(lake, "LakeOfRage_AnthologyFieldTransition", before)
-assert "FLAG_HIDE_ANTHOLOGY_BEAST_SUICUNE" in before.flags
+run(lake, "LakeOfRage_MosaicFieldTransition", before)
+assert "FLAG_HIDE_MOSAIC_BEAST_SUICUNE" in before.flags
 after = Save(flags={"FLAG_RELEASED_BEASTS"}, variables={"VAR_MAHOGANY_TOWN_STATE": 14})
-run(lake, "LakeOfRage_AnthologyFieldTransition", after)
-assert "FLAG_HIDE_ANTHOLOGY_BEAST_SUICUNE" not in after.flags
+run(lake, "LakeOfRage_MosaicFieldTransition", after)
+assert "FLAG_HIDE_MOSAIC_BEAST_SUICUNE" not in after.flags
 
 # Ilex Forest: first story sets VAR_AZALEA_TOWN_STATE=10 once; subsequent
 # encounters use shrine rematch, not Kurt's introductory scene again.
@@ -306,7 +306,7 @@ for stage in (2, 4):
     state.caught.add("SPECIES_HO_OH")
     run(tower, entry, state)
     assert "FLAG_HIDE_HO_OH" in state.flags, ("Ho-Oh duplicate after caught", stage)
-assert "call TinTower_RoofDay_AnthologyHoOhGate" in (ROOT / "data/maps/TinTower_RoofDay/scripts.inc").read_text()
+assert "call TinTower_RoofDay_MosaicHoOhGate" in (ROOT / "data/maps/TinTower_RoofDay/scripts.inc").read_text()
 print("P0 Ho-Oh: native rooftop only, caught trio prerequisite, early/postgame and already-caught guards PASS")
 
 
@@ -328,12 +328,12 @@ print("P0 native Ho-Oh after faint: immediate re-entry retry and permanent caugh
 # Verify caught-Dex gates, post-faint retry, and caught persistence without
 # assuming that matching Pokémon have to remain in the player's party.
 for new_map, entry, battle, hide, prereq in (
-    ("MtMoon_B2F_Frlg", "MtMoon_B2F_AnthologyOnTransition", "MtMoon_B2F_EventScript_Giratina",
-     "FLAG_HIDE_ANTHOLOGY_GIRATINA", {"SPECIES_DIALGA", "SPECIES_PALKIA"}),
-    ("PokemonTower_7F_Frlg", "PokemonTower_7F_AnthologyOnTransition", "PokemonTower_7F_EventScript_Darkrai",
-     "FLAG_HIDE_ANTHOLOGY_DARKRAI", {"SPECIES_CRESSELIA"}),
-    ("CeladonCity_Frlg", "CeladonCity_AnthologyOnTransition", "CeladonCity_EventScript_TapuLele",
-     "FLAG_HIDE_ANTHOLOGY_TAPU_LELE", set()),
+    ("MtMoon_B2F_Frlg", "MtMoon_B2F_MosaicOnTransition", "MtMoon_B2F_EventScript_Giratina",
+     "FLAG_HIDE_MOSAIC_GIRATINA", {"SPECIES_DIALGA", "SPECIES_PALKIA"}),
+    ("PokemonTower_7F_Frlg", "PokemonTower_7F_MosaicOnTransition", "PokemonTower_7F_EventScript_Darkrai",
+     "FLAG_HIDE_MOSAIC_DARKRAI", {"SPECIES_CRESSELIA"}),
+    ("CeladonCity_Frlg", "CeladonCity_MosaicOnTransition", "CeladonCity_EventScript_TapuLele",
+     "FLAG_HIDE_MOSAIC_TAPU_LELE", set()),
 ):
     labels = blocks(new_map)
     preflags = {"FLAG_RESCUED_MR_FUJI"} if "Darkrai" in battle else set()
@@ -357,16 +357,16 @@ assert "RockTunnel_B1F_EventScript_Giratina" not in (ROOT / "data/maps/RockTunne
 assert "RockTunnel_B1F_EventScript_Darkrai" not in (ROOT / "data/maps/RockTunnel_B1F_Frlg/scripts.inc").read_text()
 assert "RockTunnel_B1F_EventScript_TapuLele" not in (ROOT / "data/maps/RockTunnel_B1F_Frlg/scripts.inc").read_text()
 pre_fuji = Save(caught={"SPECIES_CRESSELIA"})
-run(blocks("PokemonTower_7F_Frlg"), "PokemonTower_7F_AnthologyOnTransition", pre_fuji)
-assert "FLAG_HIDE_ANTHOLOGY_DARKRAI" in pre_fuji.flags
+run(blocks("PokemonTower_7F_Frlg"), "PokemonTower_7F_MosaicOnTransition", pre_fuji)
+assert "FLAG_HIDE_MOSAIC_DARKRAI" in pre_fuji.flags
 print("P0 Kanto relocated statics: caught prerequisite, Fuji rescue, KO/revisit and caught/revisit PASS")
 
 # Swords of Justice are independent captures, early to mid Johto, with the
 # same KO->revisit and caught->permanent-hide semantics as other statics.
 for _dir,_name in (("Route32","Keldeo"),("UnionCave_1F","Terrakion"),("NationalPark_Normal","Virizion"),("MtMortar_1F_South","Cobalion")):
     _scripts = blocks(_dir)
-    _entry = _dir+"_AnthologyOnTransition"
-    _hide = "FLAG_HIDE_ANTHOLOGY_"+_name.upper()
+    _entry = _dir+"_MosaicOnTransition"
+    _hide = "FLAG_HIDE_MOSAIC_"+_name.upper()
     _battle = _dir+"_EventScript_"+_name
     _state = Save()
     run(_scripts,_entry,_state)
@@ -396,9 +396,9 @@ _hunt = (
 )
 for _map, _name, _species, _suffix, _prereqs in _hunt:
     _labels = blocks(_map)
-    _entry = _map + "_AnthologyHuntTransition"
+    _entry = _map + "_MosaicHuntTransition"
     _battle = _map + "_EventScript_" + _name
-    _hide = "FLAG_HIDE_ANTHOLOGY_" + _suffix
+    _hide = "FLAG_HIDE_MOSAIC_" + _suffix
     for _one_missing in _prereqs:
         _state = Save(caught=set(_prereqs) - {_one_missing})
         run(_labels, _entry, _state)
@@ -438,16 +438,16 @@ for area, species, hide in (
 print("P0 Hoenn weather trio: prerequisite and permanent catch persistence PASS")
 
 location_gates = (
-    ("PetalburgWoods", "PetalburgWoods_AnthologyOnTransition",
-     "FLAG_HIDE_ANTHOLOGY_ZYGARDE_10", (), None, "FLAG_CAUGHT_ANTHOLOGY_ZYGARDE_10"),
-    ("MeteorFalls_1F_1R", "MeteorFalls_1F_1R_AnthologyOnTransition",
-     "FLAG_HIDE_ANTHOLOGY_ZYGARDE", ("FLAG_BADGE06_GET",), None, "FLAG_CAUGHT_ANTHOLOGY_ZYGARDE"),
-    ("Route128_AncientGrotto", "Route128_AncientGrotto_AnthologyOnTransition",
-     "FLAG_HIDE_ANTHOLOGY_KORAIDON", ("FLAG_BADGE07_GET", "FLAG_DEFEATED_MAGMA_SPACE_CENTER"), None, "SPECIES_KORAIDON"),
-    ("NewMauville_GeneratorAnnex", "NewMauville_GeneratorAnnex_AnthologyOnTransition",
-     "FLAG_HIDE_ANTHOLOGY_MIRAIDON", ("FLAG_BADGE07_GET", "FLAG_DEFEATED_MAGMA_SPACE_CENTER"), 2, "SPECIES_MIRAIDON"),
-    ("MossdeepCity_SpaceCenter_1F", "MossdeepCity_SpaceCenter_1F_AnthologyOnTransition",
-     "FLAG_HIDE_ANTHOLOGY_LATIOS", ("FLAG_DEFEATED_MAGMA_SPACE_CENTER",), None, "SPECIES_LATIOS"),
+    ("PetalburgWoods", "PetalburgWoods_MosaicOnTransition",
+     "FLAG_HIDE_MOSAIC_ZYGARDE_10", (), None, "FLAG_CAUGHT_MOSAIC_ZYGARDE_10"),
+    ("MeteorFalls_1F_1R", "MeteorFalls_1F_1R_MosaicOnTransition",
+     "FLAG_HIDE_MOSAIC_ZYGARDE", ("FLAG_BADGE06_GET",), None, "FLAG_CAUGHT_MOSAIC_ZYGARDE"),
+    ("Route128_AncientGrotto", "Route128_AncientGrotto_MosaicOnTransition",
+     "FLAG_HIDE_MOSAIC_KORAIDON", ("FLAG_BADGE07_GET", "FLAG_DEFEATED_MAGMA_SPACE_CENTER"), None, "SPECIES_KORAIDON"),
+    ("NewMauville_GeneratorAnnex", "NewMauville_GeneratorAnnex_MosaicOnTransition",
+     "FLAG_HIDE_MOSAIC_MIRAIDON", ("FLAG_BADGE07_GET", "FLAG_DEFEATED_MAGMA_SPACE_CENTER"), 2, "SPECIES_MIRAIDON"),
+    ("MossdeepCity_SpaceCenter_1F", "MossdeepCity_SpaceCenter_1F_MosaicOnTransition",
+     "FLAG_HIDE_MOSAIC_LATIOS", ("FLAG_DEFEATED_MAGMA_SPACE_CENTER",), None, "SPECIES_LATIOS"),
 )
 for area, transition, hide, prereqs, generator, claimed in location_gates:
     scripts = blocks(area)
@@ -486,54 +486,54 @@ print("P0 Deoxys: native triangle plus ticket-free Rayquaza ferry source contrac
 # never consume the encounter. This is source interpreter evidence, not mGBA.
 SEED_SITES = (
     # map, transition, battle, original species, hide flag, captured-site bit, flags, vars
-    ("PokemonMansion_1F_Frlg", "PokemonMansion_1F_AnthologyOnTransition",
-     "PokemonMansion_1F_RandomizedMewStatic", "MEW", "FLAG_HIDE_ANTHOLOGY_MEW",
+    ("PokemonMansion_1F_Frlg", "PokemonMansion_1F_MosaicOnTransition",
+     "PokemonMansion_1F_RandomizedMewStatic", "MEW", "FLAG_HIDE_MOSAIC_MEW",
      "FLAG_CAUGHT_RANDOM_MANSION_MEW", set(), {}),
-    ("PokemonMansion_1F_Frlg", "PokemonMansion_1F_AnthologyOnTransition",
-     "PokemonMansion_1F_EventScript_TypeNull", "TYPE_NULL", "FLAG_HIDE_ANTHOLOGY_TYPE_NULL",
+    ("PokemonMansion_1F_Frlg", "PokemonMansion_1F_MosaicOnTransition",
+     "PokemonMansion_1F_EventScript_TypeNull", "TYPE_NULL", "FLAG_HIDE_MOSAIC_TYPE_NULL",
      "FLAG_CAUGHT_RANDOM_MANSION_TYPE_NULL", set(), {}),
-    ("IlexForest", "IlexForest_AnthologyOnTransition",
-     "IlexForest_EventScript_Zarude", "ZARUDE", "FLAG_HIDE_ANTHOLOGY_ZARUDE",
+    ("IlexForest", "IlexForest_MosaicOnTransition",
+     "IlexForest_EventScript_Zarude", "ZARUDE", "FLAG_HIDE_MOSAIC_ZARUDE",
      "FLAG_CAUGHT_RANDOM_ILEX_ZARUDE", set(), {}),
     ("Route38", "Route38_FieldSyncRaikouReserve",
-     "Route38_EventScript_RaikouReserve", "RAIKOU", "FLAG_HIDE_ANTHOLOGY_BEAST_RAIKOU",
+     "Route38_EventScript_RaikouReserve", "RAIKOU", "FLAG_HIDE_MOSAIC_BEAST_RAIKOU",
      "FLAG_CAUGHT_RANDOM_ROUTE38_RAIKOU", {"FLAG_RELEASED_BEASTS"}, {}),
     ("MtMortar_2F", "MtMortar_2F_FieldSyncEnteiReserve",
-     "MtMortar_2F_EventScript_EnteiReserve", "ENTEI", "FLAG_HIDE_ANTHOLOGY_BEAST_ENTEI",
+     "MtMortar_2F_EventScript_EnteiReserve", "ENTEI", "FLAG_HIDE_MOSAIC_BEAST_ENTEI",
      "FLAG_CAUGHT_RANDOM_MTMORTAR_2F_ENTEI", {"FLAG_RELEASED_BEASTS"}, {}),
     ("LakeOfRage", "LakeOfRage_FieldSyncSuicuneReserve",
-     "LakeOfRage_EventScript_SuicuneReserve", "SUICUNE", "FLAG_HIDE_ANTHOLOGY_BEAST_SUICUNE",
+     "LakeOfRage_EventScript_SuicuneReserve", "SUICUNE", "FLAG_HIDE_MOSAIC_BEAST_SUICUNE",
      "FLAG_CAUGHT_RANDOM_LAKEOFRAGE_SUICUNE", {"FLAG_RELEASED_BEASTS"}, {"VAR_MAHOGANY_TOWN_STATE": 14}),
-    ("Route40", "Route40_AnthologyOnTransition",
-     "Route40_EventScript_Lugia", "LUGIA", "FLAG_HIDE_ANTHOLOGY_LUGIA",
+    ("Route40", "Route40_MosaicOnTransition",
+     "Route40_EventScript_Lugia", "LUGIA", "FLAG_HIDE_MOSAIC_LUGIA",
      "FLAG_CAUGHT_RANDOM_ROUTE40_LUGIA", set(), {}),
     ("ShoalCave_LowTideIceRoom", "ShoalCave_LowTideIceRoom_OnTransition",
      "ShoalCave_LowTideIceRoom_EventScript_Glastrier", "GLASTRIER",
-     "FLAG_HIDE_ANTHOLOGY_GLASTRIER", "FLAG_CAUGHT_RANDOM_SHOALCAVE_GLASTRIER", set(), {}),
+     "FLAG_HIDE_MOSAIC_GLASTRIER", "FLAG_CAUGHT_RANDOM_SHOALCAVE_GLASTRIER", set(), {}),
     ("Route118", "Route118_SecondBatchOnTransition",
-     "Route118_EventScript_IronBoulder", "IRON_BOULDER", "FLAG_HIDE_ANTHOLOGY_IRON_BOULDER",
+     "Route118_EventScript_IronBoulder", "IRON_BOULDER", "FLAG_HIDE_MOSAIC_IRON_BOULDER",
      "FLAG_CAUGHT_RANDOM_ROUTE118_IRON_BOULDER", set(), {}),
-    ("Route119", "Route119_AnthologyOnTransition",
-     "Route119_EventScript_RagingBolt", "RAGING_BOLT", "FLAG_HIDE_ANTHOLOGY_RAGING_BOLT",
+    ("Route119", "Route119_MosaicOnTransition",
+     "Route119_EventScript_RagingBolt", "RAGING_BOLT", "FLAG_HIDE_MOSAIC_RAGING_BOLT",
      "FLAG_CAUGHT_RANDOM_ROUTE119_RAGING_BOLT", set(), {}),
     ("Route119", "Route119_XerneasTransition",
-     "Route119_EventScript_Xerneas", "XERNEAS", "FLAG_HIDE_ANTHOLOGY_XERNEAS",
+     "Route119_EventScript_Xerneas", "XERNEAS", "FLAG_HIDE_MOSAIC_XERNEAS",
      "FLAG_CAUGHT_RANDOM_ROUTE119_XERNEAS", set(), {}),
     ("Route120", "Route120_SecondBatchOnTransition",
-     "Route120_EventScript_IronLeaves", "IRON_LEAVES", "FLAG_HIDE_ANTHOLOGY_IRON_LEAVES",
+     "Route120_EventScript_IronLeaves", "IRON_LEAVES", "FLAG_HIDE_MOSAIC_IRON_LEAVES",
      "FLAG_CAUGHT_RANDOM_ROUTE120_IRON_LEAVES", set(), {}),
     ("Route120", "Route120_SecondBatchOnTransition",
-     "Route120_EventScript_Latias", "LATIAS", "FLAG_HIDE_ANTHOLOGY_LATIAS",
+     "Route120_EventScript_Latias", "LATIAS", "FLAG_HIDE_MOSAIC_LATIAS",
      "FLAG_CAUGHT_RANDOM_ROUTE120_LATIAS", set(), {}),
     ("Route120", "Route120_WoChienTransition",
-     "Route120_EventScript_WoChien", "WO_CHIEN", "FLAG_HIDE_ANTHOLOGY_WO_CHIEN",
+     "Route120_EventScript_WoChien", "WO_CHIEN", "FLAG_HIDE_MOSAIC_WO_CHIEN",
      "FLAG_CAUGHT_RANDOM_ROUTE120_WO_CHIEN", set(), {}),
-    ("Route128_AncientGrotto", "Route128_AncientGrotto_AnthologyOnTransition",
+    ("Route128_AncientGrotto", "Route128_AncientGrotto_MosaicOnTransition",
      "Route128_AncientGrotto_EventScript_Koraidon", "KORAIDON",
-     "FLAG_HIDE_ANTHOLOGY_KORAIDON", "FLAG_CAUGHT_RANDOM_ANCIENTGROTTO_KORAIDON",
+     "FLAG_HIDE_MOSAIC_KORAIDON", "FLAG_CAUGHT_RANDOM_ANCIENTGROTTO_KORAIDON",
      {"FLAG_BADGE07_GET", "FLAG_DEFEATED_MAGMA_SPACE_CENTER"}, {}),
-    ("CeladonCity_Frlg", "CeladonCity_AnthologyOnTransition",
-     "CeladonCity_EventScript_TapuLele", "TAPU_LELE", "FLAG_HIDE_ANTHOLOGY_TAPU_LELE",
+    ("CeladonCity_Frlg", "CeladonCity_MosaicOnTransition",
+     "CeladonCity_EventScript_TapuLele", "TAPU_LELE", "FLAG_HIDE_MOSAIC_TAPU_LELE",
      "FLAG_CAUGHT_RANDOM_CELADON_TAPU_LELE", set(), {}),
     ("Route25_Frlg", "Route25_Frlg_OnTransition",
      "Route25_EventScript_Suicune", "SUICUNE", "FLAG_HIDE_ROUTE25_SUICUNE",
@@ -612,14 +612,14 @@ for absent in beast_sites:
     state = Save(flags={"FLAG_RELEASED_BEASTS"} | (beast_sites - {absent}),
                  caught={"SPECIES_RAIKOU", "SPECIES_ENTEI", "SPECIES_SUICUNE"},
                  seeded=True)
-    run(roof, "TinTower_RoofDay_AnthologyHoOhGate", state)
+    run(roof, "TinTower_RoofDay_MosaicHoOhGate", state)
     assert "FLAG_HIDE_HO_OH" in state.flags
 state = Save(flags={"FLAG_RELEASED_BEASTS"} | beast_sites, seeded=True)
-run(roof, "TinTower_RoofDay_AnthologyHoOhGate", state)
+run(roof, "TinTower_RoofDay_MosaicHoOhGate", state)
 assert "FLAG_HIDE_HO_OH" not in state.flags
 run(roof, "TinTower_RoofDay_EventScript_CaughtHooh", state)
 assert "FLAG_CAUGHT_RANDOM_TINTOWER_HO_OH" in state.flags
-run(roof, "TinTower_RoofDay_AnthologyHoOhGate", state)
+run(roof, "TinTower_RoofDay_MosaicHoOhGate", state)
 assert "FLAG_HIDE_HO_OH" in state.flags
 print("P0 seeded Ho-Oh beast-source prerequisite, capture and repeat prevention PASS")
 

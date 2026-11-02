@@ -2211,7 +2211,7 @@ static void StorePokedexListSpecies(void)
 }
 
 // Regional number displays fall back to Hoenn in legacy single-region builds.
-static enum Region AnthologyGetDisplayRegion(void)
+static enum Region MosaicGetDisplayRegion(void)
 {
 #if ALL_REGIONS
     return GetActiveRegion();
@@ -2239,7 +2239,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
     {
     default:
     case DEX_MODE_HOENN:
-        temp_dexCount = GetAnthologyRegionalDexSize(region);
+        temp_dexCount = GetMosaicRegionalDexSize(region);
         temp_isHoennDex = TRUE;
         break;
     case DEX_MODE_NATIONAL:
@@ -2250,7 +2250,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         }
         else
         {
-            temp_dexCount = GetAnthologyRegionalDexSize(region);
+            temp_dexCount = GetMosaicRegionalDexSize(region);
             temp_isHoennDex = TRUE;
         }
         break;
@@ -2263,7 +2263,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         {
             for (i = 0; i < temp_dexCount; i++)
             {
-                temp_dexNum = AnthologyRegionalToNationalOrder(region, i + 1);
+                temp_dexNum = MosaicRegionalToNationalOrder(region, i + 1);
                 sPokedexView->pokedexList[i].dexNum = temp_dexNum;
                 sPokedexView->pokedexList[i].seen = GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN);
                 sPokedexView->pokedexList[i].owned = GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT);
@@ -2296,7 +2296,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         {
             temp_dexNum = gPokedexOrder_Alphabetical[i];
 
-            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInAnthologyRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN))
+            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInMosaicRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN))
             {
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -2310,7 +2310,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         {
             temp_dexNum = gPokedexOrder_Weight[i];
 
-            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInAnthologyRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
+            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInMosaicRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
             {
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -2324,7 +2324,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         {
             temp_dexNum = gPokedexOrder_Weight[i];
 
-            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInAnthologyRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
+            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInMosaicRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
             {
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -2338,7 +2338,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         {
             temp_dexNum = gPokedexOrder_Height[i];
 
-            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInAnthologyRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
+            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInMosaicRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
             {
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -2352,7 +2352,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         {
             temp_dexNum = gPokedexOrder_Height[i];
 
-            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInAnthologyRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
+            if (temp_dexNum <= NATIONAL_DEX_COUNT && (!temp_isHoennDex || IsInMosaicRegionalDex(region, temp_dexNum)) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
             {
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = temp_dexNum;
                 sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
@@ -2484,7 +2484,7 @@ static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
-        dexNum = AnthologyNationalToRegionalOrder(AnthologyGetDisplayRegion(), dexNum);
+        dexNum = MosaicNationalToRegionalOrder(MosaicGetDisplayRegion(), dexNum);
     memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
     if (NATIONAL_DEX_COUNT > 999 && sPokedexView->dexMode != DEX_MODE_HOENN)
     {
@@ -4245,7 +4245,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     if (newEntry)
         PrintInfoScreenText(gText_PokedexRegistration, GetStringCenterAlignXOffset(FONT_NORMAL, gText_PokedexRegistration, DISPLAY_WIDTH), 0);
     if (value == 0)
-        value = AnthologyNationalToRegionalOrder(AnthologyGetDisplayRegion(), num);
+        value = MosaicNationalToRegionalOrder(MosaicGetDisplayRegion(), num);
     else
         value = num;
 
@@ -4613,7 +4613,7 @@ u16 GetNationalPokedexCount(u8 caseID)
 }
 
 // Three disjoint Gen 1-9 catalogs, compactly mapped to National numbers.
-u16 GetAnthologyRegionalDexSize(enum Region region)
+u16 GetMosaicRegionalDexSize(enum Region region)
 {
     switch (region)
     {
@@ -4624,9 +4624,9 @@ u16 GetAnthologyRegionalDexSize(enum Region region)
     }
 }
 
-u16 AnthologyRegionalToNationalOrder(enum Region region, u16 index)
+u16 MosaicRegionalToNationalOrder(enum Region region, u16 index)
 {
-    if (index == 0 || index > GetAnthologyRegionalDexSize(region))
+    if (index == 0 || index > GetMosaicRegionalDexSize(region))
         return NATIONAL_DEX_NONE;
     switch (region)
     {
@@ -4647,9 +4647,9 @@ u16 AnthologyRegionalToNationalOrder(enum Region region, u16 index)
     }
 }
 
-u16 AnthologyNationalToRegionalOrder(enum Region region, u16 national)
+u16 MosaicNationalToRegionalOrder(enum Region region, u16 national)
 {
-    if (!IsInAnthologyRegionalDex(region, national))
+    if (!IsInMosaicRegionalDex(region, national))
         return 0;
     switch (region)
     {
@@ -4669,7 +4669,7 @@ u16 AnthologyNationalToRegionalOrder(enum Region region, u16 national)
     }
 }
 
-bool8 IsInAnthologyRegionalDex(enum Region region, enum NationalDexOrder number)
+bool8 IsInMosaicRegionalDex(enum Region region, enum NationalDexOrder number)
 {
     switch (region)
     {
@@ -4690,11 +4690,11 @@ bool8 IsInAnthologyRegionalDex(enum Region region, enum NationalDexOrder number)
     }
 }
 
-u16 GetAnthologyRegionalPokedexCount(enum Region region, u8 caseID)
+u16 GetMosaicRegionalPokedexCount(enum Region region, u8 caseID)
 {
     u16 number, count = 0;
     for (number = 1; number <= NATIONAL_DEX_COUNT; number++)
-        if (IsInAnthologyRegionalDex(region, number)
+        if (IsInMosaicRegionalDex(region, number)
          && GetSetPokedexFlag(number, caseID))
             count++;
     return count;
@@ -4703,7 +4703,7 @@ u16 GetAnthologyRegionalPokedexCount(enum Region region, u8 caseID)
 u32 GetRegionalPokedexCount(u8 caseID)
 {
 #if ALL_REGIONS
-    return GetAnthologyRegionalPokedexCount(GetActiveRegion(), caseID);
+    return GetMosaicRegionalPokedexCount(GetActiveRegion(), caseID);
 #else
     return GetHoennPokedexCount(caseID);
 #endif
@@ -4712,7 +4712,7 @@ u32 GetRegionalPokedexCount(u8 caseID)
 u16 GetHoennPokedexCount(u8 caseID)
 {
 #if ALL_REGIONS
-    return GetAnthologyRegionalPokedexCount(REGION_HOENN, caseID);
+    return GetMosaicRegionalPokedexCount(REGION_HOENN, caseID);
 #else
     u16 i, count = 0;
     for (i = 1; i < HOENN_DEX_COUNT; i++)
@@ -4725,7 +4725,7 @@ u16 GetHoennPokedexCount(u8 caseID)
 u16 GetKantoPokedexCount(u8 caseID)
 {
 #if ALL_REGIONS
-    return GetAnthologyRegionalPokedexCount(REGION_KANTO, caseID);
+    return GetMosaicRegionalPokedexCount(REGION_KANTO, caseID);
 #else
     u16 i, count = 0;
     for (i = 1; i < KANTO_DEX_COUNT; i++)
@@ -4735,13 +4735,13 @@ u16 GetKantoPokedexCount(u8 caseID)
 #endif
 }
 
-bool16 HasAllAnthologyRegionalMons(enum Region region)
+bool16 HasAllMosaicRegionalMons(enum Region region)
 {
     u16 number;
-    if (!GetAnthologyRegionalDexSize(region))
+    if (!GetMosaicRegionalDexSize(region))
         return FALSE;
     for (number = 1; number <= NATIONAL_DEX_COUNT; number++)
-        if (IsInAnthologyRegionalDex(region, number)
+        if (IsInMosaicRegionalDex(region, number)
          && !GetSetPokedexFlag(number, FLAG_GET_CAUGHT))
             return FALSE;
     return TRUE;
@@ -4750,7 +4750,7 @@ bool16 HasAllAnthologyRegionalMons(enum Region region)
 bool16 HasAllRegionalMons(void)
 {
 #if ALL_REGIONS
-    return HasAllAnthologyRegionalMons(GetActiveRegion());
+    return HasAllMosaicRegionalMons(GetActiveRegion());
 #else
     return HasAllHoennMons();
 #endif
@@ -4782,7 +4782,7 @@ static const u8 *GetObtainableNationalDexSlots(void)
 bool16 HasAllHoennMons(void)
 {
 #if ALL_REGIONS
-    return HasAllAnthologyRegionalMons(REGION_HOENN);
+    return HasAllMosaicRegionalMons(REGION_HOENN);
 #else
     const u8 *occupied = GetObtainableNationalDexSlots();
     u32 i, j;
@@ -4801,7 +4801,7 @@ bool16 HasAllHoennMons(void)
 bool16 HasAllKantoMons(void)
 {
 #if ALL_REGIONS
-    return HasAllAnthologyRegionalMons(REGION_KANTO);
+    return HasAllMosaicRegionalMons(REGION_KANTO);
 #else
     const u8 *occupied = GetObtainableNationalDexSlots();
     u32 i, j;

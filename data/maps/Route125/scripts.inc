@@ -5,7 +5,7 @@ Route125_MapScripts::
 	.byte 0
 
 Route125_OnTransition:
-	call Route125_AnthologyOnTransition
+	call Route125_MosaicOnTransition
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	call_if_eq VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_HideMapNamePopup
 	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_125_WEST, AbnormalWeather_StartKyogreWeather
@@ -84,25 +84,25 @@ Route125_EventScript_Auron::
 
 // Place this unique legendary-Paradox encounter on a Surf-accessible
 // shoreline instead of gated/legacy-diving cave maps.
-Route125_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, Route125_AnthologyRandomOnTransition
+Route125_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, Route125_MosaicRandomOnTransition
 	getcaughtmon SPECIES_WALKING_WAKE
-	call_if_eq VAR_RESULT, TRUE, Route125_AnthologyHideWalkingWake
-	call_if_ne VAR_RESULT, TRUE, Route125_AnthologyShowWalkingWake
+	call_if_eq VAR_RESULT, TRUE, Route125_MosaicHideWalkingWake
+	call_if_ne VAR_RESULT, TRUE, Route125_MosaicShowWalkingWake
 	return
 
-Route125_AnthologyRandomOnTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_ROUTE125_WALKING_WAKE, Route125_AnthologyHideWalkingWake
-	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE125_WALKING_WAKE, Route125_AnthologyShowWalkingWake
+Route125_MosaicRandomOnTransition::
+	call_if_set FLAG_CAUGHT_RANDOM_ROUTE125_WALKING_WAKE, Route125_MosaicHideWalkingWake
+	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE125_WALKING_WAKE, Route125_MosaicShowWalkingWake
 	return
 
-Route125_AnthologyHideWalkingWake::
-	setflag FLAG_HIDE_ANTHOLOGY_WALKING_WAKE
+Route125_MosaicHideWalkingWake::
+	setflag FLAG_HIDE_MOSAIC_WALKING_WAKE
 	return
 
-Route125_AnthologyShowWalkingWake::
-	clearflag FLAG_HIDE_ANTHOLOGY_WALKING_WAKE
+Route125_MosaicShowWalkingWake::
+	clearflag FLAG_HIDE_MOSAIC_WALKING_WAKE
 	return
 
 Route125_EventScript_WalkingWake::
@@ -114,26 +114,26 @@ Route125_EventScript_WalkingWake::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route125_AnthologyWalkingWakeRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route125_AnthologyWalkingWakeRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route125_AnthologyWalkingWakeResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route125_AnthologyWalkingWakeResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route125_MosaicWalkingWakeRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route125_MosaicWalkingWakeRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route125_MosaicWalkingWakeResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route125_MosaicWalkingWakeResolved
 	release
 	end
 
-Route125_AnthologyWalkingWakeResolvedRandomCaught::
+Route125_MosaicWalkingWakeResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE125_WALKING_WAKE
-	goto Route125_AnthologyWalkingWakeResolved
+	goto Route125_MosaicWalkingWakeResolved
 
-Route125_AnthologyWalkingWakeResolved::
+Route125_MosaicWalkingWakeResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_WALKING_WAKE
-	setflag FLAG_HIDE_ANTHOLOGY_WALKING_WAKE
+	removeobject LOCALID_MOSAIC_WALKING_WAKE
+	setflag FLAG_HIDE_MOSAIC_WALKING_WAKE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route125_AnthologyWalkingWakeRetreated::
+Route125_MosaicWalkingWakeRetreated::
 	release
 	end
 

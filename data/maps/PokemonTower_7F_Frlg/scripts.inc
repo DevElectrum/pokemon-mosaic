@@ -3,27 +3,27 @@ PokemonTower_7F_Frlg_MapScripts::
 	.byte 0
 
 PokemonTower_7F_OnTransition::
-	call PokemonTower_7F_AnthologyOnTransition
+	call PokemonTower_7F_MosaicOnTransition
 	end
 
 // The Rocket/Mr. Fuji rescue is native and unchanged. Darkrai remains hidden
 // until Fuji is actually rescued and Cresselia has been registered caught.
-PokemonTower_7F_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+PokemonTower_7F_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, PokemonTower_7F_RandomDarkraiOnTransition
-	goto_if_unset FLAG_RESCUED_MR_FUJI, PokemonTower_7F_AnthologyHideDarkrai
+	goto_if_unset FLAG_RESCUED_MR_FUJI, PokemonTower_7F_MosaicHideDarkrai
 	getcaughtmon SPECIES_CRESSELIA
-	goto_if_ne VAR_RESULT, TRUE, PokemonTower_7F_AnthologyHideDarkrai
+	goto_if_ne VAR_RESULT, TRUE, PokemonTower_7F_MosaicHideDarkrai
 	getcaughtmon SPECIES_DARKRAI
-	call_if_eq VAR_RESULT, TRUE, PokemonTower_7F_AnthologyHideDarkrai
-	call_if_ne VAR_RESULT, TRUE, PokemonTower_7F_AnthologyShowDarkrai
+	call_if_eq VAR_RESULT, TRUE, PokemonTower_7F_MosaicHideDarkrai
+	call_if_ne VAR_RESULT, TRUE, PokemonTower_7F_MosaicShowDarkrai
 	return
 
 PokemonTower_7F_RandomDarkraiOnTransition::
-	goto_if_unset FLAG_RESCUED_MR_FUJI, PokemonTower_7F_AnthologyHideDarkrai
-	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_CRESSELIA, PokemonTower_7F_AnthologyHideDarkrai
-	call_if_set FLAG_CAUGHT_RANDOM_POKEMONTOWER_DARKRAI, PokemonTower_7F_AnthologyHideDarkrai
-	call_if_unset FLAG_CAUGHT_RANDOM_POKEMONTOWER_DARKRAI, PokemonTower_7F_AnthologyShowDarkrai
+	goto_if_unset FLAG_RESCUED_MR_FUJI, PokemonTower_7F_MosaicHideDarkrai
+	goto_if_unset FLAG_CAUGHT_RANDOM_MTMOON_CRESSELIA, PokemonTower_7F_MosaicHideDarkrai
+	call_if_set FLAG_CAUGHT_RANDOM_POKEMONTOWER_DARKRAI, PokemonTower_7F_MosaicHideDarkrai
+	call_if_unset FLAG_CAUGHT_RANDOM_POKEMONTOWER_DARKRAI, PokemonTower_7F_MosaicShowDarkrai
 	return
 
 PokemonTower_7F_EventScript_MrFuji::
@@ -307,12 +307,12 @@ PokemonTower_7F_Text_MrFujiThankYouFollowMe::
 
 
 // Static encounter is on the 7F public aisle, separate from Fuji's script.
-PokemonTower_7F_AnthologyHideDarkrai::
-	setflag FLAG_HIDE_ANTHOLOGY_DARKRAI
+PokemonTower_7F_MosaicHideDarkrai::
+	setflag FLAG_HIDE_MOSAIC_DARKRAI
 	return
 
-PokemonTower_7F_AnthologyShowDarkrai::
-	clearflag FLAG_HIDE_ANTHOLOGY_DARKRAI
+PokemonTower_7F_MosaicShowDarkrai::
+	clearflag FLAG_HIDE_MOSAIC_DARKRAI
 	return
 
 PokemonTower_7F_EventScript_Darkrai::
@@ -324,44 +324,44 @@ PokemonTower_7F_EventScript_Darkrai::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PokemonTower_7F_AnthologyDarkraiRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PokemonTower_7F_AnthologyDarkraiRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonTower_7F_AnthologyDarkraiCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PokemonTower_7F_AnthologyDarkraiResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PokemonTower_7F_MosaicDarkraiRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PokemonTower_7F_MosaicDarkraiRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonTower_7F_MosaicDarkraiCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PokemonTower_7F_MosaicDarkraiResolved
 	release
 	end
 
-PokemonTower_7F_AnthologyDarkraiCaught::
+PokemonTower_7F_MosaicDarkraiCaught::
 	setflag FLAG_CAUGHT_RANDOM_POKEMONTOWER_DARKRAI
-	goto PokemonTower_7F_AnthologyDarkraiResolved
+	goto PokemonTower_7F_MosaicDarkraiResolved
 
-PokemonTower_7F_AnthologyDarkraiResolved::
+PokemonTower_7F_MosaicDarkraiResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_DARKRAI
-	setflag FLAG_HIDE_ANTHOLOGY_DARKRAI
+	removeobject LOCALID_MOSAIC_DARKRAI
+	setflag FLAG_HIDE_MOSAIC_DARKRAI
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-PokemonTower_7F_AnthologyDarkraiRetreated::
+PokemonTower_7F_MosaicDarkraiRetreated::
 	release
 	end
 
 
-Anthology_MegaStone_DARKRANITE::
-    callnative AnthologyStaticRandomizerIsOn
+Mosaic_MegaStone_DARKRANITE::
+    callnative MosaicStaticRandomizerIsOn
     goto_if_eq VAR_RESULT, TRUE, PokemonTower_7F_MegaStoneDarkraiRandom
     getcaughtmon SPECIES_DARKRAI
-    goto_if_ne VAR_RESULT, TRUE, Anthology_MegaStone_DARKRANITE_Locked
+    goto_if_ne VAR_RESULT, TRUE, Mosaic_MegaStone_DARKRANITE_Locked
     finditem ITEM_DARKRANITE
     end
 PokemonTower_7F_MegaStoneDarkraiRandom::
-    goto_if_unset FLAG_CAUGHT_RANDOM_POKEMONTOWER_DARKRAI, Anthology_MegaStone_DARKRANITE_Locked
+    goto_if_unset FLAG_CAUGHT_RANDOM_POKEMONTOWER_DARKRAI, Mosaic_MegaStone_DARKRANITE_Locked
     finditem ITEM_DARKRANITE
     end
-Anthology_MegaStone_DARKRANITE_Locked::
-    msgbox Anthology_MegaStone_DARKRANITE_LockedText, MSGBOX_DEFAULT
+Mosaic_MegaStone_DARKRANITE_Locked::
+    msgbox Mosaic_MegaStone_DARKRANITE_LockedText, MSGBOX_DEFAULT
     end
-Anthology_MegaStone_DARKRANITE_LockedText::
+Mosaic_MegaStone_DARKRANITE_LockedText::
     .string "A special MEGA STONE resonates here.\p"
     .string "Return when its guardian is yours.$"

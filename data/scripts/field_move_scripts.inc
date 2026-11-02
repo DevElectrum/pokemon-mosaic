@@ -89,18 +89,18 @@ EventScript_SmashRock:: @ fallthrough
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
 	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash
 	special RockSmashWildEncounter
-	goto_if_eq VAR_RESULT, FALSE, EventScript_AnthologyCheckExcavatedFossil
+	goto_if_eq VAR_RESULT, FALSE, EventScript_MosaicCheckExcavatedFossil
 	waitstate
 	releaseall
 	end
 
-EventScript_AnthologyCheckExcavatedFossil::
+EventScript_MosaicCheckExcavatedFossil::
 	goto_if_eq VAR_0x8004, ITEM_NONE, EventScript_EndSmash
 	bufferitemname STR_VAR_1, VAR_0x8004
-	msgbox Text_AnthologyRockSmashFossil, MSGBOX_DEFAULT
+	msgbox Text_MosaicRockSmashFossil, MSGBOX_DEFAULT
 	goto EventScript_EndSmash
 
-Text_AnthologyRockSmashFossil:
+Text_MosaicRockSmashFossil:
 	.string "Found {STR_VAR_1} inside the rock!\p"
 	.string "It was placed in the BAG.$"
 

@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCALID_ANTHOLOGY_MIRAIDON",
+      "local_id": "LOCALID_MOSAIC_MIRAIDON",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(MIRAIDON)",
       "x": 4,
       "y": 2,
@@ -27,7 +27,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NewMauville_GeneratorAnnex_EventScript_Miraidon",
-      "flag": "FLAG_HIDE_ANTHOLOGY_MIRAIDON"
+      "flag": "FLAG_HIDE_MOSAIC_MIRAIDON"
     }
   ],
   "warp_events": [

@@ -14,7 +14,7 @@ MarineCave_End_EventScript_TryRemoveKyogre::
 	return
 
 MarineCave_End_OnTransition:
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, MarineCave_End_SeededOnTransition
 	getcaughtmon SPECIES_KYOGRE
 	goto_if_eq VAR_RESULT, TRUE, MarineCave_End_NativeKYOGRECaught
@@ -66,7 +66,7 @@ MarineCave_End_EventScript_Kyogre::
 	end
 
 MarineCave_End_SeededCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, MarineCave_End_MarkSeededCaught
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
 	setflag FLAG_DEFEATED_KYOGRE

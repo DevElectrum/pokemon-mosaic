@@ -40,7 +40,7 @@ for line in catalog_path.read_text().splitlines():
     if row.get("kind") == "item":
         catalog[row["symbol"]] = row
 
-guide = (root / "docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md").read_text()
+guide = (root / "docs/MOSAIC_FIELD_GUIDE.md").read_text()
 for item in items:
     symbol = "ITEM_" + item
     assert symbol in catalog, "Missing catalog entry: " + symbol

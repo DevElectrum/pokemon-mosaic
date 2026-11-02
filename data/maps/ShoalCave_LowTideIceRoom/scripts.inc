@@ -3,20 +3,20 @@ ShoalCave_LowTideIceRoom_MapScripts::
 	.byte 0
 
 ShoalCave_LowTideIceRoom_OnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideIceRoom_SeededTransition
 	getcaughtmon SPECIES_GLASTRIER
 	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideIceRoom_HideGlastrier
-	clearflag FLAG_HIDE_ANTHOLOGY_GLASTRIER
+	clearflag FLAG_HIDE_MOSAIC_GLASTRIER
 	end
 
 ShoalCave_LowTideIceRoom_SeededTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_SHOALCAVE_GLASTRIER, ShoalCave_LowTideIceRoom_HideGlastrier
-	clearflag FLAG_HIDE_ANTHOLOGY_GLASTRIER
+	clearflag FLAG_HIDE_MOSAIC_GLASTRIER
 	end
 
 ShoalCave_LowTideIceRoom_HideGlastrier::
-	setflag FLAG_HIDE_ANTHOLOGY_GLASTRIER
+	setflag FLAG_HIDE_MOSAIC_GLASTRIER
 	end
 
 
@@ -39,7 +39,7 @@ ShoalCave_LowTideIceRoom_EventScript_Glastrier::
 	end
 
 ShoalCave_LowTideIceRoom_LegendaryCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideIceRoom_MarkSeededGlastrier
 	goto ShoalCave_LowTideIceRoom_LegendaryResolved
 
@@ -49,8 +49,8 @@ ShoalCave_LowTideIceRoom_MarkSeededGlastrier::
 
 ShoalCave_LowTideIceRoom_LegendaryResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_GLASTRIER
-	setflag FLAG_HIDE_ANTHOLOGY_GLASTRIER
+	removeobject LOCALID_MOSAIC_GLASTRIER
+	setflag FLAG_HIDE_MOSAIC_GLASTRIER
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

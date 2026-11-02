@@ -60,7 +60,7 @@ Use the toolchain and Lua-enabled mGBA in [test/overworld/mgba](../mgba/README.m
 ```sh
 make modern TOOLCHAIN=/opt/devkitpro/devkitARM -j8
 python3 test/overworld/bw-battle-ui/build_fixture.py --repo . \
-  --rom "$PWD/pokemonworld.gba" --elf "$PWD/pokemonworld.elf" \
+  --rom "$PWD/pokemon-mosaic.gba" --elf "$PWD/pokemon-mosaic.elf" \
   --source-ref "$(git rev-parse HEAD)" --out /tmp/bw-fixture
 python3 test/overworld/bw-battle-ui/run_all.py --repo . \
   --fixture /tmp/bw-fixture --out /tmp/bw-checks

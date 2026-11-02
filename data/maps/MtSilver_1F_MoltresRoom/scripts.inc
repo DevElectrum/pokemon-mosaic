@@ -6,7 +6,7 @@ MtSilver_1F_MoltresRoom_MapScripts::
 	.byte 0
 
 MtSilver_1F_MoltresRoom_OnTransition:
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, MtSilver_1F_MoltresRoom_SeededTransition
 	end
 
@@ -43,7 +43,7 @@ MtSilver_1F_MoltresRoom_EventScript_Moltres::
 	end
 
 MtSilver_1F_MoltresRoom_SeededMoltresMark::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_ne VAR_RESULT, TRUE, MtSilver_1F_MoltresRoom_SeededMoltresMarkDone
 	setflag FLAG_CAUGHT_RANDOM_MTSILVER_1F_MOLTRESROOM_MOLTRES
 MtSilver_1F_MoltresRoom_SeededMoltresMarkDone::

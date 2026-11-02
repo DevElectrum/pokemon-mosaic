@@ -66,7 +66,7 @@ LilycoveCity_DepartmentStore_2F_Pokemart1:
 	.2byte ITEM_WHIPPED_DREAM
 	.2byte ITEM_AUSPICIOUS_ARMOR
 	.2byte ITEM_MALICIOUS_ARMOR
-	@ Anthology ability and special evolution items.
+	@ Mosaic ability and special evolution items.
 	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_ABILITY_PATCH
 	.2byte ITEM_LEADERS_CREST

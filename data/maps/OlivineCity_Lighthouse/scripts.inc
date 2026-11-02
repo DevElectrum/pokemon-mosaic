@@ -6,7 +6,7 @@ OlivineCity_Lighthouse_MapScripts::
 	.byte 0
 
 OlivineCity_Lighthouse_OnTransition::
-	call OlivineCity_Lighthouse_AnthologyOnTransition
+	call OlivineCity_Lighthouse_MosaicOnTransition
 	end
 
 OlivineLighthouse_EventScript_Item_Ether::
@@ -399,17 +399,17 @@ OlivineLighthouse_Text_AmphyPaluPalulu:
 
 
 
-OlivineCity_Lighthouse_AnthologyOnTransition::
+OlivineCity_Lighthouse_MosaicOnTransition::
 	goto_if_unset FLAG_AMPHAROS_HEALED, OlivineCity_Lighthouse_HideRegieleki
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, OlivineCity_Lighthouse_SeededREGIELEKIVisible
 	getcaughtmon SPECIES_REGIELEKI
 	goto_if_eq VAR_RESULT, TRUE, OlivineCity_Lighthouse_HideRegieleki
-	clearflag FLAG_HIDE_ANTHOLOGY_REGIELEKI
+	clearflag FLAG_HIDE_MOSAIC_REGIELEKI
 	return
 
 OlivineCity_Lighthouse_HideRegieleki::
-	setflag FLAG_HIDE_ANTHOLOGY_REGIELEKI
+	setflag FLAG_HIDE_MOSAIC_REGIELEKI
 	return
 
 OlivineCity_Lighthouse_EventScript_Regieleki::
@@ -430,8 +430,8 @@ OlivineCity_Lighthouse_EventScript_Regieleki::
 
 OlivineCity_Lighthouse_RegielekiResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_REGIELEKI
-	setflag FLAG_HIDE_ANTHOLOGY_REGIELEKI
+	removeobject LOCALID_MOSAIC_REGIELEKI
+	setflag FLAG_HIDE_MOSAIC_REGIELEKI
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -443,11 +443,11 @@ OlivineCity_Lighthouse_RegielekiRetreated::
 // Seeded location ownership is separate from the original species Pokédex.
 OlivineCity_Lighthouse_SeededREGIELEKIVisible::
 	goto_if_set FLAG_CAUGHT_RANDOM_OLIVINECITY_LIGHTHOUSE_REGIELEKI, OlivineCity_Lighthouse_HideRegieleki
-	clearflag FLAG_HIDE_ANTHOLOGY_REGIELEKI
+	clearflag FLAG_HIDE_MOSAIC_REGIELEKI
 	return
 
 OlivineCity_Lighthouse_SeededREGIELEKICatch::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, OlivineCity_Lighthouse_SeededREGIELEKICatchMark
 	goto OlivineCity_Lighthouse_RegielekiResolved
 

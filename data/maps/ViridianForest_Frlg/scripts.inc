@@ -4,7 +4,7 @@ ViridianForest_Frlg_MapScripts::
 
 ViridianForest_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_FOREST
-	call ViridianForest_AnthologyOnTransition
+	call ViridianForest_MosaicOnTransition
 	end
 
 ViridianForest_EventScript_Youngster::
@@ -171,25 +171,25 @@ ViridianForest_Text_LeavingViridianForest::
 
 
 // Before Brock: a one-time static encounter in the forest, not Route 5.
-ViridianForest_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, ViridianForest_AnthologyRandomOnTransition
+ViridianForest_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, ViridianForest_MosaicRandomOnTransition
 	getcaughtmon SPECIES_SHAYMIN
-	call_if_eq VAR_RESULT, TRUE, ViridianForest_AnthologyHideShaymin
-	call_if_ne VAR_RESULT, TRUE, ViridianForest_AnthologyShowShaymin
+	call_if_eq VAR_RESULT, TRUE, ViridianForest_MosaicHideShaymin
+	call_if_ne VAR_RESULT, TRUE, ViridianForest_MosaicShowShaymin
 	return
 
-ViridianForest_AnthologyRandomOnTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_VIRIDIANFOREST_SHAYMIN, ViridianForest_AnthologyHideShaymin
-	call_if_unset FLAG_CAUGHT_RANDOM_VIRIDIANFOREST_SHAYMIN, ViridianForest_AnthologyShowShaymin
+ViridianForest_MosaicRandomOnTransition::
+	call_if_set FLAG_CAUGHT_RANDOM_VIRIDIANFOREST_SHAYMIN, ViridianForest_MosaicHideShaymin
+	call_if_unset FLAG_CAUGHT_RANDOM_VIRIDIANFOREST_SHAYMIN, ViridianForest_MosaicShowShaymin
 	return
 
-ViridianForest_AnthologyHideShaymin::
-	setflag FLAG_HIDE_ANTHOLOGY_SHAYMIN
+ViridianForest_MosaicHideShaymin::
+	setflag FLAG_HIDE_MOSAIC_SHAYMIN
 	return
 
-ViridianForest_AnthologyShowShaymin::
-	clearflag FLAG_HIDE_ANTHOLOGY_SHAYMIN
+ViridianForest_MosaicShowShaymin::
+	clearflag FLAG_HIDE_MOSAIC_SHAYMIN
 	return
 
 ViridianForest_EventScript_Shaymin::
@@ -201,26 +201,26 @@ ViridianForest_EventScript_Shaymin::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, ViridianForest_AnthologyShayminRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, ViridianForest_AnthologyShayminRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, ViridianForest_AnthologyShayminResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, ViridianForest_AnthologyShayminResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, ViridianForest_MosaicShayminRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, ViridianForest_MosaicShayminRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, ViridianForest_MosaicShayminResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, ViridianForest_MosaicShayminResolved
 	release
 	end
 
-ViridianForest_AnthologyShayminResolvedRandomCaught::
+ViridianForest_MosaicShayminResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_VIRIDIANFOREST_SHAYMIN
-	goto ViridianForest_AnthologyShayminResolved
+	goto ViridianForest_MosaicShayminResolved
 
-ViridianForest_AnthologyShayminResolved::
+ViridianForest_MosaicShayminResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_SHAYMIN
-	setflag FLAG_HIDE_ANTHOLOGY_SHAYMIN
+	removeobject LOCALID_MOSAIC_SHAYMIN
+	setflag FLAG_HIDE_MOSAIC_SHAYMIN
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-ViridianForest_AnthologyShayminRetreated::
+ViridianForest_MosaicShayminRetreated::
 	release
 	end
 

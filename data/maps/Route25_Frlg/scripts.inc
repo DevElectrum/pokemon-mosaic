@@ -8,7 +8,7 @@ Route25_Frlg_MapScripts::
 @ the durable completion marker. FLAG_FOUGHT_SUICUNE means the current encounter
 @ was resolved; the Hall of Fame helper clears it only when Suicune was not caught.
 Route25_Frlg_OnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route25_SeededSuicuneTransition
 	getcaughtmon SPECIES_SUICUNE
 	goto_if_eq VAR_RESULT, TRUE, Route25_EventScript_HideCaughtSuicune
@@ -51,7 +51,7 @@ Route25_EventScript_Suicune::
 	end
 
 Route25_EventScript_SuicuneCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route25_MarkSeededSuicune
 	goto Route25_EventScript_SuicuneDefeated
 

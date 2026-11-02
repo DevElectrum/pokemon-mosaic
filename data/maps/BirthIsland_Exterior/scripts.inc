@@ -13,7 +13,7 @@ BirthIsland_Exterior_OnTransition:
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	setvar VAR_DEOXYS_ROCK_STEP_COUNT, 0
 	setvar VAR_DEOXYS_ROCK_LEVEL, 0
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, BirthIsland_Exterior_SeededDeoxysVisibility
 	getcaughtmon SPECIES_DEOXYS_NORMAL
 	call_if_eq VAR_RESULT, TRUE, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
@@ -103,7 +103,7 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	end
 
 BirthIsland_Exterior_SeededDeoxysCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, BirthIsland_Exterior_MarkSeededDeoxys
 	setflag FLAG_BATTLED_DEOXYS
 	release

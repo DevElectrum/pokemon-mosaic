@@ -20,11 +20,11 @@ for directory, name, species, coord, entrance in SITES:
     assert len(objs) == 1, (directory, "duplicate or missing object")
     o = objs[0]
     assert (o["x"], o["y"], o["elevation"]) == (*coord, 3)
-    assert o["flag"] == f"FLAG_HIDE_ANTHOLOGY_{species}"
+    assert o["flag"] == f"FLAG_HIDE_MOSAIC_{species}"
     assert o["graphics_id"] == f"OBJ_EVENT_GFX_SPECIES({species})"
     assert f"getcaughtmon SPECIES_{species}" in script
     assert f"seteventmon SPECIES_{species}" in script
-    assert f"call {directory}_AnthologyOnTransition" in script
+    assert f"call {directory}_MosaicOnTransition" in script
     layout = LAYOUTS[map_data["layout"]]
     w, h = layout["width"], layout["height"]
     tiles = (ROOT / layout["blockdata_filepath"]).read_bytes()
@@ -47,8 +47,8 @@ for directory, name, species, coord, entrance in SITES:
         x, y = xy
         todo += [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
     assert coord in seen, (directory, "unreachable from natural entry warp")
-    assert f"goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, {directory}_Anthology{name}" in script
-    assert f"goto_if_eq VAR_RESULT, B_OUTCOME_WON, {directory}_Anthology{name}Resolved" in script
+    assert f"goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, {directory}_Mosaic{name}" in script
+    assert f"goto_if_eq VAR_RESULT, B_OUTCOME_WON, {directory}_Mosaic{name}Resolved" in script
     assert "B_OUTCOME_RAN" in script and "B_OUTCOME_PLAYER_TELEPORTED" in script
 
 for old, species in (("Route45", "RESHIRAM"), ("Route45", "ZEKROM"), ("Route44", "KYUREM")):
@@ -59,12 +59,12 @@ for old, species in (("Route45", "RESHIRAM"), ("Route45", "ZEKROM"), ("Route44",
     assert f"seteventmon SPECIES_{species}" not in src
 
 ice = (MAPS / "IcePath_B1F/scripts.inc").read_text()
-gate = ice.split("IcePath_B1F_AnthologyOnTransition::")[1].split("IcePath_B1F_AnthologyHideKyurem::")[0]
-assert gate.index("getcaughtmon SPECIES_KYUREM") < gate.index("getcaughtmon SPECIES_RESHIRAM") < gate.index("getcaughtmon SPECIES_ZEKROM") < gate.index("clearflag FLAG_HIDE_ANTHOLOGY_KYUREM")
-assert gate.count("goto_if_ne VAR_RESULT, TRUE, IcePath_B1F_AnthologyHideKyurem") == 2
-caught = ice.split("IcePath_B1F_AnthologyKyuremCaught::")[1].split("IcePath_B1F_AnthologyKyuremRetreated::")[0]
+gate = ice.split("IcePath_B1F_MosaicOnTransition::")[1].split("IcePath_B1F_MosaicHideKyurem::")[0]
+assert gate.index("getcaughtmon SPECIES_KYUREM") < gate.index("getcaughtmon SPECIES_RESHIRAM") < gate.index("getcaughtmon SPECIES_ZEKROM") < gate.index("clearflag FLAG_HIDE_MOSAIC_KYUREM")
+assert gate.count("goto_if_ne VAR_RESULT, TRUE, IcePath_B1F_MosaicHideKyurem") == 2
+caught = ice.split("IcePath_B1F_MosaicKyuremCaught::")[1].split("IcePath_B1F_MosaicKyuremRetreated::")[0]
 assert "giveitem ITEM_DNA_SPLICERS" in caught and "checkitem ITEM_DNA_SPLICERS" in caught
-assert "giveitem ITEM_DNA_SPLICERS" not in ice.split("IcePath_B1F_AnthologyKyuremResolved::")[1].split("IcePath_B1F_AnthologyKyuremCaught::")[0]
+assert "giveitem ITEM_DNA_SPLICERS" not in ice.split("IcePath_B1F_MosaicKyuremResolved::")[1].split("IcePath_B1F_MosaicKyuremCaught::")[0]
 plinth = json.loads((MAPS / "IcePath_B1F/map.json").read_text())["bg_events"]
 assert sum(e["script"] == "IcePath_B1F_EventScript_DNASplicersPlinth" for e in plinth) == 1
 assert "getcaughtmon SPECIES_KYUREM" in ice.split("IcePath_B1F_EventScript_DNASplicersPlinth::")[1]

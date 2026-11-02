@@ -98,20 +98,20 @@ Route104_Text_RegisteredDadInPokenav:
 	.string "in the POKéNAV.$"
 
 Route105_ChienPaoTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route105_ChienPaoRandomTransition
 	getcaughtmon SPECIES_CHIEN_PAO
 	goto_if_eq VAR_RESULT, TRUE, Route105_HideChienPao
-	clearflag FLAG_HIDE_ANTHOLOGY_CHIEN_PAO
+	clearflag FLAG_HIDE_MOSAIC_CHIEN_PAO
 	return
 
 Route105_ChienPaoRandomTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE105_CHIEN_PAO, Route105_HideChienPao
-	clearflag FLAG_HIDE_ANTHOLOGY_CHIEN_PAO
+	clearflag FLAG_HIDE_MOSAIC_CHIEN_PAO
 	return
 
 Route105_HideChienPao::
-	setflag FLAG_HIDE_ANTHOLOGY_CHIEN_PAO
+	setflag FLAG_HIDE_MOSAIC_CHIEN_PAO
 	return
 
 Route105_EventScript_ChienPao::
@@ -136,8 +136,8 @@ Route105_ChienPaoResolvedRandomCaught::
 
 Route105_ChienPaoResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_CHIEN_PAO
-	setflag FLAG_HIDE_ANTHOLOGY_CHIEN_PAO
+	removeobject LOCALID_MOSAIC_CHIEN_PAO
+	setflag FLAG_HIDE_MOSAIC_CHIEN_PAO
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

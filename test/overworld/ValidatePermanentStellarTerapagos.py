@@ -35,20 +35,20 @@ assert "call_if_set FLAG_HOENN_CHAMPION, SootopolisCity_EventScript_ReopenCaveFo
 assert "setobjectxyperm LOCALID_SOOTOPOLIS_EXPERT, 30, 18" in city
 assert "goto_if_set FLAG_HOENN_CHAMPION, SootopolisCity_EventScript_ExpertChampion" in city
 assert "goto_if_unset FLAG_HOENN_CHAMPION, CaveOfOrigin_B1F_HideStellar" in cave_script
-assert "goto_if_set FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_STELLAR, CaveOfOrigin_B1F_HideStellar" in cave_script
+assert "goto_if_set FLAG_CAUGHT_MOSAIC_TERAPAGOS_STELLAR, CaveOfOrigin_B1F_HideStellar" in cave_script
 assert "seteventmon SPECIES_TERAPAGOS_STELLAR, 75" in cave_script
 assert "goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, CaveOfOrigin_B1F_StellarCaught" in cave_script
-assert "setflag FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_STELLAR" in cave_script
-assert "FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_NORMAL" in normal
+assert "setflag FLAG_CAUGHT_MOSAIC_TERAPAGOS_STELLAR" in cave_script
+assert "FLAG_CAUGHT_MOSAIC_TERAPAGOS_NORMAL" in normal
 assert "getcaughtmon SPECIES_TERAPAGOS_NORMAL" not in normal
 assert "seteventmon SPECIES_TERAPAGOS_NORMAL, 31" in normal
-assert "FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_NORMAL" in flags
-assert "FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_STELLAR" in flags
+assert "FLAG_CAUGHT_MOSAIC_TERAPAGOS_NORMAL" in flags
+assert "FLAG_CAUGHT_MOSAIC_TERAPAGOS_STELLAR" in flags
 
 objects = [x for x in cave["object_events"] if x["script"] == "CaveOfOrigin_B1F_EventScript_StellarTerapagos"]
 assert len(objects) == 1
 event = objects[0]
-assert event["flag"] == "FLAG_HIDE_ANTHOLOGY_TERAPAGOS_STELLAR"
+assert event["flag"] == "FLAG_HIDE_MOSAIC_TERAPAGOS_STELLAR"
 assert event["graphics_id"] == "OBJ_EVENT_GFX_SPECIES(TERAPAGOS_TERASTAL)"
 assert (event["x"], event["y"], event["elevation"]) == (9, 14, 3)
 layout = layouts[cave["layout"]]

@@ -378,7 +378,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_MUNKIDORI",
+      "local_id": "LOCALID_MOSAIC_MUNKIDORI",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(MUNKIDORI)",
       "x": 22,
       "y": 28,
@@ -389,10 +389,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route114_EventScript_Munkidori",
-      "flag": "FLAG_HIDE_ANTHOLOGY_MUNKIDORI"
+      "flag": "FLAG_HIDE_MOSAIC_MUNKIDORI"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_TERAPAGOS",
+      "local_id": "LOCALID_MOSAIC_TERAPAGOS",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(TERAPAGOS_NORMAL)",
       "x": 15,
       "y": 34,
@@ -403,7 +403,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route114_EventScript_Terapagos",
-      "flag": "FLAG_HIDE_ANTHOLOGY_TERAPAGOS"
+      "flag": "FLAG_HIDE_MOSAIC_TERAPAGOS"
     }
   ],
   "warp_events": [

@@ -589,7 +589,7 @@
       "flag": "FLAG_HIDE_ROUTE_119_SCOTT"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_RAGING_BOLT",
+      "local_id": "LOCALID_MOSAIC_RAGING_BOLT",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(RAGING_BOLT)",
       "x": 24,
       "y": 111,
@@ -600,10 +600,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route119_EventScript_RagingBolt",
-      "flag": "FLAG_HIDE_ANTHOLOGY_RAGING_BOLT"
+      "flag": "FLAG_HIDE_MOSAIC_RAGING_BOLT"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_XERNEAS",
+      "local_id": "LOCALID_MOSAIC_XERNEAS",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(XERNEAS)",
       "x": 31,
       "y": 88,
@@ -614,7 +614,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route119_EventScript_Xerneas",
-      "flag": "FLAG_HIDE_ANTHOLOGY_XERNEAS"
+      "flag": "FLAG_HIDE_MOSAIC_XERNEAS"
     }
   ],
   "warp_events": [

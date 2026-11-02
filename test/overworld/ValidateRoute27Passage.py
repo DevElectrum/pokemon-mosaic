@@ -52,9 +52,9 @@ while queue:
     queue.extend(((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)))
 assert goal in seen, "Route 27 staircase no longer connects its lower and upper passages"
 
-assert any(obj.get("local_id") == "LOCALID_ANTHOLOGY_ZACIAN"
+assert any(obj.get("local_id") == "LOCALID_MOSAIC_ZACIAN"
            for obj in route["object_events"])
-assert any(obj.get("local_id") == "LOCALID_ANTHOLOGY_ZAMAZENTA"
+assert any(obj.get("local_id") == "LOCALID_MOSAIC_ZAMAZENTA"
            for obj in route["object_events"])
 
 print("PASS: Route 27 Arbok/Dodrio remain on side grass and the League path is open")

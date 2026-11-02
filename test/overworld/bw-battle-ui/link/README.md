@@ -28,7 +28,7 @@ configuration. Using a mismatched header layout will crash before emulation.
 Generate `pw-symbols.h` using the script here, with the exact fixture and ELF:
 
 ```sh
-python3 export_symbols.py --fixture /tmp/bw-fixture --elf /path/to/pokemonworld.elf --out /path/to/mgba/pw-symbols.h
+python3 export_symbols.py --fixture /tmp/bw-fixture --elf /path/to/pokemon-mosaic.elf --out /path/to/mgba/pw-symbols.h
 /path/to/mgba/build/pw-link /tmp/bw-fixture/VerifyFeatures.gba /tmp/bw-checks/save/VisualReview.sav /tmp/link-output
 ```
 

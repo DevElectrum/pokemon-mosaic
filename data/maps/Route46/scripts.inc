@@ -1,5 +1,5 @@
 Route46_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, Route46_AnthologyTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, Route46_MosaicTransition
 	map_script MAP_SCRIPT_ON_RESUME, SetTimeEncounters
 	.byte 0
 
@@ -81,5 +81,5 @@ Route46_Text_Sign:
 	.string "MOUNTAIN RD. AHEAD$"
 
 // Keep original Route 46 story transition; Entei now waits inside Mt. Mortar.
-Route46_AnthologyTransition::
+Route46_MosaicTransition::
 	goto Route29_OnTransition

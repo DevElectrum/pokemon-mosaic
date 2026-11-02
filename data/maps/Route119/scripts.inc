@@ -14,7 +14,7 @@ Route119_EventScript_TryRemoveKecleon::
 	return
 
 Route119_OnTransition:
-	call Route119_AnthologyOnTransition
+	call Route119_MosaicOnTransition
 	call Common_EventScript_SetupRivalGfxId
 	call Common_EventScript_SetupRivalOnBikeGfxId
 	call_if_eq VAR_WEATHER_INSTITUTE_STATE, 1, Route119_EventScript_MoveInstituteWorkersDownstairs
@@ -71,7 +71,7 @@ Route119_EventScript_PlayBrendanMusic::
 Route119_EventScript_BattleMay::
 	msgbox Route119_Text_MayIntro, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, Route119_EventScript_BattleMayTreecko
 	case 1, Route119_EventScript_BattleMayTorchic
@@ -103,7 +103,7 @@ Route119_EventScript_DefeatedMay::
 Route119_EventScript_BattleBrendan::
 	msgbox Route119_Text_BrendanIntro, MSGBOX_DEFAULT
 	@ Original rival/team story remains type-based for all three starter pages.
-	callnative Anthology_GetHoennStarterStoryBranch
+	callnative Mosaic_GetHoennStarterStoryBranch
 	switch VAR_RESULT
 	case 0, Route119_EventScript_BattleBrendanTreecko
 	case 1, Route119_EventScript_BattleBrendanTorchic
@@ -616,26 +616,26 @@ Route119_Text_TrainerTipsDecoration:
 
 // Special species sources added without replacing any canonical event or
 // scene. They respawn after a non-capture victory when the map is re-entered.
-Route119_AnthologyOnTransition::
+Route119_MosaicOnTransition::
 	call Route119_XerneasTransition
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route119_SeededRagingBoltTransition
 	getcaughtmon SPECIES_RAGING_BOLT
-	call_if_eq VAR_RESULT, TRUE, Route119_AnthologyHideRagingBolt
-	call_if_ne VAR_RESULT, TRUE, Route119_AnthologyShowRagingBolt
+	call_if_eq VAR_RESULT, TRUE, Route119_MosaicHideRagingBolt
+	call_if_ne VAR_RESULT, TRUE, Route119_MosaicShowRagingBolt
 	return
 
 Route119_SeededRagingBoltTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_ROUTE119_RAGING_BOLT, Route119_AnthologyHideRagingBolt
-	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE119_RAGING_BOLT, Route119_AnthologyShowRagingBolt
+	call_if_set FLAG_CAUGHT_RANDOM_ROUTE119_RAGING_BOLT, Route119_MosaicHideRagingBolt
+	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE119_RAGING_BOLT, Route119_MosaicShowRagingBolt
 	return
 
-Route119_AnthologyHideRagingBolt::
-	setflag FLAG_HIDE_ANTHOLOGY_RAGING_BOLT
+Route119_MosaicHideRagingBolt::
+	setflag FLAG_HIDE_MOSAIC_RAGING_BOLT
 	return
 
-Route119_AnthologyShowRagingBolt::
-	clearflag FLAG_HIDE_ANTHOLOGY_RAGING_BOLT
+Route119_MosaicShowRagingBolt::
+	clearflag FLAG_HIDE_MOSAIC_RAGING_BOLT
 	return
 
 Route119_EventScript_RagingBolt::
@@ -647,49 +647,49 @@ Route119_EventScript_RagingBolt::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route119_AnthologyRagingBoltRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route119_AnthologyRagingBoltRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route119_MosaicRagingBoltRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route119_MosaicRagingBoltRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route119_SeededRagingBoltCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route119_AnthologyRagingBoltResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route119_MosaicRagingBoltResolved
 	release
 	end
 
 Route119_SeededRagingBoltCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route119_MarkSeededRagingBolt
-	goto Route119_AnthologyRagingBoltResolved
+	goto Route119_MosaicRagingBoltResolved
 
 Route119_MarkSeededRagingBolt::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE119_RAGING_BOLT
 	return
 
-Route119_AnthologyRagingBoltResolved::
+Route119_MosaicRagingBoltResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_RAGING_BOLT
-	setflag FLAG_HIDE_ANTHOLOGY_RAGING_BOLT
+	removeobject LOCALID_MOSAIC_RAGING_BOLT
+	setflag FLAG_HIDE_MOSAIC_RAGING_BOLT
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route119_AnthologyRagingBoltRetreated::
+Route119_MosaicRagingBoltRetreated::
 	release
 	end
 
 Route119_XerneasTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route119_SeededXerneasTransition
 	getcaughtmon SPECIES_XERNEAS
 	goto_if_eq VAR_RESULT, TRUE, Route119_HideXerneas
-	clearflag FLAG_HIDE_ANTHOLOGY_XERNEAS
+	clearflag FLAG_HIDE_MOSAIC_XERNEAS
 	return
 
 Route119_SeededXerneasTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE119_XERNEAS, Route119_HideXerneas
-	clearflag FLAG_HIDE_ANTHOLOGY_XERNEAS
+	clearflag FLAG_HIDE_MOSAIC_XERNEAS
 	return
 
 Route119_HideXerneas::
-	setflag FLAG_HIDE_ANTHOLOGY_XERNEAS
+	setflag FLAG_HIDE_MOSAIC_XERNEAS
 	return
 
 Route119_EventScript_Xerneas::
@@ -709,7 +709,7 @@ Route119_EventScript_Xerneas::
 	end
 
 Route119_SeededXerneasCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route119_MarkSeededXerneas
 	goto Route119_XerneasResolved
 
@@ -719,8 +719,8 @@ Route119_MarkSeededXerneas::
 
 Route119_XerneasResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_XERNEAS
-	setflag FLAG_HIDE_ANTHOLOGY_XERNEAS
+	removeobject LOCALID_MOSAIC_XERNEAS
+	setflag FLAG_HIDE_MOSAIC_XERNEAS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

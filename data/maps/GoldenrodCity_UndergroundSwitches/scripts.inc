@@ -325,11 +325,11 @@ GoldenrodCity_UndergroundSwitches_EventScript_SilverTriggerTop::
 	waitmovement 0
 	msgbox GoldenrodUnderground_Text_SilverBefore, MSGBOX_DEFAULT
 	closemessage
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, GoldenrodCity_UndergroundSwitches_EventScript_Cyndaquil
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, GoldenrodCity_UndergroundSwitches_EventScript_Totodile
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, GoldenrodCity_UndergroundSwitches_EventScript_Chikorita
 	playbgm MUS_HG_RIVAL_EXIT, TRUE
 	msgbox GoldenrodUnderground_Text_SilverAfter, MSGBOX_DEFAULT
@@ -361,11 +361,11 @@ GoldenrodCity_UndergroundSwitches_EventScript_SilverTriggerBot::
 	waitmovement 0
 	msgbox GoldenrodUnderground_Text_SilverBefore, MSGBOX_DEFAULT
 	closemessage
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, GoldenrodCity_UndergroundSwitches_EventScript_Cyndaquil
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, GoldenrodCity_UndergroundSwitches_EventScript_Totodile
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, GoldenrodCity_UndergroundSwitches_EventScript_Chikorita
 	playbgm MUS_HG_RIVAL_EXIT, TRUE
 	msgbox GoldenrodUnderground_Text_SilverAfter, MSGBOX_DEFAULT

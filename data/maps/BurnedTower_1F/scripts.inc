@@ -9,7 +9,7 @@ BurnedTower_1F_MapScripts::
 	.byte 0
 
 BurnedTower_1F_OnTransition:
-	call BurnedTower_1F_AnthologyFieldTransition
+	call BurnedTower_1F_MosaicFieldTransition
 	end
 
 BurnedTower_1F_OnLoad::
@@ -110,11 +110,11 @@ BurnedTower_1F_EventScript_Silver::
 	waitmovement 0
 	waitmovement 0
 	msgbox BurnedTowerSilver_BeforeText, MSGBOX_DEFAULT
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, BurnedTower_1F_Silver_Battle_Cyndaquil
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, BurnedTower_1F_Silver_Battle_Totodile
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, BurnedTower_1F_Silver_Battle_Chikorita
 	playbgm MUS_HG_RIVAL_EXIT, TRUE
 	msgbox BurnedTowerSilver_AfterText1, MSGBOX_DEFAULT
@@ -221,17 +221,17 @@ BurnedTower_Text_RichardoAfter:
 	.string "me…$"
 
 // Optional new form or post-release roamer safety-net encounter.
-BurnedTower_1F_AnthologyFieldTransition::
-	call_if_set FLAG_CAUGHT_ANTHOLOGY_MOLTRES_GALAR, BurnedTower_1F_FieldHideGalarianMoltres
-	call_if_unset FLAG_CAUGHT_ANTHOLOGY_MOLTRES_GALAR, BurnedTower_1F_FieldShowGalarianMoltres
+BurnedTower_1F_MosaicFieldTransition::
+	call_if_set FLAG_CAUGHT_MOSAIC_MOLTRES_GALAR, BurnedTower_1F_FieldHideGalarianMoltres
+	call_if_unset FLAG_CAUGHT_MOSAIC_MOLTRES_GALAR, BurnedTower_1F_FieldShowGalarianMoltres
 	return
 
 BurnedTower_1F_FieldHideGalarianMoltres::
-	setflag FLAG_HIDE_ANTHOLOGY_MOLTRES_GALAR
+	setflag FLAG_HIDE_MOSAIC_MOLTRES_GALAR
 	return
 
 BurnedTower_1F_FieldShowGalarianMoltres::
-	clearflag FLAG_HIDE_ANTHOLOGY_MOLTRES_GALAR
+	clearflag FLAG_HIDE_MOSAIC_MOLTRES_GALAR
 	return
 
 BurnedTower_1F_EventScript_GalarianMoltres::
@@ -251,13 +251,13 @@ BurnedTower_1F_EventScript_GalarianMoltres::
 	end
 
 BurnedTower_1F_FieldGalarianMoltresCaught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_MOLTRES_GALAR
+	setflag FLAG_CAUGHT_MOSAIC_MOLTRES_GALAR
 	goto BurnedTower_1F_FieldGalarianMoltresResolved
 
 BurnedTower_1F_FieldGalarianMoltresResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_MOLTRES_GALAR
-	setflag FLAG_HIDE_ANTHOLOGY_MOLTRES_GALAR
+	removeobject LOCALID_MOSAIC_MOLTRES_GALAR
+	setflag FLAG_HIDE_MOSAIC_MOLTRES_GALAR
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

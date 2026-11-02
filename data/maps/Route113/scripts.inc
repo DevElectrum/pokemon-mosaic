@@ -8,7 +8,7 @@ Route113_OnResume:
 	end
 
 Route113_OnTransition:
-	call Route113_AnthologyHuntTransition
+	call Route113_MosaicHuntTransition
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	call Route113_EventScript_CheckSetAshWeather
 	end
@@ -166,24 +166,24 @@ Route113_Text_GlassWorkshopSign:
 	.string "“Turning Volcanic Ash into Glass Items”$"
 
 
-Route113_AnthologyHuntTransition::
-	callnative AnthologyStaticRandomizerIsOn
+Route113_MosaicHuntTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route113_RandomHuntTransition
 	getcaughtmon SPECIES_FEZANDIPITI
 	goto_if_eq VAR_RESULT, TRUE, Route113_HideFezandipiti
 	getcaughtmon SPECIES_OGERPON_TEAL
 	goto_if_ne VAR_RESULT, TRUE, Route113_HideFezandipiti
-	clearflag FLAG_HIDE_ANTHOLOGY_FEZANDIPITI
+	clearflag FLAG_HIDE_MOSAIC_FEZANDIPITI
 	return
 
 Route113_RandomHuntTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE113_FEZANDIPITI, Route113_HideFezandipiti
 	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE117_OGERPON, Route113_HideFezandipiti
-	clearflag FLAG_HIDE_ANTHOLOGY_FEZANDIPITI
+	clearflag FLAG_HIDE_MOSAIC_FEZANDIPITI
 	return
 
 Route113_HideFezandipiti::
-	setflag FLAG_HIDE_ANTHOLOGY_FEZANDIPITI
+	setflag FLAG_HIDE_MOSAIC_FEZANDIPITI
 	return
 
 Route113_EventScript_Fezandipiti::
@@ -208,8 +208,8 @@ Route113_FezandipitiCaught::
 
 Route113_FezandipitiResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_FEZANDIPITI
-	setflag FLAG_HIDE_ANTHOLOGY_FEZANDIPITI
+	removeobject LOCALID_MOSAIC_FEZANDIPITI
+	setflag FLAG_HIDE_MOSAIC_FEZANDIPITI
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

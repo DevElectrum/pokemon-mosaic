@@ -14,7 +14,7 @@ MtEmber_Summit_EventScript_TryRemoveMoltres::
 	return
 
 MtEmber_Summit_OnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, MtEmber_Summit_SeededMoltresVisibility
 	getcaughtmon SPECIES_MOLTRES
 	call_if_eq VAR_RESULT, TRUE, MtEmber_Summit_NativeMOLTRESCaught
@@ -55,7 +55,7 @@ MtEmber_Summit_EventScript_Moltres::
 	end
 
 MtEmber_Summit_SeededMoltresCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, MtEmber_Summit_SeededMoltresMark
 	setflag FLAG_FOUGHT_MOLTRES
 	release

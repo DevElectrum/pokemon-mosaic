@@ -28,11 +28,11 @@ PokemonTower_2F_EventScript_Rival::
 	waitmovement 0
 	msgbox PokemonTower_2F_Text_RivalIntro
 	setvar VAR_LAST_TALKED, LOCALID_POKEMON_TOWER_RIVAL
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, PokemonTower_2F_EventScript_RivalSquirtle
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, PokemonTower_2F_EventScript_RivalBulbasaur
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, PokemonTower_2F_EventScript_RivalCharmander
 	msgbox PokemonTower_2F_Text_RivalPostBattle
 	closemessage

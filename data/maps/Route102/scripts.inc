@@ -114,20 +114,20 @@ Route102_Text_RouteSignPetalburg:
 	.string "{LEFT_ARROW} PETALBURG CITY$"
 
 Route102_JirachiTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route102_JirachiRandomTransition
 	getcaughtmon SPECIES_JIRACHI
 	goto_if_eq VAR_RESULT, TRUE, Route102_HideJirachi
-	clearflag FLAG_HIDE_ANTHOLOGY_JIRACHI
+	clearflag FLAG_HIDE_MOSAIC_JIRACHI
 	return
 
 Route102_JirachiRandomTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE102_JIRACHI, Route102_HideJirachi
-	clearflag FLAG_HIDE_ANTHOLOGY_JIRACHI
+	clearflag FLAG_HIDE_MOSAIC_JIRACHI
 	return
 
 Route102_HideJirachi::
-	setflag FLAG_HIDE_ANTHOLOGY_JIRACHI
+	setflag FLAG_HIDE_MOSAIC_JIRACHI
 	return
 
 Route102_EventScript_Jirachi::
@@ -152,8 +152,8 @@ Route102_JirachiResolvedRandomCaught::
 
 Route102_JirachiResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_JIRACHI
-	setflag FLAG_HIDE_ANTHOLOGY_JIRACHI
+	removeobject LOCALID_MOSAIC_JIRACHI
+	setflag FLAG_HIDE_MOSAIC_JIRACHI
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

@@ -15,7 +15,7 @@ PowerPlant_EventScript_TryRemoveStaticMon::
 
 PowerPlant_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_POWER_PLANT
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, PowerPlant_SeededZapdosVisibility
 	getcaughtmon SPECIES_ZAPDOS
 	call_if_eq VAR_RESULT, TRUE, PowerPlant_NativeZAPDOSCaught
@@ -25,7 +25,7 @@ PowerPlant_OnTransition::
 PowerPlant_AfterSeededZapdosVisibility::
 	call_if_unset FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1, PowerPlant_EventScript_ShowElectrode1
 	call_if_unset FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2, PowerPlant_EventScript_ShowElectrode2
-	call PowerPlant_AnthologyOnTransition
+	call PowerPlant_MosaicOnTransition
 	end
 
 PowerPlant_SeededZapdosVisibility::
@@ -70,7 +70,7 @@ PowerPlant_EventScript_Zapdos::
 	end
 
 PowerPlant_SeededZapdosCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, PowerPlant_SeededZapdosMark
 	setflag FLAG_FOUGHT_ZAPDOS
 	release
@@ -140,30 +140,30 @@ PowerPlant_EventScript_FoughtElectrode2::
 
 
 // Restore uncaught statics on entry; let the original map scripts run.
-PowerPlant_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, PowerPlant_AnthologyRandomOnTransition
+PowerPlant_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, PowerPlant_MosaicRandomOnTransition
 	getcaughtmon SPECIES_TAPU_KOKO
-	call_if_eq VAR_RESULT, TRUE, PowerPlant_AnthologyHideTapuKoko
-	call_if_ne VAR_RESULT, TRUE, PowerPlant_AnthologyShowTapuKoko
+	call_if_eq VAR_RESULT, TRUE, PowerPlant_MosaicHideTapuKoko
+	call_if_ne VAR_RESULT, TRUE, PowerPlant_MosaicShowTapuKoko
 	getcaughtmon SPECIES_ZERAORA
-	call_if_eq VAR_RESULT, TRUE, PowerPlant_AnthologyHideZeraora
-	call_if_ne VAR_RESULT, TRUE, PowerPlant_AnthologyShowZeraora
+	call_if_eq VAR_RESULT, TRUE, PowerPlant_MosaicHideZeraora
+	call_if_ne VAR_RESULT, TRUE, PowerPlant_MosaicShowZeraora
 	return
 
-PowerPlant_AnthologyRandomOnTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_POWERPLANT_TAPU_KOKO, PowerPlant_AnthologyHideTapuKoko
-	call_if_unset FLAG_CAUGHT_RANDOM_POWERPLANT_TAPU_KOKO, PowerPlant_AnthologyShowTapuKoko
-	call_if_set FLAG_CAUGHT_RANDOM_POWERPLANT_ZERAORA, PowerPlant_AnthologyHideZeraora
-	call_if_unset FLAG_CAUGHT_RANDOM_POWERPLANT_ZERAORA, PowerPlant_AnthologyShowZeraora
+PowerPlant_MosaicRandomOnTransition::
+	call_if_set FLAG_CAUGHT_RANDOM_POWERPLANT_TAPU_KOKO, PowerPlant_MosaicHideTapuKoko
+	call_if_unset FLAG_CAUGHT_RANDOM_POWERPLANT_TAPU_KOKO, PowerPlant_MosaicShowTapuKoko
+	call_if_set FLAG_CAUGHT_RANDOM_POWERPLANT_ZERAORA, PowerPlant_MosaicHideZeraora
+	call_if_unset FLAG_CAUGHT_RANDOM_POWERPLANT_ZERAORA, PowerPlant_MosaicShowZeraora
 	return
 
-PowerPlant_AnthologyHideTapuKoko::
-	setflag FLAG_HIDE_ANTHOLOGY_TAPU_KOKO
+PowerPlant_MosaicHideTapuKoko::
+	setflag FLAG_HIDE_MOSAIC_TAPU_KOKO
 	return
 
-PowerPlant_AnthologyShowTapuKoko::
-	clearflag FLAG_HIDE_ANTHOLOGY_TAPU_KOKO
+PowerPlant_MosaicShowTapuKoko::
+	clearflag FLAG_HIDE_MOSAIC_TAPU_KOKO
 	return
 
 // Caught: permanently gone. Fainted: returns on re-entry. Run: stays here.
@@ -176,35 +176,35 @@ PowerPlant_EventScript_TapuKoko::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PowerPlant_AnthologyTapuKokoRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PowerPlant_AnthologyTapuKokoRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PowerPlant_AnthologyTapuKokoResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PowerPlant_AnthologyTapuKokoResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PowerPlant_MosaicTapuKokoRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PowerPlant_MosaicTapuKokoRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PowerPlant_MosaicTapuKokoResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PowerPlant_MosaicTapuKokoResolved
 	release
 	end
 
-PowerPlant_AnthologyTapuKokoResolvedRandomCaught::
+PowerPlant_MosaicTapuKokoResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_POWERPLANT_TAPU_KOKO
-	goto PowerPlant_AnthologyTapuKokoResolved
+	goto PowerPlant_MosaicTapuKokoResolved
 
-PowerPlant_AnthologyTapuKokoResolved::
+PowerPlant_MosaicTapuKokoResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_TAPU_KOKO
-	setflag FLAG_HIDE_ANTHOLOGY_TAPU_KOKO
+	removeobject LOCALID_MOSAIC_TAPU_KOKO
+	setflag FLAG_HIDE_MOSAIC_TAPU_KOKO
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-PowerPlant_AnthologyTapuKokoRetreated::
+PowerPlant_MosaicTapuKokoRetreated::
 	release
 	end
 
-PowerPlant_AnthologyHideZeraora::
-	setflag FLAG_HIDE_ANTHOLOGY_ZERAORA
+PowerPlant_MosaicHideZeraora::
+	setflag FLAG_HIDE_MOSAIC_ZERAORA
 	return
 
-PowerPlant_AnthologyShowZeraora::
-	clearflag FLAG_HIDE_ANTHOLOGY_ZERAORA
+PowerPlant_MosaicShowZeraora::
+	clearflag FLAG_HIDE_MOSAIC_ZERAORA
 	return
 
 // Same acquisition semantics as the other Power Plant statics.
@@ -218,26 +218,26 @@ PowerPlant_EventScript_Zeraora::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PowerPlant_AnthologyZeraoraRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PowerPlant_AnthologyZeraoraRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PowerPlant_AnthologyZeraoraResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PowerPlant_AnthologyZeraoraResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PowerPlant_MosaicZeraoraRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PowerPlant_MosaicZeraoraRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PowerPlant_MosaicZeraoraResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PowerPlant_MosaicZeraoraResolved
 	release
 	end
 
-PowerPlant_AnthologyZeraoraResolvedRandomCaught::
+PowerPlant_MosaicZeraoraResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_POWERPLANT_ZERAORA
-	goto PowerPlant_AnthologyZeraoraResolved
+	goto PowerPlant_MosaicZeraoraResolved
 
-PowerPlant_AnthologyZeraoraResolved::
+PowerPlant_MosaicZeraoraResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ZERAORA
-	setflag FLAG_HIDE_ANTHOLOGY_ZERAORA
+	removeobject LOCALID_MOSAIC_ZERAORA
+	setflag FLAG_HIDE_MOSAIC_ZERAORA
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-PowerPlant_AnthologyZeraoraRetreated::
+PowerPlant_MosaicZeraoraRetreated::
 	release
 	end
 
@@ -254,20 +254,20 @@ PowerPlant_NativeZAPDOSUncaught::
 	clearflag FLAG_HIDE_ZAPDOS
 	return
 
-Anthology_MegaStone_ZERAORITE::
-    callnative AnthologyStaticRandomizerIsOn
-    goto_if_eq VAR_RESULT, TRUE, Anthology_MegaStone_ZERAORITE_Randomized
+Mosaic_MegaStone_ZERAORITE::
+    callnative MosaicStaticRandomizerIsOn
+    goto_if_eq VAR_RESULT, TRUE, Mosaic_MegaStone_ZERAORITE_Randomized
     getcaughtmon SPECIES_ZERAORA
-    goto_if_ne VAR_RESULT, TRUE, Anthology_MegaStone_ZERAORITE_Locked
-    goto Anthology_MegaStone_ZERAORITE_Ready
-Anthology_MegaStone_ZERAORITE_Randomized::
-    goto_if_unset FLAG_CAUGHT_RANDOM_POWERPLANT_ZERAORA, Anthology_MegaStone_ZERAORITE_Locked
-Anthology_MegaStone_ZERAORITE_Ready::
+    goto_if_ne VAR_RESULT, TRUE, Mosaic_MegaStone_ZERAORITE_Locked
+    goto Mosaic_MegaStone_ZERAORITE_Ready
+Mosaic_MegaStone_ZERAORITE_Randomized::
+    goto_if_unset FLAG_CAUGHT_RANDOM_POWERPLANT_ZERAORA, Mosaic_MegaStone_ZERAORITE_Locked
+Mosaic_MegaStone_ZERAORITE_Ready::
     finditem ITEM_ZERAORITE
     end
-Anthology_MegaStone_ZERAORITE_Locked::
-    msgbox Anthology_MegaStone_ZERAORITE_LockedText, MSGBOX_DEFAULT
+Mosaic_MegaStone_ZERAORITE_Locked::
+    msgbox Mosaic_MegaStone_ZERAORITE_LockedText, MSGBOX_DEFAULT
     end
-Anthology_MegaStone_ZERAORITE_LockedText::
+Mosaic_MegaStone_ZERAORITE_LockedText::
     .string "A special MEGA STONE resonates here.\p"
     .string "Return when its guardian is yours.$"

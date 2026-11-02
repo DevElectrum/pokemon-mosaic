@@ -13,7 +13,7 @@ EcruteakCity_Theater_MapScripts::
 	.byte 0
 
 EcruteakCity_Theater_OnTransition::
-	call EcruteakCity_Theater_AnthologyOnTransition
+	call EcruteakCity_Theater_MosaicOnTransition
 	call_if_eq VAR_ECRUTEAK_CITY_THEATER, 1, EcruteakCity_Theater_MapScript_SetRocketSceneActive
 	call_if_eq VAR_ECRUTEAK_CITY_THEATER, 8, EcruteakCity_Theater_MapScript_SetKimonoMovement
 	end
@@ -1102,20 +1102,20 @@ EcruteakCity_Theater_Text_KimonoGirlsBeforeBattle:
 	.string "when you are ready.$"
 
 // Independent special encounter flags; keep native events authoritative.
-EcruteakCity_Theater_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+EcruteakCity_Theater_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, EcruteakCity_Theater_SeededMELOETTAVisibility
 	getcaughtmon SPECIES_MELOETTA
-	call_if_eq VAR_RESULT, TRUE, EcruteakCity_Theater_AnthologyHideMeloetta
-	call_if_ne VAR_RESULT, TRUE, EcruteakCity_Theater_AnthologyShowMeloetta
+	call_if_eq VAR_RESULT, TRUE, EcruteakCity_Theater_MosaicHideMeloetta
+	call_if_ne VAR_RESULT, TRUE, EcruteakCity_Theater_MosaicShowMeloetta
 	return
 
-EcruteakCity_Theater_AnthologyHideMeloetta::
-	setflag FLAG_HIDE_ANTHOLOGY_MELOETTA
+EcruteakCity_Theater_MosaicHideMeloetta::
+	setflag FLAG_HIDE_MOSAIC_MELOETTA
 	return
 
-EcruteakCity_Theater_AnthologyShowMeloetta::
-	clearflag FLAG_HIDE_ANTHOLOGY_MELOETTA
+EcruteakCity_Theater_MosaicShowMeloetta::
+	clearflag FLAG_HIDE_MOSAIC_MELOETTA
 	return
 
 EcruteakCity_Theater_EventScript_Meloetta::
@@ -1127,34 +1127,34 @@ EcruteakCity_Theater_EventScript_Meloetta::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EcruteakCity_Theater_AnthologyMeloettaRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EcruteakCity_Theater_AnthologyMeloettaRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EcruteakCity_Theater_MosaicMeloettaRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EcruteakCity_Theater_MosaicMeloettaRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EcruteakCity_Theater_SeededMELOETTACaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EcruteakCity_Theater_AnthologyMeloettaResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EcruteakCity_Theater_MosaicMeloettaResolved
 	release
 	end
 
-EcruteakCity_Theater_AnthologyMeloettaResolved::
+EcruteakCity_Theater_MosaicMeloettaResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_MELOETTA
-	setflag FLAG_HIDE_ANTHOLOGY_MELOETTA
+	removeobject LOCALID_MOSAIC_MELOETTA
+	setflag FLAG_HIDE_MOSAIC_MELOETTA
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-EcruteakCity_Theater_AnthologyMeloettaRetreated::
+EcruteakCity_Theater_MosaicMeloettaRetreated::
 	release
 	end
 
 EcruteakCity_Theater_SeededMELOETTAVisibility::
-	call_if_set FLAG_CAUGHT_RANDOM_ECRUTEAKCITY_THEATER_MELOETTA, EcruteakCity_Theater_AnthologyHideMeloetta
-	call_if_unset FLAG_CAUGHT_RANDOM_ECRUTEAKCITY_THEATER_MELOETTA, EcruteakCity_Theater_AnthologyShowMeloetta
+	call_if_set FLAG_CAUGHT_RANDOM_ECRUTEAKCITY_THEATER_MELOETTA, EcruteakCity_Theater_MosaicHideMeloetta
+	call_if_unset FLAG_CAUGHT_RANDOM_ECRUTEAKCITY_THEATER_MELOETTA, EcruteakCity_Theater_MosaicShowMeloetta
 	return
 
 EcruteakCity_Theater_SeededMELOETTACaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, EcruteakCity_Theater_SeededMELOETTAMark
-	goto EcruteakCity_Theater_AnthologyMeloettaResolved
+	goto EcruteakCity_Theater_MosaicMeloettaResolved
 
 EcruteakCity_Theater_SeededMELOETTAMark::
 	setflag FLAG_CAUGHT_RANDOM_ECRUTEAKCITY_THEATER_MELOETTA

@@ -423,7 +423,7 @@ void RegionHub_ScrIsAnyRegionChampion(struct ScriptContext *ctx)
 
 // Claims are transactional: a full BAG leaves the prize unclaimed and rolls
 // back any items already inserted. Independent flags survive save/reload.
-static u8 ClaimAnthologyResearchPrize(u16 flag, bool16 complete,
+static u8 ClaimMosaicResearchPrize(u16 flag, bool16 complete,
                                       u16 masters, enum Item item1, u16 count1,
                                       enum Item item2, u16 count2)
 {
@@ -449,27 +449,27 @@ static u8 ClaimAnthologyResearchPrize(u16 flag, bool16 complete,
     return 1;
 }
 
-void Anthology_ScrClaimOakMedal(struct ScriptContext *ctx)
+void Mosaic_ScrClaimOakMedal(struct ScriptContext *ctx)
 {
-    gSpecialVar_Result = ClaimAnthologyResearchPrize(FLAG_ANTHOLOGY_OAK_MEDAL,
-        HasAllAnthologyRegionalMons(REGION_KANTO), 3, ITEM_RARE_CANDY, 10, ITEM_NONE, 0);
+    gSpecialVar_Result = ClaimMosaicResearchPrize(FLAG_MOSAIC_OAK_MEDAL,
+        HasAllMosaicRegionalMons(REGION_KANTO), 3, ITEM_RARE_CANDY, 10, ITEM_NONE, 0);
 }
 
-void Anthology_ScrClaimElmMedal(struct ScriptContext *ctx)
+void Mosaic_ScrClaimElmMedal(struct ScriptContext *ctx)
 {
-    gSpecialVar_Result = ClaimAnthologyResearchPrize(FLAG_ANTHOLOGY_ELM_MEDAL,
-        HasAllAnthologyRegionalMons(REGION_JOHTO), 3, ITEM_ABILITY_PATCH, 5, ITEM_PP_MAX, 10);
+    gSpecialVar_Result = ClaimMosaicResearchPrize(FLAG_MOSAIC_ELM_MEDAL,
+        HasAllMosaicRegionalMons(REGION_JOHTO), 3, ITEM_ABILITY_PATCH, 5, ITEM_PP_MAX, 10);
 }
 
-void Anthology_ScrClaimBirchMedal(struct ScriptContext *ctx)
+void Mosaic_ScrClaimBirchMedal(struct ScriptContext *ctx)
 {
-    gSpecialVar_Result = ClaimAnthologyResearchPrize(FLAG_ANTHOLOGY_BIRCH_MEDAL,
-        HasAllAnthologyRegionalMons(REGION_HOENN), 3, ITEM_RARE_CANDY, 25, ITEM_PP_MAX, 10);
+    gSpecialVar_Result = ClaimMosaicResearchPrize(FLAG_MOSAIC_BIRCH_MEDAL,
+        HasAllMosaicRegionalMons(REGION_HOENN), 3, ITEM_RARE_CANDY, 25, ITEM_PP_MAX, 10);
 }
 
 void RegionHub_ScrClaimGrandResearcher(struct ScriptContext *ctx)
 {
-    gSpecialVar_Result = ClaimAnthologyResearchPrize(FLAG_ANTHOLOGY_GRAND_RESEARCHER,
+    gSpecialVar_Result = ClaimMosaicResearchPrize(FLAG_MOSAIC_GRAND_RESEARCHER,
         HasAllMons(), 10, ITEM_NONE, 0, ITEM_NONE, 0);
 }
 

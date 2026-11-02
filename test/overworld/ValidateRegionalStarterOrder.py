@@ -39,9 +39,9 @@ assert tuple_for("REGION_KANTO") == (
 oak = read("data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc")
 champion = read("data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc")
 town = read("data/maps/Route22_Frlg/scripts.inc")
-assert "special AnthologyChooseKantoStarter" in oak
+assert "special MosaicChooseKantoStarter" in oak
 assert "copyvar PLAYER_STARTER_NUM, VAR_RESULT" in oak
-assert "callnative Anthology_GetKantoChosenStarterSpecies" in oak
+assert "callnative Mosaic_GetKantoChosenStarterSpecies" in oak
 assert "copyvar VAR_STARTER_MON, PLAYER_STARTER_NUM" in oak
 assert "SPECIES_RHYHORN" in oak and "LOCALID_CHARMANDER_BALL" in oak
 assert "VAR_STARTER_MON_FRLG               VAR_KANTO_SLICE(0x0C)" in vars_frlg
@@ -58,7 +58,7 @@ for path in (
     "data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc",
 ):
     body = read(path)
-    assert "callnative Anthology_GetKantoStarterStoryBranch" in body, path
+    assert "callnative Mosaic_GetKantoStarterStoryBranch" in body, path
     assert "call_if_eq VAR_STARTER_MON" not in body, path
     assert "goto_if_eq VAR_STARTER_MON" not in body, path
 assert "GetKantoStarterBranch(VarGet(VAR_STARTER_MON))" in starter
@@ -66,8 +66,8 @@ assert "GetKantoStarterBranch(VarGet(VAR_TEMP_1))" in starter
 assert "index == 9 ? 0 : index % STARTER_MON_COUNT" in starter
 assert "sprite->invisible = (GetCurrentRegion() == REGION_KANTO" in starter
 assert "GetCurrentRegion() == REGION_KANTO ? 4 : STARTER_GENERATION_PAGES" in starter
-assert "def_special AnthologyChooseKantoStarter, waitstate=1" in read("data/specials.inc")
-assert "void AnthologyChooseKantoStarter(void)" in read("src/battle_setup.c")
+assert "def_special MosaicChooseKantoStarter, waitstate=1" in read("data/specials.inc")
+assert "void MosaicChooseKantoStarter(void)" in read("src/battle_setup.c")
 blue = read("src/battle_main.c")
 for name in ("OAKS_LAB", "ROUTE22_EARLY", "CERULEAN", "SS_ANNE", "POKEMON_TOWER", "SILPH", "ROUTE22_LATE"):
     assert "TRAINER_RIVAL_" + name + "_CHARMANDER" in blue
@@ -109,7 +109,7 @@ for path in (
 ):
     text = read(path)
     assert "switch VAR_STARTER_MON" not in text, path
-    assert "callnative Anthology_GetHoennStarterStoryBranch\n\tswitch VAR_RESULT" in text, path
+    assert "callnative Mosaic_GetHoennStarterStoryBranch\n\tswitch VAR_RESULT" in text, path
 
 assert "gSpecialVar_Result = VarGet(VAR_STARTER_MON) % STARTER_MON_COUNT;" in starter
 assert "tStarterPage * STARTER_MON_COUNT" in starter
@@ -124,13 +124,13 @@ for pokemon in ("CHESPIN","FENNEKIN","FROAKIE","SPRIGATITO","FUECOCO","QUAXLY"):
 elm = read("data/maps/NewBarkTown_Lab/scripts.inc")
 native = read("src/battle_setup.c")
 specials = read("data/specials.inc")
-assert "def_special AnthologyChooseJohtoStarter, waitstate=1" in specials
-assert "void AnthologyChooseJohtoStarter(void)" in native
+assert "def_special MosaicChooseJohtoStarter, waitstate=1" in specials
+assert "void MosaicChooseJohtoStarter(void)" in native
 # The live Elm/Chikorita emulator regression requires page-one cursor zero;
 # leave the classic Hoenn center cursor behavior intact.
 assert "gTasks[taskId].tStarterSelection = GetCurrentRegion() == REGION_HOENN ? 1 : 0;" in starter
-assert "special AnthologyChooseJohtoStarter" in elm
-assert "callnative Anthology_GetJohtoChosenStarterSpecies" in elm
+assert "special MosaicChooseJohtoStarter" in elm
+assert "callnative Mosaic_GetJohtoChosenStarterSpecies" in elm
 assert "copyvar VAR_STARTER_MON, VAR_RESULT" in elm
 assert "givemon PLAYER_STARTER_SPECIES, 5" in elm
 assert "gSpecialVar_Result = GetStarterPokemon(VarGet(VAR_STARTER_MON));" in starter
@@ -139,7 +139,7 @@ for path in ("data/maps/NewBarkTown_Lab/scripts.inc", "data/maps/AzaleaTown/scri
              "data/maps/JohtoIndigoPlateau_PokemonCenter/scripts.inc",
              "data/maps/GoldenrodCity_UndergroundSwitches/scripts.inc"):
     text = read(path)
-    assert "callnative Anthology_GetJohtoStarterStoryBranch" in text, path
+    assert "callnative Mosaic_GetJohtoStarterStoryBranch" in text, path
     assert "call_if_eq VAR_STARTER_MON" not in text, path
     assert "goto_if_eq VAR_STARTER_MON" not in text, path
 assert "sPokeballCoords[STARTER_MON_COUNT][2] =" in starter

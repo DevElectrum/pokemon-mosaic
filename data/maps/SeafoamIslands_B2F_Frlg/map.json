@@ -59,7 +59,7 @@
       "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B2F_BIG_PEARL"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_MANAPHY",
+      "local_id": "LOCALID_MOSAIC_MANAPHY",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(MANAPHY)",
       "x": 14,
       "y": 16,
@@ -70,10 +70,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SeafoamIslands_B2F_EventScript_Manaphy",
-      "flag": "FLAG_HIDE_ANTHOLOGY_MANAPHY"
+      "flag": "FLAG_HIDE_MOSAIC_MANAPHY"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_TAPU_FINI",
+      "local_id": "LOCALID_MOSAIC_TAPU_FINI",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(TAPU_FINI)",
       "x": 14,
       "y": 4,
@@ -84,7 +84,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SeafoamIslands_B2F_EventScript_TapuFini",
-      "flag": "FLAG_HIDE_ANTHOLOGY_TAPU_FINI"
+      "flag": "FLAG_HIDE_MOSAIC_TAPU_FINI"
     }
   ],
   "warp_events": [

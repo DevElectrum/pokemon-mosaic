@@ -162,11 +162,11 @@ AzaleaTown_EventScript_SilverTriggerTop::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
 	msgbox AzaleaTown_Text_RivalBefore, MSGBOX_DEFAULT
 	closemessage
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, AzaleaTown_Silver_Battle_Cyndaquil
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, AzaleaTown_Silver_Battle_Totodile
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, AzaleaTown_Silver_Battle_Chikorita
 	msgbox AzaleaTown_Text_RivalAfter, MSGBOX_DEFAULT
 	closemessage
@@ -192,11 +192,11 @@ AzaleaTown_EventScript_SilverTriggerBot::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
 	msgbox AzaleaTown_Text_RivalBefore, MSGBOX_DEFAULT
 	closemessage
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, AzaleaTown_Silver_Battle_Cyndaquil
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, AzaleaTown_Silver_Battle_Totodile
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, AzaleaTown_Silver_Battle_Chikorita
 	playbgm MUS_HG_RIVAL_EXIT, TRUE
 	msgbox AzaleaTown_Text_RivalAfter, MSGBOX_DEFAULT

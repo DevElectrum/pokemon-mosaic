@@ -242,7 +242,7 @@
       "flag": "FLAG_HIDE_LAKE_PRYCE"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_BEAST_SUICUNE",
+      "local_id": "LOCALID_MOSAIC_BEAST_SUICUNE",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(SUICUNE)",
       "x": 35,
       "y": 38,
@@ -253,7 +253,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LakeOfRage_EventScript_SuicuneReserve",
-      "flag": "FLAG_HIDE_ANTHOLOGY_BEAST_SUICUNE"
+      "flag": "FLAG_HIDE_MOSAIC_BEAST_SUICUNE"
     }
   ],
   "warp_events": [

@@ -3,7 +3,7 @@ CliffEdgeCave_MapScripts::
 	.byte 0
 
 CliffEdgeCave_OnTransition::
-	call CliffEdgeCave_AnthologyOnTransition
+	call CliffEdgeCave_MosaicOnTransition
 	end
 
 CliffEdgeCave_EventScript_BaldMan::
@@ -21,21 +21,21 @@ CliffEdgeCave_Text_Baldman:
 	.string "to a dead end.\p"
 	.string "but people can't help trying both.$"
 
-CliffEdgeCave_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, CliffEdgeCave_AnthologyRandomOnTransition
+CliffEdgeCave_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, CliffEdgeCave_MosaicRandomOnTransition
 	getcaughtmon SPECIES_SPECTRIER
 	goto_if_eq VAR_RESULT, TRUE, CliffEdgeCave_HideSpectrier
-	clearflag FLAG_HIDE_ANTHOLOGY_SPECTRIER
+	clearflag FLAG_HIDE_MOSAIC_SPECTRIER
 	return
 
-CliffEdgeCave_AnthologyRandomOnTransition::
+CliffEdgeCave_MosaicRandomOnTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_CLIFFEDGE_SPECTRIER, CliffEdgeCave_HideSpectrier
-	clearflag FLAG_HIDE_ANTHOLOGY_SPECTRIER
+	clearflag FLAG_HIDE_MOSAIC_SPECTRIER
 	return
 
 CliffEdgeCave_HideSpectrier::
-	setflag FLAG_HIDE_ANTHOLOGY_SPECTRIER
+	setflag FLAG_HIDE_MOSAIC_SPECTRIER
 	return
 
 CliffEdgeCave_EventScript_Spectrier::
@@ -60,8 +60,8 @@ CliffEdgeCave_SpectrierResolvedRandomCaught::
 
 CliffEdgeCave_SpectrierResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_SPECTRIER
-	setflag FLAG_HIDE_ANTHOLOGY_SPECTRIER
+	removeobject LOCALID_MOSAIC_SPECTRIER
+	setflag FLAG_HIDE_MOSAIC_SPECTRIER
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

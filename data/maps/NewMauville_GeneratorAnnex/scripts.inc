@@ -1,12 +1,12 @@
 NewMauville_GeneratorAnnex_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, NewMauville_GeneratorAnnex_AnthologyOnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, NewMauville_GeneratorAnnex_MosaicOnTransition
 	.byte 0
 
-NewMauville_GeneratorAnnex_AnthologyOnTransition::
+NewMauville_GeneratorAnnex_MosaicOnTransition::
 	goto_if_unset FLAG_BADGE07_GET, NewMauville_GeneratorAnnex_SecondBatchHideMiraidon
 	goto_if_unset FLAG_DEFEATED_MAGMA_SPACE_CENTER, NewMauville_GeneratorAnnex_SecondBatchHideMiraidon
 	goto_if_ne VAR_NEW_MAUVILLE_STATE, 2, NewMauville_GeneratorAnnex_SecondBatchHideMiraidon
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, NewMauville_GeneratorAnnex_SeededMIRAIDONVisible
 	getcaughtmon SPECIES_MIRAIDON
 	call_if_eq VAR_RESULT, TRUE, NewMauville_GeneratorAnnex_SecondBatchHideMiraidon
@@ -14,14 +14,14 @@ NewMauville_GeneratorAnnex_AnthologyOnTransition::
 	return
 
 NewMauville_GeneratorAnnex_SecondBatchOnTransition::
-	goto NewMauville_GeneratorAnnex_AnthologyOnTransition
+	goto NewMauville_GeneratorAnnex_MosaicOnTransition
 
 NewMauville_GeneratorAnnex_SecondBatchHideMiraidon::
-	setflag FLAG_HIDE_ANTHOLOGY_MIRAIDON
+	setflag FLAG_HIDE_MOSAIC_MIRAIDON
 	return
 
 NewMauville_GeneratorAnnex_SecondBatchShowMiraidon::
-	clearflag FLAG_HIDE_ANTHOLOGY_MIRAIDON
+	clearflag FLAG_HIDE_MOSAIC_MIRAIDON
 	return
 
 NewMauville_GeneratorAnnex_EventScript_Miraidon::
@@ -42,8 +42,8 @@ NewMauville_GeneratorAnnex_EventScript_Miraidon::
 
 NewMauville_GeneratorAnnex_SecondBatchMiraidonResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_MIRAIDON
-	setflag FLAG_HIDE_ANTHOLOGY_MIRAIDON
+	removeobject LOCALID_MOSAIC_MIRAIDON
+	setflag FLAG_HIDE_MOSAIC_MIRAIDON
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -59,7 +59,7 @@ NewMauville_GeneratorAnnex_SeededMIRAIDONVisible::
 	return
 
 NewMauville_GeneratorAnnex_SeededMIRAIDONCatch::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, NewMauville_GeneratorAnnex_SeededMIRAIDONCatchMark
 	goto NewMauville_GeneratorAnnex_SecondBatchMiraidonResolved
 

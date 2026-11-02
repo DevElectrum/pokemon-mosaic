@@ -4,16 +4,16 @@ CeladonCity_Frlg_MapScripts::
 
 CeladonCity_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_CELADON_CITY
-	call CeladonCity_AnthologyOnTransition
+	call CeladonCity_MosaicOnTransition
 	end
 
 // Tapu Lele may be discovered naturally in Celadon's flowers near Erika's Gym.
-CeladonCity_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+CeladonCity_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, CeladonCity_SeededTapuLeleTransition
 	getcaughtmon SPECIES_TAPU_LELE
-	call_if_eq VAR_RESULT, TRUE, CeladonCity_AnthologyHideTapuLele
-	call_if_ne VAR_RESULT, TRUE, CeladonCity_AnthologyShowTapuLele
+	call_if_eq VAR_RESULT, TRUE, CeladonCity_MosaicHideTapuLele
+	call_if_ne VAR_RESULT, TRUE, CeladonCity_MosaicShowTapuLele
 	return
 
 CeladonCity_EventScript_LittleGirl::
@@ -228,16 +228,16 @@ CeladonCity_Text_SomeoneStoleSilphScope::
 
 
 CeladonCity_SeededTapuLeleTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_CELADON_TAPU_LELE, CeladonCity_AnthologyHideTapuLele
-	call_if_unset FLAG_CAUGHT_RANDOM_CELADON_TAPU_LELE, CeladonCity_AnthologyShowTapuLele
+	call_if_set FLAG_CAUGHT_RANDOM_CELADON_TAPU_LELE, CeladonCity_MosaicHideTapuLele
+	call_if_unset FLAG_CAUGHT_RANDOM_CELADON_TAPU_LELE, CeladonCity_MosaicShowTapuLele
 	return
 
-CeladonCity_AnthologyHideTapuLele::
-	setflag FLAG_HIDE_ANTHOLOGY_TAPU_LELE
+CeladonCity_MosaicHideTapuLele::
+	setflag FLAG_HIDE_MOSAIC_TAPU_LELE
 	return
 
-CeladonCity_AnthologyShowTapuLele::
-	clearflag FLAG_HIDE_ANTHOLOGY_TAPU_LELE
+CeladonCity_MosaicShowTapuLele::
+	clearflag FLAG_HIDE_MOSAIC_TAPU_LELE
 	return
 
 CeladonCity_EventScript_TapuLele::
@@ -249,31 +249,31 @@ CeladonCity_EventScript_TapuLele::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, CeladonCity_AnthologyTapuLeleRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, CeladonCity_AnthologyTapuLeleRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, CeladonCity_MosaicTapuLeleRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, CeladonCity_MosaicTapuLeleRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, CeladonCity_SeededTapuLeleCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, CeladonCity_AnthologyTapuLeleResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, CeladonCity_MosaicTapuLeleResolved
 	release
 	end
 
 CeladonCity_SeededTapuLeleCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, CeladonCity_MarkSeededTapuLele
-	goto CeladonCity_AnthologyTapuLeleResolved
+	goto CeladonCity_MosaicTapuLeleResolved
 
 CeladonCity_MarkSeededTapuLele::
 	setflag FLAG_CAUGHT_RANDOM_CELADON_TAPU_LELE
 	return
 
-CeladonCity_AnthologyTapuLeleResolved::
+CeladonCity_MosaicTapuLeleResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_TAPU_LELE
-	setflag FLAG_HIDE_ANTHOLOGY_TAPU_LELE
+	removeobject LOCALID_MOSAIC_TAPU_LELE
+	setflag FLAG_HIDE_MOSAIC_TAPU_LELE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-CeladonCity_AnthologyTapuLeleRetreated::
+CeladonCity_MosaicTapuLeleRetreated::
 	release
 	end
 

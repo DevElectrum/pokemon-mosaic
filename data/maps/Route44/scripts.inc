@@ -167,20 +167,20 @@ Route44_Text_Sign2:
 // the first Johto Champion. Hoenn's Shoal Cave source uses the same persistent
 // National Dex caught bit, so capturing either source retires both on revisit.
 Route44_TornadusOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route44_TornadusRandomOnTransition
 	getcaughtmon SPECIES_TORNADUS
-	goto_if_eq VAR_RESULT, TRUE, Route44_AnthologyHideTornadus
-	clearflag FLAG_HIDE_ANTHOLOGY_TORNADUS
+	goto_if_eq VAR_RESULT, TRUE, Route44_MosaicHideTornadus
+	clearflag FLAG_HIDE_MOSAIC_TORNADUS
 	return
 
 Route44_TornadusRandomOnTransition::
-	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE44_TORNADUS, Route44_AnthologyHideTornadus
-	clearflag FLAG_HIDE_ANTHOLOGY_TORNADUS
+	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE44_TORNADUS, Route44_MosaicHideTornadus
+	clearflag FLAG_HIDE_MOSAIC_TORNADUS
 	return
 
-Route44_AnthologyHideTornadus::
-	setflag FLAG_HIDE_ANTHOLOGY_TORNADUS
+Route44_MosaicHideTornadus::
+	setflag FLAG_HIDE_MOSAIC_TORNADUS
 	return
 
 Route44_EventScript_Tornadus::
@@ -192,25 +192,25 @@ Route44_EventScript_Tornadus::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route44_AnthologyTornadusRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route44_AnthologyTornadusRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route44_AnthologyTornadusResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route44_AnthologyTornadusResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route44_MosaicTornadusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route44_MosaicTornadusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route44_MosaicTornadusResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route44_MosaicTornadusResolved
 	release
 	end
 
-Route44_AnthologyTornadusResolvedRandomCaught::
+Route44_MosaicTornadusResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE44_TORNADUS
-	goto Route44_AnthologyTornadusResolved
+	goto Route44_MosaicTornadusResolved
 
-Route44_AnthologyTornadusResolved::
+Route44_MosaicTornadusResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_TORNADUS
-	setflag FLAG_HIDE_ANTHOLOGY_TORNADUS
+	removeobject LOCALID_MOSAIC_TORNADUS
+	setflag FLAG_HIDE_MOSAIC_TORNADUS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route44_AnthologyTornadusRetreated::
+Route44_MosaicTornadusRetreated::
 	release
 	end

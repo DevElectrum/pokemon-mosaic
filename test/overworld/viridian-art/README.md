@@ -56,7 +56,7 @@ python3 test/overworld/viridian-art/art.py author
 python3 test/overworld/viridian-art/art.py check --out /tmp/viridian-audit
 make modern TOOLCHAIN=/opt/devkitpro/devkitARM -j8
 make validate
-PW_OUT=/tmp/viridian-runs/regression test/overworld/run-all.sh pokemonworld.gba \
+PW_OUT=/tmp/viridian-runs/regression test/overworld/run-all.sh pokemon-mosaic.gba \
   > /tmp/viridian-sweep.log 2>&1
 cp /tmp/viridian-sweep.log /tmp/viridian-runs/regression/sweep.log
 ```

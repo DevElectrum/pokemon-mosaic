@@ -4,7 +4,7 @@ RockTunnel_B1F_Frlg_MapScripts::
 
 RockTunnel_B1F_OnTransition::
 	call RockTunnel_B1F_BigBatchOnTransition
-	call RockTunnel_B1F_AnthologyOnTransition
+	call RockTunnel_B1F_MosaicOnTransition
 	end
 
 RockTunnel_B1F_EventScript_Sofia::
@@ -143,59 +143,59 @@ RockTunnel_B1F_Text_WinstonPostBattle::
 	.string "I'll go home to draw.$"
 
 // Regigigas requires all three Hoenn Regis registered caught, not in party.
-RockTunnel_B1F_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyRandomOnTransition
+RockTunnel_B1F_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_MosaicRandomOnTransition
 	getcaughtmon SPECIES_REGIROCK
-	goto_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyRegigigasLocked
+	goto_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_MosaicRegigigasLocked
 	getcaughtmon SPECIES_REGICE
-	goto_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyRegigigasLocked
+	goto_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_MosaicRegigigasLocked
 	getcaughtmon SPECIES_REGISTEEL
-	goto_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyRegigigasLocked
+	goto_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_MosaicRegigigasLocked
 	getcaughtmon SPECIES_REGIGIGAS
-	call_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyHideRegigigas
-	call_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyShowRegigigas
-	goto RockTunnel_B1F_AnthologyOtherStatics
+	call_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_MosaicHideRegigigas
+	call_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_MosaicShowRegigigas
+	goto RockTunnel_B1F_MosaicOtherStatics
 
-RockTunnel_B1F_AnthologyRegigigasLocked::
-	setflag FLAG_HIDE_ANTHOLOGY_REGIGIGAS
-RockTunnel_B1F_AnthologyOtherStatics::
+RockTunnel_B1F_MosaicRegigigasLocked::
+	setflag FLAG_HIDE_MOSAIC_REGIGIGAS
+RockTunnel_B1F_MosaicOtherStatics::
 	getcaughtmon SPECIES_UXIE
-	call_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyHideUxie
-	call_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyShowUxie
+	call_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_MosaicHideUxie
+	call_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_MosaicShowUxie
 	getcaughtmon SPECIES_MESPRIT
-	call_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyHideMesprit
-	call_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyShowMesprit
+	call_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_MosaicHideMesprit
+	call_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_MosaicShowMesprit
 	getcaughtmon SPECIES_AZELF
-	call_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyHideAzelf
-	call_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_AnthologyShowAzelf
+	call_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_MosaicHideAzelf
+	call_if_ne VAR_RESULT, TRUE, RockTunnel_B1F_MosaicShowAzelf
 	return
 
-RockTunnel_B1F_AnthologyRandomOnTransition::
-	goto_if_unset FLAG_CAUGHT_RANDOM_DESERTRUINS_REGIROCK, RockTunnel_B1F_AnthologyRegigigasRandomLocked
-	goto_if_unset FLAG_CAUGHT_RANDOM_ISLANDCAVE_REGICE, RockTunnel_B1F_AnthologyRegigigasRandomLocked
-	goto_if_unset FLAG_CAUGHT_RANDOM_ANCIENTTOMB_REGISTEEL, RockTunnel_B1F_AnthologyRegigigasRandomLocked
-	call_if_set FLAG_CAUGHT_RANDOM_ROCKTUNNEL_REGIGIGAS, RockTunnel_B1F_AnthologyHideRegigigas
-	call_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_REGIGIGAS, RockTunnel_B1F_AnthologyShowRegigigas
-	goto RockTunnel_B1F_AnthologyOtherRandomStatics
+RockTunnel_B1F_MosaicRandomOnTransition::
+	goto_if_unset FLAG_CAUGHT_RANDOM_DESERTRUINS_REGIROCK, RockTunnel_B1F_MosaicRegigigasRandomLocked
+	goto_if_unset FLAG_CAUGHT_RANDOM_ISLANDCAVE_REGICE, RockTunnel_B1F_MosaicRegigigasRandomLocked
+	goto_if_unset FLAG_CAUGHT_RANDOM_ANCIENTTOMB_REGISTEEL, RockTunnel_B1F_MosaicRegigigasRandomLocked
+	call_if_set FLAG_CAUGHT_RANDOM_ROCKTUNNEL_REGIGIGAS, RockTunnel_B1F_MosaicHideRegigigas
+	call_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_REGIGIGAS, RockTunnel_B1F_MosaicShowRegigigas
+	goto RockTunnel_B1F_MosaicOtherRandomStatics
 
-RockTunnel_B1F_AnthologyRegigigasRandomLocked::
-	setflag FLAG_HIDE_ANTHOLOGY_REGIGIGAS
-RockTunnel_B1F_AnthologyOtherRandomStatics::
-	call_if_set FLAG_CAUGHT_RANDOM_ROCKTUNNEL_UXIE, RockTunnel_B1F_AnthologyHideUxie
-	call_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_UXIE, RockTunnel_B1F_AnthologyShowUxie
-	call_if_set FLAG_CAUGHT_RANDOM_ROCKTUNNEL_MESPRIT, RockTunnel_B1F_AnthologyHideMesprit
-	call_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_MESPRIT, RockTunnel_B1F_AnthologyShowMesprit
-	call_if_set FLAG_CAUGHT_RANDOM_ROCKTUNNEL_AZELF, RockTunnel_B1F_AnthologyHideAzelf
-	call_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_AZELF, RockTunnel_B1F_AnthologyShowAzelf
+RockTunnel_B1F_MosaicRegigigasRandomLocked::
+	setflag FLAG_HIDE_MOSAIC_REGIGIGAS
+RockTunnel_B1F_MosaicOtherRandomStatics::
+	call_if_set FLAG_CAUGHT_RANDOM_ROCKTUNNEL_UXIE, RockTunnel_B1F_MosaicHideUxie
+	call_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_UXIE, RockTunnel_B1F_MosaicShowUxie
+	call_if_set FLAG_CAUGHT_RANDOM_ROCKTUNNEL_MESPRIT, RockTunnel_B1F_MosaicHideMesprit
+	call_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_MESPRIT, RockTunnel_B1F_MosaicShowMesprit
+	call_if_set FLAG_CAUGHT_RANDOM_ROCKTUNNEL_AZELF, RockTunnel_B1F_MosaicHideAzelf
+	call_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_AZELF, RockTunnel_B1F_MosaicShowAzelf
 	return
 
-RockTunnel_B1F_AnthologyHideRegigigas::
-	setflag FLAG_HIDE_ANTHOLOGY_REGIGIGAS
+RockTunnel_B1F_MosaicHideRegigigas::
+	setflag FLAG_HIDE_MOSAIC_REGIGIGAS
 	return
 
-RockTunnel_B1F_AnthologyShowRegigigas::
-	clearflag FLAG_HIDE_ANTHOLOGY_REGIGIGAS
+RockTunnel_B1F_MosaicShowRegigigas::
+	clearflag FLAG_HIDE_MOSAIC_REGIGIGAS
 	return
 
 RockTunnel_B1F_EventScript_Regigigas::
@@ -207,35 +207,35 @@ RockTunnel_B1F_EventScript_Regigigas::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, RockTunnel_B1F_AnthologyRegigigasRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, RockTunnel_B1F_AnthologyRegigigasRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RockTunnel_B1F_AnthologyRegigigasCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, RockTunnel_B1F_AnthologyRegigigasResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, RockTunnel_B1F_MosaicRegigigasRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, RockTunnel_B1F_MosaicRegigigasRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RockTunnel_B1F_MosaicRegigigasCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, RockTunnel_B1F_MosaicRegigigasResolved
 	release
 	end
 
-RockTunnel_B1F_AnthologyRegigigasCaught::
+RockTunnel_B1F_MosaicRegigigasCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROCKTUNNEL_REGIGIGAS
-	goto RockTunnel_B1F_AnthologyRegigigasResolved
+	goto RockTunnel_B1F_MosaicRegigigasResolved
 
-RockTunnel_B1F_AnthologyRegigigasResolved::
+RockTunnel_B1F_MosaicRegigigasResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_REGIGIGAS
-	setflag FLAG_HIDE_ANTHOLOGY_REGIGIGAS
+	removeobject LOCALID_MOSAIC_REGIGIGAS
+	setflag FLAG_HIDE_MOSAIC_REGIGIGAS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-RockTunnel_B1F_AnthologyRegigigasRetreated::
+RockTunnel_B1F_MosaicRegigigasRetreated::
 	release
 	end
 
-RockTunnel_B1F_AnthologyHideUxie::
-	setflag FLAG_HIDE_ANTHOLOGY_UXIE
+RockTunnel_B1F_MosaicHideUxie::
+	setflag FLAG_HIDE_MOSAIC_UXIE
 	return
 
-RockTunnel_B1F_AnthologyShowUxie::
-	clearflag FLAG_HIDE_ANTHOLOGY_UXIE
+RockTunnel_B1F_MosaicShowUxie::
+	clearflag FLAG_HIDE_MOSAIC_UXIE
 	return
 
 RockTunnel_B1F_EventScript_Uxie::
@@ -247,35 +247,35 @@ RockTunnel_B1F_EventScript_Uxie::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, RockTunnel_B1F_AnthologyUxieRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, RockTunnel_B1F_AnthologyUxieRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RockTunnel_B1F_AnthologyUxieCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, RockTunnel_B1F_AnthologyUxieResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, RockTunnel_B1F_MosaicUxieRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, RockTunnel_B1F_MosaicUxieRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RockTunnel_B1F_MosaicUxieCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, RockTunnel_B1F_MosaicUxieResolved
 	release
 	end
 
-RockTunnel_B1F_AnthologyUxieCaught::
+RockTunnel_B1F_MosaicUxieCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROCKTUNNEL_UXIE
-	goto RockTunnel_B1F_AnthologyUxieResolved
+	goto RockTunnel_B1F_MosaicUxieResolved
 
-RockTunnel_B1F_AnthologyUxieResolved::
+RockTunnel_B1F_MosaicUxieResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_UXIE
-	setflag FLAG_HIDE_ANTHOLOGY_UXIE
+	removeobject LOCALID_MOSAIC_UXIE
+	setflag FLAG_HIDE_MOSAIC_UXIE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-RockTunnel_B1F_AnthologyUxieRetreated::
+RockTunnel_B1F_MosaicUxieRetreated::
 	release
 	end
 
-RockTunnel_B1F_AnthologyHideMesprit::
-	setflag FLAG_HIDE_ANTHOLOGY_MESPRIT
+RockTunnel_B1F_MosaicHideMesprit::
+	setflag FLAG_HIDE_MOSAIC_MESPRIT
 	return
 
-RockTunnel_B1F_AnthologyShowMesprit::
-	clearflag FLAG_HIDE_ANTHOLOGY_MESPRIT
+RockTunnel_B1F_MosaicShowMesprit::
+	clearflag FLAG_HIDE_MOSAIC_MESPRIT
 	return
 
 RockTunnel_B1F_EventScript_Mesprit::
@@ -287,35 +287,35 @@ RockTunnel_B1F_EventScript_Mesprit::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, RockTunnel_B1F_AnthologyMespritRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, RockTunnel_B1F_AnthologyMespritRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RockTunnel_B1F_AnthologyMespritCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, RockTunnel_B1F_AnthologyMespritResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, RockTunnel_B1F_MosaicMespritRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, RockTunnel_B1F_MosaicMespritRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RockTunnel_B1F_MosaicMespritCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, RockTunnel_B1F_MosaicMespritResolved
 	release
 	end
 
-RockTunnel_B1F_AnthologyMespritCaught::
+RockTunnel_B1F_MosaicMespritCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROCKTUNNEL_MESPRIT
-	goto RockTunnel_B1F_AnthologyMespritResolved
+	goto RockTunnel_B1F_MosaicMespritResolved
 
-RockTunnel_B1F_AnthologyMespritResolved::
+RockTunnel_B1F_MosaicMespritResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_MESPRIT
-	setflag FLAG_HIDE_ANTHOLOGY_MESPRIT
+	removeobject LOCALID_MOSAIC_MESPRIT
+	setflag FLAG_HIDE_MOSAIC_MESPRIT
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-RockTunnel_B1F_AnthologyMespritRetreated::
+RockTunnel_B1F_MosaicMespritRetreated::
 	release
 	end
 
-RockTunnel_B1F_AnthologyHideAzelf::
-	setflag FLAG_HIDE_ANTHOLOGY_AZELF
+RockTunnel_B1F_MosaicHideAzelf::
+	setflag FLAG_HIDE_MOSAIC_AZELF
 	return
 
-RockTunnel_B1F_AnthologyShowAzelf::
-	clearflag FLAG_HIDE_ANTHOLOGY_AZELF
+RockTunnel_B1F_MosaicShowAzelf::
+	clearflag FLAG_HIDE_MOSAIC_AZELF
 	return
 
 RockTunnel_B1F_EventScript_Azelf::
@@ -327,32 +327,32 @@ RockTunnel_B1F_EventScript_Azelf::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, RockTunnel_B1F_AnthologyAzelfRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, RockTunnel_B1F_AnthologyAzelfRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RockTunnel_B1F_AnthologyAzelfCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, RockTunnel_B1F_AnthologyAzelfResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, RockTunnel_B1F_MosaicAzelfRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, RockTunnel_B1F_MosaicAzelfRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RockTunnel_B1F_MosaicAzelfCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, RockTunnel_B1F_MosaicAzelfResolved
 	release
 	end
 
-RockTunnel_B1F_AnthologyAzelfCaught::
+RockTunnel_B1F_MosaicAzelfCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROCKTUNNEL_AZELF
-	goto RockTunnel_B1F_AnthologyAzelfResolved
+	goto RockTunnel_B1F_MosaicAzelfResolved
 
-RockTunnel_B1F_AnthologyAzelfResolved::
+RockTunnel_B1F_MosaicAzelfResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_AZELF
-	setflag FLAG_HIDE_ANTHOLOGY_AZELF
+	removeobject LOCALID_MOSAIC_AZELF
+	setflag FLAG_HIDE_MOSAIC_AZELF
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-RockTunnel_B1F_AnthologyAzelfRetreated::
+RockTunnel_B1F_MosaicAzelfRetreated::
 	release
 	end
 
 // Multi-location acquisition batch: preserve canonical map scripts.
 RockTunnel_B1F_BigBatchOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_BigBatchRandomOnTransition
 	getcaughtmon SPECIES_HEATRAN
 	call_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_BigBatchHideHeatran
@@ -365,11 +365,11 @@ RockTunnel_B1F_BigBatchRandomOnTransition::
 	return
 
 RockTunnel_B1F_BigBatchHideHeatran::
-	setflag FLAG_HIDE_ANTHOLOGY_HEATRAN
+	setflag FLAG_HIDE_MOSAIC_HEATRAN
 	return
 
 RockTunnel_B1F_BigBatchShowHeatran::
-	clearflag FLAG_HIDE_ANTHOLOGY_HEATRAN
+	clearflag FLAG_HIDE_MOSAIC_HEATRAN
 	return
 
 RockTunnel_B1F_EventScript_Heatran::
@@ -394,8 +394,8 @@ RockTunnel_B1F_BigBatchHeatranCaught::
 
 RockTunnel_B1F_BigBatchHeatranResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_HEATRAN
-	setflag FLAG_HIDE_ANTHOLOGY_HEATRAN
+	removeobject LOCALID_MOSAIC_HEATRAN
+	setflag FLAG_HIDE_MOSAIC_HEATRAN
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -404,20 +404,20 @@ RockTunnel_B1F_BigBatchHeatranRetreated::
 	release
 	end
 
-Anthology_MegaStone_HEATRANITE::
-    callnative AnthologyStaticRandomizerIsOn
+Mosaic_MegaStone_HEATRANITE::
+    callnative MosaicStaticRandomizerIsOn
     goto_if_eq VAR_RESULT, TRUE, RockTunnel_B1F_MegaStoneHeatranRandom
     getcaughtmon SPECIES_HEATRAN
-    goto_if_ne VAR_RESULT, TRUE, Anthology_MegaStone_HEATRANITE_Locked
+    goto_if_ne VAR_RESULT, TRUE, Mosaic_MegaStone_HEATRANITE_Locked
     finditem ITEM_HEATRANITE
     end
 RockTunnel_B1F_MegaStoneHeatranRandom::
-    goto_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_HEATRAN, Anthology_MegaStone_HEATRANITE_Locked
+    goto_if_unset FLAG_CAUGHT_RANDOM_ROCKTUNNEL_HEATRAN, Mosaic_MegaStone_HEATRANITE_Locked
     finditem ITEM_HEATRANITE
     end
-Anthology_MegaStone_HEATRANITE_Locked::
-    msgbox Anthology_MegaStone_HEATRANITE_LockedText, MSGBOX_DEFAULT
+Mosaic_MegaStone_HEATRANITE_Locked::
+    msgbox Mosaic_MegaStone_HEATRANITE_LockedText, MSGBOX_DEFAULT
     end
-Anthology_MegaStone_HEATRANITE_LockedText::
+Mosaic_MegaStone_HEATRANITE_LockedText::
     .string "A special MEGA STONE resonates here.\p"
     .string "Return when its guardian is yours.$"

@@ -78,7 +78,7 @@ NewBarkTown_EventScript_Aide2Testimony::
 NewBarkTown_Lab_EventScript_Elm::
 	lock
 	faceplayer
-	callnative Anthology_ScrClaimElmMedal
+	callnative Mosaic_ScrClaimElmMedal
 	goto_if_eq VAR_RESULT, 1, NewBarkTown_Lab_EventScript_ResearchMedalAward
 	goto_if_eq VAR_RESULT, 2, NewBarkTown_Lab_EventScript_ResearchMedalBagFull
 	goto_if_set FLAG_HIDE_NEWBARKTOWN_LAB_AIDE, NewBarkTown_Lab_EventScript_ElmAideIsWaiting
@@ -210,9 +210,9 @@ NewBarkTown_Lab_EventScript_TotodileBall_Choice::
 @ still handles the successful gift and one-time starter acceptance.
 NewBarkTown_Lab_EventScript_PagedStarterChoice::
 	callnative DisableStaticRandomizer
-	special AnthologyChooseJohtoStarter
+	special MosaicChooseJohtoStarter
 	copyvar VAR_STARTER_MON, VAR_RESULT
-	callnative Anthology_GetJohtoChosenStarterSpecies
+	callnative Mosaic_GetJohtoChosenStarterSpecies
 	copyvar PLAYER_STARTER_SPECIES, VAR_RESULT
 	goto NewBarkTown_Lab_EventScript_ChoseStarter
 
@@ -362,11 +362,11 @@ NewBarkTown_Lab_EventScript_HideChikorita::
 NewBarkTown_Lab_EventScript_PoliceEpisode::
 	lock
 	setmetatile 7, 1, METATILE_R26_21_Broken_Window, TRUE
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0 NewBarkTown_Lab_EventScript_HideCyndaquil
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1 NewBarkTown_Lab_EventScript_HideTotodile
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2 NewBarkTown_Lab_EventScript_HideChikorita
 	applymovement OBJ_EVENT_ID_PLAYER, NeBarkTownLab_Movement_PlayerWalkToCop
 	waitmovement 0

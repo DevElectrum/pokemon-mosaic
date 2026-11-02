@@ -495,7 +495,7 @@ RegionHub_Text_WorldTourBreakdown:
 RegionHub_EventScript_Clerk::
 	lock
 	faceplayer
-	goto_if_set FLAG_ANTHOLOGY_GRAND_RESEARCHER, RegionHub_EventScript_ClerkPremiumChoice
+	goto_if_set FLAG_MOSAIC_GRAND_RESEARCHER, RegionHub_EventScript_ClerkPremiumChoice
 RegionHub_EventScript_ClerkRegular::
 	message gText_HowMayIServeYou
 	waitmessage
@@ -994,7 +994,7 @@ RegionHub_EventScript_DexReward::
 	faceplayer
 	callnative RegionHub_ScrGetCaughtCount
 	copyvar VAR_0x8000, VAR_RESULT
-	goto_if_set FLAG_ANTHOLOGY_GRAND_RESEARCHER, RegionHub_EventScript_DexRewardTier2
+	goto_if_set FLAG_MOSAIC_GRAND_RESEARCHER, RegionHub_EventScript_DexRewardTier2
 	callnative RegionHub_ScrClaimGrandResearcher
 	goto_if_eq VAR_RESULT, 1, RegionHub_EventScript_DexRewardGiveTier3
 	goto_if_eq VAR_RESULT, 2, RegionHub_EventScript_ResearchRewardBagFull
@@ -1007,7 +1007,7 @@ RegionHub_EventScript_DexRewardTier1::
 RegionHub_EventScript_DexRewardProgress::
 	goto_if_unset FLAG_DEX_REWARD_1, RegionHub_EventScript_DexRewardShowCount
 	goto_if_unset FLAG_DEX_REWARD_2, RegionHub_EventScript_DexRewardShowCount
-	goto_if_unset FLAG_ANTHOLOGY_GRAND_RESEARCHER, RegionHub_EventScript_DexRewardShowCount
+	goto_if_unset FLAG_MOSAIC_GRAND_RESEARCHER, RegionHub_EventScript_DexRewardShowCount
 	msgbox RegionHub_Text_DexRewardAllDone, MSGBOX_DEFAULT
 	release
 	end

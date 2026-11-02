@@ -3,8 +3,8 @@ Route40_MapScripts::
 	.byte 0
 
 Route40_MapScript_OnTransition::
-	call Route40_AnthologyFieldTransition
-	call Route40_AnthologyOnTransition
+	call Route40_MosaicFieldTransition
+	call Route40_MosaicOnTransition
 	goto_if_ge VAR_OLIVINE_CITY_STATE, 5, Route40_MapScript_ClearWeather
 	end
 
@@ -198,25 +198,25 @@ Rotue40_EventScript_MonicaCompleted::
 	end
 
 // New static acquisition flags are independent of original Johto plot events.
-Route40_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+Route40_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route40_SeededLugiaTransition
 	getcaughtmon SPECIES_LUGIA
-	call_if_eq VAR_RESULT, TRUE, Route40_AnthologyHideLugia
-	call_if_ne VAR_RESULT, TRUE, Route40_AnthologyShowLugia
+	call_if_eq VAR_RESULT, TRUE, Route40_MosaicHideLugia
+	call_if_ne VAR_RESULT, TRUE, Route40_MosaicShowLugia
 	return
 
 Route40_SeededLugiaTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_ROUTE40_LUGIA, Route40_AnthologyHideLugia
-	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE40_LUGIA, Route40_AnthologyShowLugia
+	call_if_set FLAG_CAUGHT_RANDOM_ROUTE40_LUGIA, Route40_MosaicHideLugia
+	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE40_LUGIA, Route40_MosaicShowLugia
 	return
 
-Route40_AnthologyHideLugia::
-	setflag FLAG_HIDE_ANTHOLOGY_LUGIA
+Route40_MosaicHideLugia::
+	setflag FLAG_HIDE_MOSAIC_LUGIA
 	return
 
-Route40_AnthologyShowLugia::
-	clearflag FLAG_HIDE_ANTHOLOGY_LUGIA
+Route40_MosaicShowLugia::
+	clearflag FLAG_HIDE_MOSAIC_LUGIA
 	return
 
 // Defeated => map re-entry rematch. Caught => permanent for this site.
@@ -230,46 +230,46 @@ Route40_EventScript_Lugia::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route40_AnthologyLugiaRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route40_AnthologyLugiaRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route40_AnthologyLugiaCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route40_AnthologyLugiaResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route40_MosaicLugiaRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route40_MosaicLugiaRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route40_MosaicLugiaCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route40_MosaicLugiaResolved
 	release
 	end
 
-Route40_AnthologyLugiaCaught::
-	callnative AnthologyStaticRandomizerIsOn
+Route40_MosaicLugiaCaught::
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route40_MarkSeededLugia
-	goto Route40_AnthologyLugiaResolved
+	goto Route40_MosaicLugiaResolved
 
 Route40_MarkSeededLugia::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE40_LUGIA
 	return
 
-Route40_AnthologyLugiaResolved::
+Route40_MosaicLugiaResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_LUGIA
-	setflag FLAG_HIDE_ANTHOLOGY_LUGIA
+	removeobject LOCALID_MOSAIC_LUGIA
+	setflag FLAG_HIDE_MOSAIC_LUGIA
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route40_AnthologyLugiaRetreated::
+Route40_MosaicLugiaRetreated::
 	release
 	end
 
 // Optional new form or post-release roamer safety-net encounter.
-Route40_AnthologyFieldTransition::
-	call_if_set FLAG_CAUGHT_ANTHOLOGY_ARTICUNO_GALAR, Route40_FieldHideGalarianArticuno
-	call_if_unset FLAG_CAUGHT_ANTHOLOGY_ARTICUNO_GALAR, Route40_FieldShowGalarianArticuno
+Route40_MosaicFieldTransition::
+	call_if_set FLAG_CAUGHT_MOSAIC_ARTICUNO_GALAR, Route40_FieldHideGalarianArticuno
+	call_if_unset FLAG_CAUGHT_MOSAIC_ARTICUNO_GALAR, Route40_FieldShowGalarianArticuno
 	return
 
 Route40_FieldHideGalarianArticuno::
-	setflag FLAG_HIDE_ANTHOLOGY_ARTICUNO_GALAR
+	setflag FLAG_HIDE_MOSAIC_ARTICUNO_GALAR
 	return
 
 Route40_FieldShowGalarianArticuno::
-	clearflag FLAG_HIDE_ANTHOLOGY_ARTICUNO_GALAR
+	clearflag FLAG_HIDE_MOSAIC_ARTICUNO_GALAR
 	return
 
 Route40_EventScript_GalarianArticuno::
@@ -289,13 +289,13 @@ Route40_EventScript_GalarianArticuno::
 	end
 
 Route40_FieldGalarianArticunoCaught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_ARTICUNO_GALAR
+	setflag FLAG_CAUGHT_MOSAIC_ARTICUNO_GALAR
 	goto Route40_FieldGalarianArticunoResolved
 
 Route40_FieldGalarianArticunoResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ARTICUNO_GALAR
-	setflag FLAG_HIDE_ANTHOLOGY_ARTICUNO_GALAR
+	removeobject LOCALID_MOSAIC_ARTICUNO_GALAR
+	setflag FLAG_HIDE_MOSAIC_ARTICUNO_GALAR
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

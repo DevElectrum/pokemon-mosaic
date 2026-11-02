@@ -434,7 +434,7 @@ Route120_Text_RouteSign121:
 // Hoenn pre-League sites independent of the original story interactions.
 Route120_SecondBatchOnTransition::
 	call Route120_WoChienTransition
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route120_SecondBatchSeededTransition
 	getcaughtmon SPECIES_IRON_LEAVES
 	call_if_eq VAR_RESULT, TRUE, Route120_SecondBatchHideIronLeaves
@@ -452,11 +452,11 @@ Route120_SecondBatchSeededTransition::
 	return
 
 Route120_SecondBatchHideIronLeaves::
-	setflag FLAG_HIDE_ANTHOLOGY_IRON_LEAVES
+	setflag FLAG_HIDE_MOSAIC_IRON_LEAVES
 	return
 
 Route120_SecondBatchShowIronLeaves::
-	clearflag FLAG_HIDE_ANTHOLOGY_IRON_LEAVES
+	clearflag FLAG_HIDE_MOSAIC_IRON_LEAVES
 	return
 
 Route120_EventScript_IronLeaves::
@@ -476,7 +476,7 @@ Route120_EventScript_IronLeaves::
 	end
 
 Route120_SeededIronLeavesCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route120_MarkSeededIronLeaves
 	goto Route120_SecondBatchIronLeavesResolved
 
@@ -486,8 +486,8 @@ Route120_MarkSeededIronLeaves::
 
 Route120_SecondBatchIronLeavesResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_IRON_LEAVES
-	setflag FLAG_HIDE_ANTHOLOGY_IRON_LEAVES
+	removeobject LOCALID_MOSAIC_IRON_LEAVES
+	setflag FLAG_HIDE_MOSAIC_IRON_LEAVES
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -497,11 +497,11 @@ Route120_SecondBatchIronLeavesRetreated::
 	end
 
 Route120_SecondBatchHideLatias::
-	setflag FLAG_HIDE_ANTHOLOGY_LATIAS
+	setflag FLAG_HIDE_MOSAIC_LATIAS
 	return
 
 Route120_SecondBatchShowLatias::
-	clearflag FLAG_HIDE_ANTHOLOGY_LATIAS
+	clearflag FLAG_HIDE_MOSAIC_LATIAS
 	return
 
 Route120_EventScript_Latias::
@@ -521,7 +521,7 @@ Route120_EventScript_Latias::
 	end
 
 Route120_SeededLatiasCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route120_MarkSeededLatias
 	goto Route120_SecondBatchLatiasResolved
 
@@ -531,8 +531,8 @@ Route120_MarkSeededLatias::
 
 Route120_SecondBatchLatiasResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_LATIAS
-	setflag FLAG_HIDE_ANTHOLOGY_LATIAS
+	removeobject LOCALID_MOSAIC_LATIAS
+	setflag FLAG_HIDE_MOSAIC_LATIAS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -543,20 +543,20 @@ Route120_SecondBatchLatiasRetreated::
 
 
 Route120_WoChienTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route120_SeededWoChienTransition
 	getcaughtmon SPECIES_WO_CHIEN
 	goto_if_eq VAR_RESULT, TRUE, Route120_HideWoChien
-	clearflag FLAG_HIDE_ANTHOLOGY_WO_CHIEN
+	clearflag FLAG_HIDE_MOSAIC_WO_CHIEN
 	return
 
 Route120_SeededWoChienTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE120_WO_CHIEN, Route120_HideWoChien
-	clearflag FLAG_HIDE_ANTHOLOGY_WO_CHIEN
+	clearflag FLAG_HIDE_MOSAIC_WO_CHIEN
 	return
 
 Route120_HideWoChien::
-	setflag FLAG_HIDE_ANTHOLOGY_WO_CHIEN
+	setflag FLAG_HIDE_MOSAIC_WO_CHIEN
 	return
 
 Route120_EventScript_WoChien::
@@ -576,7 +576,7 @@ Route120_EventScript_WoChien::
 	end
 
 Route120_SeededWoChienCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route120_MarkSeededWoChien
 	goto Route120_WoChienResolved
 
@@ -586,8 +586,8 @@ Route120_MarkSeededWoChien::
 
 Route120_WoChienResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_WO_CHIEN
-	setflag FLAG_HIDE_ANTHOLOGY_WO_CHIEN
+	removeobject LOCALID_MOSAIC_WO_CHIEN
+	setflag FLAG_HIDE_MOSAIC_WO_CHIEN
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

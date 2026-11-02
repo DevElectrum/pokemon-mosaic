@@ -74,21 +74,21 @@ fixture builder verifies unused ROM padding and patches only disposable copies.
 
 ```sh
 python3 test/overworld/visual-features/build_fixture.py --repo . \
-  --rom /tmp/lighting-after/pokemonworld.gba --elf /tmp/lighting-after/pokemonworld.elf \
+  --rom /tmp/lighting-after/pokemon-mosaic.gba --elf /tmp/lighting-after/pokemon-mosaic.elf \
   --source test/overworld/night-lighting/fixture.c --out /tmp/lighting-capture
 python3 test/overworld/night-lighting/run_captures.py --repo "$PWD" \
   --fixture /tmp/lighting-capture --out /tmp/lighting-runs/after
 python3 test/overworld/visual-features/build_fixture.py --repo . \
-  --rom /tmp/lighting-after/pokemonworld.gba --elf /tmp/lighting-after/pokemonworld.elf \
+  --rom /tmp/lighting-after/pokemon-mosaic.gba --elf /tmp/lighting-after/pokemon-mosaic.elf \
   --source test/overworld/night-lighting/lifecycle_fixture.c --out /tmp/lighting-lifecycle
 python3 test/overworld/visual-features/run_fixture.py --repo "$PWD" \
   --fixture /tmp/lighting-lifecycle --suite test/overworld/night-lighting/lifecycle.lua \
   --out /tmp/lighting-runs/lifecycle
-PW_OUT=/tmp/lighting-runs/regression test/overworld/run-all.sh /tmp/lighting-after/pokemonworld.gba \
+PW_OUT=/tmp/lighting-runs/regression test/overworld/run-all.sh /tmp/lighting-after/pokemon-mosaic.gba \
   > /tmp/lighting-sweep.log 2>&1
 cp /tmp/lighting-sweep.log /tmp/lighting-runs/regression/sweep.log
 PW_OUT=/tmp/lighting-runs/delivery/ test/overworld/mgba-run.sh test/overworld/night-lighting/delivery.lua \
-  /tmp/lighting-after/pokemonworld.gba /tmp/lighting-runs/lifecycle/VisualReview.sav
+  /tmp/lighting-after/pokemon-mosaic.gba /tmp/lighting-runs/lifecycle/VisualReview.sav
 ```
 
 Build a clean baseline and repeat the capture with the same `fixture.c` for the
@@ -106,7 +106,7 @@ python3 test/overworld/night-lighting/render_review.py --base "$BASE" --repo . \
   --before-fixture /tmp/lighting-before-capture --after-fixture /tmp/lighting-capture \
   --lifecycle /tmp/lighting-runs/lifecycle --lifecycle-fixture /tmp/lighting-lifecycle \
   --regression /tmp/lighting-runs/regression \
-  --delivery /tmp/lighting-after/pokemonworld.gba --delivery-run /tmp/lighting-runs/delivery \
+  --delivery /tmp/lighting-after/pokemon-mosaic.gba --delivery-run /tmp/lighting-runs/delivery \
   --out test/overworld/night-lighting/evidence/review
 ```
 

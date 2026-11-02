@@ -286,7 +286,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_LUGIA",
+      "local_id": "LOCALID_MOSAIC_LUGIA",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LUGIA)",
       "x": 28,
       "y": 15,
@@ -297,10 +297,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route40_EventScript_Lugia",
-      "flag": "FLAG_HIDE_ANTHOLOGY_LUGIA"
+      "flag": "FLAG_HIDE_MOSAIC_LUGIA"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_ARTICUNO_GALAR",
+      "local_id": "LOCALID_MOSAIC_ARTICUNO_GALAR",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(ARTICUNO_GALAR)",
       "x": 9,
       "y": 2,
@@ -311,7 +311,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route40_EventScript_GalarianArticuno",
-      "flag": "FLAG_HIDE_ANTHOLOGY_ARTICUNO_GALAR"
+      "flag": "FLAG_HIDE_MOSAIC_ARTICUNO_GALAR"
     }
   ],
   "warp_events": [

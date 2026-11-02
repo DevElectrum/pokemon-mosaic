@@ -1,29 +1,29 @@
 Route128_AncientGrotto_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, Route128_AncientGrotto_AnthologyOnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, Route128_AncientGrotto_MosaicOnTransition
 	.byte 0
 
 
-Route128_AncientGrotto_AnthologyOnTransition::
-	goto_if_unset FLAG_BADGE07_GET, Route128_AncientGrotto_AnthologyHideKoraidon
-	goto_if_unset FLAG_DEFEATED_MAGMA_SPACE_CENTER, Route128_AncientGrotto_AnthologyHideKoraidon
-	callnative AnthologyStaticRandomizerIsOn
+Route128_AncientGrotto_MosaicOnTransition::
+	goto_if_unset FLAG_BADGE07_GET, Route128_AncientGrotto_MosaicHideKoraidon
+	goto_if_unset FLAG_DEFEATED_MAGMA_SPACE_CENTER, Route128_AncientGrotto_MosaicHideKoraidon
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route128_AncientGrotto_SeededKoraidonTransition
 	getcaughtmon SPECIES_KORAIDON
-	call_if_eq VAR_RESULT, TRUE, Route128_AncientGrotto_AnthologyHideKoraidon
-	call_if_ne VAR_RESULT, TRUE, Route128_AncientGrotto_AnthologyShowKoraidon
+	call_if_eq VAR_RESULT, TRUE, Route128_AncientGrotto_MosaicHideKoraidon
+	call_if_ne VAR_RESULT, TRUE, Route128_AncientGrotto_MosaicShowKoraidon
 	end
 
 Route128_AncientGrotto_SeededKoraidonTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_ANCIENTGROTTO_KORAIDON, Route128_AncientGrotto_AnthologyHideKoraidon
-	call_if_unset FLAG_CAUGHT_RANDOM_ANCIENTGROTTO_KORAIDON, Route128_AncientGrotto_AnthologyShowKoraidon
+	call_if_set FLAG_CAUGHT_RANDOM_ANCIENTGROTTO_KORAIDON, Route128_AncientGrotto_MosaicHideKoraidon
+	call_if_unset FLAG_CAUGHT_RANDOM_ANCIENTGROTTO_KORAIDON, Route128_AncientGrotto_MosaicShowKoraidon
 	end
 
-Route128_AncientGrotto_AnthologyHideKoraidon::
-	setflag FLAG_HIDE_ANTHOLOGY_KORAIDON
+Route128_AncientGrotto_MosaicHideKoraidon::
+	setflag FLAG_HIDE_MOSAIC_KORAIDON
 	return
 
-Route128_AncientGrotto_AnthologyShowKoraidon::
-	clearflag FLAG_HIDE_ANTHOLOGY_KORAIDON
+Route128_AncientGrotto_MosaicShowKoraidon::
+	clearflag FLAG_HIDE_MOSAIC_KORAIDON
 	return
 
 Route128_AncientGrotto_EventScript_Koraidon::
@@ -35,31 +35,31 @@ Route128_AncientGrotto_EventScript_Koraidon::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route128_AncientGrotto_AnthologyKoraidonRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route128_AncientGrotto_AnthologyKoraidonRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route128_AncientGrotto_MosaicKoraidonRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route128_AncientGrotto_MosaicKoraidonRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route128_AncientGrotto_SeededKoraidonCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route128_AncientGrotto_AnthologyKoraidonResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route128_AncientGrotto_MosaicKoraidonResolved
 	release
 	end
 
 Route128_AncientGrotto_SeededKoraidonCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route128_AncientGrotto_MarkSeededKoraidon
-	goto Route128_AncientGrotto_AnthologyKoraidonResolved
+	goto Route128_AncientGrotto_MosaicKoraidonResolved
 
 Route128_AncientGrotto_MarkSeededKoraidon::
 	setflag FLAG_CAUGHT_RANDOM_ANCIENTGROTTO_KORAIDON
 	return
 
-Route128_AncientGrotto_AnthologyKoraidonResolved::
+Route128_AncientGrotto_MosaicKoraidonResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_KORAIDON
-	setflag FLAG_HIDE_ANTHOLOGY_KORAIDON
+	removeobject LOCALID_MOSAIC_KORAIDON
+	setflag FLAG_HIDE_MOSAIC_KORAIDON
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route128_AncientGrotto_AnthologyKoraidonRetreated::
+Route128_AncientGrotto_MosaicKoraidonRetreated::
 	release
 	end
 

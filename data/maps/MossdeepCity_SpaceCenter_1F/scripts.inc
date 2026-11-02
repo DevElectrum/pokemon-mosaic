@@ -4,7 +4,7 @@ MossdeepCity_SpaceCenter_1F_MapScripts::
 	.byte 0
 
 MossdeepCity_SpaceCenter_1F_OnTransition:
-	call MossdeepCity_SpaceCenter_1F_AnthologyOnTransition
+	call MossdeepCity_SpaceCenter_1F_MosaicOnTransition
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma
 	end
 
@@ -426,27 +426,27 @@ MossdeepCity_SpaceCenter_1F_Text_MagmaIntentToStealNotice:
 
 // Special species sources added without replacing any canonical event or
 // scene. They respawn after a non-capture victory when the map is re-entered.
-MossdeepCity_SpaceCenter_1F_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+MossdeepCity_SpaceCenter_1F_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, MossdeepCity_SpaceCenter_1F_SeededLatiosVisibility
 	getcaughtmon SPECIES_LATIOS
-	call_if_eq VAR_RESULT, TRUE, MossdeepCity_SpaceCenter_1F_AnthologyHideDeoxys
-	goto_if_unset FLAG_DEFEATED_MAGMA_SPACE_CENTER, MossdeepCity_SpaceCenter_1F_AnthologyHideDeoxys
-	call_if_ne VAR_RESULT, TRUE, MossdeepCity_SpaceCenter_1F_AnthologyShowDeoxys
+	call_if_eq VAR_RESULT, TRUE, MossdeepCity_SpaceCenter_1F_MosaicHideDeoxys
+	goto_if_unset FLAG_DEFEATED_MAGMA_SPACE_CENTER, MossdeepCity_SpaceCenter_1F_MosaicHideDeoxys
+	call_if_ne VAR_RESULT, TRUE, MossdeepCity_SpaceCenter_1F_MosaicShowDeoxys
 	return
 
 MossdeepCity_SpaceCenter_1F_SeededLatiosVisibility::
-	goto_if_unset FLAG_DEFEATED_MAGMA_SPACE_CENTER, MossdeepCity_SpaceCenter_1F_AnthologyHideDeoxys
-	call_if_set FLAG_CAUGHT_RANDOM_MOSSDEEP_LATIOS, MossdeepCity_SpaceCenter_1F_AnthologyHideDeoxys
-	call_if_unset FLAG_CAUGHT_RANDOM_MOSSDEEP_LATIOS, MossdeepCity_SpaceCenter_1F_AnthologyShowDeoxys
+	goto_if_unset FLAG_DEFEATED_MAGMA_SPACE_CENTER, MossdeepCity_SpaceCenter_1F_MosaicHideDeoxys
+	call_if_set FLAG_CAUGHT_RANDOM_MOSSDEEP_LATIOS, MossdeepCity_SpaceCenter_1F_MosaicHideDeoxys
+	call_if_unset FLAG_CAUGHT_RANDOM_MOSSDEEP_LATIOS, MossdeepCity_SpaceCenter_1F_MosaicShowDeoxys
 	return
 
-MossdeepCity_SpaceCenter_1F_AnthologyHideDeoxys::
-	setflag FLAG_HIDE_ANTHOLOGY_LATIOS
+MossdeepCity_SpaceCenter_1F_MosaicHideDeoxys::
+	setflag FLAG_HIDE_MOSAIC_LATIOS
 	return
 
-MossdeepCity_SpaceCenter_1F_AnthologyShowDeoxys::
-	clearflag FLAG_HIDE_ANTHOLOGY_LATIOS
+MossdeepCity_SpaceCenter_1F_MosaicShowDeoxys::
+	clearflag FLAG_HIDE_MOSAIC_LATIOS
 	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_Latios::
@@ -458,30 +458,30 @@ MossdeepCity_SpaceCenter_1F_EventScript_Latios::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MossdeepCity_SpaceCenter_1F_AnthologyLatiosRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MossdeepCity_SpaceCenter_1F_AnthologyLatiosRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MossdeepCity_SpaceCenter_1F_MosaicLatiosRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MossdeepCity_SpaceCenter_1F_MosaicLatiosRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MossdeepCity_SpaceCenter_1F_SeededLatiosCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MossdeepCity_SpaceCenter_1F_AnthologyLatiosResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MossdeepCity_SpaceCenter_1F_MosaicLatiosResolved
 	release
 	end
 
 MossdeepCity_SpaceCenter_1F_SeededLatiosCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, MossdeepCity_SpaceCenter_1F_MarkSeededLatios
-	goto MossdeepCity_SpaceCenter_1F_AnthologyLatiosResolved
+	goto MossdeepCity_SpaceCenter_1F_MosaicLatiosResolved
 
 MossdeepCity_SpaceCenter_1F_MarkSeededLatios::
 	setflag FLAG_CAUGHT_RANDOM_MOSSDEEP_LATIOS
 	return
 
-MossdeepCity_SpaceCenter_1F_AnthologyLatiosResolved::
+MossdeepCity_SpaceCenter_1F_MosaicLatiosResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_LATIOS
-	setflag FLAG_HIDE_ANTHOLOGY_LATIOS
+	removeobject LOCALID_MOSAIC_LATIOS
+	setflag FLAG_HIDE_MOSAIC_LATIOS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-MossdeepCity_SpaceCenter_1F_AnthologyLatiosRetreated::
+MossdeepCity_SpaceCenter_1F_MosaicLatiosRetreated::
 	release
 	end

@@ -58,7 +58,7 @@ CeladonCity_DepartmentStore_4F_Items::
 	.2byte ITEM_AUSPICIOUS_ARMOR
 	.2byte ITEM_MALICIOUS_ARMOR
 	.2byte ITEM_GIMMIGHOUL_COIN
-	@ Anthology ability and branching evolution items.
+	@ Mosaic ability and branching evolution items.
 	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_ABILITY_PATCH
 	.2byte ITEM_LEADERS_CREST

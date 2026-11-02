@@ -11,7 +11,7 @@ IcePath_B1F_MapScripts::
 
 IcePath_B1F_OnTransition:
 	copyvar VAR_ICE_STEP_COUNT, 1
-	call IcePath_B1F_AnthologyOnTransition
+	call IcePath_B1F_MosaicOnTransition
 	end
 
 IcePath_B1F_SetHoleWarp:
@@ -55,27 +55,27 @@ IcePath_B1F_Text_Sign:
 	.string "The sign is faded…$"
 
 
-IcePath_B1F_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, IcePath_B1F_AnthologyRandomOnTransition
+IcePath_B1F_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, IcePath_B1F_MosaicRandomOnTransition
 	getcaughtmon SPECIES_KYUREM
-	goto_if_eq VAR_RESULT, TRUE, IcePath_B1F_AnthologyHideKyurem
+	goto_if_eq VAR_RESULT, TRUE, IcePath_B1F_MosaicHideKyurem
 	getcaughtmon SPECIES_RESHIRAM
-	goto_if_ne VAR_RESULT, TRUE, IcePath_B1F_AnthologyHideKyurem
+	goto_if_ne VAR_RESULT, TRUE, IcePath_B1F_MosaicHideKyurem
 	getcaughtmon SPECIES_ZEKROM
-	goto_if_ne VAR_RESULT, TRUE, IcePath_B1F_AnthologyHideKyurem
-	clearflag FLAG_HIDE_ANTHOLOGY_KYUREM
+	goto_if_ne VAR_RESULT, TRUE, IcePath_B1F_MosaicHideKyurem
+	clearflag FLAG_HIDE_MOSAIC_KYUREM
 	return
 
-IcePath_B1F_AnthologyRandomOnTransition::
-	goto_if_set FLAG_CAUGHT_RANDOM_ICEPATH_KYUREM, IcePath_B1F_AnthologyHideKyurem
-	goto_if_unset FLAG_CAUGHT_RANDOM_TINTOWER_RESHIRAM, IcePath_B1F_AnthologyHideKyurem
-	goto_if_unset FLAG_CAUGHT_RANDOM_DARKCAVE_ZEKROM, IcePath_B1F_AnthologyHideKyurem
-	clearflag FLAG_HIDE_ANTHOLOGY_KYUREM
+IcePath_B1F_MosaicRandomOnTransition::
+	goto_if_set FLAG_CAUGHT_RANDOM_ICEPATH_KYUREM, IcePath_B1F_MosaicHideKyurem
+	goto_if_unset FLAG_CAUGHT_RANDOM_TINTOWER_RESHIRAM, IcePath_B1F_MosaicHideKyurem
+	goto_if_unset FLAG_CAUGHT_RANDOM_DARKCAVE_ZEKROM, IcePath_B1F_MosaicHideKyurem
+	clearflag FLAG_HIDE_MOSAIC_KYUREM
 	return
 
-IcePath_B1F_AnthologyHideKyurem::
-	setflag FLAG_HIDE_ANTHOLOGY_KYUREM
+IcePath_B1F_MosaicHideKyurem::
+	setflag FLAG_HIDE_MOSAIC_KYUREM
 	return
 
 IcePath_B1F_EventScript_Kyurem::
@@ -87,44 +87,44 @@ IcePath_B1F_EventScript_Kyurem::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, IcePath_B1F_AnthologyKyuremRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, IcePath_B1F_AnthologyKyuremRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, IcePath_B1F_AnthologyKyuremCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IcePath_B1F_AnthologyKyuremResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, IcePath_B1F_MosaicKyuremRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, IcePath_B1F_MosaicKyuremRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, IcePath_B1F_MosaicKyuremCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IcePath_B1F_MosaicKyuremResolved
 	release
 	end
 
-IcePath_B1F_AnthologyKyuremResolved::
+IcePath_B1F_MosaicKyuremResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_KYUREM
-	setflag FLAG_HIDE_ANTHOLOGY_KYUREM
+	removeobject LOCALID_MOSAIC_KYUREM
+	setflag FLAG_HIDE_MOSAIC_KYUREM
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-IcePath_B1F_AnthologyKyuremCaught::
+IcePath_B1F_MosaicKyuremCaught::
 	setflag FLAG_CAUGHT_RANDOM_ICEPATH_KYUREM
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_KYUREM
-	setflag FLAG_HIDE_ANTHOLOGY_KYUREM
+	removeobject LOCALID_MOSAIC_KYUREM
+	setflag FLAG_HIDE_MOSAIC_KYUREM
 	fadescreenswapbuffers FADE_FROM_BLACK
 	checkitem ITEM_DNA_SPLICERS
-	goto_if_eq VAR_RESULT, TRUE, IcePath_B1F_AnthologyKyuremRetreated
+	goto_if_eq VAR_RESULT, TRUE, IcePath_B1F_MosaicKyuremRetreated
 	giveitem ITEM_DNA_SPLICERS
-	goto_if_eq VAR_RESULT, TRUE, IcePath_B1F_AnthologyKyuremRetreated
+	goto_if_eq VAR_RESULT, TRUE, IcePath_B1F_MosaicKyuremRetreated
 	msgbox IcePath_B1F_Text_SplicersBagFull, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
 
-IcePath_B1F_AnthologyKyuremRetreated::
+IcePath_B1F_MosaicKyuremRetreated::
 	release
 	end
 
 // After a full bag, the adjacent plinth restores uncaptured DNA Splicers.
 IcePath_B1F_EventScript_DNASplicersPlinth::
 	lock
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, IcePath_B1F_EventScript_PlinthRandomized
 	getcaughtmon SPECIES_KYUREM
 	goto_if_ne VAR_RESULT, TRUE, IcePath_B1F_EventScript_PlinthSealed

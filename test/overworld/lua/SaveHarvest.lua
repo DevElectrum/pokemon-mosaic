@@ -4,7 +4,7 @@
 -- SaveBlock2.saveVersion appearing in the written .srm (footer signature 0x08012025).
 --
 -- The four address constants below are per-build: MakeMigrationFixtures.sh sed-patches them from
--- each historical build's pokemonworld.map before running. The defaults are the current build's
+-- each historical build's pokemon-mosaic.map before running. The defaults are the current build's
 -- addresses so this also runs standalone against the current ROM.
 local GMAIN_CB2 = 0x03006550
 local CB2_OW    = 0x081901d0

@@ -51,7 +51,7 @@ test/overworld/run-all.sh
 make check TOOLCHAIN=/opt/devkitpro/devkitARM -j8
 make validate
 python3 test/overworld/visual-features/build_fixture.py --repo "$PWD" \
-  --rom pokemonworld.gba --elf pokemonworld.elf --out /tmp/visual-fixture
+  --rom pokemon-mosaic.gba --elf pokemon-mosaic.elf --out /tmp/visual-fixture
 PW_FEATURE_LIB=/tmp/visual-fixture/lua PW_OUT=/tmp/visual-captures \
   test/overworld/mgba-run.sh test/overworld/visual-features/capture.lua /tmp/visual-fixture/VerifyFeatures.gba
 python3 test/overworld/visual-features/run_fixture.py --repo "$PWD" \

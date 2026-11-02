@@ -30,7 +30,7 @@ IslandCave_EventScript_HideRegiEntrance::
 IslandCave_OnTransition:
 	setflag FLAG_LANDMARK_ISLAND_CAVE
 	call IslandCave_EventScript_ClearSteps
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, IslandCave_RandomStaticOnTransition
 	getcaughtmon SPECIES_REGICE
 	call_if_eq VAR_RESULT, TRUE, IslandCave_NativeREGICECaught

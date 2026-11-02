@@ -34,7 +34,7 @@ mode it is called out — most of the pain in this project has come from harness
 
 ```bash
 cd ~/Github/PKMN-World
-make modern -j$(sysctl -n hw.ncpu)          # -> pokemonworld.gba (+ test/overworld/lua/symbols.lua)
+make modern -j$(sysctl -n hw.ncpu)          # -> pokemon-mosaic.gba (+ test/overworld/lua/symbols.lua)
 ```
 
 `make modern` → `all` → `rom`, and `rom: $(ROM) $(LUA_SYMBOLS)` — so a normal build also
@@ -54,7 +54,7 @@ script, and never reuse a savestate across builds.
 
 ```bash
 test/overworld/mgba-run.sh test/overworld/lua/SmokeBoot.lua
-test/overworld/mgba-run.sh test/overworld/lua/VerifyV7Migrate.lua pokemonworld.gba test/overworld/lua/fixtures/v7dirty.srm
+test/overworld/mgba-run.sh test/overworld/lua/VerifyV7Migrate.lua pokemon-mosaic.gba test/overworld/lua/fixtures/v7dirty.srm
 ```
 
 Arguments are `<suite.lua> [rom.gba] [save.srm]`; the ROM defaults to the repo build. Exit code is
@@ -89,7 +89,7 @@ directory on exit. Anything the run writes dies with it. Two independent guards 
 2. **Throwaway-ROM allowlist** — the ROM basename must match `^Verify`, `^MigChk` or `^FixGen`
    (`lib.lua:38`). Override deliberately with `opts.allowAnyRom = true`.
 
-The owner's live save is `pokemonworld.gba`'s neighbour `pokemonworld.sav` at the repo root
+The owner's live save is `pokemon-mosaic.gba`'s neighbour `pokemon-mosaic.sav` at the repo root
 (gitignored, untracked). `VerifyOwnerSave.lua` is the only suite that reads it. `mgba-run.sh` copies
 it into the temp dir, but pass a copy anyway if you are experimenting.
 
@@ -101,7 +101,7 @@ it into the temp dir, but pass a copy anyway if you are experimenting.
 
 ## 3. Addresses: read them from `symbols.lua`, never by hand
 
-`test/overworld/GenLuaSymbols.py` reads the freshly built `pokemonworld.elf` and emits
+`test/overworld/GenLuaSymbols.py` reads the freshly built `pokemon-mosaic.elf` and emits
 `test/overworld/lua/symbols.lua` — runtime addresses, a curated ABI-fixed struct-offset table, and the
 ROM's md5/sha1. It is a build artifact: **gitignored, never committed.**
 

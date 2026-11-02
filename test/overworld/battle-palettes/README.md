@@ -28,7 +28,7 @@ The same fixture source works against the merged BW baseline and this feature.
 make modern TOOLCHAIN=/opt/devkitpro/devkitARM -j8
 make check TOOLCHAIN=/opt/devkitpro/devkitARM -j8
 python3 test/overworld/battle-palettes/build_fixture.py \
-  --repo "$PWD" --rom pokemonworld.gba --elf pokemonworld.elf \
+  --repo "$PWD" --rom pokemon-mosaic.gba --elf pokemon-mosaic.elf \
   --out /tmp/world-palettes-fixture
 python3 test/overworld/visual-features/run_fixture.py \
   --repo "$PWD" --fixture /tmp/world-palettes-fixture \

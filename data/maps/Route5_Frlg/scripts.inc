@@ -16,7 +16,7 @@ Route5_Text_UndergroundPathSign::
 
 // Multi-location acquisition batch: preserve canonical map scripts.
 Route5_BigBatchOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route5_BigBatchRandomOnTransition
 	getcaughtmon SPECIES_TAPU_BULU
 	call_if_eq VAR_RESULT, TRUE, Route5_BigBatchHideTapuBulu
@@ -29,11 +29,11 @@ Route5_BigBatchRandomOnTransition::
 	return
 
 Route5_BigBatchHideTapuBulu::
-	setflag FLAG_HIDE_ANTHOLOGY_TAPU_BULU
+	setflag FLAG_HIDE_MOSAIC_TAPU_BULU
 	return
 
 Route5_BigBatchShowTapuBulu::
-	clearflag FLAG_HIDE_ANTHOLOGY_TAPU_BULU
+	clearflag FLAG_HIDE_MOSAIC_TAPU_BULU
 	return
 
 Route5_EventScript_TapuBulu::
@@ -58,8 +58,8 @@ Route5_BigBatchTapuBuluResolvedRandomCaught::
 
 Route5_BigBatchTapuBuluResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_TAPU_BULU
-	setflag FLAG_HIDE_ANTHOLOGY_TAPU_BULU
+	removeobject LOCALID_MOSAIC_TAPU_BULU
+	setflag FLAG_HIDE_MOSAIC_TAPU_BULU
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

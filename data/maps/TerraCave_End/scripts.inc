@@ -14,7 +14,7 @@ TerraCave_End_EventScript_TryRemoveGroudon::
 	return
 
 TerraCave_End_OnTransition:
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, TerraCave_End_SeededOnTransition
 	getcaughtmon SPECIES_GROUDON
 	goto_if_eq VAR_RESULT, TRUE, TerraCave_End_NativeGROUDONCaught
@@ -66,7 +66,7 @@ TerraCave_End_EventScript_Groudon::
 	end
 
 TerraCave_End_SeededCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, TerraCave_End_MarkSeededCaught
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
 	setflag FLAG_DEFEATED_GROUDON

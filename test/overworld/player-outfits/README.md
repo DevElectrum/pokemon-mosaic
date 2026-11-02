@@ -86,7 +86,7 @@ make modern TOOLCHAIN=/opt/devkitpro/devkitARM -j8
 make release TOOLCHAIN=/opt/devkitpro/devkitARM -j8
 make validate
 python3 test/overworld/player-outfits/run_capture.py --repo . \
-  --rom pokemonworld.gba --elf pokemonworld.elf --out /tmp/outfits/after
+  --rom pokemon-mosaic.gba --elf pokemon-mosaic.elf --out /tmp/outfits/after
 ```
 
 Run the same capture command with the baseline repo and its matching ROM/ELF,
@@ -102,14 +102,14 @@ from `export_symbols.py`. Its `feature_symbols.lua` must contain `return {}`:
 ```sh
 mkdir -p /tmp/outfits/delivery-lib /tmp/outfits/delivery
 cp test/overworld/lua/*.lua /tmp/outfits/delivery-lib/
-python3 test/overworld/GenLuaSymbols.py pokemonworld.elf \
+python3 test/overworld/GenLuaSymbols.py pokemon-mosaic.elf \
   > /tmp/outfits/delivery-lib/symbols.lua
 cp /tmp/outfits/after/assets/outfit_expected.lua /tmp/outfits/delivery-lib/
 printf 'return {}\n' > /tmp/outfits/delivery-lib/feature_symbols.lua
-python3 test/overworld/player-outfits/export_symbols.py pokemonworld.elf \
+python3 test/overworld/player-outfits/export_symbols.py pokemon-mosaic.elf \
   /tmp/outfits/delivery-lib/outfit_symbols.lua
 PW_FEATURE_LIB=/tmp/outfits/delivery-lib PW_OUT=/tmp/outfits/delivery \
-  test/overworld/mgba-run.sh test/overworld/player-outfits/OutfitDelivery.lua pokemonworld.gba \
+  test/overworld/mgba-run.sh test/overworld/player-outfits/OutfitDelivery.lua pokemon-mosaic.gba \
   /tmp/outfits/after/surfaces/VisualReview.sav \
   > /tmp/outfits/delivery/runner.log 2>&1
 PW_OUT=/tmp/outfits/regression test/overworld/run-all.sh
@@ -117,7 +117,7 @@ PW_OUT=/tmp/outfits/regression test/overworld/run-all.sh
 
 `render_review.py --runs /tmp/outfits --out test/overworld/player-outfits/review
 --before-source <actual-before-game-commit> --after-source <actual-after-game-commit>
---delivery-rom pokemonworld.gba` requires all seven runs to have fresh terminal
+--delivery-rom pokemon-mosaic.gba` requires all seven runs to have fresh terminal
 verdicts, positive equal assertion counts, and matching ROM-stamped PASS files.
 It also verifies ten Red frames pixel-for-pixel and decodes every lossless clip
 against its source pixels and timing. Raw palette snapshots use `.pal.bin` to

@@ -3,7 +3,7 @@ Route41_MapScripts::
 	.byte 0
 
 Route41_MapScript_OnTransition::
-	call Route41_AnthologyOnTransition
+	call Route41_MosaicOnTransition
 	goto_if_eq VAR_COMPLETED_LUGIA, 4, Route41_MapScript_DoNothing
 	goto_if_ge VAR_OLIVINE_CITY_STATE, 5, OlivineCity_MapScript_ClearWeather
 	end
@@ -295,21 +295,21 @@ Route41_Text_TentacruelHeal:
 	.string "The TENTACRUEL used RECOVER!\n"
 	.string "It is fully healed!$"
 
-Route41_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, Route41_AnthologyRandomOnTransition
+Route41_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, Route41_MosaicRandomOnTransition
 	getcaughtmon SPECIES_THUNDURUS
-	goto_if_eq VAR_RESULT, TRUE, Route41_AnthologyHideThundurus
-	clearflag FLAG_HIDE_ANTHOLOGY_THUNDURUS
+	goto_if_eq VAR_RESULT, TRUE, Route41_MosaicHideThundurus
+	clearflag FLAG_HIDE_MOSAIC_THUNDURUS
 	return
 
-Route41_AnthologyRandomOnTransition::
-	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE41_THUNDURUS, Route41_AnthologyHideThundurus
-	clearflag FLAG_HIDE_ANTHOLOGY_THUNDURUS
+Route41_MosaicRandomOnTransition::
+	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE41_THUNDURUS, Route41_MosaicHideThundurus
+	clearflag FLAG_HIDE_MOSAIC_THUNDURUS
 	return
 
-Route41_AnthologyHideThundurus::
-	setflag FLAG_HIDE_ANTHOLOGY_THUNDURUS
+Route41_MosaicHideThundurus::
+	setflag FLAG_HIDE_MOSAIC_THUNDURUS
 	return
 
 Route41_EventScript_Thundurus::
@@ -321,25 +321,25 @@ Route41_EventScript_Thundurus::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route41_AnthologyThundurusRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route41_AnthologyThundurusRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route41_AnthologyThundurusResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route41_AnthologyThundurusResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route41_MosaicThundurusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route41_MosaicThundurusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route41_MosaicThundurusResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route41_MosaicThundurusResolved
 	release
 	end
 
-Route41_AnthologyThundurusResolvedRandomCaught::
+Route41_MosaicThundurusResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE41_THUNDURUS
-	goto Route41_AnthologyThundurusResolved
+	goto Route41_MosaicThundurusResolved
 
-Route41_AnthologyThundurusResolved::
+Route41_MosaicThundurusResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_THUNDURUS
-	setflag FLAG_HIDE_ANTHOLOGY_THUNDURUS
+	removeobject LOCALID_MOSAIC_THUNDURUS
+	setflag FLAG_HIDE_MOSAIC_THUNDURUS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route41_AnthologyThundurusRetreated::
+Route41_MosaicThundurusRetreated::
 	release
 	end

@@ -1,15 +1,15 @@
 CaveOfOrigin_B1F_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_B1F_AnthologyStellarOnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_B1F_MosaicStellarOnTransition
 	.byte 0
 
-CaveOfOrigin_B1F_AnthologyStellarOnTransition::
+CaveOfOrigin_B1F_MosaicStellarOnTransition::
 	goto_if_unset FLAG_HOENN_CHAMPION, CaveOfOrigin_B1F_HideStellar
-	goto_if_set FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_STELLAR, CaveOfOrigin_B1F_HideStellar
-	clearflag FLAG_HIDE_ANTHOLOGY_TERAPAGOS_STELLAR
+	goto_if_set FLAG_CAUGHT_MOSAIC_TERAPAGOS_STELLAR, CaveOfOrigin_B1F_HideStellar
+	clearflag FLAG_HIDE_MOSAIC_TERAPAGOS_STELLAR
 	return
 
 CaveOfOrigin_B1F_HideStellar::
-	setflag FLAG_HIDE_ANTHOLOGY_TERAPAGOS_STELLAR
+	setflag FLAG_HIDE_MOSAIC_TERAPAGOS_STELLAR
 	return
 
 CaveOfOrigin_B1F_EventScript_Wallace::
@@ -149,13 +149,13 @@ CaveOfOrigin_B1F_EventScript_StellarTerapagos::
     end
 
 CaveOfOrigin_B1F_StellarCaught::
-    setflag FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_STELLAR
+    setflag FLAG_CAUGHT_MOSAIC_TERAPAGOS_STELLAR
     goto CaveOfOrigin_B1F_StellarResolved
 
 CaveOfOrigin_B1F_StellarResolved::
     fadescreenswapbuffers FADE_TO_BLACK
-    removeobject LOCALID_ANTHOLOGY_TERAPAGOS_STELLAR
-    setflag FLAG_HIDE_ANTHOLOGY_TERAPAGOS_STELLAR
+    removeobject LOCALID_MOSAIC_TERAPAGOS_STELLAR
+    setflag FLAG_HIDE_MOSAIC_TERAPAGOS_STELLAR
     fadescreenswapbuffers FADE_FROM_BLACK
     release
     end

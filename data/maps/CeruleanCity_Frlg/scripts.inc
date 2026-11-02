@@ -42,11 +42,11 @@ CeruleanCity_EventScript_Rival::
 	waitmovement 0
 	msgbox CeruleanCity_Text_RivalIntro
 	setvar VAR_LAST_TALKED, LOCALID_CERULEAN_RIVAL
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, CeruleanCity_EventScript_RivalSquirtle
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, CeruleanCity_EventScript_RivalBulbasaur
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, CeruleanCity_EventScript_RivalCharmander
 	famechecker FAMECHECKER_BILL, 0
 	msgbox CeruleanCity_Text_RivalPostBattle

@@ -882,7 +882,7 @@ static void CB2_EndWildBattle(void)
 static void CB2_EndScriptedWildBattle(void)
 {
     // Also reset on defeat/whiteout, when the event script may not resume.
-    FlagClear(FLAG_ANTHOLOGY_ROYAL_DUO_NO_CATCH);
+    FlagClear(FLAG_MOSAIC_ROYAL_DUO_NO_CATCH);
     CpuFill16(0, (void *)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
@@ -1171,16 +1171,16 @@ void ChooseStarter(void)
 }
 
 // Elm's lab uses the shared chooser without Birch's Zigzagoon callback.
-void AnthologyChooseJohtoStarter(void)
+void MosaicChooseJohtoStarter(void)
 {
     SetMainCallback2(CB2_ChooseStarter);
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
 }
 
 // Oak's lab shares the non-battle callback with Elm's laboratory.
-void AnthologyChooseKantoStarter(void)
+void MosaicChooseKantoStarter(void)
 {
-    AnthologyChooseJohtoStarter();
+    MosaicChooseJohtoStarter();
 }
 
 static void CB2_GiveStarter(void)

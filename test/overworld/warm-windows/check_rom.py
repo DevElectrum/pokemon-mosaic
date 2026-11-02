@@ -15,12 +15,12 @@ a = p.parse_args()
 
 def symbols(root):
     output = subprocess.check_output(['/opt/devkitpro/devkitARM/bin/arm-none-eabi-nm',
-                                      '-S', str(root/'pokemonworld.elf')], text=True)
+                                      '-S', str(root/'pokemon-mosaic.elf')], text=True)
     return {v[3]: (int(v[0],16)-0x08000000, int(v[1],16))
             for line in output.splitlines() if len(v := line.split()) == 4}
 
 
-before, after = [(r/'pokemonworld.gba').read_bytes() for r in (a.before,a.after)]
+before, after = [(r/'pokemon-mosaic.gba').read_bytes() for r in (a.before,a.after)]
 assert len(before) == len(after)
 old, new = symbols(a.before), symbols(a.after)
 ranges = {}

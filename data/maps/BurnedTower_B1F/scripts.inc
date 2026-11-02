@@ -124,7 +124,7 @@ BurnedTower_B1F_EventScript_ReleaseBeasts::
 	setflag FLAG_RELEASED_BEASTS
 	setvar VAR_ECRUTEAK_CITY_STATE, 4
 	release
-	call BurnedTower_B1F_AnthologyOnTransition
+	call BurnedTower_B1F_MosaicOnTransition
 	end
 
 BurnedTower_B1F_Movement_AwakenBeasts:
@@ -220,5 +220,5 @@ BurnedTower_B1F_EventScript_Item_UltraBall::
 // Restore uncaught statics on entry; let the original map scripts run.
 
 // Legacy beast-awakening callback: Spectrier moved to Cliff Cave.
-BurnedTower_B1F_AnthologyOnTransition::
+BurnedTower_B1F_MosaicOnTransition::
 	return

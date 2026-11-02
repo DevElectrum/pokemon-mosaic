@@ -145,7 +145,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_ZEKROM",
+      "local_id": "LOCALID_MOSAIC_ZEKROM",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(ZEKROM)",
       "x": 40,
       "y": 13,
@@ -156,7 +156,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "DarkCave_NorthSide_EventScript_Zekrom",
-      "flag": "FLAG_HIDE_ANTHOLOGY_ZEKROM"
+      "flag": "FLAG_HIDE_MOSAIC_ZEKROM"
     }
   ],
   "warp_events": [

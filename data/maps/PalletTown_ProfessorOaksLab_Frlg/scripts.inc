@@ -296,11 +296,11 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattle::
 	closemessage
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_FaceDown
 	waitmovement 0
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	goto_if_eq VAR_RESULT, 0, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	goto_if_eq VAR_RESULT, 1, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	goto_if_eq VAR_RESULT, 2, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle
 	end
 
@@ -570,7 +570,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalChoseStarter::
 PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	lock
 	faceplayer
-	callnative Anthology_ScrClaimOakMedal
+	callnative Mosaic_ScrClaimOakMedal
 	goto_if_eq VAR_RESULT, 1, PalletTown_ProfessorOaksLab_EventScript_ResearchMedalAward
 	goto_if_eq VAR_RESULT, 2, PalletTown_ProfessorOaksLab_EventScript_ResearchMedalBagFull
 	goto_if_set SHOWED_OAK_COMPLETE_DEX, PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex
@@ -1102,11 +1102,11 @@ PalletTown_ProfessorOaksLab_EventScript_PagedStarterEntry::
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_PagedStarterChoice::
-	special AnthologyChooseKantoStarter
+	special MosaicChooseKantoStarter
 	copyvar PLAYER_STARTER_NUM, VAR_RESULT
-	callnative Anthology_GetKantoChosenStarterSpecies
+	callnative Mosaic_GetKantoChosenStarterSpecies
 	copyvar PLAYER_STARTER_SPECIES, VAR_RESULT
-	callnative Anthology_GetKantoPendingStarterBranch
+	callnative Mosaic_GetKantoPendingStarterBranch
 	goto_if_eq VAR_RESULT, 0, PalletTown_ProfessorOaksLab_EventScript_NewRivalCharmander
 	goto_if_eq VAR_RESULT, 1, PalletTown_ProfessorOaksLab_EventScript_NewRivalBulbasaur
 	goto PalletTown_ProfessorOaksLab_EventScript_NewRivalSquirtle
@@ -1179,7 +1179,7 @@ PalletTown_ProfessorOaksLab_EventScript_ChoseStarter::
 PalletTown_ProfessorOaksLab_EventScript_StarterAccepted::
 	@ Remove the selected TYPE's ball, not whichever of the three selector
 	@ objects was tapped. Blue's remaining counterpart ball must still exist.
-	callnative Anthology_GetKantoPendingStarterBranch
+	callnative Mosaic_GetKantoPendingStarterBranch
 	call_if_eq VAR_RESULT, 0, PalletTown_ProfessorOaksLab_EventScript_RemoveGrassBall
 	call_if_eq VAR_RESULT, 1, PalletTown_ProfessorOaksLab_EventScript_RemoveWaterBall
 	call_if_eq VAR_RESULT, 2, PalletTown_ProfessorOaksLab_EventScript_RemoveFireBall
@@ -1233,7 +1233,7 @@ EventScript_GiveNicknameToStarter::
 
 PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter::
 	closemessage
-	callnative Anthology_GetKantoPendingStarterBranch
+	callnative Mosaic_GetKantoPendingStarterBranch
 	goto_if_eq VAR_RESULT, 0, PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander
 	goto_if_eq VAR_RESULT, 1, PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur
 	goto_if_eq VAR_RESULT, 2, PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle

@@ -3,7 +3,7 @@ Route124_MapScripts::
 	.byte 0
 
 Route124_OnTransition:
-	call Route124_AnthologyOnTransition
+	call Route124_MosaicOnTransition
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	end
 
@@ -105,25 +105,25 @@ Route124_Text_HuntersHouse:
 
 // Place this unique legendary-Paradox encounter on a Surf-accessible
 // shoreline instead of gated/legacy-diving cave maps.
-Route124_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, Route124_AnthologyRandomOnTransition
+Route124_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, Route124_MosaicRandomOnTransition
 	getcaughtmon SPECIES_IRON_CROWN
-	call_if_eq VAR_RESULT, TRUE, Route124_AnthologyHideIronCrown
-	call_if_ne VAR_RESULT, TRUE, Route124_AnthologyShowIronCrown
+	call_if_eq VAR_RESULT, TRUE, Route124_MosaicHideIronCrown
+	call_if_ne VAR_RESULT, TRUE, Route124_MosaicShowIronCrown
 	return
 
-Route124_AnthologyRandomOnTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_ROUTE124_IRON_CROWN, Route124_AnthologyHideIronCrown
-	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE124_IRON_CROWN, Route124_AnthologyShowIronCrown
+Route124_MosaicRandomOnTransition::
+	call_if_set FLAG_CAUGHT_RANDOM_ROUTE124_IRON_CROWN, Route124_MosaicHideIronCrown
+	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE124_IRON_CROWN, Route124_MosaicShowIronCrown
 	return
 
-Route124_AnthologyHideIronCrown::
-	setflag FLAG_HIDE_ANTHOLOGY_IRON_CROWN
+Route124_MosaicHideIronCrown::
+	setflag FLAG_HIDE_MOSAIC_IRON_CROWN
 	return
 
-Route124_AnthologyShowIronCrown::
-	clearflag FLAG_HIDE_ANTHOLOGY_IRON_CROWN
+Route124_MosaicShowIronCrown::
+	clearflag FLAG_HIDE_MOSAIC_IRON_CROWN
 	return
 
 Route124_EventScript_IronCrown::
@@ -135,25 +135,25 @@ Route124_EventScript_IronCrown::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route124_AnthologyIronCrownRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route124_AnthologyIronCrownRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route124_AnthologyIronCrownResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route124_AnthologyIronCrownResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route124_MosaicIronCrownRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route124_MosaicIronCrownRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route124_MosaicIronCrownResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route124_MosaicIronCrownResolved
 	release
 	end
 
-Route124_AnthologyIronCrownResolvedRandomCaught::
+Route124_MosaicIronCrownResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE124_IRON_CROWN
-	goto Route124_AnthologyIronCrownResolved
+	goto Route124_MosaicIronCrownResolved
 
-Route124_AnthologyIronCrownResolved::
+Route124_MosaicIronCrownResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_IRON_CROWN
-	setflag FLAG_HIDE_ANTHOLOGY_IRON_CROWN
+	removeobject LOCALID_MOSAIC_IRON_CROWN
+	setflag FLAG_HIDE_MOSAIC_IRON_CROWN
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route124_AnthologyIronCrownRetreated::
+Route124_MosaicIronCrownRetreated::
 	release
 	end

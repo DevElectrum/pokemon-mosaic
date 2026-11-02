@@ -3,7 +3,7 @@ UnionCave_1F_MapScripts::
 	.byte 0
 
 UnionCave_1F_OnTransition::
-	call UnionCave_1F_AnthologyOnTransition
+	call UnionCave_1F_MosaicOnTransition
 	end
 
 
@@ -138,25 +138,25 @@ UnionCave_1F_Text_FirebreatherRayAfter:
 	.string "up this cave.$"
 
 // Independent early/mid-Johto Sword of Justice static. No sibling capture gate.
-UnionCave_1F_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, UnionCave_1F_AnthologyRandomOnTransition
+UnionCave_1F_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, UnionCave_1F_MosaicRandomOnTransition
 	getcaughtmon SPECIES_TERRAKION
-	call_if_eq VAR_RESULT, TRUE, UnionCave_1F_AnthologyHideTerrakion
-	call_if_ne VAR_RESULT, TRUE, UnionCave_1F_AnthologyShowTerrakion
+	call_if_eq VAR_RESULT, TRUE, UnionCave_1F_MosaicHideTerrakion
+	call_if_ne VAR_RESULT, TRUE, UnionCave_1F_MosaicShowTerrakion
 	return
 
-UnionCave_1F_AnthologyRandomOnTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_UNIONCAVE_1F_TERRAKION, UnionCave_1F_AnthologyHideTerrakion
-	call_if_unset FLAG_CAUGHT_RANDOM_UNIONCAVE_1F_TERRAKION, UnionCave_1F_AnthologyShowTerrakion
+UnionCave_1F_MosaicRandomOnTransition::
+	call_if_set FLAG_CAUGHT_RANDOM_UNIONCAVE_1F_TERRAKION, UnionCave_1F_MosaicHideTerrakion
+	call_if_unset FLAG_CAUGHT_RANDOM_UNIONCAVE_1F_TERRAKION, UnionCave_1F_MosaicShowTerrakion
 	return
 
-UnionCave_1F_AnthologyHideTerrakion::
-	setflag FLAG_HIDE_ANTHOLOGY_TERRAKION
+UnionCave_1F_MosaicHideTerrakion::
+	setflag FLAG_HIDE_MOSAIC_TERRAKION
 	return
 
-UnionCave_1F_AnthologyShowTerrakion::
-	clearflag FLAG_HIDE_ANTHOLOGY_TERRAKION
+UnionCave_1F_MosaicShowTerrakion::
+	clearflag FLAG_HIDE_MOSAIC_TERRAKION
 	return
 
 // Defeated => map re-entry rematch. Caught => permanent for this site.
@@ -170,26 +170,26 @@ UnionCave_1F_EventScript_Terrakion::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, UnionCave_1F_AnthologyTerrakionRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, UnionCave_1F_AnthologyTerrakionRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, UnionCave_1F_AnthologyTerrakionResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, UnionCave_1F_AnthologyTerrakionResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, UnionCave_1F_MosaicTerrakionRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, UnionCave_1F_MosaicTerrakionRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, UnionCave_1F_MosaicTerrakionResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, UnionCave_1F_MosaicTerrakionResolved
 	release
 	end
 
-UnionCave_1F_AnthologyTerrakionResolvedRandomCaught::
+UnionCave_1F_MosaicTerrakionResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_UNIONCAVE_1F_TERRAKION
-	goto UnionCave_1F_AnthologyTerrakionResolved
+	goto UnionCave_1F_MosaicTerrakionResolved
 
-UnionCave_1F_AnthologyTerrakionResolved::
+UnionCave_1F_MosaicTerrakionResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_TERRAKION
-	setflag FLAG_HIDE_ANTHOLOGY_TERRAKION
+	removeobject LOCALID_MOSAIC_TERRAKION
+	setflag FLAG_HIDE_MOSAIC_TERRAKION
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-UnionCave_1F_AnthologyTerrakionRetreated::
+UnionCave_1F_MosaicTerrakionRetreated::
 	release
 	end
 

@@ -29,13 +29,13 @@ def walkable(x, y):
 guardians = {}
 for name in ("ZACIAN", "ZAMAZENTA"):
     found = [obj for obj in route["object_events"]
-             if obj.get("local_id") == f"LOCALID_ANTHOLOGY_{name}"]
+             if obj.get("local_id") == f"LOCALID_MOSAIC_{name}"]
     assert len(found) == 1, (name, "expected exactly one Route 27 object")
     guardians[name] = found[0]
     assert found[0]["script"] == "Route27_EventScript_RoyalDuo" + name.title()
-    assert found[0]["flag"] == "FLAG_HIDE_ANTHOLOGY_" + name
+    assert found[0]["flag"] == "FLAG_HIDE_MOSAIC_" + name
     assert walkable(found[0]["x"], found[0]["y"]), name
-    assert not any(obj.get("local_id") == f"LOCALID_ANTHOLOGY_{name}"
+    assert not any(obj.get("local_id") == f"LOCALID_MOSAIC_{name}"
                    for mapname in ("Route48", "RuinsOfAlph_Outside")
                    for obj in json.loads(source(f"data/maps/{mapname}/map.json"))["object_events"])
 assert guardians["ZACIAN"]["y"] == guardians["ZAMAZENTA"]["y"]
@@ -58,18 +58,18 @@ while todo:
 assert all((obj["x"], obj["y"]) in seen for obj in guardians.values())
 
 assert "goto_if_unset FLAG_JOHTO_BADGE_8, Route27_RoyalDuoHide" in scripts
-assert "goto_if_set FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED, Route27_RoyalDuoHide" in scripts
+assert "goto_if_set FLAG_MOSAIC_ROYAL_DUO_CLAIMED, Route27_RoyalDuoHide" in scripts
 assert "special RoyalDuoCheckCapacity" in scripts
 assert "special RoyalDuoPrepareBattle" in scripts
 assert "special BattleSetup_StartRoyalDuoBattle" in scripts
 assert "goto_if_ne VAR_RESULT, B_OUTCOME_WON, Route27_RoyalDuoRetry" in scripts
 assert "special RoyalDuoAwardVictory" in scripts
-assert "setflag FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED" in scripts
-assert "removeobject LOCALID_ANTHOLOGY_ZACIAN" in scripts
-assert "removeobject LOCALID_ANTHOLOGY_ZAMAZENTA" in scripts
+assert "setflag FLAG_MOSAIC_ROYAL_DUO_CLAIMED" in scripts
+assert "removeobject LOCALID_MOSAIC_ZACIAN" in scripts
+assert "removeobject LOCALID_MOSAIC_ZAMAZENTA" in scripts
 assert "BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LEGENDARY" in battle
-assert "FlagClear(FLAG_ANTHOLOGY_ROYAL_DUO_NO_CATCH)" in battle
-assert "FLAG_ANTHOLOGY_ROYAL_DUO_NO_CATCH" in cfg
+assert "FlagClear(FLAG_MOSAIC_ROYAL_DUO_NO_CATCH)" in battle
+assert "FLAG_MOSAIC_ROYAL_DUO_NO_CATCH" in cfg
 assert all(f"def_special {sym}" in specials for sym in
            ("RoyalDuoCheckCapacity", "RoyalDuoPrepareBattle",
             "RoyalDuoAwardVictory", "BattleSetup_StartRoyalDuoBattle"))
@@ -93,8 +93,8 @@ assert "item = ITEM_RUSTED_SHIELD" in rewards
 assert "if (item != ITEM_NONE)" in rewards
 assert "SetMonData(mon, MON_DATA_HELD_ITEM, &item)" in rewards
 assert "SetMonMoveSlot(mon, MOVE_IRON_HEAD, 0)" in rewards
-assert "FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED" in flags
-assert "FLAG_ANTHOLOGY_ROYAL_DUO_NO_CATCH" in flags
+assert "FLAG_MOSAIC_ROYAL_DUO_CLAIMED" in flags
+assert "FLAG_MOSAIC_ROYAL_DUO_NO_CATCH" in flags
 # Item definitions and Crowned form-change tables are inherited; no extra loose distribution.
 forms = source("src/data/pokemon/form_change_tables.h")
 for item, mon in (("ITEM_RUSTED_SWORD", "SPECIES_ZACIAN_CROWNED"),

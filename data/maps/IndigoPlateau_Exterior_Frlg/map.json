@@ -49,7 +49,7 @@
       "flag": "FLAG_HIDE_CREDITS_OAK"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_ARCEUS",
+      "local_id": "LOCALID_MOSAIC_ARCEUS",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(ARCEUS)",
       "x": 11,
       "y": 17,
@@ -60,7 +60,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "IndigoPlateau_Exterior_EventScript_Arceus",
-      "flag": "FLAG_HIDE_ANTHOLOGY_ARCEUS"
+      "flag": "FLAG_HIDE_MOSAIC_ARCEUS"
     }
   ],
   "warp_events": [

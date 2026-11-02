@@ -1900,7 +1900,7 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
     }
 }
 
-// P0 Grand Anthology: one fixed species per seed, original trainer-mon,
+// P0 Grand Mosaic: one fixed species per seed, original trainer-mon,
 // trainer class and chosen party slot. No frame-dependent RNG is consumed and
 // the underlying trainer data, AI, level, badges and script flags are untouched.
 // Never randomize player-provided partner teams or special-format battles.

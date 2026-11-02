@@ -353,7 +353,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_SPECTRIER",
+      "local_id": "LOCALID_MOSAIC_SPECTRIER",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(SPECTRIER)",
       "x": 22,
       "y": 26,
@@ -364,7 +364,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CliffEdgeCave_EventScript_Spectrier",
-      "flag": "FLAG_HIDE_ANTHOLOGY_SPECTRIER"
+      "flag": "FLAG_HIDE_MOSAIC_SPECTRIER"
     }
   ],
   "warp_events": [

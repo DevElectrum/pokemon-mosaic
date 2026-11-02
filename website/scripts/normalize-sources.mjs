@@ -16,7 +16,7 @@ export function normalizeSourceEntries(records) {
       }
       if (entry.kind === 'item' && entry.mega_stone && source.method === 'scripted_pickup_candidate') {
         const mapDirectory = `data/maps/${source.map}`;
-        const expectedScript = `Anthology_MegaStone_${entry.symbol?.replace(/^ITEM_/, '')}`;
+        const expectedScript = `Mosaic_MegaStone_${entry.symbol?.replace(/^ITEM_/, '')}`;
         return !entry.sources.some(other =>
           other.method === 'overworld_item_ball' &&
           other.map === source.map &&

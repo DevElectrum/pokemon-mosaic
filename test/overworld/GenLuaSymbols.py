@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Generate test/overworld/lua/symbols.lua from a built pokemonworld.elf.
+# Generate test/overworld/lua/symbols.lua from a built pokemon-mosaic.elf.
 #
 # Every ROM rebuild moves the runtime addresses, which is why the old _pwtest scripts
 # hardcoded per-build values and rotted on the next build. This reads them fresh from the
@@ -7,7 +7,7 @@
 # edits an address again.
 #
 # Usage (see the `symbols` make target):
-#   python3 test/overworld/GenLuaSymbols.py pokemonworld.elf [arm-none-eabi-nm] > test/overworld/lua/symbols.lua
+#   python3 test/overworld/GenLuaSymbols.py pokemon-mosaic.elf [arm-none-eabi-nm] > test/overworld/lua/symbols.lua
 #
 # The generated file is a build artifact (gitignored) — commit the generator, not its output.
 import subprocess, sys, re, os, hashlib
@@ -466,7 +466,7 @@ def load_syms(elf, nm):
 
 def main():
     if len(sys.argv) < 2:
-        sys.exit("usage: GenLuaSymbols.py <pokemonworld.elf> [nm] [--title]")
+        sys.exit("usage: GenLuaSymbols.py <pokemon-mosaic.elf> [nm] [--title]")
     elf = sys.argv[1]
     args = [arg for arg in sys.argv[2:] if arg != "--title"]
     nm = args[0] if args else "arm-none-eabi-nm"

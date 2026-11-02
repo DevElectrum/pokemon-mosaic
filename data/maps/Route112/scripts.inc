@@ -3,7 +3,7 @@ Route112_MapScripts::
 	.byte 0
 
 Route112_OnTransition:
-	call Route112_AnthologyHuntTransition
+	call Route112_MosaicHuntTransition
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
 	end
@@ -142,24 +142,24 @@ Route112_Text_RouteSignLavaridge:
 	.string "{LEFT_ARROW} LAVARIDGE TOWN$"
 
 
-Route112_AnthologyHuntTransition::
-	callnative AnthologyStaticRandomizerIsOn
+Route112_MosaicHuntTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route112_RandomHuntTransition
 	getcaughtmon SPECIES_OKIDOGI
 	goto_if_eq VAR_RESULT, TRUE, Route112_HideOkidogi
 	getcaughtmon SPECIES_OGERPON_TEAL
 	goto_if_ne VAR_RESULT, TRUE, Route112_HideOkidogi
-	clearflag FLAG_HIDE_ANTHOLOGY_OKIDOGI
+	clearflag FLAG_HIDE_MOSAIC_OKIDOGI
 	return
 
 Route112_RandomHuntTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE112_OKIDOGI, Route112_HideOkidogi
 	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE117_OGERPON, Route112_HideOkidogi
-	clearflag FLAG_HIDE_ANTHOLOGY_OKIDOGI
+	clearflag FLAG_HIDE_MOSAIC_OKIDOGI
 	return
 
 Route112_HideOkidogi::
-	setflag FLAG_HIDE_ANTHOLOGY_OKIDOGI
+	setflag FLAG_HIDE_MOSAIC_OKIDOGI
 	return
 
 Route112_EventScript_Okidogi::
@@ -184,8 +184,8 @@ Route112_OkidogiCaught::
 
 Route112_OkidogiResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_OKIDOGI
-	setflag FLAG_HIDE_ANTHOLOGY_OKIDOGI
+	removeobject LOCALID_MOSAIC_OKIDOGI
+	setflag FLAG_HIDE_MOSAIC_OKIDOGI
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

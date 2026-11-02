@@ -1,41 +1,41 @@
 SaffronCity_Dojo_Frlg_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_Dojo_AnthologyOnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_Dojo_MosaicOnTransition
 	.byte 0
 
 // The Karate Master has to be defeated, not merely challenged. Reading
 // his persistent trainer flag also supports saves that won before this patch.
-SaffronCity_Dojo_AnthologyOnTransition::
+SaffronCity_Dojo_MosaicOnTransition::
 	checktrainerflag TRAINER_BLACK_BELT_KOICHI
-	goto_if EQUAL, SaffronCity_Dojo_AnthologyMarshadowAfterMaster
-	setflag FLAG_HIDE_ANTHOLOGY_MARSHADOW
+	goto_if EQUAL, SaffronCity_Dojo_MosaicMarshadowAfterMaster
+	setflag FLAG_HIDE_MOSAIC_MARSHADOW
 	end
 
-SaffronCity_Dojo_AnthologyMarshadowAfterMaster::
-	callnative AnthologyStaticRandomizerIsOn
+SaffronCity_Dojo_MosaicMarshadowAfterMaster::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, SaffronCity_Dojo_SeededMarshadowAfterMaster
 	getcaughtmon SPECIES_MARSHADOW
-	call_if_eq VAR_RESULT, TRUE, SaffronCity_Dojo_AnthologyHideMarshadow
-	call_if_ne VAR_RESULT, TRUE, SaffronCity_Dojo_AnthologyShowMarshadow
+	call_if_eq VAR_RESULT, TRUE, SaffronCity_Dojo_MosaicHideMarshadow
+	call_if_ne VAR_RESULT, TRUE, SaffronCity_Dojo_MosaicShowMarshadow
 	end
 
 SaffronCity_Dojo_SeededMarshadowAfterMaster::
-	call_if_set FLAG_CAUGHT_RANDOM_DOJO_MARSHADOW, SaffronCity_Dojo_AnthologyHideMarshadow
-	call_if_unset FLAG_CAUGHT_RANDOM_DOJO_MARSHADOW, SaffronCity_Dojo_AnthologyShowMarshadow
+	call_if_set FLAG_CAUGHT_RANDOM_DOJO_MARSHADOW, SaffronCity_Dojo_MosaicHideMarshadow
+	call_if_unset FLAG_CAUGHT_RANDOM_DOJO_MARSHADOW, SaffronCity_Dojo_MosaicShowMarshadow
 	end
 
-SaffronCity_Dojo_AnthologyRevealMarshadowNow::
-	callnative AnthologyStaticRandomizerIsOn
+SaffronCity_Dojo_MosaicRevealMarshadowNow::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, SaffronCity_Dojo_SeededMarshadowRevealNow
 	getcaughtmon SPECIES_MARSHADOW
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_Dojo_AnthologyHideMarshadow
-	clearflag FLAG_HIDE_ANTHOLOGY_MARSHADOW
-	addobject LOCALID_ANTHOLOGY_MARSHADOW
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_Dojo_MosaicHideMarshadow
+	clearflag FLAG_HIDE_MOSAIC_MARSHADOW
+	addobject LOCALID_MOSAIC_MARSHADOW
 	return
 
 SaffronCity_Dojo_SeededMarshadowRevealNow::
-	goto_if_set FLAG_CAUGHT_RANDOM_DOJO_MARSHADOW, SaffronCity_Dojo_AnthologyHideMarshadow
-	clearflag FLAG_HIDE_ANTHOLOGY_MARSHADOW
-	addobject LOCALID_ANTHOLOGY_MARSHADOW
+	goto_if_set FLAG_CAUGHT_RANDOM_DOJO_MARSHADOW, SaffronCity_Dojo_MosaicHideMarshadow
+	clearflag FLAG_HIDE_MOSAIC_MARSHADOW
+	addobject LOCALID_MOSAIC_MARSHADOW
 	return
 
 SaffronCity_Dojo_EventScript_TriggerMasterBattleLeft::
@@ -183,7 +183,7 @@ SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon::
 
 SaffronCity_Dojo_EventScript_DefeatedMasterKoichi::
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
-	call SaffronCity_Dojo_AnthologyRevealMarshadowNow
+	call SaffronCity_Dojo_MosaicRevealMarshadowNow
 	release
 	end
 
@@ -288,12 +288,12 @@ SaffronCity_Dojo_Text_FightingDojo::
 
 // Additional fighter discovered after Koichi's victory, without consuming
 // either of his existing Hitmonlee/Hitmonchan reward choices.
-SaffronCity_Dojo_AnthologyHideMarshadow::
-	setflag FLAG_HIDE_ANTHOLOGY_MARSHADOW
+SaffronCity_Dojo_MosaicHideMarshadow::
+	setflag FLAG_HIDE_MOSAIC_MARSHADOW
 	return
 
-SaffronCity_Dojo_AnthologyShowMarshadow::
-	clearflag FLAG_HIDE_ANTHOLOGY_MARSHADOW
+SaffronCity_Dojo_MosaicShowMarshadow::
+	clearflag FLAG_HIDE_MOSAIC_MARSHADOW
 	return
 
 // Caught: permanently gone. Fainted: returns on re-entry. Run: stays here.
@@ -306,30 +306,30 @@ SaffronCity_Dojo_EventScript_Marshadow::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SaffronCity_Dojo_AnthologyMarshadowRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SaffronCity_Dojo_AnthologyMarshadowRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SaffronCity_Dojo_MosaicMarshadowRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SaffronCity_Dojo_MosaicMarshadowRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, SaffronCity_Dojo_SeededMarshadowCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SaffronCity_Dojo_AnthologyMarshadowResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SaffronCity_Dojo_MosaicMarshadowResolved
 	release
 	end
 
 SaffronCity_Dojo_SeededMarshadowCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, SaffronCity_Dojo_MarkSeededMarshadow
-	goto SaffronCity_Dojo_AnthologyMarshadowResolved
+	goto SaffronCity_Dojo_MosaicMarshadowResolved
 
 SaffronCity_Dojo_MarkSeededMarshadow::
 	setflag FLAG_CAUGHT_RANDOM_DOJO_MARSHADOW
 	return
 
-SaffronCity_Dojo_AnthologyMarshadowResolved::
+SaffronCity_Dojo_MosaicMarshadowResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_MARSHADOW
-	setflag FLAG_HIDE_ANTHOLOGY_MARSHADOW
+	removeobject LOCALID_MOSAIC_MARSHADOW
+	setflag FLAG_HIDE_MOSAIC_MARSHADOW
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-SaffronCity_Dojo_AnthologyMarshadowRetreated::
+SaffronCity_Dojo_MosaicMarshadowRetreated::
 	release
 	end

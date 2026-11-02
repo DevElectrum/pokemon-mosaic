@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Grand Anthology: lossless external Pokémon PC vault, first persistent storage layer.
+"""Grand Mosaic: lossless external Pokémon PC vault, first persistent storage layer.
 
 A vanilla 128 KiB GBA battery save cannot fit thousands of BoxPokemon records.
 The playable ROM retains its original shared 14x30 boxes. This *offline* tool

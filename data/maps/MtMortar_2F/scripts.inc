@@ -4,7 +4,7 @@ MtMortar_2F_MapScripts::
 	.byte 0
 
 MtMortar_2F_OnTransition: 
-	call MtMortar_2F_AnthologyFieldTransition
+	call MtMortar_2F_MosaicFieldTransition
 	end
 
 MtMortar_2F_EventScript_Item_Iron::
@@ -52,13 +52,13 @@ MtMortar_2F_Text_SupernerdHughAfter:
 
 // Entei's fixed encounter lies inside Mt. Mortar beyond the mountain approach.
 // The Burned Tower awakening is required; no artificial badge threshold.
-MtMortar_2F_AnthologyFieldTransition::
+MtMortar_2F_MosaicFieldTransition::
 	call MtMortar_2F_FieldSyncEnteiReserve
 	return
 
 MtMortar_2F_FieldSyncEnteiReserve::
 	goto_if_unset FLAG_RELEASED_BEASTS, MtMortar_2F_FieldHideEnteiReserve
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, MtMortar_2F_FieldSyncSeededEnteiReserve
 	getcaughtmon SPECIES_ENTEI
 	goto_if_eq VAR_RESULT, TRUE, MtMortar_2F_FieldHideEnteiReserve
@@ -69,11 +69,11 @@ MtMortar_2F_FieldSyncSeededEnteiReserve::
 	goto MtMortar_2F_FieldShowEnteiReserve
 
 MtMortar_2F_FieldHideEnteiReserve::
-	setflag FLAG_HIDE_ANTHOLOGY_BEAST_ENTEI
+	setflag FLAG_HIDE_MOSAIC_BEAST_ENTEI
 	return
 
 MtMortar_2F_FieldShowEnteiReserve::
-	clearflag FLAG_HIDE_ANTHOLOGY_BEAST_ENTEI
+	clearflag FLAG_HIDE_MOSAIC_BEAST_ENTEI
 	return
 
 MtMortar_2F_EventScript_EnteiReserve::
@@ -93,7 +93,7 @@ MtMortar_2F_EventScript_EnteiReserve::
 	end
 
 MtMortar_2F_FieldEnteiReserveCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, MtMortar_2F_MarkSeededEntei
 	goto MtMortar_2F_FieldEnteiReserveResolved
 
@@ -103,8 +103,8 @@ MtMortar_2F_MarkSeededEntei::
 
 MtMortar_2F_FieldEnteiReserveResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_BEAST_ENTEI
-	setflag FLAG_HIDE_ANTHOLOGY_BEAST_ENTEI
+	removeobject LOCALID_MOSAIC_BEAST_ENTEI
+	setflag FLAG_HIDE_MOSAIC_BEAST_ENTEI
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

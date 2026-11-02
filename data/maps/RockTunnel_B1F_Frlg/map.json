@@ -381,7 +381,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_REGIGIGAS",
+      "local_id": "LOCALID_MOSAIC_REGIGIGAS",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(REGIGIGAS)",
       "x": 19,
       "y": 12,
@@ -392,10 +392,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RockTunnel_B1F_EventScript_Regigigas",
-      "flag": "FLAG_HIDE_ANTHOLOGY_REGIGIGAS"
+      "flag": "FLAG_HIDE_MOSAIC_REGIGIGAS"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_UXIE",
+      "local_id": "LOCALID_MOSAIC_UXIE",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(UXIE)",
       "x": 16,
       "y": 20,
@@ -406,10 +406,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RockTunnel_B1F_EventScript_Uxie",
-      "flag": "FLAG_HIDE_ANTHOLOGY_UXIE"
+      "flag": "FLAG_HIDE_MOSAIC_UXIE"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_MESPRIT",
+      "local_id": "LOCALID_MOSAIC_MESPRIT",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(MESPRIT)",
       "x": 44,
       "y": 13,
@@ -420,10 +420,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RockTunnel_B1F_EventScript_Mesprit",
-      "flag": "FLAG_HIDE_ANTHOLOGY_MESPRIT"
+      "flag": "FLAG_HIDE_MOSAIC_MESPRIT"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_AZELF",
+      "local_id": "LOCALID_MOSAIC_AZELF",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(AZELF)",
       "x": 27,
       "y": 28,
@@ -434,10 +434,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RockTunnel_B1F_EventScript_Azelf",
-      "flag": "FLAG_HIDE_ANTHOLOGY_AZELF"
+      "flag": "FLAG_HIDE_MOSAIC_AZELF"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_HEATRAN",
+      "local_id": "LOCALID_MOSAIC_HEATRAN",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(HEATRAN)",
       "x": 9,
       "y": 27,
@@ -448,7 +448,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RockTunnel_B1F_EventScript_Heatran",
-      "flag": "FLAG_HIDE_ANTHOLOGY_HEATRAN"
+      "flag": "FLAG_HIDE_MOSAIC_HEATRAN"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -460,8 +460,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_HEATRANITE",
-      "script": "Anthology_MegaStone_HEATRANITE",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_37"
+      "script": "Mosaic_MegaStone_HEATRANITE",
+      "flag": "FLAG_MOSAIC_MEGA_STONE_37"
     }
   ],
   "warp_events": [

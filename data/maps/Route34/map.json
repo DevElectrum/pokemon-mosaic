@@ -286,7 +286,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_KUBFU_EAST",
+      "local_id": "LOCALID_MOSAIC_KUBFU_EAST",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(KUBFU)",
       "x": 39,
       "y": 33,
@@ -297,7 +297,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route34_EventScript_KubfuEast",
-      "flag": "FLAG_HIDE_ANTHOLOGY_KUBFU_EAST"
+      "flag": "FLAG_HIDE_MOSAIC_KUBFU_EAST"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -310,7 +310,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_LOPUNNITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_29"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_29"
     }
   ],
   "warp_events": [

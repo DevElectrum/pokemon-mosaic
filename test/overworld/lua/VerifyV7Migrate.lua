@@ -26,7 +26,7 @@
 -- does not invalidate the save). Verified to discriminate: 10/11 without the memset, 11/11 with.
 --
 -- Run (the fixture must be this ROM's battery save):
---   cp <repo>/pokemonworld.gba              BizHawk\MigChkV7.gba
+--   cp <repo>/pokemon-mosaic.gba              BizHawk\MigChkV7.gba
 --   cp test\overworld\lua\fixtures\v7dirty.srm     BizHawk\GBA\SaveRAM\MigChkV7.SaveRAM
 --   EmuHawk.exe BizHawk\MigChkV7.gba --lua=<repo>\test\overworld\lua\VerifyV7Migrate.lua
 local here = (debug.getinfo(1, "S").source:sub(2)):match("^(.*[/\\])") or ""

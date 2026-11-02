@@ -76,7 +76,7 @@ do. None of the three produces a diagnostic — each just silently changes behav
 
 ```bash
 test/overworld/mgba-run.sh test/overworld/lua/SmokeBoot.lua
-test/overworld/mgba-run.sh test/overworld/lua/VerifyV7Migrate.lua pokemonworld.gba test/overworld/lua/fixtures/v7dirty.srm
+test/overworld/mgba-run.sh test/overworld/lua/VerifyV7Migrate.lua pokemon-mosaic.gba test/overworld/lua/fixtures/v7dirty.srm
 ```
 
 Arguments are `<suite.lua> [rom.gba] [save.srm]`; the ROM defaults to the repo build. Exit code

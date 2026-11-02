@@ -5,7 +5,7 @@ Route114_MapScripts::
 	.byte 0
 
 Route114_OnTransition:
-	call Route114_AnthologyHuntTransition
+	call Route114_MosaicHuntTransition
 	call Route114_TerapagosTransition
 	call_if_eq VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_HideMapNamePopup
 	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_114_NORTH, AbnormalWeather_StartGroudonWeather
@@ -200,24 +200,24 @@ Route114_Text_LanettesHouse:
 	.string "LANETTE'S HOUSE$"
 
 
-Route114_AnthologyHuntTransition::
-	callnative AnthologyStaticRandomizerIsOn
+Route114_MosaicHuntTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route114_RandomHuntTransition
 	getcaughtmon SPECIES_MUNKIDORI
 	goto_if_eq VAR_RESULT, TRUE, Route114_HideMunkidori
 	getcaughtmon SPECIES_OGERPON_TEAL
 	goto_if_ne VAR_RESULT, TRUE, Route114_HideMunkidori
-	clearflag FLAG_HIDE_ANTHOLOGY_MUNKIDORI
+	clearflag FLAG_HIDE_MOSAIC_MUNKIDORI
 	return
 
 Route114_RandomHuntTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE114_MUNKIDORI, Route114_HideMunkidori
 	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE117_OGERPON, Route114_HideMunkidori
-	clearflag FLAG_HIDE_ANTHOLOGY_MUNKIDORI
+	clearflag FLAG_HIDE_MOSAIC_MUNKIDORI
 	return
 
 Route114_HideMunkidori::
-	setflag FLAG_HIDE_ANTHOLOGY_MUNKIDORI
+	setflag FLAG_HIDE_MOSAIC_MUNKIDORI
 	return
 
 Route114_EventScript_Munkidori::
@@ -242,8 +242,8 @@ Route114_MunkidoriCaught::
 
 Route114_MunkidoriResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_MUNKIDORI
-	setflag FLAG_HIDE_ANTHOLOGY_MUNKIDORI
+	removeobject LOCALID_MOSAIC_MUNKIDORI
+	setflag FLAG_HIDE_MOSAIC_MUNKIDORI
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -253,12 +253,12 @@ Route114_MunkidoriRetreated::
 	end
 
 Route114_TerapagosTransition::
-	goto_if_set FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_NORMAL, Route114_HideTerapagos
-	clearflag FLAG_HIDE_ANTHOLOGY_TERAPAGOS
+	goto_if_set FLAG_CAUGHT_MOSAIC_TERAPAGOS_NORMAL, Route114_HideTerapagos
+	clearflag FLAG_HIDE_MOSAIC_TERAPAGOS
 	return
 
 Route114_HideTerapagos::
-	setflag FLAG_HIDE_ANTHOLOGY_TERAPAGOS
+	setflag FLAG_HIDE_MOSAIC_TERAPAGOS
 	return
 
 Route114_EventScript_Terapagos::
@@ -278,13 +278,13 @@ Route114_EventScript_Terapagos::
 	end
 
 Route114_TerapagosCaught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_TERAPAGOS_NORMAL
+	setflag FLAG_CAUGHT_MOSAIC_TERAPAGOS_NORMAL
 	goto Route114_TerapagosResolved
 
 Route114_TerapagosResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_TERAPAGOS
-	setflag FLAG_HIDE_ANTHOLOGY_TERAPAGOS
+	removeobject LOCALID_MOSAIC_TERAPAGOS
+	setflag FLAG_HIDE_MOSAIC_TERAPAGOS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

@@ -26,7 +26,7 @@
 --
 -- Run against a THROWAWAY COPY — lib.new() refuses anything not named Verify*/MigChk*/FixGen*:
 --   make -j12                                     # symbols.lua is a prerequisite of `rom`
---   cp <repo>\pokemonworld.gba  BizHawk\Verify1.gba
+--   cp <repo>\pokemon-mosaic.gba  BizHawk\Verify1.gba
 --   EmuHawk.exe BizHawk\Verify1.gba --lua=<repo>\test\overworld\lua\VioletMart.lua
 local here = (debug.getinfo(1, "S").source:sub(2)):match("^(.*[/\\])") or ""
 package.path = here .. "?.lua;" .. package.path

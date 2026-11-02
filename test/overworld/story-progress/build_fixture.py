@@ -14,8 +14,8 @@ p.add_argument('--elf', type=Path)
 a = p.parse_args()
 root = Path(__file__).resolve().parents[3]
 here = Path(__file__).resolve().parent
-rom_path = a.rom or root/'pokemonworld.gba'
-elf_path = a.elf or root/'pokemonworld.elf'
+rom_path = a.rom or root/'pokemon-mosaic.gba'
+elf_path = a.elf or root/'pokemon-mosaic.elf'
 nm = '/opt/devkitpro/devkitARM/bin/arm-none-eabi-nm'
 subprocess.run(['python3', str(root/'test/overworld/visual-features/build_fixture.py'),
                 '--repo', str(root), '--rom', str(rom_path),

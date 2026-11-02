@@ -845,7 +845,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_THUNDURUS",
+      "local_id": "LOCALID_MOSAIC_THUNDURUS",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(THUNDURUS)",
       "x": 17,
       "y": 56,
@@ -856,7 +856,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route41_EventScript_Thundurus",
-      "flag": "FLAG_HIDE_ANTHOLOGY_THUNDURUS"
+      "flag": "FLAG_HIDE_MOSAIC_THUNDURUS"
     }
   ],
   "warp_events": [

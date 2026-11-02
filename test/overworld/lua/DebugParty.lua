@@ -13,7 +13,7 @@
 -- at count 0).
 --
 -- Run against a THROWAWAY COPY, on a genuinely fresh save:
---   cp <repo>\pokemonworld.gba  BizHawk\Verify3.gba
+--   cp <repo>\pokemon-mosaic.gba  BizHawk\Verify3.gba
 --   del BizHawk\GBA\SaveRAM\Verify3.SaveRAM
 --   EmuHawk.exe BizHawk\Verify3.gba --lua=<repo>\test\overworld\lua\DebugParty.lua
 local here = (debug.getinfo(1, "S").source:sub(2)):match("^(.*[/\\])") or ""

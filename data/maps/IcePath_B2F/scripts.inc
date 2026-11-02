@@ -4,7 +4,7 @@ IcePath_B2F_MapScripts::
 	.byte 0
 
 IcePath_B2F_OnTransition:
-	call IcePath_B2F_AnthologyOnTransition
+	call IcePath_B2F_MosaicOnTransition
 	end
 
 IcePath_B2F_EventScript_Item_FullHeal::
@@ -19,21 +19,21 @@ IcePath_B2F_EventScript_Item_Carbos::
 	finditem ITEM_CARBOS
 	end
 
-IcePath_B2F_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, IcePath_B2F_AnthologyRandomOnTransition
+IcePath_B2F_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, IcePath_B2F_MosaicRandomOnTransition
 	getcaughtmon SPECIES_GLASTRIER
 	goto_if_eq VAR_RESULT, TRUE, IcePath_B2F_HideGlastrierJohto
-	clearflag FLAG_HIDE_ANTHOLOGY_JOHTO_GLASTRIER
+	clearflag FLAG_HIDE_MOSAIC_JOHTO_GLASTRIER
 	return
 
-IcePath_B2F_AnthologyRandomOnTransition::
+IcePath_B2F_MosaicRandomOnTransition::
 	goto_if_set FLAG_CAUGHT_RANDOM_ICEPATH_GLASTRIER, IcePath_B2F_HideGlastrierJohto
-	clearflag FLAG_HIDE_ANTHOLOGY_JOHTO_GLASTRIER
+	clearflag FLAG_HIDE_MOSAIC_JOHTO_GLASTRIER
 	return
 
 IcePath_B2F_HideGlastrierJohto::
-	setflag FLAG_HIDE_ANTHOLOGY_JOHTO_GLASTRIER
+	setflag FLAG_HIDE_MOSAIC_JOHTO_GLASTRIER
 	return
 
 IcePath_B2F_EventScript_GlastrierJohto::
@@ -58,8 +58,8 @@ IcePath_B2F_GlastrierJohtoResolvedRandomCaught::
 
 IcePath_B2F_GlastrierJohtoResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_JOHTO_GLASTRIER
-	setflag FLAG_HIDE_ANTHOLOGY_JOHTO_GLASTRIER
+	removeobject LOCALID_MOSAIC_JOHTO_GLASTRIER
+	setflag FLAG_HIDE_MOSAIC_JOHTO_GLASTRIER
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

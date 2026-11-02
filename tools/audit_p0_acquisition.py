@@ -126,9 +126,9 @@ for group in encounters["wild_encounter_groups"]:
                 add(loc,item["species"].removeprefix("SPECIES_"),"native_"+method)
 
 for filename,pattern,method in (
-    ("src/data/anthology_rare_habitats.h",r"^RARE_ON_MAP\((MAP_\w+), ([A-Z0-9_]+)\)", "rare"),
-    ("src/data/anthology_extra_habitats.h",r"^ECOLOGY_ON_MAP\((MAP_\w+), ([A-Z0-9_]+)\)", "ecology"),
-    ("src/data/anthology_aquatic_habitats.h",r"^AQUATIC_ON_MAP\((MAP_\w+), (?:WATER|FISHING), ([A-Z0-9_]+)\)", "aquatic"),
+    ("src/data/mosaic_rare_habitats.h",r"^RARE_ON_MAP\((MAP_\w+), ([A-Z0-9_]+)\)", "rare"),
+    ("src/data/mosaic_extra_habitats.h",r"^ECOLOGY_ON_MAP\((MAP_\w+), ([A-Z0-9_]+)\)", "ecology"),
+    ("src/data/mosaic_aquatic_habitats.h",r"^AQUATIC_ON_MAP\((MAP_\w+), (?:WATER|FISHING), ([A-Z0-9_]+)\)", "aquatic"),
 ):
     for loc,mon in re.findall(pattern,read(filename),re.M):
         add(loc,mon,method)
@@ -147,7 +147,7 @@ for path in (ROOT/"data/maps").glob("*/scripts.inc"):
 mew_mansion = read("data/maps/PokemonMansion_1F_Frlg/scripts.inc")
 mew_preparation = read("src/script_pokemon_util.c")
 if ("special MewGauntletPrepareBattle" in mew_mansion
-    and "goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_AnthologyMewResolved" in mew_mansion
+    and "goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PokemonMansion_1F_MosaicMewResolved" in mew_mansion
     and "{SPECIES_MEW, 35," in mew_preparation):
     add("MAP_POKEMON_MANSION_1F", "MEW", "script_mew_gauntlet")
 

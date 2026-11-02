@@ -606,7 +606,7 @@
       "flag": "FLAG_ITEM_ROUTE_120_REVIVE"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_IRON_LEAVES",
+      "local_id": "LOCALID_MOSAIC_IRON_LEAVES",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(IRON_LEAVES)",
       "x": 36,
       "y": 58,
@@ -617,10 +617,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route120_EventScript_IronLeaves",
-      "flag": "FLAG_HIDE_ANTHOLOGY_IRON_LEAVES"
+      "flag": "FLAG_HIDE_MOSAIC_IRON_LEAVES"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_LATIAS",
+      "local_id": "LOCALID_MOSAIC_LATIAS",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(LATIAS)",
       "x": 25,
       "y": 61,
@@ -631,10 +631,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route120_EventScript_Latias",
-      "flag": "FLAG_HIDE_ANTHOLOGY_LATIAS"
+      "flag": "FLAG_HIDE_MOSAIC_LATIAS"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_WO_CHIEN",
+      "local_id": "LOCALID_MOSAIC_WO_CHIEN",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(WO_CHIEN)",
       "x": 18,
       "y": 57,
@@ -645,7 +645,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route120_EventScript_WoChien",
-      "flag": "FLAG_HIDE_ANTHOLOGY_WO_CHIEN"
+      "flag": "FLAG_HIDE_MOSAIC_WO_CHIEN"
     }
   ],
   "warp_events": [

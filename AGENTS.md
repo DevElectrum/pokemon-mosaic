@@ -1,3 +1,5 @@
+> **2 NOV 2026 REBRANDING PASS 2:** Internal Mosaic source symbol names, validators, field guide path, CI and ROM/test defaults are updated in a single verified refactor. Numeric save flag expressions, BPEE and Flash format stay unchanged. The old title picture and generator remain until the LAST visual pass. Use the backup/copy-only docs/SAVE_FILENAME_MIGRATION.md; never overwrite completed-game saves.
+
 > **2 NOV 2026 MOSAIC REBRANDING PASS 1:** Current user explicitly authorized completing the full separate Mosaic rebrand in phases, with **title-screen picture LAST**. Pass 1 corrects current docs/website copy, inherited install/header claims and opening-page authorship attribution. No gameplay/internal symbol/flag/ROM-basename changes here. Pass 2 must trace all `Anthology_*` code/script callers, preserve numeric flag values and save ABI, rename all ROM/CI/test consumers and provide `.sav` backup-and-copy guidance. Pass 3 handles other imagery; last pass implements the 240×160 indexed native GBA title image. Older 31 October delegation note below is superseded by this approval. Keep third-party credits, historical files and source traceability intact.
 
 > **2 NOV 2026 JOHTO GYM FLAG ISOLATION FIX:** Mosaic #3 (and #1/#2) was caused by all 8 Johto Gym victories calling the Hoenn-only `Common_EventScript_SetGymTrainers`, prematurely marking Hoenn Gym subordinates defeated. Ported Pokémon World `95ba7588bd`'s Johto dispatcher and 8 call sites, mapping 28 actual Johto Gym subordinate trainer IDs. `test/overworld/ValidateJohtoGymTrainerIsolation.py` in gameplay CI verifies dispatch, map scripts, and disjoint numeric trainer flags. No save ABI, IDs or Hoenn Gym scripts changed. Previously set Hoenn defeated flags persist on existing saves; DO NOT blindly reset completed Hoenn runs. Exact-commit CI and disposable runtime verification still needed.
@@ -30,7 +32,7 @@
 
 - [Astra's catalog instructions and query recipes](data/catalog/README.md)
 - [Machine-readable acquisition index: all 1,025 National species + 874 numbered items](data/catalog/world_acquisition.jsonl)
-- [Player's searchable field guide](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md)
+- [Player's searchable field guide](docs/MOSAIC_FIELD_GUIDE.md)
 - [Current Royal Duo contract](docs/ROYAL_DUO_ROUTE27_IMPLEMENTATION_2026-10-25.md)
 
 The JSONL is a **candidate-path inventory**. It is not proof that each encounter is reachable, catchable, persistent or accessible at any badge count. Cross-check map scripts, current source tests and reported gameplay. Maintain the Astra index and the human field guide **together** whenever encounters, rewards, prerequisites or item sources move. Old handoffs/ledgers below may describe retired positions or proposed-only features; live source and newest approved design take precedence.

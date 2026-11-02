@@ -319,18 +319,18 @@ Route36_Text_Tips2:
 
 // Multi-location acquisition batch: preserve canonical map scripts.
 Route36_BigBatchOnTransition::
-	call_if_set FLAG_CAUGHT_ANTHOLOGY_CALYREX_NORTH, Route36_BigBatchHideCalyrexNorth
-	call_if_unset FLAG_CAUGHT_ANTHOLOGY_CALYREX_NORTH, Route36_BigBatchShowCalyrexNorth
-	call_if_set FLAG_CAUGHT_ANTHOLOGY_CALYREX_SOUTH, Route36_BigBatchHideCalyrexSouth
-	call_if_unset FLAG_CAUGHT_ANTHOLOGY_CALYREX_SOUTH, Route36_BigBatchShowCalyrexSouth
+	call_if_set FLAG_CAUGHT_MOSAIC_CALYREX_NORTH, Route36_BigBatchHideCalyrexNorth
+	call_if_unset FLAG_CAUGHT_MOSAIC_CALYREX_NORTH, Route36_BigBatchShowCalyrexNorth
+	call_if_set FLAG_CAUGHT_MOSAIC_CALYREX_SOUTH, Route36_BigBatchHideCalyrexSouth
+	call_if_unset FLAG_CAUGHT_MOSAIC_CALYREX_SOUTH, Route36_BigBatchShowCalyrexSouth
 	return
 
 Route36_BigBatchHideCalyrexNorth::
-	setflag FLAG_HIDE_ANTHOLOGY_CALYREX_NORTH
+	setflag FLAG_HIDE_MOSAIC_CALYREX_NORTH
 	return
 
 Route36_BigBatchShowCalyrexNorth::
-	clearflag FLAG_HIDE_ANTHOLOGY_CALYREX_NORTH
+	clearflag FLAG_HIDE_MOSAIC_CALYREX_NORTH
 	return
 
 Route36_EventScript_CalyrexNorth::
@@ -350,13 +350,13 @@ Route36_EventScript_CalyrexNorth::
 	end
 
 Route36_BigBatchCalyrexNorthCaught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_CALYREX_NORTH
+	setflag FLAG_CAUGHT_MOSAIC_CALYREX_NORTH
 	goto Route36_BigBatchCalyrexNorthResolved
 
 Route36_BigBatchCalyrexNorthResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_CALYREX_NORTH
-	setflag FLAG_HIDE_ANTHOLOGY_CALYREX_NORTH
+	removeobject LOCALID_MOSAIC_CALYREX_NORTH
+	setflag FLAG_HIDE_MOSAIC_CALYREX_NORTH
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -366,11 +366,11 @@ Route36_BigBatchCalyrexNorthRetreated::
 	end
 
 Route36_BigBatchHideCalyrexSouth::
-	setflag FLAG_HIDE_ANTHOLOGY_CALYREX_SOUTH
+	setflag FLAG_HIDE_MOSAIC_CALYREX_SOUTH
 	return
 
 Route36_BigBatchShowCalyrexSouth::
-	clearflag FLAG_HIDE_ANTHOLOGY_CALYREX_SOUTH
+	clearflag FLAG_HIDE_MOSAIC_CALYREX_SOUTH
 	return
 
 Route36_EventScript_CalyrexSouth::
@@ -390,13 +390,13 @@ Route36_EventScript_CalyrexSouth::
 	end
 
 Route36_BigBatchCalyrexSouthCaught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_CALYREX_SOUTH
+	setflag FLAG_CAUGHT_MOSAIC_CALYREX_SOUTH
 	goto Route36_BigBatchCalyrexSouthResolved
 
 Route36_BigBatchCalyrexSouthResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_CALYREX_SOUTH
-	setflag FLAG_HIDE_ANTHOLOGY_CALYREX_SOUTH
+	removeobject LOCALID_MOSAIC_CALYREX_SOUTH
+	setflag FLAG_HIDE_MOSAIC_CALYREX_SOUTH
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

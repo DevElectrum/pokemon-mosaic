@@ -14,7 +14,7 @@
 #define WE_FLAG_FORCE_DOUBLE_WILD    0     // If this flag is set, all land and surfing wild battles will be double battles.
 #define WE_SMART_WILD_AI_FLAG        0     // If this flag is set, wild Pokémon will become smart, with all AI flags enabled.
 #if ALL_REGIONS
-#define WE_FLAG_NO_CATCHING          FLAG_ANTHOLOGY_ROYAL_DUO_NO_CATCH // Temporary during Route 27 Royal Duo battle.
+#define WE_FLAG_NO_CATCHING          FLAG_MOSAIC_ROYAL_DUO_NO_CATCH // Temporary during Route 27 Royal Duo battle.
 #else
 #define WE_FLAG_NO_CATCHING          0
 #endif

@@ -23,7 +23,7 @@
 -- and night passes are interleaved rather than run map-by-map for exactly that reason.
 --
 -- Run against a THROWAWAY COPY:
---   cp <repo>\pokemonworld.gba  BizHawk\Verify1.gba
+--   cp <repo>\pokemon-mosaic.gba  BizHawk\Verify1.gba
 --   EmuHawk.exe BizHawk\Verify1.gba --lua=<repo>\test\overworld\lua\JohtoDayNightWorld.lua
 local here = (debug.getinfo(1, "S").source:sub(2)):match("^(.*[/\\])") or ""
 package.path = here .. "?.lua;" .. package.path

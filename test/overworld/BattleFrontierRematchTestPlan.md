@@ -50,7 +50,7 @@ Each case gives **Setup → Steps → Expected → Evidence to capture**. Expect
 1. Build the emulator once — `test/overworld/mgba/README.md`. There is no BizHawk on macOS.
 2. Build the ROM: `make modern -j$(sysctl -n hw.ncpu)`. That also regenerates
    `test/overworld/lua/symbols.lua`, which is where addresses come from — do not re-derive them from
-   `pokemonworld.map` by hand.
+   `pokemon-mosaic.map` by hand.
 3. Write each case as a suite in `test/overworld/lua/` on top of `lib.lua` and drive it with
    `test/overworld/mgba-run.sh test/overworld/lua/<Suite>.lua`. The runner copies the ROM into a throwaway
    `Verify1.gba` in a temp dir and pins the RTC, so isolation and determinism are handled — see

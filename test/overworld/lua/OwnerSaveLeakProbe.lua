@@ -32,7 +32,7 @@
 --     -> step Up -> CONNECTION crossing (no warp) into Route37 (15,40)
 --     -> continue north through the corridor, sampling every step throughout
 --
--- Run: test/overworld/mgba-run.sh test/overworld/lua/OwnerSaveLeakProbe.lua pokemonworld.gba <save>
+-- Run: test/overworld/mgba-run.sh test/overworld/lua/OwnerSaveLeakProbe.lua pokemon-mosaic.gba <save>
 
 local here = (debug.getinfo(1, "S").source:sub(2)):match("^(.*[/\\])") or ""
 package.path = here .. "?.lua;" .. package.path

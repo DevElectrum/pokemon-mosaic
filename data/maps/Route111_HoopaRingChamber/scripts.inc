@@ -1,21 +1,21 @@
 Route111_HoopaRingChamber_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, Route111_HoopaRingChamber_AnthologyOnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, Route111_HoopaRingChamber_MosaicOnTransition
 	.byte 0
 
-Route111_HoopaRingChamber_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+Route111_HoopaRingChamber_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route111_HoopaRingChamber_SeededHOOPAVisible
 	getcaughtmon SPECIES_HOOPA_CONFINED
-	call_if_eq VAR_RESULT, TRUE, Route111_HoopaRingChamber_AnthologyHideHoopa
-	call_if_ne VAR_RESULT, TRUE, Route111_HoopaRingChamber_AnthologyShowHoopa
+	call_if_eq VAR_RESULT, TRUE, Route111_HoopaRingChamber_MosaicHideHoopa
+	call_if_ne VAR_RESULT, TRUE, Route111_HoopaRingChamber_MosaicShowHoopa
 	return
 
-Route111_HoopaRingChamber_AnthologyHideHoopa::
-	setflag FLAG_HIDE_ANTHOLOGY_HOOPA
+Route111_HoopaRingChamber_MosaicHideHoopa::
+	setflag FLAG_HIDE_MOSAIC_HOOPA
 	return
 
-Route111_HoopaRingChamber_AnthologyShowHoopa::
-	clearflag FLAG_HIDE_ANTHOLOGY_HOOPA
+Route111_HoopaRingChamber_MosaicShowHoopa::
+	clearflag FLAG_HIDE_MOSAIC_HOOPA
 	return
 
 Route111_HoopaRingChamber_EventScript_Hoopa::
@@ -27,36 +27,36 @@ Route111_HoopaRingChamber_EventScript_Hoopa::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route111_HoopaRingChamber_AnthologyHoopaRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route111_HoopaRingChamber_AnthologyHoopaRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route111_HoopaRingChamber_MosaicHoopaRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route111_HoopaRingChamber_MosaicHoopaRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route111_HoopaRingChamber_SeededHOOPACatch
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route111_HoopaRingChamber_AnthologyHoopaResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route111_HoopaRingChamber_MosaicHoopaResolved
 	release
 	end
 
-Route111_HoopaRingChamber_AnthologyHoopaResolved::
+Route111_HoopaRingChamber_MosaicHoopaResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_HOOPA
-	setflag FLAG_HIDE_ANTHOLOGY_HOOPA
+	removeobject LOCALID_MOSAIC_HOOPA
+	setflag FLAG_HIDE_MOSAIC_HOOPA
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route111_HoopaRingChamber_AnthologyHoopaRetreated::
+Route111_HoopaRingChamber_MosaicHoopaRetreated::
 	release
 	end
 
 
 // Seeded location ownership is separate from the original species Pokédex.
 Route111_HoopaRingChamber_SeededHOOPAVisible::
-	call_if_set FLAG_CAUGHT_RANDOM_ROUTE111_HOOPARINGCHAMBER_HOOPA, Route111_HoopaRingChamber_AnthologyHideHoopa
-	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE111_HOOPARINGCHAMBER_HOOPA, Route111_HoopaRingChamber_AnthologyShowHoopa
+	call_if_set FLAG_CAUGHT_RANDOM_ROUTE111_HOOPARINGCHAMBER_HOOPA, Route111_HoopaRingChamber_MosaicHideHoopa
+	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE111_HOOPARINGCHAMBER_HOOPA, Route111_HoopaRingChamber_MosaicShowHoopa
 	return
 
 Route111_HoopaRingChamber_SeededHOOPACatch::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route111_HoopaRingChamber_SeededHOOPACatchMark
-	goto Route111_HoopaRingChamber_AnthologyHoopaResolved
+	goto Route111_HoopaRingChamber_MosaicHoopaResolved
 
 Route111_HoopaRingChamber_SeededHOOPACatchMark::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE111_HOOPARINGCHAMBER_HOOPA

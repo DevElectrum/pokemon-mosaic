@@ -295,7 +295,7 @@ ECOLOGY_ON_MAP(MAP_SPROUT_TOWER_3F, TOGEPI)
 ECOLOGY_ON_MAP(MAP_ROUTE38, EEVEE)
 ECOLOGY_ON_MAP(MAP_ROUTE39, PORYGON)
 
-// Anthology P0: regional permanent-form family hunt. Each original map keeps
+// Mosaic P0: regional permanent-form family hunt. Each original map keeps
 // native Pokémon, unique story events, and the primary rare habitat intact.
 // Alolan, Galarian, Hisuian, Paldean forms are registered under their National
 // species numbers, while their distinct species identities remain usable.

@@ -471,7 +471,7 @@ LilycoveCity_Harbor_Movement_UnusedBoardFerry:
 LilycoveCity_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_Harbor_SeededRayquazaFerry
 	getcaughtmon SPECIES_RAYQUAZA
 	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_Harbor_EventScript_SailorBirthIsland

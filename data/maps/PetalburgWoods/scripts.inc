@@ -1,5 +1,5 @@
 PetalburgWoods_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgWoods_AnthologyOnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgWoods_MosaicOnTransition
 	.byte 0
 
 PetalburgWoods_EventScript_DevonResearcherLeft::
@@ -473,17 +473,17 @@ PetalburgWoods_Text_TrainerTipsPP:
 	.string "taken to a POKéMON CENTER.$"
 
 
-PetalburgWoods_AnthologyOnTransition::
-	call_if_set FLAG_CAUGHT_ANTHOLOGY_ZYGARDE_10, PetalburgWoods_AnthologyHideZygarde10
-	call_if_unset FLAG_CAUGHT_ANTHOLOGY_ZYGARDE_10, PetalburgWoods_AnthologyShowZygarde10
+PetalburgWoods_MosaicOnTransition::
+	call_if_set FLAG_CAUGHT_MOSAIC_ZYGARDE_10, PetalburgWoods_MosaicHideZygarde10
+	call_if_unset FLAG_CAUGHT_MOSAIC_ZYGARDE_10, PetalburgWoods_MosaicShowZygarde10
 	end
 
-PetalburgWoods_AnthologyHideZygarde10::
-	setflag FLAG_HIDE_ANTHOLOGY_ZYGARDE_10
+PetalburgWoods_MosaicHideZygarde10::
+	setflag FLAG_HIDE_MOSAIC_ZYGARDE_10
 	return
 
-PetalburgWoods_AnthologyShowZygarde10::
-	clearflag FLAG_HIDE_ANTHOLOGY_ZYGARDE_10
+PetalburgWoods_MosaicShowZygarde10::
+	clearflag FLAG_HIDE_MOSAIC_ZYGARDE_10
 	return
 
 PetalburgWoods_EventScript_Zygarde10::
@@ -495,24 +495,24 @@ PetalburgWoods_EventScript_Zygarde10::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PetalburgWoods_AnthologyZygarde10Retreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PetalburgWoods_AnthologyZygarde10Retreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PetalburgWoods_AnthologyZygarde10Caught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PetalburgWoods_AnthologyZygarde10Resolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, PetalburgWoods_MosaicZygarde10Retreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, PetalburgWoods_MosaicZygarde10Retreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, PetalburgWoods_MosaicZygarde10Caught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, PetalburgWoods_MosaicZygarde10Resolved
 	release
 	end
 
-PetalburgWoods_AnthologyZygarde10Caught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_ZYGARDE_10
-	goto PetalburgWoods_AnthologyZygarde10Resolved
-PetalburgWoods_AnthologyZygarde10Resolved::
+PetalburgWoods_MosaicZygarde10Caught::
+	setflag FLAG_CAUGHT_MOSAIC_ZYGARDE_10
+	goto PetalburgWoods_MosaicZygarde10Resolved
+PetalburgWoods_MosaicZygarde10Resolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ZYGARDE_10
-	setflag FLAG_HIDE_ANTHOLOGY_ZYGARDE_10
+	removeobject LOCALID_MOSAIC_ZYGARDE_10
+	setflag FLAG_HIDE_MOSAIC_ZYGARDE_10
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-PetalburgWoods_AnthologyZygarde10Retreated::
+PetalburgWoods_MosaicZygarde10Retreated::
 	release
 	end

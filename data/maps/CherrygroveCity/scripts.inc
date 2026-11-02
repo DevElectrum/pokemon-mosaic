@@ -229,11 +229,11 @@ CherryGroveCity_EventScript_TriggerSilver::
 	waitmovement 0
 	msgbox CherrygroveCity_Text_RivalSeen, MSGBOX_DEFAULT
 	closemessage
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	goto_if_eq VAR_RESULT, 0, CherryGroveCity_Silver_Battle_Cyndaquil
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	goto_if_eq VAR_RESULT, 1, CherryGroveCity_Silver_Battle_Totodile
-	callnative Anthology_GetJohtoStarterStoryBranch
+	callnative Mosaic_GetJohtoStarterStoryBranch
 	goto_if_eq VAR_RESULT, 2, CherryGroveCity_Silver_Battle_Chikorita
 	release
 	end

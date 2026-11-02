@@ -523,16 +523,16 @@ static bool8 MapHasSpecies(const struct WildPokemonHeader *header, u32 headerSec
 
     if (MonListHasSpecies(ResolveAreaTable(info->landMonsInfo, fallback->landMonsInfo), species, NUM_LAND_MONS_ENCOUNTER_SLOTS, WILD_AREA_LAND, header->mapGroup, header->mapNum))
         return TRUE;
-    // Include special and ordinary Anthology habitats on the regional map.
-    if ((!gSaveBlock2Ptr || !gSaveBlock2Ptr->randomizerWild) && AnthologyMapHasHabitatSpecies(header->mapGroup, header->mapNum,
+    // Include special and ordinary Mosaic habitats on the regional map.
+    if ((!gSaveBlock2Ptr || !gSaveBlock2Ptr->randomizerWild) && MosaicMapHasHabitatSpecies(header->mapGroup, header->mapNum,
                                     species, ResolveAreaTable(info->landMonsInfo, fallback->landMonsInfo)))
         return TRUE;
     if (MonListHasSpecies(ResolveAreaTable(info->waterMonsInfo, fallback->waterMonsInfo), species, NUM_WATER_MONS_ENCOUNTER_SLOTS, WILD_AREA_WATER, header->mapGroup, header->mapNum))
         return TRUE;
-    if ((!gSaveBlock2Ptr || !gSaveBlock2Ptr->randomizerWild) && AnthologyMapHasAquaticHabitatSpecies(header->mapGroup, header->mapNum, WILD_AREA_WATER,
+    if ((!gSaveBlock2Ptr || !gSaveBlock2Ptr->randomizerWild) && MosaicMapHasAquaticHabitatSpecies(header->mapGroup, header->mapNum, WILD_AREA_WATER,
                                             species, ResolveAreaTable(info->waterMonsInfo, fallback->waterMonsInfo)))
         return TRUE;
-    if ((!gSaveBlock2Ptr || !gSaveBlock2Ptr->randomizerWild) && AnthologyMapHasAquaticHabitatSpecies(header->mapGroup, header->mapNum, WILD_AREA_FISHING,
+    if ((!gSaveBlock2Ptr || !gSaveBlock2Ptr->randomizerWild) && MosaicMapHasAquaticHabitatSpecies(header->mapGroup, header->mapNum, WILD_AREA_FISHING,
                                             species, ResolveAreaTable(info->fishingMonsInfo, fallback->fishingMonsInfo)))
         return TRUE;
 // When searching the fishing encounters, this incorrectly uses the size of the land encounters.

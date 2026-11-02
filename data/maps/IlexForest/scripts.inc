@@ -17,12 +17,12 @@ IlexForest_OnTransition:
 	call_if_eq VAR_ILEX_FOREST_FARFETCHD, 1, IlexForest_EventScript_ReenterWhenFarfetchdLeaving
 	call_if_eq VAR_ILEX_FOREST_FARFETCHD, 2, IlexForest_EventScript_ReenterDuringCutScene
 	call_if_lt VAR_AZALEA_TOWN_STATE, 9, IlexForest_EventScript_HideShrineCast
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, IlexForest_SeededCaughtTransition
 	getcaughtmon SPECIES_CELEBI
 	call_if_eq VAR_RESULT, TRUE, IlexForest_EventScript_Shrine_Caught
 	call IlexForest_EventScript_SyncSecondCelebi
-	call IlexForest_AnthologyOnTransition
+	call IlexForest_MosaicOnTransition
 	end	
 
 @ Celebi, Kurt and the post-game second Celebi are spawned by script - the shrine cutscene
@@ -34,7 +34,7 @@ IlexForest_OnTransition:
 IlexForest_SeededCaughtTransition::
 	call_if_set FLAG_CAUGHT_RANDOM_ILEX_SHRINE_CELEBI, IlexForest_EventScript_HideCaughtShrine
 	call IlexForest_EventScript_SyncSecondCelebi
-	call IlexForest_AnthologyOnTransition
+	call IlexForest_MosaicOnTransition
 	end
 
 IlexForest_EventScript_HideCaughtShrine::
@@ -47,7 +47,7 @@ IlexForest_EventScript_HideShrineCast::
 	return
 
 IlexForest_EventScript_SyncSecondCelebi::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, IlexForest_EventScript_SeededSecondCelebi
 	goto_if_set FLAG_CAUGHT_CELEBI, IlexForest_EventScript_HideSecondCelebi
 	goto IlexForest_EventScript_SecondCelebiGate
@@ -373,7 +373,7 @@ IlexForest_EventScript_Kurt::
 // Completing Kurt's first shrine cutscene does not consume an uncaught
 // Celebi.  Later shrine interactions use a short, story-safe rematch instead.
 IlexForest_EventScript_CelebiRematch::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, IlexForest_EventScript_SeededShrineRematch
 	getcaughtmon SPECIES_CELEBI
 	goto_if_eq VAR_RESULT, TRUE, IlexForest_EventScript_ShrineRegularText
@@ -397,7 +397,7 @@ IlexForest_EventScript_BeginShrineRematch::
 	end
 
 IlexForest_EventScript_Shrine_Caught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, IlexForest_EventScript_ShrineSeededCaught
 	setflag FLAG_CAUGHT_CELEBI
 	return
@@ -435,7 +435,7 @@ waitstate
 	end
 
 IlexForest_EventScript_SecondCelebiCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, IlexForest_EventScript_SecondSeededCaught
 	setflag FLAG_CAUGHT_CELEBI
 	return
@@ -930,25 +930,25 @@ IlexForest_Text_Kimono_Girl5:
 
 @ Zarude inhabits forest troops. This local rare individual is deliberately
 @ discoverable as a static and is independent of Celebi's shrine story.
-IlexForest_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+IlexForest_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, IlexForest_SeededZarudeTransition
 	getcaughtmon SPECIES_ZARUDE
-	call_if_eq VAR_RESULT, TRUE, IlexForest_AnthologyHideZarude
-	call_if_ne VAR_RESULT, TRUE, IlexForest_AnthologyShowZarude
+	call_if_eq VAR_RESULT, TRUE, IlexForest_MosaicHideZarude
+	call_if_ne VAR_RESULT, TRUE, IlexForest_MosaicShowZarude
 	return
 
 IlexForest_SeededZarudeTransition::
-	call_if_set FLAG_CAUGHT_RANDOM_ILEX_ZARUDE, IlexForest_AnthologyHideZarude
-	call_if_unset FLAG_CAUGHT_RANDOM_ILEX_ZARUDE, IlexForest_AnthologyShowZarude
+	call_if_set FLAG_CAUGHT_RANDOM_ILEX_ZARUDE, IlexForest_MosaicHideZarude
+	call_if_unset FLAG_CAUGHT_RANDOM_ILEX_ZARUDE, IlexForest_MosaicShowZarude
 	return
 
-IlexForest_AnthologyHideZarude::
-	setflag FLAG_HIDE_ANTHOLOGY_ZARUDE
+IlexForest_MosaicHideZarude::
+	setflag FLAG_HIDE_MOSAIC_ZARUDE
 	return
 
-IlexForest_AnthologyShowZarude::
-	clearflag FLAG_HIDE_ANTHOLOGY_ZARUDE
+IlexForest_MosaicShowZarude::
+	clearflag FLAG_HIDE_MOSAIC_ZARUDE
 	return
 
 IlexForest_EventScript_Zarude::
@@ -960,31 +960,31 @@ IlexForest_EventScript_Zarude::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, IlexForest_AnthologyZarudeRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, IlexForest_AnthologyZarudeRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, IlexForest_AnthologyZarudeCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IlexForest_AnthologyZarudeResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, IlexForest_MosaicZarudeRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, IlexForest_MosaicZarudeRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, IlexForest_MosaicZarudeCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IlexForest_MosaicZarudeResolved
 	release
 	end
 
-IlexForest_AnthologyZarudeCaught::
-	callnative AnthologyStaticRandomizerIsOn
+IlexForest_MosaicZarudeCaught::
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, IlexForest_MarkSeededZarude
-	goto IlexForest_AnthologyZarudeResolved
+	goto IlexForest_MosaicZarudeResolved
 
 IlexForest_MarkSeededZarude::
 	setflag FLAG_CAUGHT_RANDOM_ILEX_ZARUDE
 	return
 
-IlexForest_AnthologyZarudeResolved::
+IlexForest_MosaicZarudeResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ZARUDE
-	setflag FLAG_HIDE_ANTHOLOGY_ZARUDE
+	removeobject LOCALID_MOSAIC_ZARUDE
+	setflag FLAG_HIDE_MOSAIC_ZARUDE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-IlexForest_AnthologyZarudeRetreated::
+IlexForest_MosaicZarudeRetreated::
 	release
 	end
 

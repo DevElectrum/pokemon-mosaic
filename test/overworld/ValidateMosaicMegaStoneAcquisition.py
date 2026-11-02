@@ -41,7 +41,7 @@ layouts = {layout["id"]: layout for layout in layout_data}
 world = defaultdict(list)
 used_flags = set()
 specials = {
-    "ITEM_ZYGARDITE": "FLAG_CAUGHT_ANTHOLOGY_ZYGARDE_COMPLETE",
+    "ITEM_ZYGARDITE": "FLAG_CAUGHT_MOSAIC_ZYGARDE_COMPLETE",
     "ITEM_HEATRANITE": "getcaughtmon SPECIES_HEATRAN",
     "ITEM_DARKRANITE": "getcaughtmon SPECIES_DARKRAI",
     "ITEM_ZERAORITE": "getcaughtmon SPECIES_ZERAORA",
@@ -52,7 +52,7 @@ for map_path in MAPS.glob("*/map.json"):
     info = json.loads(map_path.read_text())
     for obj in info.get("object_events", []):
         item = obj.get("trainer_sight_or_berry_tree_id")
-        if item not in roster or not str(obj.get("flag", "")).startswith("FLAG_ANTHOLOGY_MEGA_STONE_"):
+        if item not in roster or not str(obj.get("flag", "")).startswith("FLAG_MOSAIC_MEGA_STONE_"):
             continue
         assert obj["graphics_id"] == "OBJ_EVENT_GFX_ITEM_BALL", (map_path, item, "not a visible item ball")
         flag = obj["flag"]
@@ -69,7 +69,7 @@ for map_path in MAPS.glob("*/map.json"):
                 raise AssertionError((map_path, item, "overlapping event", x, y))
         script_name = obj["script"]
         if item in specials:
-            assert script_name == "Anthology_MegaStone_" + item[5:], (map_path, item, script_name)
+            assert script_name == "Mosaic_MegaStone_" + item[5:], (map_path, item, script_name)
             script = (map_path.parent / "scripts.inc").read_text()
             assert script_name + "::" in script, (map_path, item, "missing script")
             assert specials[item] in script, (map_path, item, "missing unlock")
@@ -82,7 +82,7 @@ assert len(world) == 41, ("world pickup count", len(world))
 assert len(used_flags) == 41, ("unique world flags", len(used_flags))
 assert all(len(locations) == 1 for locations in world.values()), "Unexpected duplicate new world sources"
 for i in range(41):
-    assert f"FLAG_ANTHOLOGY_MEGA_STONE_{i:02}" in used_flags, ("missing world flag", i)
+    assert f"FLAG_MOSAIC_MEGA_STONE_{i:02}" in used_flags, ("missing world flag", i)
 
 coverage = set(vendor) | set(rematches) | set(world)
 missing = sorted(set(roster) - coverage)

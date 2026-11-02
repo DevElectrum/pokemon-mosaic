@@ -18,7 +18,7 @@
 -- suite is what proves it is wired up.
 --
 -- Run against any pre-v7 fixture (v3/v4/v5 all work — they are all below the floor):
---   cp <repo>\pokemonworld.gba  BizHawk\MigChk.gba
+--   cp <repo>\pokemon-mosaic.gba  BizHawk\MigChk.gba
 --   make symbols                          -- symbols.lua is ROM-bound; lib.new() rejects a mismatch
 --   cp test\overworld\lua\fixtures\v3.srm  BizHawk\GBA\SaveRAM\MigChk.SaveRAM   (raw 131072-byte body)
 --   EmuHawk.exe BizHawk\MigChk.gba --lua=<repo>\test\overworld\lua\MigrateFixtures.lua

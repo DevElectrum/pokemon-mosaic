@@ -854,15 +854,15 @@ MtChimney_Text_SawyerPostRematch:
 	.string "I'm overdressed for these parts.$"
 
 MtChimney_VolcanionTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, MtChimney_SeededVOLCANIONVisibility
 	getcaughtmon SPECIES_VOLCANION
 	goto_if_eq VAR_RESULT, TRUE, MtChimney_HideVolcanion
-	clearflag FLAG_HIDE_ANTHOLOGY_VOLCANION
+	clearflag FLAG_HIDE_MOSAIC_VOLCANION
 	return
 
 MtChimney_HideVolcanion::
-	setflag FLAG_HIDE_ANTHOLOGY_VOLCANION
+	setflag FLAG_HIDE_MOSAIC_VOLCANION
 	return
 
 MtChimney_EventScript_Volcanion::
@@ -883,8 +883,8 @@ MtChimney_EventScript_Volcanion::
 
 MtChimney_VolcanionResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_VOLCANION
-	setflag FLAG_HIDE_ANTHOLOGY_VOLCANION
+	removeobject LOCALID_MOSAIC_VOLCANION
+	setflag FLAG_HIDE_MOSAIC_VOLCANION
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -895,11 +895,11 @@ MtChimney_VolcanionRetreated::
 
 MtChimney_SeededVOLCANIONVisibility::
 	goto_if_set FLAG_CAUGHT_RANDOM_MTCHIMNEY_VOLCANION, MtChimney_HideVolcanion
-	clearflag FLAG_HIDE_ANTHOLOGY_VOLCANION
+	clearflag FLAG_HIDE_MOSAIC_VOLCANION
 	return
 
 MtChimney_SeededVOLCANIONCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, MtChimney_SeededVOLCANIONMark
 	goto MtChimney_VolcanionResolved
 

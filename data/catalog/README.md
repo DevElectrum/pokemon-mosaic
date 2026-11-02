@@ -5,7 +5,7 @@
 ## The two reader views
 
 - **Astra / machine:** [`world_acquisition.jsonl`](world_acquisition.jsonl). One JSON object per line: a metadata header, exactly **1,025** `kind=pokemon` records in National Dex order, and **874** `kind=item` records for explicitly numbered item constants. The item list includes all **92** defined Mega Stones, and **41** world Mega Stone entries carry exact source-map tile coordinates.
-- **Human:** [Mosaic Field Guide](../../docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md), which has Kanto → Johto → Hoenn progression, a complete Pokédex lookup, 546 source-location groups, the 92-stone acquisition list and an item lookup.
+- **Human:** [Mosaic Field Guide](../../docs/MOSAIC_FIELD_GUIDE.md), which has Kanto → Johto → Hoenn progression, a complete Pokédex lookup, 546 source-location groups, the 92-stone acquisition list and an item lookup.
 - **Public introduction:** [README](../../README.md). Keep its progression and development status synchronized.
 
 ## Search examples
@@ -46,7 +46,7 @@ When source changes:
 1. Read the actual map/script/item/reward implementation and its flags, rather than copying retired placement notes.
 2. Update the affected JSONL line's source list and evidence labels. If a record is a candidate, leave it a candidate until gameplay acceptance is recorded.
 3. Update the corresponding player's Field Guide entry and map/item indexes, plus README progression when relevant. The JSONL is the canonical machine inventory; do not let the guides drift.
-4. Validate **1,025 unique dex entries**, **92 Mega Stones**, valid item IDs and no invented source locations. The independent `test/overworld/ValidateAnthologyMegaStoneAcquisition.py` confirms 92/92 *source-level* Mega paths (30 rematch, 21 vendor, 41 world), not walkability.
+4. Validate **1,025 unique dex entries**, **92 Mega Stones**, valid item IDs and no invented source locations. The independent `test/overworld/ValidateMosaicMegaStoneAcquisition.py` confirms 92/92 *source-level* Mega paths (30 rematch, 21 vendor, 41 world), not walkability.
 5. Consult `docs/ROYAL_DUO_ROUTE27_IMPLEMENTATION_2026-10-25.md` and `docs/PERMANENT_STELLAR_TERAPAGOS_2026-10-25.md` for special cases. **Eternatus is now in Johto Victory Road's gated chamber**; older Route 44 placement notes are superseded.
 
 The human guide is currently a documented rendering of this machine inventory with editorial progression notes. There is **no automatic keep-in-sync build step yet**; future developers must update both views together or add a deterministic generator before relying on automation.

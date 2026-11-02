@@ -65,21 +65,21 @@ RustboroCity_DevonCorp_2F_EventScript_FossilScientist::
 	checkitem ITEM_CLAW_FOSSIL
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_NoticeClawFossil
 	checkitem ITEM_SKULL_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_SKULL_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_SKULL_FOSSIL
 	checkitem ITEM_ARMOR_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_ARMOR_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_ARMOR_FOSSIL
 	checkitem ITEM_COVER_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_COVER_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_COVER_FOSSIL
 	checkitem ITEM_PLUME_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_PLUME_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_PLUME_FOSSIL
 	checkitem ITEM_JAW_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_JAW_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_JAW_FOSSIL
 	checkitem ITEM_SAIL_FOSSIL
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_SAIL_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_SAIL_FOSSIL
 	checkitem ITEM_FOSSILIZED_BIRD
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_FOSSILIZED_BIRD
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_FOSSILIZED_BIRD
 	checkitem ITEM_FOSSILIZED_FISH
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_FOSSILIZED_FISH
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_FOSSILIZED_FISH
 	release
 	end
 
@@ -270,112 +270,112 @@ RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect::
 	release
 	end
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_SKULL_FOSSIL::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_SKULL_FOSSIL::
 	setvar VAR_TEMP_1, ITEM_SKULL_FOSSIL
 	setvar VAR_TEMP_2, ITEM_NONE
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CRANIDOS
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_ARMOR_FOSSIL::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_ARMOR_FOSSIL::
 	setvar VAR_TEMP_1, ITEM_ARMOR_FOSSIL
 	setvar VAR_TEMP_2, ITEM_NONE
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_SHIELDON
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_COVER_FOSSIL::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_COVER_FOSSIL::
 	setvar VAR_TEMP_1, ITEM_COVER_FOSSIL
 	setvar VAR_TEMP_2, ITEM_NONE
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TIRTOUGA
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_PLUME_FOSSIL::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_PLUME_FOSSIL::
 	setvar VAR_TEMP_1, ITEM_PLUME_FOSSIL
 	setvar VAR_TEMP_2, ITEM_NONE
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_ARCHEN
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_JAW_FOSSIL::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_JAW_FOSSIL::
 	setvar VAR_TEMP_1, ITEM_JAW_FOSSIL
 	setvar VAR_TEMP_2, ITEM_NONE
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TYRUNT
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_SAIL_FOSSIL::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_SAIL_FOSSIL::
 	setvar VAR_TEMP_1, ITEM_SAIL_FOSSIL
 	setvar VAR_TEMP_2, ITEM_NONE
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_AMAURA
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_FOSSILIZED_BIRD::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_FOSSILIZED_BIRD::
 	checkitem ITEM_FOSSILIZED_DRAKE
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_DRACOZOLT
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_DRACOZOLT
 	checkitem ITEM_FOSSILIZED_DINO
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_ARCTOZOLT
-	msgbox RustboroCity_DevonCorp_2F_Text_AnthologyNeedTwoFossils, MSGBOX_DEFAULT
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_ARCTOZOLT
+	msgbox RustboroCity_DevonCorp_2F_Text_MosaicNeedTwoFossils, MSGBOX_DEFAULT
 	release
 	end
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_FOSSILIZED_FISH::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_FOSSILIZED_FISH::
 	checkitem ITEM_FOSSILIZED_DRAKE
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_DRACOVISH
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_DRACOVISH
 	checkitem ITEM_FOSSILIZED_DINO
-	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Anthology_ARCTOVISH
-	msgbox RustboroCity_DevonCorp_2F_Text_AnthologyNeedTwoFossils, MSGBOX_DEFAULT
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Mosaic_ARCTOVISH
+	msgbox RustboroCity_DevonCorp_2F_Text_MosaicNeedTwoFossils, MSGBOX_DEFAULT
 	release
 	end
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_DRACOZOLT::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_DRACOZOLT::
 	setvar VAR_TEMP_1, ITEM_FOSSILIZED_BIRD
 	setvar VAR_TEMP_2, ITEM_FOSSILIZED_DRAKE
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_DRACOZOLT
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_ARCTOZOLT::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_ARCTOZOLT::
 	setvar VAR_TEMP_1, ITEM_FOSSILIZED_BIRD
 	setvar VAR_TEMP_2, ITEM_FOSSILIZED_DINO
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_ARCTOZOLT
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_DRACOVISH::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_DRACOVISH::
 	setvar VAR_TEMP_1, ITEM_FOSSILIZED_FISH
 	setvar VAR_TEMP_2, ITEM_FOSSILIZED_DRAKE
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_DRACOVISH
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_Anthology_ARCTOVISH::
+RustboroCity_DevonCorp_2F_EventScript_Mosaic_ARCTOVISH::
 	setvar VAR_TEMP_1, ITEM_FOSSILIZED_FISH
 	setvar VAR_TEMP_2, ITEM_FOSSILIZED_DINO
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_ARCTOVISH
-	goto RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm
+	goto RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm
 
-RustboroCity_DevonCorp_2F_EventScript_AnthologyConfirm::
+RustboroCity_DevonCorp_2F_EventScript_MosaicConfirm::
 	bufferitemname STR_VAR_1, VAR_TEMP_1
 	bufferspeciesname STR_VAR_2, VAR_TEMP_TRANSFERRED_SPECIES
-	msgbox RustboroCity_DevonCorp_2F_Text_AnthologyModernFossil, MSGBOX_YESNO
+	msgbox RustboroCity_DevonCorp_2F_Text_MosaicModernFossil, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_CancelFossilSelect
 	givemon VAR_TEMP_TRANSFERRED_SPECIES, 20
 	goto_if_eq VAR_RESULT, MON_CANT_GIVE, Common_EventScript_NoMoreRoomForPokemon
 	removeitem VAR_TEMP_1
-	goto_if_eq VAR_TEMP_2, ITEM_NONE, RustboroCity_DevonCorp_2F_EventScript_AnthologyRevived
+	goto_if_eq VAR_TEMP_2, ITEM_NONE, RustboroCity_DevonCorp_2F_EventScript_MosaicRevived
 	removeitem VAR_TEMP_2
-RustboroCity_DevonCorp_2F_EventScript_AnthologyRevived::
+RustboroCity_DevonCorp_2F_EventScript_MosaicRevived::
 	bufferspeciesname STR_VAR_2, VAR_TEMP_TRANSFERRED_SPECIES
 	playfanfare MUS_OBTAIN_ITEM
-	msgbox RustboroCity_DevonCorp_2F_Text_AnthologyRevived, MSGBOX_DEFAULT
+	msgbox RustboroCity_DevonCorp_2F_Text_MosaicRevived, MSGBOX_DEFAULT
 	waitfanfare
 	setflag FLAG_RECEIVED_REVIVED_FOSSIL_MON
 	release
 	end
 
-RustboroCity_DevonCorp_2F_Text_AnthologyModernFossil:
+RustboroCity_DevonCorp_2F_Text_MosaicModernFossil:
 	.string "Your {STR_VAR_1} can revive a\l"
 	.string "{STR_VAR_2}! Revive it now?$"
 
-RustboroCity_DevonCorp_2F_Text_AnthologyNeedTwoFossils:
+RustboroCity_DevonCorp_2F_Text_MosaicNeedTwoFossils:
 	.string "These fragments need a matching\l"
 	.string "ancient fossil half to revive.$"
 
-RustboroCity_DevonCorp_2F_Text_AnthologyRevived:
+RustboroCity_DevonCorp_2F_Text_MosaicRevived:
 	.string "Your {STR_VAR_2} has been restored!\p"
 	.string "Take good care of it!$"
 

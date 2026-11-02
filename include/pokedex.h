@@ -7,12 +7,12 @@ extern void (*gPokedexVBlankCB)(void);
 
 void ResetPokedex(void);
 u16 GetNationalPokedexCount(u8 caseID);
-u16 GetAnthologyRegionalDexSize(enum Region region);
-u16 AnthologyRegionalToNationalOrder(enum Region region, u16 index);
-u16 AnthologyNationalToRegionalOrder(enum Region region, u16 national);
-bool8 IsInAnthologyRegionalDex(enum Region region, enum NationalDexOrder number);
-u16 GetAnthologyRegionalPokedexCount(enum Region region, u8 caseID);
-bool16 HasAllAnthologyRegionalMons(enum Region region);
+u16 GetMosaicRegionalDexSize(enum Region region);
+u16 MosaicRegionalToNationalOrder(enum Region region, u16 index);
+u16 MosaicNationalToRegionalOrder(enum Region region, u16 national);
+bool8 IsInMosaicRegionalDex(enum Region region, enum NationalDexOrder number);
+u16 GetMosaicRegionalPokedexCount(enum Region region, u8 caseID);
+bool16 HasAllMosaicRegionalMons(enum Region region);
 u32 GetRegionalPokedexCount(u8 caseID);
 u16 GetHoennPokedexCount(u8 caseID);
 u16 GetKantoPokedexCount(u8 caseID);

@@ -8,7 +8,7 @@ Route32_MapScripts::
 	.byte 0
 
 Route32_OnTransition: 
-	call Route32_AnthologyOnTransition
+	call Route32_MosaicOnTransition
 	end
 
 Route32_EventScript_FisherJustin::
@@ -521,20 +521,20 @@ Route32_Text_Sign3:
 	.string "AHEAD$"
 
 // Independent early/mid-Johto Sword of Justice static. No sibling capture gate.
-Route32_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+Route32_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route32_SeededKELDEOVisibility
 	getcaughtmon SPECIES_KELDEO
-	call_if_eq VAR_RESULT, TRUE, Route32_AnthologyHideKeldeo
-	call_if_ne VAR_RESULT, TRUE, Route32_AnthologyShowKeldeo
+	call_if_eq VAR_RESULT, TRUE, Route32_MosaicHideKeldeo
+	call_if_ne VAR_RESULT, TRUE, Route32_MosaicShowKeldeo
 	return
 
-Route32_AnthologyHideKeldeo::
-	setflag FLAG_HIDE_ANTHOLOGY_KELDEO
+Route32_MosaicHideKeldeo::
+	setflag FLAG_HIDE_MOSAIC_KELDEO
 	return
 
-Route32_AnthologyShowKeldeo::
-	clearflag FLAG_HIDE_ANTHOLOGY_KELDEO
+Route32_MosaicShowKeldeo::
+	clearflag FLAG_HIDE_MOSAIC_KELDEO
 	return
 
 // Defeated => map re-entry rematch. Caught => permanent for this site.
@@ -548,35 +548,35 @@ Route32_EventScript_Keldeo::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route32_AnthologyKeldeoRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route32_AnthologyKeldeoRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route32_MosaicKeldeoRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route32_MosaicKeldeoRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route32_SeededKELDEOCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route32_AnthologyKeldeoResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route32_MosaicKeldeoResolved
 	release
 	end
 
-Route32_AnthologyKeldeoResolved::
+Route32_MosaicKeldeoResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_KELDEO
-	setflag FLAG_HIDE_ANTHOLOGY_KELDEO
+	removeobject LOCALID_MOSAIC_KELDEO
+	setflag FLAG_HIDE_MOSAIC_KELDEO
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route32_AnthologyKeldeoRetreated::
+Route32_MosaicKeldeoRetreated::
 	release
 	end
 
 
 Route32_SeededKELDEOVisibility::
-	call_if_set FLAG_CAUGHT_RANDOM_ROUTE32_KELDEO, Route32_AnthologyHideKeldeo
-	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE32_KELDEO, Route32_AnthologyShowKeldeo
+	call_if_set FLAG_CAUGHT_RANDOM_ROUTE32_KELDEO, Route32_MosaicHideKeldeo
+	call_if_unset FLAG_CAUGHT_RANDOM_ROUTE32_KELDEO, Route32_MosaicShowKeldeo
 	return
 
 Route32_SeededKELDEOCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route32_SeededKELDEOMark
-	goto Route32_AnthologyKeldeoResolved
+	goto Route32_MosaicKeldeoResolved
 
 Route32_SeededKELDEOMark::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE32_KELDEO

@@ -132,7 +132,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_COBALION",
+      "local_id": "LOCALID_MOSAIC_COBALION",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(COBALION)",
       "x": 19,
       "y": 41,
@@ -143,7 +143,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtMortar_1F_South_EventScript_Cobalion",
-      "flag": "FLAG_HIDE_ANTHOLOGY_COBALION"
+      "flag": "FLAG_HIDE_MOSAIC_COBALION"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -156,7 +156,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_DRAMPANITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_15"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_15"
     }
   ],
   "warp_events": [

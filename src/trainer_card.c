@@ -736,7 +736,7 @@ u32 CountPlayerTrainerStars(void)
 
     // National Grand Researcher uses the existing 4-star gold palette.
     #if ALL_REGIONS
-    if (FlagGet(FLAG_ANTHOLOGY_GRAND_RESEARCHER))
+    if (FlagGet(FLAG_MOSAIC_GRAND_RESEARCHER))
         return 4;
     #endif
     return stars;

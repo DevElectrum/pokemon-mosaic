@@ -3,7 +3,7 @@
 
 Each map retains all original wild species and original encounter rates/levels;
 only a repeated slot is repurposed. Count every encounter variant, and reserve
-DexNav icons for any anthology rare/extra inhabitants still present on a map.
+DexNav icons for any mosaic rare/extra inhabitants still present on a map.
 """
 import json
 import re
@@ -12,8 +12,8 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[2]
 data = json.loads((root / "src/data/wild_encounters.json").read_text())
 rows = data["wild_encounter_groups"][0]["encounters"]
-rare = (root / "src/data/anthology_rare_habitats.h").read_text()
-extra = (root / "src/data/anthology_extra_habitats.h").read_text()
+rare = (root / "src/data/mosaic_rare_habitats.h").read_text()
+extra = (root / "src/data/mosaic_extra_habitats.h").read_text()
 species_ids = (root / "include/constants/species.h").read_text()
 # map: (slot index, originally repeated species, replacement).
 # Original species must REMAIN on each variant, with no lost 5%/10% staple.

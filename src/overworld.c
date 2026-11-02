@@ -2046,7 +2046,7 @@ u8 UpdateSpritePaletteWithTime(u8 paletteNum)
 
 static void OverworldBasic(void)
 {
-    if (gSaveBlock2Ptr != NULL && FlagGet(FLAG_ANTHOLOGY_INFINITE_BP))
+    if (gSaveBlock2Ptr != NULL && FlagGet(FLAG_MOSAIC_INFINITE_BP))
         gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
     ScriptContext_RunScript();
     RunTasks();

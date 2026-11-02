@@ -13,7 +13,7 @@
 --
 -- Run against the owner's battery save (never the repo copy in place -- mgba-run.sh copies it
 -- into a temp dir, but pass a COPY anyway):
---   test/overworld/mgba-run.sh test/overworld/lua/VerifyOwnerSave.lua pokemonworld.gba <copy-of>.sav
+--   test/overworld/mgba-run.sh test/overworld/lua/VerifyOwnerSave.lua pokemon-mosaic.gba <copy-of>.sav
 --
 -- Expected pre-migration state of that save (read straight out of the .srm):
 --   saveVersion 7 | location VioletCity(75,6) warpId 2 | lastHealLocation VioletCity (30,18)

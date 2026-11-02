@@ -374,7 +374,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_SKARMORITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_17"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_17"
     }
   ],
   "warp_events": [

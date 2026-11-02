@@ -7,7 +7,7 @@ DragonsDen_Cavern_MapScripts::
 	.byte 0
 
 DragonsDen_Cavern_OnTransition::
-	call DragonsDen_Cavern_AnthologyOnTransition
+	call DragonsDen_Cavern_MosaicOnTransition
 	end
 
 DragonsDen_Cavern_OnFrame::
@@ -281,16 +281,16 @@ DragonsDen_Cavern_Text_TwinsLeaandPia2After:
     .string "We'll tell on you.\p"
     .string "MASTER will be angry with you.$"
 
-DragonsDen_Cavern_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+DragonsDen_Cavern_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, DragonsDen_Cavern_SeededREGIDRAGOVisible
 	getcaughtmon SPECIES_REGIDRAGO
 	goto_if_eq VAR_RESULT, TRUE, DragonsDen_Cavern_HideRegidrago
-	clearflag FLAG_HIDE_ANTHOLOGY_REGIDRAGO
+	clearflag FLAG_HIDE_MOSAIC_REGIDRAGO
 	return
 
 DragonsDen_Cavern_HideRegidrago::
-	setflag FLAG_HIDE_ANTHOLOGY_REGIDRAGO
+	setflag FLAG_HIDE_MOSAIC_REGIDRAGO
 	return
 
 DragonsDen_Cavern_EventScript_Regidrago::
@@ -311,8 +311,8 @@ DragonsDen_Cavern_EventScript_Regidrago::
 
 DragonsDen_Cavern_RegidragoResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_REGIDRAGO
-	setflag FLAG_HIDE_ANTHOLOGY_REGIDRAGO
+	removeobject LOCALID_MOSAIC_REGIDRAGO
+	setflag FLAG_HIDE_MOSAIC_REGIDRAGO
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
@@ -324,11 +324,11 @@ DragonsDen_Cavern_RegidragoRetreated::
 // Seeded location ownership is separate from the original species Pokédex.
 DragonsDen_Cavern_SeededREGIDRAGOVisible::
 	goto_if_set FLAG_CAUGHT_RANDOM_DRAGONSDEN_CAVERN_REGIDRAGO, DragonsDen_Cavern_HideRegidrago
-	clearflag FLAG_HIDE_ANTHOLOGY_REGIDRAGO
+	clearflag FLAG_HIDE_MOSAIC_REGIDRAGO
 	return
 
 DragonsDen_Cavern_SeededREGIDRAGOCatch::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, DragonsDen_Cavern_SeededREGIDRAGOCatchMark
 	goto DragonsDen_Cavern_RegidragoResolved
 

@@ -111,7 +111,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_CHANDELURITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_03"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_03"
     }
   ],
   "warp_events": [

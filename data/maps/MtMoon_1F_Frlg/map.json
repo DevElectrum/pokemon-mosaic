@@ -213,7 +213,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_COSMOG_MOON",
+      "local_id": "LOCALID_MOSAIC_COSMOG_MOON",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(COSMOG)",
       "x": 10,
       "y": 3,
@@ -224,7 +224,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtMoon_1F_EventScript_CosmogMoon",
-      "flag": "FLAG_HIDE_ANTHOLOGY_COSMOG_MOON"
+      "flag": "FLAG_HIDE_MOSAIC_COSMOG_MOON"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -237,7 +237,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_CLEFABLITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ANTHOLOGY_MEGA_STONE_00"
+      "flag": "FLAG_MOSAIC_MEGA_STONE_00"
     }
   ],
   "warp_events": [

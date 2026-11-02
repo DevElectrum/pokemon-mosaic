@@ -42,11 +42,11 @@ SilphCo_7F_EventScript_RivalScene::
 	call_if_eq VAR_TEMP_1, 1, SilphCo_7F_EventScript_RivalApproachBottom
 	msgbox SilphCo_7F_Text_RivalIntro
 	setvar VAR_LAST_TALKED, LOCALID_SILPH_CO_RIVAL
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 2, SilphCo_7F_EventScript_RivalSquirtle
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 1, SilphCo_7F_EventScript_RivalBulbasaur
-	callnative Anthology_GetKantoStarterStoryBranch
+	callnative Mosaic_GetKantoStarterStoryBranch
 	call_if_eq VAR_RESULT, 0, SilphCo_7F_EventScript_RivalCharmander
 	msgbox SilphCo_7F_Text_RivalPostBattle
 	closemessage
@@ -377,13 +377,13 @@ SilphCo_7F_Text_FloorSign::
 	.string "7F$"
 
 
-Anthology_MegaStone_MAGEARNITE::
-    goto_if_unset FLAG_GOT_LAPRAS_FROM_SILPH, Anthology_MegaStone_MAGEARNITE_Locked
+Mosaic_MegaStone_MAGEARNITE::
+    goto_if_unset FLAG_GOT_LAPRAS_FROM_SILPH, Mosaic_MegaStone_MAGEARNITE_Locked
     finditem ITEM_MAGEARNITE
     end
-Anthology_MegaStone_MAGEARNITE_Locked::
-    msgbox Anthology_MegaStone_MAGEARNITE_LockedText, MSGBOX_DEFAULT
+Mosaic_MegaStone_MAGEARNITE_Locked::
+    msgbox Mosaic_MegaStone_MAGEARNITE_LockedText, MSGBOX_DEFAULT
     end
-Anthology_MegaStone_MAGEARNITE_LockedText::
+Mosaic_MegaStone_MAGEARNITE_LockedText::
     .string "A special MEGA STONE resonates here.\p"
     .string "Return when its guardian is yours.$"

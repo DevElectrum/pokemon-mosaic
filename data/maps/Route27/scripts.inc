@@ -7,14 +7,14 @@ Route27_MapScripts::
 
 Route27_OnTransition:
     goto_if_unset FLAG_JOHTO_BADGE_8, Route27_RoyalDuoHide
-    goto_if_set FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED, Route27_RoyalDuoHide
-    clearflag FLAG_HIDE_ANTHOLOGY_ZACIAN
-    clearflag FLAG_HIDE_ANTHOLOGY_ZAMAZENTA
+    goto_if_set FLAG_MOSAIC_ROYAL_DUO_CLAIMED, Route27_RoyalDuoHide
+    clearflag FLAG_HIDE_MOSAIC_ZACIAN
+    clearflag FLAG_HIDE_MOSAIC_ZAMAZENTA
     end
 
 Route27_RoyalDuoHide::
-    setflag FLAG_HIDE_ANTHOLOGY_ZACIAN
-    setflag FLAG_HIDE_ANTHOLOGY_ZAMAZENTA
+    setflag FLAG_HIDE_MOSAIC_ZACIAN
+    setflag FLAG_HIDE_MOSAIC_ZAMAZENTA
     end
 
 Route27_EventScript_BaobaCall::
@@ -244,25 +244,25 @@ Route27_EventScript_RoyalDuo::
     lock
     faceplayer
     goto_if_unset FLAG_JOHTO_BADGE_8, Route27_RoyalDuoNotReady
-    goto_if_set FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED, Route27_RoyalDuoAlreadyClaimed
+    goto_if_set FLAG_MOSAIC_ROYAL_DUO_CLAIMED, Route27_RoyalDuoAlreadyClaimed
     special RoyalDuoCheckCapacity
     goto_if_eq VAR_RESULT, FALSE, Route27_RoyalDuoNoRoom
     msgbox Route27_Text_RoyalDuoChallenge, MSGBOX_DEFAULT
     closemessage
     special RoyalDuoPrepareBattle
-    setflag FLAG_ANTHOLOGY_ROYAL_DUO_NO_CATCH
+    setflag FLAG_MOSAIC_ROYAL_DUO_NO_CATCH
     special BattleSetup_StartRoyalDuoBattle
     waitstate
     specialvar VAR_RESULT, GetBattleOutcome
     goto_if_ne VAR_RESULT, B_OUTCOME_WON, Route27_RoyalDuoRetry
     special RoyalDuoAwardVictory
     goto_if_eq VAR_RESULT, FALSE, Route27_RoyalDuoNoRoom
-    setflag FLAG_ANTHOLOGY_ROYAL_DUO_CLAIMED
+    setflag FLAG_MOSAIC_ROYAL_DUO_CLAIMED
     fadescreenswapbuffers FADE_TO_BLACK
-    removeobject LOCALID_ANTHOLOGY_ZACIAN
-    removeobject LOCALID_ANTHOLOGY_ZAMAZENTA
-    setflag FLAG_HIDE_ANTHOLOGY_ZACIAN
-    setflag FLAG_HIDE_ANTHOLOGY_ZAMAZENTA
+    removeobject LOCALID_MOSAIC_ZACIAN
+    removeobject LOCALID_MOSAIC_ZAMAZENTA
+    setflag FLAG_HIDE_MOSAIC_ZACIAN
+    setflag FLAG_HIDE_MOSAIC_ZAMAZENTA
     fadescreenswapbuffers FADE_FROM_BLACK
     msgbox Route27_Text_RoyalDuoGift, MSGBOX_DEFAULT
     release

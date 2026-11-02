@@ -7,7 +7,7 @@ Route39_MapScripts::
 	.byte 0
 
 Route39_OnTransition:
-	call Route39_AnthologyOnTransition 
+	call Route39_MosaicOnTransition
 	end
 
 Route39_EventScript_Item_TM::
@@ -374,30 +374,30 @@ Route39_Text_TrainerTips:
 	.string "you see!$"
 
 // New static acquisition flags are independent of original Johto plot events.
-Route39_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
-	goto_if_eq VAR_RESULT, TRUE, Route39_AnthologyRandomOnTransition
+Route39_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
+	goto_if_eq VAR_RESULT, TRUE, Route39_MosaicRandomOnTransition
 	getcaughtmon SPECIES_ENAMORUS
-	goto_if_eq VAR_RESULT, TRUE, Route39_AnthologyHideEnamorus
+	goto_if_eq VAR_RESULT, TRUE, Route39_MosaicHideEnamorus
 	getcaughtmon SPECIES_TORNADUS
-	goto_if_ne VAR_RESULT, TRUE, Route39_AnthologyHideEnamorus
+	goto_if_ne VAR_RESULT, TRUE, Route39_MosaicHideEnamorus
 	getcaughtmon SPECIES_THUNDURUS
-	goto_if_ne VAR_RESULT, TRUE, Route39_AnthologyHideEnamorus
+	goto_if_ne VAR_RESULT, TRUE, Route39_MosaicHideEnamorus
 	getcaughtmon SPECIES_LANDORUS
-	goto_if_ne VAR_RESULT, TRUE, Route39_AnthologyHideEnamorus
-	clearflag FLAG_HIDE_ANTHOLOGY_ENAMORUS
+	goto_if_ne VAR_RESULT, TRUE, Route39_MosaicHideEnamorus
+	clearflag FLAG_HIDE_MOSAIC_ENAMORUS
 	return
 
-Route39_AnthologyRandomOnTransition::
-	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE39_ENAMORUS, Route39_AnthologyHideEnamorus
-	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE44_TORNADUS, Route39_AnthologyHideEnamorus
-	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE41_THUNDURUS, Route39_AnthologyHideEnamorus
-	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE43_LANDORUS, Route39_AnthologyHideEnamorus
-	clearflag FLAG_HIDE_ANTHOLOGY_ENAMORUS
+Route39_MosaicRandomOnTransition::
+	goto_if_set FLAG_CAUGHT_RANDOM_ROUTE39_ENAMORUS, Route39_MosaicHideEnamorus
+	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE44_TORNADUS, Route39_MosaicHideEnamorus
+	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE41_THUNDURUS, Route39_MosaicHideEnamorus
+	goto_if_unset FLAG_CAUGHT_RANDOM_ROUTE43_LANDORUS, Route39_MosaicHideEnamorus
+	clearflag FLAG_HIDE_MOSAIC_ENAMORUS
 	return
 
-Route39_AnthologyHideEnamorus::
-	setflag FLAG_HIDE_ANTHOLOGY_ENAMORUS
+Route39_MosaicHideEnamorus::
+	setflag FLAG_HIDE_MOSAIC_ENAMORUS
 	return
 
 // Defeated => map re-entry rematch. Caught => permanent for this site.
@@ -411,25 +411,25 @@ Route39_EventScript_Enamorus::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route39_AnthologyEnamorusRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route39_AnthologyEnamorusRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route39_AnthologyEnamorusResolvedRandomCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route39_AnthologyEnamorusResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route39_MosaicEnamorusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route39_MosaicEnamorusRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route39_MosaicEnamorusResolvedRandomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route39_MosaicEnamorusResolved
 	release
 	end
 
-Route39_AnthologyEnamorusResolvedRandomCaught::
+Route39_MosaicEnamorusResolvedRandomCaught::
 	setflag FLAG_CAUGHT_RANDOM_ROUTE39_ENAMORUS
-	goto Route39_AnthologyEnamorusResolved
+	goto Route39_MosaicEnamorusResolved
 
-Route39_AnthologyEnamorusResolved::
+Route39_MosaicEnamorusResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ENAMORUS
-	setflag FLAG_HIDE_ANTHOLOGY_ENAMORUS
+	removeobject LOCALID_MOSAIC_ENAMORUS
+	setflag FLAG_HIDE_MOSAIC_ENAMORUS
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route39_AnthologyEnamorusRetreated::
+Route39_MosaicEnamorusRetreated::
 	release
 	end

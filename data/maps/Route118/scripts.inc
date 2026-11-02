@@ -330,7 +330,7 @@ Route118_Text_JessieJamesBlastOff:
 
 // Hoenn pre-League sites independent of the original story interactions.
 Route118_SecondBatchOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, Route118_SeededIronBoulderTransition
 	getcaughtmon SPECIES_IRON_BOULDER
 	call_if_eq VAR_RESULT, TRUE, Route118_SecondBatchHideIronBoulder
@@ -343,11 +343,11 @@ Route118_SeededIronBoulderTransition::
 	return
 
 Route118_SecondBatchHideIronBoulder::
-	setflag FLAG_HIDE_ANTHOLOGY_IRON_BOULDER
+	setflag FLAG_HIDE_MOSAIC_IRON_BOULDER
 	return
 
 Route118_SecondBatchShowIronBoulder::
-	clearflag FLAG_HIDE_ANTHOLOGY_IRON_BOULDER
+	clearflag FLAG_HIDE_MOSAIC_IRON_BOULDER
 	return
 
 Route118_EventScript_IronBoulder::
@@ -367,7 +367,7 @@ Route118_EventScript_IronBoulder::
 	end
 
 Route118_SeededIronBoulderCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, Route118_MarkSeededIronBoulder
 	goto Route118_SecondBatchIronBoulderResolved
 
@@ -377,8 +377,8 @@ Route118_MarkSeededIronBoulder::
 
 Route118_SecondBatchIronBoulderResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_IRON_BOULDER
-	setflag FLAG_HIDE_ANTHOLOGY_IRON_BOULDER
+	removeobject LOCALID_MOSAIC_IRON_BOULDER
+	setflag FLAG_HIDE_MOSAIC_IRON_BOULDER
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

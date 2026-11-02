@@ -22,14 +22,14 @@
 #if ALL_REGIONS
 
 // The 240x160 title contains no prompt; reuse the original World blinking sprite.
-#define ANTHOLOGY_SCREEN_BLOCK 30
-#define ANTHOLOGY_TITLE_TILES_RAW_BYTES (577 * 64)
-#define ANTHOLOGY_PRESS_START_TAG 1001
-#define ANTHOLOGY_PRESS_START_PIECES 5
+#define MOSAIC_SCREEN_BLOCK 30
+#define MOSAIC_TITLE_TILES_RAW_BYTES (577 * 64)
+#define MOSAIC_PRESS_START_TAG 1001
+#define MOSAIC_PRESS_START_PIECES 5
 #define CLEAR_SAVE_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
 #define RESET_RTC_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_LEFT)
 
-static const struct OamData sAnthologyPressStartOam =
+static const struct OamData sMosaicPressStartOam =
 {
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -46,67 +46,67 @@ static const struct OamData sAnthologyPressStartOam =
     .affineParam = 0,
 };
 
-static const union AnimCmd sAnthologyPromptFrame0[] = { ANIMCMD_FRAME(1, 4), ANIMCMD_END };
-static const union AnimCmd sAnthologyPromptFrame1[] = { ANIMCMD_FRAME(5, 4), ANIMCMD_END };
-static const union AnimCmd sAnthologyPromptFrame2[] = { ANIMCMD_FRAME(9, 4), ANIMCMD_END };
-static const union AnimCmd sAnthologyPromptFrame3[] = { ANIMCMD_FRAME(13, 4), ANIMCMD_END };
-static const union AnimCmd sAnthologyPromptFrame4[] = { ANIMCMD_FRAME(17, 4), ANIMCMD_END };
+static const union AnimCmd sMosaicPromptFrame0[] = { ANIMCMD_FRAME(1, 4), ANIMCMD_END };
+static const union AnimCmd sMosaicPromptFrame1[] = { ANIMCMD_FRAME(5, 4), ANIMCMD_END };
+static const union AnimCmd sMosaicPromptFrame2[] = { ANIMCMD_FRAME(9, 4), ANIMCMD_END };
+static const union AnimCmd sMosaicPromptFrame3[] = { ANIMCMD_FRAME(13, 4), ANIMCMD_END };
+static const union AnimCmd sMosaicPromptFrame4[] = { ANIMCMD_FRAME(17, 4), ANIMCMD_END };
 
-static const union AnimCmd *const sAnthologyPromptAnims[] =
+static const union AnimCmd *const sMosaicPromptAnims[] =
 {
-    sAnthologyPromptFrame0,
-    sAnthologyPromptFrame1,
-    sAnthologyPromptFrame2,
-    sAnthologyPromptFrame3,
-    sAnthologyPromptFrame4,
+    sMosaicPromptFrame0,
+    sMosaicPromptFrame1,
+    sMosaicPromptFrame2,
+    sMosaicPromptFrame3,
+    sMosaicPromptFrame4,
 };
 
-static void SpriteCB_AnthologyPressStart(struct Sprite *sprite)
+static void SpriteCB_MosaicPressStart(struct Sprite *sprite)
 {
     sprite->invisible = !(++sprite->data[0] & 16);
 }
 
-static const struct SpriteTemplate sAnthologyPressStartTemplate =
+static const struct SpriteTemplate sMosaicPressStartTemplate =
 {
-    .tileTag = ANTHOLOGY_PRESS_START_TAG,
-    .paletteTag = ANTHOLOGY_PRESS_START_TAG,
-    .oam = &sAnthologyPressStartOam,
-    .anims = sAnthologyPromptAnims,
-    .callback = SpriteCB_AnthologyPressStart,
+    .tileTag = MOSAIC_PRESS_START_TAG,
+    .paletteTag = MOSAIC_PRESS_START_TAG,
+    .oam = &sMosaicPressStartOam,
+    .anims = sMosaicPromptAnims,
+    .callback = SpriteCB_MosaicPressStart,
 };
 
-static const struct CompressedSpriteSheet sAnthologyPressStartSheet =
+static const struct CompressedSpriteSheet sMosaicPressStartSheet =
 {
     .data = gTitleScreenPressStartGfx,
     .size = 0x520,
-    .tag = ANTHOLOGY_PRESS_START_TAG,
+    .tag = MOSAIC_PRESS_START_TAG,
 };
 
-static const struct SpritePalette sAnthologyPressStartPalette =
+static const struct SpritePalette sMosaicPressStartPalette =
 {
     .data = gTitleScreenPressStartPal,
-    .tag = ANTHOLOGY_PRESS_START_TAG,
+    .tag = MOSAIC_PRESS_START_TAG,
 };
 
-static void CreateAnthologyPressStart(void)
+static void CreateMosaicPressStart(void)
 {
     u8 i;
-    for (i = 0; i < ANTHOLOGY_PRESS_START_PIECES; i++)
+    for (i = 0; i < MOSAIC_PRESS_START_PIECES; i++)
     {
-        u8 spriteId = CreateSprite(&sAnthologyPressStartTemplate, 56 + i * 32, 145, 0);
+        u8 spriteId = CreateSprite(&sMosaicPressStartTemplate, 56 + i * 32, 145, 0);
         if (spriteId != MAX_SPRITES)
             StartSpriteAnim(&gSprites[spriteId], i);
     }
 }
 
-static const u32 sAnthologyTiles[] = INCBIN_U32("graphics/title_screen/world/anthology_title_tiles.bin");
-static const u16 sAnthologyPalette[] = INCBIN_U16("graphics/title_screen/world/anthology_title_palette.bin");
-static const u16 sAnthologyMap[] = INCBIN_U16("graphics/title_screen/world/anthology_title_map.bin");
+static const u32 sMosaicTiles[] = INCBIN_U32("graphics/title_screen/world/anthology_title_tiles.bin");
+static const u16 sMosaicPalette[] = INCBIN_U16("graphics/title_screen/world/anthology_title_palette.bin");
+static const u16 sMosaicMap[] = INCBIN_U16("graphics/title_screen/world/anthology_title_map.bin");
 
-STATIC_ASSERT(ANTHOLOGY_TITLE_TILES_RAW_BYTES <= ANTHOLOGY_SCREEN_BLOCK * 0x800, AnthologyTitleTilesFit);
-STATIC_ASSERT(sizeof(sAnthologyTiles) == ANTHOLOGY_TITLE_TILES_RAW_BYTES, AnthologyTitleTilesLength);
-STATIC_ASSERT(sizeof(sAnthologyPalette) == BG_PLTT_SIZE, AnthologyTitlePaletteSize);
-STATIC_ASSERT(sizeof(sAnthologyMap) == 0x800, AnthologyTitleMapSize);
+STATIC_ASSERT(MOSAIC_TITLE_TILES_RAW_BYTES <= MOSAIC_SCREEN_BLOCK * 0x800, MosaicTitleTilesFit);
+STATIC_ASSERT(sizeof(sMosaicTiles) == MOSAIC_TITLE_TILES_RAW_BYTES, MosaicTitleTilesLength);
+STATIC_ASSERT(sizeof(sMosaicPalette) == BG_PLTT_SIZE, MosaicTitlePaletteSize);
+STATIC_ASSERT(sizeof(sMosaicMap) == 0x800, MosaicTitleMapSize);
 
 static void MainCB2_WorldTitleScreen(void);
 static void Task_WorldTitleScreen(u8 taskId);
@@ -159,19 +159,19 @@ void CB2_InitWorldTitleScreen(void)
     case 1:
         // A direct aligned DMA copy avoids VRAM LZ10 halfword decoding differences.
         // The art is only 38 KiB raw, so ROM overhead is small.
-        DmaCopy32(3, sAnthologyTiles, (void *)VRAM, sizeof(sAnthologyTiles));
-        DmaCopy16(3, sAnthologyMap, (void *)BG_SCREEN_ADDR(ANTHOLOGY_SCREEN_BLOCK), sizeof(sAnthologyMap));
-        LoadPalette(sAnthologyPalette, 0, sizeof(sAnthologyPalette));
-        LoadCompressedSpriteSheet(&sAnthologyPressStartSheet);
-        LoadSpritePalette(&sAnthologyPressStartPalette);
+        DmaCopy32(3, sMosaicTiles, (void *)VRAM, sizeof(sMosaicTiles));
+        DmaCopy16(3, sMosaicMap, (void *)BG_SCREEN_ADDR(MOSAIC_SCREEN_BLOCK), sizeof(sMosaicMap));
+        LoadPalette(sMosaicPalette, 0, sizeof(sMosaicPalette));
+        LoadCompressedSpriteSheet(&sMosaicPressStartSheet);
+        LoadSpritePalette(&sMosaicPressStartPalette);
         if (QUICKSTART && QUICKSTART_HUD)
             CreateQuickstartHud();
         BuildOamBuffer();
         gMain.state++;
         break;
     default:
-        SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(ANTHOLOGY_SCREEN_BLOCK) | BGCNT_256COLOR | BGCNT_TXT256x256);
-        CreateAnthologyPressStart();
+        SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(MOSAIC_SCREEN_BLOCK) | BGCNT_256COLOR | BGCNT_TXT256x256);
+        CreateMosaicPressStart();
         CreateTask(Task_WorldTitleScreen, 0);
         BeginNormalPaletteFade(PALETTES_ALL, 1, 16, 0, RGB_WHITEALPHA);
         SetVBlankCallback(VBlankCB_WorldTitleScreen);

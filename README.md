@@ -9,7 +9,7 @@
 An **unofficial, non-commercial, experimental hobby modification** built upon
 [Pokémon World](https://github.com/evilchinesefood/PKMN-World) by David A. and its contributors.
 
-[**Origins**](#our-origins-built-upon-pokémon-world) · [**Field Guide**](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md) · [**Features**](#what-mosaic-adds) · [**Status**](#development-status-and-verification) · [**Build**](#building-locally) · [**Credits**](#credits-and-acknowledgments) · [**Roadmap**](#development-roadmap)
+[**Origins**](#our-origins-built-upon-pokémon-world) · [**Field Guide**](docs/MOSAIC_FIELD_GUIDE.md) · [**Features**](#what-mosaic-adds) · [**Status**](#development-status-and-verification) · [**Build**](#building-locally) · [**Credits**](#credits-and-acknowledgments) · [**Roadmap**](#development-roadmap)
 
 **Mosaic website:** The independent site source is included in `website/` but has not yet been deployed. The existing `grand-anthology.pages.dev` site belongs to the separate nine-region Grand Anthology project. No ROM downloads are provided.
 
@@ -54,7 +54,7 @@ The following foundation is inherited from Pokémon World; Mosaic aims to preser
 | **Hoenn** | The Emerald adventure, its League and the Battle Frontier. |
 | **World Transit** | A hub linking the regions, with shared trainer systems and region-specific progression. |
 
-Mosaic's intended continuous adventure uses **one trainer, party, bag, Pokédex, PC and save**, preserving the active team when moving between regions while keeping regional badges and story progression distinct. Our preferred journey is **Kanto → Johto → Hoenn**; extensive cross-region and save/reload acceptance remains part of the development work. For a searchable Pokémon-and-item lookup across the three campaigns, use the **[Mosaic Field Guide](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md)**.
+Mosaic's intended continuous adventure uses **one trainer, party, bag, Pokédex, PC and save**, preserving the active team when moving between regions while keeping regional badges and story progression distinct. Our preferred journey is **Kanto → Johto → Hoenn**; extensive cross-region and save/reload acceptance remains part of the development work. For a searchable Pokémon-and-item lookup across the three campaigns, use the **[Mosaic Field Guide](docs/MOSAIC_FIELD_GUIDE.md)**.
 
 ## What Mosaic adds
 
@@ -72,7 +72,7 @@ The public `main` branch has substantial source-level acquisition and encounter 
 
 ### Player progression and locations
 
-**[Open the Mosaic Field Guide](docs/GRAND_ANTHOLOGY_FIELD_GUIDE.md)** for searchable National Pokédex entries, all numbered items, all 92 Mega Stone sources, a map-by-map index, major boss encounter requirements and the intended Kanto → Johto → Hoenn journey.
+**[Open the Mosaic Field Guide](docs/MOSAIC_FIELD_GUIDE.md)** for searchable National Pokédex entries, all numbered items, all 92 Mega Stone sources, a map-by-map index, major boss encounter requirements and the intended Kanto → Johto → Hoenn journey.
 
 The encounter engineering milestone **does not imply postgame placement**. The Royal Duo is explicitly **pre-Johto-Champion**. In contrast, permanent Complete Zygarde and permanent Stellar Terapagos unlock **after Hoenn Champion**. **Eternatus is now authored as a level-55 static** in a chamber off Johto Victory Road 1F; the League-side meteorite only permits entry after the Royal Duo victory. Gameplay acceptance is pending.
 
@@ -96,7 +96,7 @@ For a preview of the **underlying** game's three-region presentation, see [Poké
 
 ## Building locally
 
-This repository contains GBA source, data and build tools; **it does not provide downloadable ROM files**. The inherited `pokemonworld-release.gba` output filename remains **temporarily** in Pass 1 for save and CI compatibility, although the GBA cartridge header and main menu already say Pokémon Mosaic. Pass 2 will rename the default output to `pokemon-mosaic-release.gba` alongside every CI/test consumer, with explicit, copy-only `.sav` migration instructions. **Do not rename, overwrite, or delete your only save file.**
+This repository contains GBA source, data and build tools; **it does not provide downloadable ROM files**. The standard build now outputs **pokemon-mosaic-release.gba** with a **PKMN MOSAIC** cartridge header. To carry a saved game forward from the old filename, first follow the [copy-only save guide](docs/SAVE_FILENAME_MIGRATION.md). Never overwrite your only .sav.
 
 You need Git, Python 3, GNU Make, host build tools, `libpng` development headers, and a modern `arm-none-eabi` compiler/binutils/newlib toolchain. The project uses **modern compilation, not agbcc**. See [INSTALL.md](INSTALL.md) for platform-specific setup.
 

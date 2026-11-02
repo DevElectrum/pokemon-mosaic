@@ -22,7 +22,7 @@ VermilionCity_Movement_ExitSSAnne::
 
 VermilionCity_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_VERMILION_CITY
-	call VermilionCity_AnthologyOnTransition
+	call VermilionCity_MosaicOnTransition
 	call_if_set FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION, VermilionCity_EventScript_HideOaksAide
 	end
 
@@ -467,20 +467,20 @@ VermilionCity_Text_Route2AideHasPackageForYou::
 
 // A small metal Pokémon among the construction works near Machop.
 // Multi-location acquisition batch: preserve canonical map scripts.
-VermilionCity_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+VermilionCity_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, VermilionCity_Frlg_SeededMELTANVisibility
 	getcaughtmon SPECIES_MELTAN
-	call_if_eq VAR_RESULT, TRUE, VermilionCity_AnthologyHideMeltan
-	call_if_ne VAR_RESULT, TRUE, VermilionCity_AnthologyShowMeltan
+	call_if_eq VAR_RESULT, TRUE, VermilionCity_MosaicHideMeltan
+	call_if_ne VAR_RESULT, TRUE, VermilionCity_MosaicShowMeltan
 	return
 
-VermilionCity_AnthologyHideMeltan::
-	setflag FLAG_HIDE_ANTHOLOGY_MELTAN
+VermilionCity_MosaicHideMeltan::
+	setflag FLAG_HIDE_MOSAIC_MELTAN
 	return
 
-VermilionCity_AnthologyShowMeltan::
-	clearflag FLAG_HIDE_ANTHOLOGY_MELTAN
+VermilionCity_MosaicShowMeltan::
+	clearflag FLAG_HIDE_MOSAIC_MELTAN
 	return
 
 VermilionCity_EventScript_Meltan::
@@ -492,35 +492,35 @@ VermilionCity_EventScript_Meltan::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, VermilionCity_AnthologyMeltanRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, VermilionCity_AnthologyMeltanRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, VermilionCity_MosaicMeltanRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, VermilionCity_MosaicMeltanRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, VermilionCity_Frlg_SeededMELTANCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, VermilionCity_AnthologyMeltanResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, VermilionCity_MosaicMeltanResolved
 	release
 	end
 
-VermilionCity_AnthologyMeltanResolved::
+VermilionCity_MosaicMeltanResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_MELTAN
-	setflag FLAG_HIDE_ANTHOLOGY_MELTAN
+	removeobject LOCALID_MOSAIC_MELTAN
+	setflag FLAG_HIDE_MOSAIC_MELTAN
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-VermilionCity_AnthologyMeltanRetreated::
+VermilionCity_MosaicMeltanRetreated::
 	release
 	end
 
 
 VermilionCity_Frlg_SeededMELTANVisibility::
-	call_if_set FLAG_CAUGHT_RANDOM_VERMILIONCITY_FRLG_MELTAN, VermilionCity_AnthologyHideMeltan
-	call_if_unset FLAG_CAUGHT_RANDOM_VERMILIONCITY_FRLG_MELTAN, VermilionCity_AnthologyShowMeltan
+	call_if_set FLAG_CAUGHT_RANDOM_VERMILIONCITY_FRLG_MELTAN, VermilionCity_MosaicHideMeltan
+	call_if_unset FLAG_CAUGHT_RANDOM_VERMILIONCITY_FRLG_MELTAN, VermilionCity_MosaicShowMeltan
 	return
 
 VermilionCity_Frlg_SeededMELTANCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, VermilionCity_Frlg_SeededMELTANMark
-	goto VermilionCity_AnthologyMeltanResolved
+	goto VermilionCity_MosaicMeltanResolved
 
 VermilionCity_Frlg_SeededMELTANMark::
 	setflag FLAG_CAUGHT_RANDOM_VERMILIONCITY_FRLG_MELTAN

@@ -6,14 +6,14 @@ GraniteCave_StevensRoom_MapScripts::
 @ Steven's original letter/TM story takes priority; Diancie appears after
 @ the letter and both Roxanne's and Brawly's badges, until caught.
 GraniteCave_StevensRoom_OnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_SeededDiancieTransition
 	getcaughtmon SPECIES_DIANCIE
 	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_HideDiancie
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, GraniteCave_StevensRoom_HideDiancie
 	goto_if_unset FLAG_BADGE01_GET, GraniteCave_StevensRoom_HideDiancie
 	goto_if_unset FLAG_BADGE02_GET, GraniteCave_StevensRoom_HideDiancie
-	clearflag FLAG_HIDE_ANTHOLOGY_DIANCIE
+	clearflag FLAG_HIDE_MOSAIC_DIANCIE
 	end
 
 GraniteCave_StevensRoom_SeededDiancieTransition::
@@ -21,11 +21,11 @@ GraniteCave_StevensRoom_SeededDiancieTransition::
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, GraniteCave_StevensRoom_HideDiancie
 	goto_if_unset FLAG_BADGE01_GET, GraniteCave_StevensRoom_HideDiancie
 	goto_if_unset FLAG_BADGE02_GET, GraniteCave_StevensRoom_HideDiancie
-	clearflag FLAG_HIDE_ANTHOLOGY_DIANCIE
+	clearflag FLAG_HIDE_MOSAIC_DIANCIE
 	end
 
 GraniteCave_StevensRoom_HideDiancie::
-	setflag FLAG_HIDE_ANTHOLOGY_DIANCIE
+	setflag FLAG_HIDE_MOSAIC_DIANCIE
 	end
 
 GraniteCave_StevensRoom_EventScript_Steven::
@@ -38,7 +38,7 @@ GraniteCave_StevensRoom_EventScript_Steven::
 	@ The letter is delivered *inside* this room. A transition-only guard
 	@ cannot reveal Diancie until the player leaves and returns.
 	@ Show it now if the Pokédex has not registered its capture.
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_SeededAfterLetter
 	getcaughtmon SPECIES_DIANCIE
 	call_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_RevealDiancieAfterLetter
@@ -74,8 +74,8 @@ GraniteCave_StevensRoom_ContinueLetterStory::
 GraniteCave_StevensRoom_RevealDiancieAfterLetter::
 	goto_if_unset FLAG_BADGE01_GET, GraniteCave_StevensRoom_RevealDiancieTooEarly
 	goto_if_unset FLAG_BADGE02_GET, GraniteCave_StevensRoom_RevealDiancieTooEarly
-	clearflag FLAG_HIDE_ANTHOLOGY_DIANCIE
-	addobject LOCALID_ANTHOLOGY_DIANCIE
+	clearflag FLAG_HIDE_MOSAIC_DIANCIE
+	addobject LOCALID_MOSAIC_DIANCIE
 GraniteCave_StevensRoom_RevealDiancieTooEarly::
 	return
 
@@ -185,7 +185,7 @@ GraniteCave_StevensRoom_EventScript_Diancie::
 	end
 
 GraniteCave_StevensRoom_SeededDiancieCaught::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_MarkSeededDiancie
 	goto GraniteCave_StevensRoom_LegendaryResolved
 
@@ -195,8 +195,8 @@ GraniteCave_StevensRoom_MarkSeededDiancie::
 
 GraniteCave_StevensRoom_LegendaryResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_DIANCIE
-	setflag FLAG_HIDE_ANTHOLOGY_DIANCIE
+	removeobject LOCALID_MOSAIC_DIANCIE
+	setflag FLAG_HIDE_MOSAIC_DIANCIE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end

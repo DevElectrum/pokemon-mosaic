@@ -1,7 +1,7 @@
 .set LOCALID_GOLDENROD_ROCKET_SCOUT, 11
 
 GoldenrodCity_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, GoldenrodCity_AnthologyOnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, GoldenrodCity_MosaicOnTransition
 	.byte 0
 
 GoldenrodCity_EventScript_Trigger:: @flagheap
@@ -460,20 +460,20 @@ GoldenrodCity_Text_MoveTutorNotEnoughCoins:
 	.string "…You don't have enough coins…$"
 
 // Rare encounter locations near their original home regions.
-GoldenrodCity_AnthologyOnTransition::
-	callnative AnthologyStaticRandomizerIsOn
+GoldenrodCity_MosaicOnTransition::
+	callnative MosaicStaticRandomizerIsOn
 	goto_if_eq VAR_RESULT, TRUE, GoldenrodCity_SeededGENESECTVisible
 	getcaughtmon SPECIES_GENESECT
-	call_if_eq VAR_RESULT, TRUE, GoldenrodCity_AnthologyHideGenesect
-	call_if_ne VAR_RESULT, TRUE, GoldenrodCity_AnthologyShowGenesect
+	call_if_eq VAR_RESULT, TRUE, GoldenrodCity_MosaicHideGenesect
+	call_if_ne VAR_RESULT, TRUE, GoldenrodCity_MosaicShowGenesect
 	return
 
-GoldenrodCity_AnthologyHideGenesect::
-	setflag FLAG_HIDE_ANTHOLOGY_GENESECT
+GoldenrodCity_MosaicHideGenesect::
+	setflag FLAG_HIDE_MOSAIC_GENESECT
 	return
 
-GoldenrodCity_AnthologyShowGenesect::
-	clearflag FLAG_HIDE_ANTHOLOGY_GENESECT
+GoldenrodCity_MosaicShowGenesect::
+	clearflag FLAG_HIDE_MOSAIC_GENESECT
 	return
 
 GoldenrodCity_EventScript_Genesect::
@@ -485,35 +485,35 @@ GoldenrodCity_EventScript_Genesect::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, GoldenrodCity_AnthologyGenesectRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, GoldenrodCity_AnthologyGenesectRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, GoldenrodCity_MosaicGenesectRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, GoldenrodCity_MosaicGenesectRetreated
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, GoldenrodCity_SeededGENESECTCatch
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, GoldenrodCity_AnthologyGenesectResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, GoldenrodCity_MosaicGenesectResolved
 	release
 	end
 
-GoldenrodCity_AnthologyGenesectResolved::
+GoldenrodCity_MosaicGenesectResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_GENESECT
-	setflag FLAG_HIDE_ANTHOLOGY_GENESECT
+	removeobject LOCALID_MOSAIC_GENESECT
+	setflag FLAG_HIDE_MOSAIC_GENESECT
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-GoldenrodCity_AnthologyGenesectRetreated::
+GoldenrodCity_MosaicGenesectRetreated::
 	release
 	end
 
 // Seeded location ownership is separate from the original species Pokédex.
 GoldenrodCity_SeededGENESECTVisible::
-	call_if_set FLAG_CAUGHT_RANDOM_GOLDENRODCITY_GENESECT, GoldenrodCity_AnthologyHideGenesect
-	call_if_unset FLAG_CAUGHT_RANDOM_GOLDENRODCITY_GENESECT, GoldenrodCity_AnthologyShowGenesect
+	call_if_set FLAG_CAUGHT_RANDOM_GOLDENRODCITY_GENESECT, GoldenrodCity_MosaicHideGenesect
+	call_if_unset FLAG_CAUGHT_RANDOM_GOLDENRODCITY_GENESECT, GoldenrodCity_MosaicShowGenesect
 	return
 
 GoldenrodCity_SeededGENESECTCatch::
-	callnative AnthologyStaticRandomizerIsOn
+	callnative MosaicStaticRandomizerIsOn
 	call_if_eq VAR_RESULT, TRUE, GoldenrodCity_SeededGENESECTCatchMark
-	goto GoldenrodCity_AnthologyGenesectResolved
+	goto GoldenrodCity_MosaicGenesectResolved
 
 GoldenrodCity_SeededGENESECTCatchMark::
 	setflag FLAG_CAUGHT_RANDOM_GOLDENRODCITY_GENESECT

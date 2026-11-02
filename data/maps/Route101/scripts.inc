@@ -5,7 +5,7 @@ Route101_MapScripts::
 
 Route101_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
-	call Route101_AnthologyZygardeCompleteOnTransition
+	call Route101_MosaicZygardeCompleteOnTransition
 	end
 
 Route101_OnFrame:
@@ -321,14 +321,14 @@ Route101_Text_RouteSign:
 
 @ Post-Champion guardian: an independent permanent Complete Forme catch.
 @ The separate 10% and 50% Zygarde flags do not affect this encounter.
-Route101_AnthologyZygardeCompleteOnTransition::
-	goto_if_set FLAG_CAUGHT_ANTHOLOGY_ZYGARDE_COMPLETE, Route101_AnthologyHideZygardeComplete
-	goto_if_unset FLAG_HOENN_CHAMPION, Route101_AnthologyHideZygardeComplete
-	clearflag FLAG_HIDE_ANTHOLOGY_ZYGARDE_COMPLETE
+Route101_MosaicZygardeCompleteOnTransition::
+	goto_if_set FLAG_CAUGHT_MOSAIC_ZYGARDE_COMPLETE, Route101_MosaicHideZygardeComplete
+	goto_if_unset FLAG_HOENN_CHAMPION, Route101_MosaicHideZygardeComplete
+	clearflag FLAG_HIDE_MOSAIC_ZYGARDE_COMPLETE
 	return
 
-Route101_AnthologyHideZygardeComplete::
-	setflag FLAG_HIDE_ANTHOLOGY_ZYGARDE_COMPLETE
+Route101_MosaicHideZygardeComplete::
+	setflag FLAG_HIDE_MOSAIC_ZYGARDE_COMPLETE
 	return
 
 Route101_EventScript_ZygardeComplete::
@@ -342,26 +342,26 @@ Route101_EventScript_ZygardeComplete::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route101_AnthologyZygardeCompleteRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route101_AnthologyZygardeCompleteRetreated
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route101_AnthologyZygardeCompleteCaught
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route101_AnthologyZygardeCompleteResolved
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route101_MosaicZygardeCompleteRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route101_MosaicZygardeCompleteRetreated
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route101_MosaicZygardeCompleteCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route101_MosaicZygardeCompleteResolved
 	release
 	end
 
-Route101_AnthologyZygardeCompleteCaught::
-	setflag FLAG_CAUGHT_ANTHOLOGY_ZYGARDE_COMPLETE
-	goto Route101_AnthologyZygardeCompleteResolved
+Route101_MosaicZygardeCompleteCaught::
+	setflag FLAG_CAUGHT_MOSAIC_ZYGARDE_COMPLETE
+	goto Route101_MosaicZygardeCompleteResolved
 
-Route101_AnthologyZygardeCompleteResolved::
+Route101_MosaicZygardeCompleteResolved::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_ANTHOLOGY_ZYGARDE_COMPLETE
-	setflag FLAG_HIDE_ANTHOLOGY_ZYGARDE_COMPLETE
+	removeobject LOCALID_MOSAIC_ZYGARDE_COMPLETE
+	setflag FLAG_HIDE_MOSAIC_ZYGARDE_COMPLETE
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Route101_AnthologyZygardeCompleteRetreated::
+Route101_MosaicZygardeCompleteRetreated::
 	release
 	end
 
@@ -371,13 +371,13 @@ Route101_Text_ZygardeCompleteGuardian:
 	.string "It seems to have sought you out,\n"
 	.string "the CHAMPION of HOENN...$"
 
-Anthology_MegaStone_ZYGARDITE::
-    goto_if_unset FLAG_CAUGHT_ANTHOLOGY_ZYGARDE_COMPLETE, Anthology_MegaStone_ZYGARDITE_Locked
+Mosaic_MegaStone_ZYGARDITE::
+    goto_if_unset FLAG_CAUGHT_MOSAIC_ZYGARDE_COMPLETE, Mosaic_MegaStone_ZYGARDITE_Locked
     finditem ITEM_ZYGARDITE
     end
-Anthology_MegaStone_ZYGARDITE_Locked::
-    msgbox Anthology_MegaStone_ZYGARDITE_LockedText, MSGBOX_DEFAULT
+Mosaic_MegaStone_ZYGARDITE_Locked::
+    msgbox Mosaic_MegaStone_ZYGARDITE_LockedText, MSGBOX_DEFAULT
     end
-Anthology_MegaStone_ZYGARDITE_LockedText::
+Mosaic_MegaStone_ZYGARDITE_LockedText::
     .string "A special MEGA STONE resonates here.\p"
     .string "Return when its guardian is yours.$"

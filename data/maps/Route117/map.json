@@ -366,7 +366,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_OGERPON",
+      "local_id": "LOCALID_MOSAIC_OGERPON",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(OGERPON_TEAL)",
       "x": 10,
       "y": 9,
@@ -377,10 +377,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route117_EventScript_Ogerpon",
-      "flag": "FLAG_HIDE_ANTHOLOGY_OGERPON"
+      "flag": "FLAG_HIDE_MOSAIC_OGERPON"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_PECHARUNT",
+      "local_id": "LOCALID_MOSAIC_PECHARUNT",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(PECHARUNT)",
       "x": 37,
       "y": 11,
@@ -391,7 +391,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route117_EventScript_Pecharunt",
-      "flag": "FLAG_HIDE_ANTHOLOGY_PECHARUNT"
+      "flag": "FLAG_HIDE_MOSAIC_PECHARUNT"
     }
   ],
   "warp_events": [

@@ -17,7 +17,7 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCALID_ANTHOLOGY_CRESSELIA",
+      "local_id": "LOCALID_MOSAIC_CRESSELIA",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(CRESSELIA)",
       "x": 13,
       "y": 17,
@@ -28,10 +28,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtMoon_B1F_EventScript_Cresselia",
-      "flag": "FLAG_HIDE_ANTHOLOGY_CRESSELIA"
+      "flag": "FLAG_HIDE_MOSAIC_CRESSELIA"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_DIALGA",
+      "local_id": "LOCALID_MOSAIC_DIALGA",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(DIALGA)",
       "x": 19,
       "y": 3,
@@ -42,10 +42,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtMoon_B1F_EventScript_Dialga",
-      "flag": "FLAG_HIDE_ANTHOLOGY_DIALGA"
+      "flag": "FLAG_HIDE_MOSAIC_DIALGA"
     },
     {
-      "local_id": "LOCALID_ANTHOLOGY_PALKIA",
+      "local_id": "LOCALID_MOSAIC_PALKIA",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(PALKIA)",
       "x": 43,
       "y": 29,
@@ -56,7 +56,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "MtMoon_B1F_EventScript_Palkia",
-      "flag": "FLAG_HIDE_ANTHOLOGY_PALKIA"
+      "flag": "FLAG_HIDE_MOSAIC_PALKIA"
     }
   ],
   "warp_events": [
