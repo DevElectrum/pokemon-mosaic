@@ -70,6 +70,13 @@ jobs:
           sed -i 's/[[:blank:]]*$//' data/maps/Route39/scripts.inc
           git diff --check
           git status --short | head -n 100
+      - name: Website checks
+        working-directory: website
+        run: |
+          set -euo pipefail
+          npm install --no-audit --no-fund
+          npm test
+          npm run build
       - name: Build and validate actual 32 MiB ROM
         run: |
           set -euo pipefail
@@ -103,13 +110,6 @@ jobs:
           assert data[0xAC:0xB0] == b'BPEE'
           print('PASS: Mosaic ROM', len(data), 'bytes, title and BPEE')
           PY
-      - name: Website checks
-        working-directory: website
-        run: |
-          set -euo pipefail
-          npm ci
-          npm test
-          npm run build
       - name: Publish verified refactor to review branch
         run: |
           set -euo pipefail
