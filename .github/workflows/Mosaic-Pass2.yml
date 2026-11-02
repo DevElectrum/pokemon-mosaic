@@ -114,6 +114,15 @@ jobs:
         run: |
           set -euo pipefail
           git add -A
+          # Game builds may regenerate tracked graphics binaries. Never commit
+          # those assets as part of the source-only rebranding pass.
+          while IFS= read -r -d '' file; do
+            case "$file" in
+              *.gba|*.sav|*.srm|*.elf|*.png|*.jpg|*.jpeg|*.bin|*.lz|*.map|*.o|*.a|*.pyc)
+                git restore --staged -- "$file"
+                ;;
+            esac
+          done < <(git diff --cached --name-only -z)
           if git diff --cached --name-only | grep -E '\.(gba|sav|srm|elf|png|jpg|jpeg|bin|lz)$'; then
             echo "Refusing to commit compiled game or art"
             exit 1
