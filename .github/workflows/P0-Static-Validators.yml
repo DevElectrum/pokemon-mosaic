@@ -3,8 +3,8 @@ name: P0 Static Encounter Validators
 on:
   pull_request:
     paths:
-      - 'test/overworld/ValidateAnthologyHabitatRare.py'
-      - 'test/overworld/ValidateAnthologyStaticLifecycle.py'
+      - 'test/overworld/ValidateMosaicHabitatRare.py'
+      - 'test/overworld/ValidateMosaicStaticLifecycle.py'
       - 'test/overworld/ValidateJohtoEternatusChamber.py'
       - 'data/maps/**/scripts.inc'
       - 'data/maps/**/map.json'
@@ -12,8 +12,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'test/overworld/ValidateAnthologyHabitatRare.py'
-      - 'test/overworld/ValidateAnthologyStaticLifecycle.py'
+      - 'test/overworld/ValidateMosaicHabitatRare.py'
+      - 'test/overworld/ValidateMosaicStaticLifecycle.py'
       - 'test/overworld/ValidateJohtoEternatusChamber.py'
       - '.github/workflows/P0-Static-Validators.yml'
 
@@ -30,8 +30,8 @@ jobs:
         with:
           persist-credentials: false
       - name: Validate rare encounters, unlocks and transitions
-        run: python3 test/overworld/ValidateAnthologyHabitatRare.py
+        run: python3 test/overworld/ValidateMosaicHabitatRare.py
       - name: Validate Eternatus chamber seal and scripted battle
         run: python3 test/overworld/ValidateJohtoEternatusChamber.py
       - name: Interpret static battle and capture lifecycle paths
-        run: python3 test/overworld/ValidateAnthologyStaticLifecycle.py
+        run: python3 test/overworld/ValidateMosaicStaticLifecycle.py

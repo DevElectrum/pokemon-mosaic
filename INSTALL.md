@@ -2,7 +2,7 @@
 
 This builds **Pokémon Mosaic**, an experimental three-region modification built upon [Pokémon World](https://github.com/evilchinesefood/PKMN-World) and [pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion). The original platform and toolchain notes are inherited. This is the **standard GBA emulator** game, not the separate nine-region Grand Anthology/XGBA project.
 
-Build from `DevElectrum/pokemon-mosaic` on its published or maintainer-designated branch. The inherited Makefile **now** uses the `pokemonworld` build basename: `make release -j4` currently produces `pokemon-mosaic-release.gba` locally. ROM and CI filenames are updated together in rebranding Pass 2; **do not rename or overwrite your only `.sav`**. No compiled ROM is published.
+Build from `DevElectrum/pokemon-mosaic` on its published or maintainer-designated branch. The Makefile now uses the `pokemon-mosaic` build basename: `make release -j4` currently produces `pokemon-mosaic-release.gba` locally. ROM and CI filenames are updated together in rebranding Pass 2; **do not rename or overwrite your only `.sav`**. No compiled ROM is published.
 
 - **Current default ROMs:** `pokemon-mosaic.gba` (normal/debug) and `pokemon-mosaic-release.gba` (`make release`), both using the new Mosaic filename. The GBA header already says **`PKMN MOSAIC`**, with the original game code **`BPEE`**. The ROM limit is **32 MiB**.
 - **Toolchain:** modern only — `arm-none-eabi-gcc` + newlib. **agbcc is not used**; the Makefile

@@ -1,3 +1,5 @@
+> **2 November 2026 current status:** Pass 1 and Pass 2 are complete and committed to Mosaic `main`. Pass 2 changed active internal identifiers, default `pokemon-mosaic-release.gba` output, CLI/test scripts, source validators, and all active CI references, preserving the BPEE game code, numeric save flags and old title art. `docs/SAVE_FILENAME_MIGRATION.md` documents backup-first `.sav` copy only. **Pass 3: other public art and assets. Native GBA title-screen image and its generator: LAST.** Old deferred-rebrand notes below are historical.
+
 > **Current instruction, 2 November 2026:** The maintainer has completed Hoenn and resumed Mosaic rebranding in phases. **Pass 1** covers active prose, intro attribution, website copy, and documentation; Pass 2 covers internal symbol/ROM filename/test migration; Pass 3 covers other visuals; the **native GBA title-screen image is explicitly last**. Older 'do not start rebrand' or 'title image second' notes below are historical and superseded. Preserve ordinary GBA compatibility, original Pokémon World credit, and the completed-game save.
 
 # Pokémon Mosaic: repository split and rebrand handoff

@@ -1,3 +1,7 @@
+## Pass 2 merged and source/CI cleanup completed (2026-11-02)
+
+Pass 2 refactor is on `main` as `ec4647f` + `e5f98cc`; post-merge cleanup reconciled remaining static and website workflow references, and removed temporary publishing workflows. Normal optimized ROM is now `pokemon-mosaic-release.gba`; save copying without overwrite is documented in `docs/SAVE_FILENAME_MIGRATION.md`. 43 source validators, website build/test and complete 32 MiB ROM compilation passed. Native title art and `tools/build_anthology_title.py` stay untouched until the **final** title-art pass. Next: Pass 3 public images. This remains source/build validation, not an independent emulator test of an existing save.
+
 ## Mosaic Pass 2: internal identifiers and ROM filename (2 November 2026)
 
 Source identifiers and tests migrated from legacy Anthology naming to Mosaic while numeric event flags and game code BPEE remain constant. Default optimized ROM filename: pokemon-mosaic-release.gba. Copy-only save guidance: docs/SAVE_FILENAME_MIGRATION.md. The native GBA title picture and historic art generator remain explicitly last.
