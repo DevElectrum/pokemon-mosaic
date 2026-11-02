@@ -475,3 +475,7 @@ a.atlas-starter-card:hover strong, a.atlas-starter-card:focus-visible strong {
   color: var(--link);
   text-decoration: underline;
 }
+
+/* Full approved logo is intentionally reserved for the About page. */
+.mosaic-about-logo { max-width: 310px; margin: 10px auto 26px; }
+.mosaic-about-logo img { width: 100%; height: auto; object-fit: contain; }

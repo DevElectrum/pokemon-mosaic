@@ -103,8 +103,9 @@ for (const [from, to] of images) await copyFile(resolve(repository, from), resol
 // Prefer the new pictures once installed; keep the existing website build
 // working until both images are present. Never touch the GBA title resources.
 const mosaicArt = [
-  ['graphics/branding/logos/pokemon-mosaic-master.png', 'mosaic-logo.png'],
-  ['graphics/branding/artwork/pokemon-mosaic-hero-master.png', 'mosaic-hero.png']
+  ['graphics/branding/logos/pokemon-mosaic-mark.webp', 'mosaic-mark.webp'],
+  ['graphics/branding/logos/pokemon-mosaic-logo-web.webp', 'mosaic-logo.webp'],
+  ['graphics/branding/artwork/pokemon-mosaic-hero-web.webp', 'mosaic-hero.webp']
 ];
 for (const [from, to] of mosaicArt) {
   try {

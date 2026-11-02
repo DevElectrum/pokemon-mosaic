@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { existsSync } from 'node:fs';
-const hasMosaicHero = existsSync(new URL('../../public/visuals/mosaic-hero.png', import.meta.url));
+const hasMosaicHero = existsSync(new URL('../../public/visuals/mosaic-hero.webp', import.meta.url));
 import { catalog } from '../lib/data';
 const regions = [
   { name: 'Kanto', subtitle: 'Where the journey begins', img: '/visuals/kanto.png', description: 'Familiar routes, hidden encounters, and a world much larger than you remember.' },
@@ -11,7 +11,7 @@ const regions = [
 ---
 <Base title="A brighter adventure. A little mystery." description="Explore Pokémon Mosaic: a colorful collection-first fan adventure with hidden wonders, built upon Pokémon World.">
   <section class={hasMosaicHero ? 'hero hero-with-mosaic-art' : 'hero'}>
-    {hasMosaicHero && <img class="hero-mosaic-art" src="/visuals/mosaic-hero.png" width="1916" height="821" fetchpriority="high" alt="A trainer and Pokémon overlooking a brilliant realm of floating islands and waterfalls, a stained-glass Pokémon Mosaic gateway, and a mysterious violet night sky with a winged creature" />}
+    {hasMosaicHero && <img class="hero-mosaic-art" src="/visuals/mosaic-hero.webp" width="1916" height="821" fetchpriority="high" alt="A trainer and Pokémon overlooking a brilliant realm of floating islands and waterfalls, a stained-glass Pokémon Mosaic gateway, and a mysterious violet night sky with a winged creature" />}
     <div class="hero-content">
       <p class="eyebrow light">Every journey begins with wonder</p>
       <h1>Find a little joy.<br /><em>Follow a little mystery.</em></h1>
