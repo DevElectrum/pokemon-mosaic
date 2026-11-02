@@ -93,7 +93,7 @@ static void CreateMosaicPressStart(void)
     u8 i;
     for (i = 0; i < MOSAIC_PRESS_START_PIECES; i++)
     {
-        u8 spriteId = CreateSprite(&sMosaicPressStartTemplate, 56 + i * 32, 145, 0);
+        u8 spriteId = CreateSprite(&sMosaicPressStartTemplate, 65 + i * 32, 145, 0);
         if (spriteId != MAX_SPRITES)
             StartSpriteAnim(&gSprites[spriteId], i);
     }
