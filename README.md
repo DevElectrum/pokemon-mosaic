@@ -1,10 +1,10 @@
 <p align="center">
-  <img src=".github/assets/grand-anthology-readme-banner.jpg" alt="Pokémon Mosaic: an illustrated atlas spanning a coastal city, traditional countryside and tropical islands" width="100%">
+  <img src="graphics/branding/artwork/pokemon-mosaic-hero-web.webp" alt="Pokémon Mosaic: a vivid stained-glass gateway between sunny floating islands and a mysterious violet night" width="100%">
 </p>
 
 # Pokémon Mosaic
 
-**Three classic regions. Nine generations. One evolving adventure.**
+**A brighter adventure. A little mystery. Endless possibilities.**
 
 An **unofficial, non-commercial, experimental hobby modification** built upon
 [Pokémon World](https://github.com/evilchinesefood/PKMN-World) by David A. and its contributors.

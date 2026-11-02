@@ -1,6 +1,6 @@
 # Pokémon Mosaic, approved stained-glass emblem
 
-**Approved asset:** `pokemon-mosaic-master.png` (binary delivery pending)
+**Approved asset:** `pokemon-mosaic-master.png` (approved master archived, checksum verified)
 
 - Original high-resolution transparent RGBA PNG, 1254 × 1254 pixels
 - Source: approved final AI-assisted stained-glass concept, 2 November 2026
@@ -11,6 +11,6 @@
 - Keep inherited Pokémon World assets and Grand Anthology history intact
 - Do not silently overwrite the approved master: create a new versioned asset for revisions
 
-The exact PNG is staged in the ChatGPT asset package. Add it at this path without
-reencoding and verify the SHA-256 checksum before committing. Do not update
-the README banner, website assets, or native GBA title art in this archival step.
+The approved master is retained byte-for-byte. The small responsive logo/mark
+WebP derivatives live alongside it. The README and website reuse this identity.
+The native GBA title picture and original Pokémon World artwork remain unchanged.

@@ -1,3 +1,13 @@
+## Approved Pokémon Mosaic identity (2 November 2026)
+
+- Full transparent stained-glass logo: `logos/pokemon-mosaic-master.png` (1254 × 1254).
+- Full approved hero: `artwork/pokemon-mosaic-hero-master.png` (1916 × 821).
+- Web variants: `logos/pokemon-mosaic-mark.webp`, `logos/pokemon-mosaic-logo-web.webp`,
+  and `artwork/pokemon-mosaic-hero-web.webp`.
+- README hero, website homepage, navigation, About page and social metadata use these images.
+- Inherited Pokémon World art and the **native GBA title screen remain unchanged**.
+- Screenshot replacements are deferred until the eeveelution-only playthrough.
+
 # Historical Pokémon World branding resources
 
 > **Mosaic rebrand status (2 November 2026):** This directory documents legacy Pokémon World artwork and its historical exporter. It is not the active Mosaic title pipeline. The currently active (still Grand Anthology-branded) GBA title uses `src/title_screen_world.c` and `tools/build_anthology_title.py`; its native image will be replaced **last**, after text, internal naming, ROM basename, and other visuals. Do not run the old World exporter as part of current Mosaic branding.
