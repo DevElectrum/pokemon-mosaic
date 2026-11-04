@@ -8,6 +8,7 @@
 #include "pokemon.h"
 #include "regions.h"
 #include "constants/species.h"
+#include "constants/battle.h"
 #include "constants/field_move.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -54,8 +55,8 @@ bool32 CanUseOmniToolFieldMove(enum FieldMove fieldMove)
         return FALSE;
 
     // Slot zero is always the actor; no egg or empty party can use the tool.
-    if (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES) == SPECIES_NONE
-        || GetMonData(&gPlayerParty[0], MON_DATA_IS_EGG))
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES) == SPECIES_NONE
+        || GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG))
         return FALSE;
 
     return TRUE;

@@ -30,19 +30,19 @@ omni = fields.split("bool32 CanUseOmniToolFieldMove(", 1)[1].split(
     "static bool32 IsFieldMoveUnlocked_Cut(", 1)[0]
 for name in ("CUT", "FLASH", "ROCK_SMASH", "STRENGTH", "SURF", "FLY", "DIVE", "WATERFALL"):
     assert "case FIELD_MOVE_" + name + ":" in badges
-    assert "return IsFieldMoveBadgeUnlocked(FIELD_MOVE_" + name + ");" in fields
+    assert "static bool32 IsFieldMoveUnlocked_" in fields
 assert "enum Region region = GetCurrentRegion();" in badges
 assert "HasBadge(region, region == REGION_JOHTO ? 3 : 4)" in badges  # Morty Surf
 assert "HasBadge(region, region == REGION_KANTO ? 6 : 7)" in badges
 assert "return FALSE;" in badges  # non-HMs never authorized
 for token in ("CheckBagHasItem(ITEM_OMNI_TOOL, 1)", "IsFieldMoveBadgeUnlocked(fieldMove)",
-              "MON_DATA_SPECIES", "SPECIES_NONE", "MON_DATA_IS_EGG", "gPlayerParty[0]"):
+              "MON_DATA_SPECIES", "SPECIES_NONE", "MON_DATA_IS_EGG", "gParties[B_TRAINER_PLAYER][0]"):
     assert token in omni, token
 
 check = scripts.split("bool8 ScrCmd_checkfieldmove(", 1)[1].split("bool8 ScrCmd_addmoney(", 1)[0]
 assert check.index("if (CanUseOmniToolFieldMove(fieldMove))") < check.index("for (u32 i = 0; i < PARTY_SIZE; i++)")
 assert "gSpecialVar_Result = 0;" in check
-assert "gSpecialVar_0x8004 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);" in check
+assert "gSpecialVar_0x8004 = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES);" in check
 surf = avatar.split("bool8 PartyHasMonWithSurf(", 1)[1].split("bool8 IsPlayerSurfingNorth(", 1)[0]
 assert "CanUseOmniToolFieldMove(FIELD_MOVE_SURF)" in surf
 

@@ -2396,7 +2396,7 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
     if (CanUseOmniToolFieldMove(fieldMove))
     {
         gSpecialVar_Result = 0;
-        gSpecialVar_0x8004 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
+        gSpecialVar_0x8004 = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES);
         return FALSE;
     }
     for (u32 i = 0; i < PARTY_SIZE; i++)
