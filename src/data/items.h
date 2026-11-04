@@ -14347,8 +14347,8 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("OmniTool"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Carry to use HMs\\n"
-            "with your lead mon\\n"
+            "Carry to use HMs\n"
+            "with your lead mon\n"
             "after earning badges."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
