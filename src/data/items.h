@@ -14342,6 +14342,22 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_ShinyCharm,
     },
 
+    [ITEM_OMNI_TOOL] =
+    {
+        .name = ITEM_NAME("OmniTool"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Carry to use HMs\\n"
+            "with your lead mon\\n"
+            "after earning badges."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_SecretKey,
+        .iconPalette = gItemIconPalette_SecretKey,
+    },
+
     [ITEM_HUB_RETURN] =
     {
         .name = ITEM_NAME("Hub Pass"),

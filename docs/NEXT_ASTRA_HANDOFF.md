@@ -1,3 +1,7 @@
+## Mosaic OmniTool cheat-only HM utility (November 2026)
+
+Implementation committed pending exact-revision CI acceptance: one new end-of-enum Key Item `ITEM_OMNI_TOOL`, player Cheats -> Give OmniTool, strict current-region badge and non-Egg lead requirement, world scripted HM contexts, Surf and Fly/Flash on both party menus. Existing field-tool badge bypass does NOT apply to OmniTool; no save identifiers or learnsets changed. Read `docs/MOSAIC_OMNITOOL.md` and `test/overworld/ValidateMosaicOmniTool.py`. Do not claim real emulator acceptance without explicit mGBA test results.
+
 ## Mosaic artwork installed, Pass 3 (2 November 2026)
 
 Approved stained-glass master logo and the day/night portal hero have been

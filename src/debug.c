@@ -346,6 +346,7 @@ static void DebugAction_FlagsVars_CatchingOnOff(u8 taskId);
 static void DebugAction_FlagsVars_RunningShoes(u8 taskId);
 
 static void DebugAction_Give_Item(u8 taskId);
+static void DebugAction_Give_OmniTool(u8 taskId);
 static void DebugAction_Give_Item_SelectId(u8 taskId);
 static void DebugAction_Give_Item_SelectQuantity(u8 taskId);
 static void DebugAction_Give_PokemonSimple(u8 taskId);
@@ -728,6 +729,7 @@ static const struct DebugMenuOption sPlayerCheatMenu_Main[] =
     { COMPOUND_STRING("Quick Pokémon"),   DebugAction_Give_PokemonSimple },
     { COMPOUND_STRING("Custom Pokémon"),  DebugAction_Give_PokemonComplex },
     { COMPOUND_STRING("Give Item"),       DebugAction_Give_Item },
+    { COMPOUND_STRING("Give OmniTool"),   DebugAction_Give_OmniTool },
     { COMPOUND_STRING("Max Money"),       DebugAction_Give_MaxMoney },
     { COMPOUND_STRING("Max BP"),          DebugAction_Give_MaxBattlePoints },
     { COMPOUND_STRING("Infinite BP ON/OFF"), DebugAction_ToggleInfiniteBattlePoints },
@@ -4265,6 +4267,18 @@ static void DebugAction_PcSearch_Browse(u8 taskId)
         PlaySE(SE_SELECT);
         DebugAction_PcSearch_DrawResults(taskId);
     }
+}
+
+// Release Cheats -> Give OmniTool. Never added to shops, gifts or maps.
+static void DebugAction_Give_OmniTool(u8 taskId)
+{
+    if (CheckBagHasItem(ITEM_OMNI_TOOL, 1) || AddBagItem(ITEM_OMNI_TOOL, 1))
+        PlaySE(SE_PC_LOGIN);
+    else
+        PlaySE(SE_FAILURE);
+
+    Debug_DestroyMenu_Full(taskId);
+    ScriptContext_Enable();
 }
 
 static void DebugAction_Give_MaxMoney(u8 taskId)

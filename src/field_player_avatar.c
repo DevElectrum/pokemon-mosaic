@@ -1953,6 +1953,9 @@ bool8 PartyHasMonWithSurf(void)
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
+        if (CanUseOmniToolFieldMove(FIELD_MOVE_SURF))
+            return TRUE;
+
         for (i = 0; i < PARTY_SIZE; i++)
         {
             enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);

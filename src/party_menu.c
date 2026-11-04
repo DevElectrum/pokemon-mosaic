@@ -2976,6 +2976,20 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         }
     }
 
+    // The OmniTool supplies exactly the two HMs normally launched from the
+    // party menu. Trees, boulders and water use the existing world scripts.
+    // Four field actions max: keep Switch/Item/Cancel (and SwSh Follow) safe.
+    if (slotId == 0 && CanUseOmniToolFieldMove(FIELD_MOVE_FLY))
+    {
+        if (!MonKnowsMove(&mons[slotId], MOVE_FLY) && sPartyMenuInternal->numActions < 5)
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, FIELD_MOVE_FLY + MENU_FIELD_MOVES);
+    }
+    if (slotId == 0 && CanUseOmniToolFieldMove(FIELD_MOVE_FLASH))
+    {
+        if (!MonKnowsMove(&mons[slotId], MOVE_FLASH) && sPartyMenuInternal->numActions < 5)
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, FIELD_MOVE_FLASH + MENU_FIELD_MOVES);
+    }
+
     if (!InBattlePike())
     {
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)

@@ -2391,6 +2391,14 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
         return FALSE;
 
     move = FieldMove_GetMoveId(fieldMove);
+    // OmniTool is passive, badge-gated, and always credits the lead Pokémon.
+    // This path also handles the scripts that pass doUnlockedCheck=FALSE.
+    if (CanUseOmniToolFieldMove(fieldMove))
+    {
+        gSpecialVar_Result = 0;
+        gSpecialVar_0x8004 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
+        return FALSE;
+    }
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);

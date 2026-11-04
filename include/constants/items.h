@@ -1100,6 +1100,9 @@ enum __attribute__((packed)) Item
 
     ITEM_HUB_RETURN,    // Task 6: key item, warps the player one-way to the World Transit hub
 
+    // Cheat-only passive HM assistance. APPEND to protect all prior save-item IDs.
+    ITEM_OMNI_TOOL,
+
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,
 };

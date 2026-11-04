@@ -17,6 +17,11 @@ struct FieldMoveInfo
 
 extern const struct FieldMoveInfo gFieldMoveInfo[];
 
+// Cheat-only OmniTool authorization: never bypasses the current REGION's badge.
+// Both overworld script checks and graphical party menus use these shared predicates.
+bool32 IsFieldMoveBadgeUnlocked(enum FieldMove fieldMove);
+bool32 CanUseOmniToolFieldMove(enum FieldMove fieldMove);
+
 static inline bool32 SetUpFieldMove(enum FieldMove fieldMove)
 {
     return gFieldMoveInfo[fieldMove].fieldMoveFunc();

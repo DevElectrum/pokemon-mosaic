@@ -3756,6 +3756,20 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         }
     }
 
+    // The OmniTool supplies exactly the two HMs normally launched from the
+    // party menu. Trees, boulders and water use the existing world scripts.
+    // Four field actions max: keep Switch/Item/Cancel (and SwSh Follow) safe.
+    if (slotId == 0 && CanUseOmniToolFieldMove(FIELD_MOVE_FLY))
+    {
+        if (!MonKnowsMove(&mons[slotId], MOVE_FLY) && sPartyMenuInternal->numActions < 5)
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, FIELD_MOVE_FLY + MENU_FIELD_MOVES);
+    }
+    if (slotId == 0 && CanUseOmniToolFieldMove(FIELD_MOVE_FLASH))
+    {
+        if (!MonKnowsMove(&mons[slotId], MOVE_FLASH) && sPartyMenuInternal->numActions < 5)
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, FIELD_MOVE_FLASH + MENU_FIELD_MOVES);
+    }
+
 #if QOL_FIELD_MOVES_NO_TEACH
     // Also offer HM field moves this mon CAN LEARN (badge-unlocked) but hasn't been
     // taught. Cap at 4 total field moves to fit the action buffer / on-screen rows.
